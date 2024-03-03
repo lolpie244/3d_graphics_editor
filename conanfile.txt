@@ -1,0 +1,6 @@
+[requires]
+sfml/2.6.1
+
+[generators]
+CMakeDeps
+CMakeToolchain
