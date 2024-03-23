@@ -4,6 +4,7 @@
 
 namespace stage {
 	class StageManager {
+		Stage& CurrentStage();
 		void NextStage(Stage& new_stage);
 		void PreviousStage();
 	private:

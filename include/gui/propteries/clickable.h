@@ -1,26 +1,26 @@
 #pragma once
 
 #include "events/observer.h"
-#include "gui/elements/base.h"
 #include "gui/propteries/hoverable.h"
-#include <SFML/System/Vector2.hpp>
-#include <SFML/Window/Event.hpp>
-#include <functional>
 
-namespace gui::mixins
-{
-class Clickable : virtual public Hoverable
-{
-public:
-	virtual ~Clickable();
+namespace gui::mixins {
+class Clickable : virtual public Hoverable {
+   public:
+    virtual ~Clickable();
 
-	void bind_press(std::function<bool(sf::Event)> function,
-	                events::Observer<bool(sf::Event)> observer);
-	void bind_release(std::function<bool(sf::Event)> function,
-	                events::Observer<bool(sf::Event)> observer);
-protected:
-protected:
-	std::function<bool(sf::Event)> press_event_;
-	std::function<bool(sf::Event)> release_event_;
+    virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function);
+    virtual void BindRelease(events::Observer& observer, const events::EVENT_FUNC& function);
+
+	virtual void OnRelease(){};
+
+	bool State() const { return pressed_; }
+
+    enum State { RELEASED, PRESSED };
+
+   protected:
+    std::unique_ptr<events::Event> press_event_;
+    std::unique_ptr<events::Event> release_event_;
+
+    bool pressed_ = false;
 };
-} // namespace gui::mixins
+}  // namespace gui::mixins

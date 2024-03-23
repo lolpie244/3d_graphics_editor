@@ -12,8 +12,7 @@ class Draggable : virtual public Clickable
 public:
 	virtual ~Draggable();
 
-	void bind_drag(std::function<bool(sf::Event)> function,
-	                events::Observer<bool(sf::Event)> observer);
+	void bind_drag(events::Observer &observer, const events::EVENT_FUNC &function);
 protected:
 	std::function<bool(sf::Event, sf::Vector2<float> moved_to)> drag_event_;
 

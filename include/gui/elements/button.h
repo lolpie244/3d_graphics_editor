@@ -4,7 +4,7 @@
 #include "gui/propteries/clickable.h"
 namespace gui
 {
-class Button : virtual public BaseGuiElement, virtual public mixins::Clickable
+class Button : virtual public GuiElement, virtual public mixins::Clickable
 {
 public:
 	Button();

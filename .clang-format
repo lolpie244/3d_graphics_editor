@@ -1,0 +1,10 @@
+BasedOnStyle: Google
+ColumnLimit: 120
+IndentWidth: 4
+AllowShortIfStatementsOnASingleLine: Never
+AlignAfterOpenBracket: Align
+AlignEscapedNewlines: Left
+AllowShortBlocksOnASingleLine: 'true'
+AllowShortCaseLabelsOnASingleLine: 'true'
+AllowShortFunctionsOnASingleLine: All
+AllowShortLambdasOnASingleLine: All

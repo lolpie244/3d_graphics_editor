@@ -6,6 +6,7 @@ find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system audio)
 
 add_library(${PROJECT_NAME}-static STATIC
 	src/events/observer.cpp
+	src/events/event.cpp
 
 	src/gui/elements/base.cpp
 	src/gui/elements/button.cpp

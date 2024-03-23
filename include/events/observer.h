@@ -1,21 +1,31 @@
 #pragma once
 
 #include <SFML/Window/Event.hpp>
-#include <functional>
 #include <list>
+#include <memory>
+#include <set>
 #include <unordered_map>
 
-namespace events
-{
+#include "event.h"
 
-template <typename EVENT_FUNC = std::function<bool()>> class Observer
-{
+namespace events {
 
-public:
-	int bind(int event, const EVENT_FUNC &func);
-	bool notify(sf::Event& event);
+class Observer {
+   public:
+    std::unique_ptr<Event> Bind(sf::Event::EventType event, const EVENT_FUNC& func, int depth = 0);
+    bool Notify(sf::Event& event);
 
-private:
-	std::unordered_map<sf::Event, std::list<EVENT_FUNC>> events_;
+   protected:
+    void Unbind(Event* event);
+
+   private:
+	std::function<bool(Event*, Event*)> cmp = [](Event* a, Event* b) {
+		if (a->depth_ != b->depth_)
+			return a->depth_ > b->depth_;
+		return a->id_ < b->id_;
+	};
+
+	std::set<Event*, decltype(cmp)> events_[sf::Event::Count];
+    friend Event;
 };
-} // namespace events
+}  // namespace events
