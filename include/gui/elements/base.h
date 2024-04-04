@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <memory>
 #include <utility>
@@ -27,6 +28,7 @@ class GuiElement {
     bool is_active_ = true;
 
     sf::Sprite sprite_;
+	sf::Texture texture_;
     sf::Vector2f size_;
     sf::Vector2f position_;
     int depth_;

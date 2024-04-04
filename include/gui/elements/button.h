@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Graphics/Texture.hpp>
 #include "gui/elements/base.h"
 #include "gui/propteries/clickable.h"
 namespace gui
@@ -10,10 +11,13 @@ public:
 	Button();
 	virtual ~Button() {}
 
-private:
-	void change_state();
+	void BindPress(events::Observer& observer, const events::EVENT_FUNC& function) override;
+    void OnRelease() override;
 
-public:
-	enum State { RELEASED, PRESSED };
+private:
+	void update_texture();
+
+private:
+	sf::Texture pressed_texture_;
 };
 } // namespace gui

@@ -22,4 +22,4 @@ build:
 
 .PHONY: run
 run: build
-	build/3d_graphics
+	build/app/3d_graphics

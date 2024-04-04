@@ -19,13 +19,14 @@ class Observer {
     void Unbind(Event* event);
 
    private:
-	std::function<bool(Event*, Event*)> cmp = [](Event* a, Event* b) {
-		if (a->depth_ != b->depth_)
-			return a->depth_ > b->depth_;
-		return a->id_ < b->id_;
-	};
-
-	std::set<Event*, decltype(cmp)> events_[sf::Event::Count];
+    struct cmp {
+        bool operator()(const Event* a, const Event* b) const {
+            if (a->depth_ != b->depth_)
+                return a->depth_ > b->depth_;
+            return a->id_ < b->id_;
+        }
+    };
+    std::set<Event*, cmp> events_[sf::Event::Count];
     friend Event;
 };
 }  // namespace events

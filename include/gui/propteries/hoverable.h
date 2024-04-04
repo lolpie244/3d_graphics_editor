@@ -19,7 +19,7 @@ class Hoverable : virtual public GuiElement {
     virtual bool ContainsMouse(sf::Event event);
 
    protected:
-	std::unique_ptr<events::Event> mouse_in_event_;
+    std::unique_ptr<events::Event> mouse_in_event_;
     std::unique_ptr<events::Event> mouse_out_event_;
     bool mouse_in_flag_ = false;
     bool check_transparecy_ = false;

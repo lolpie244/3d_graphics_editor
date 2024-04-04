@@ -23,13 +23,16 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
         if (!pressed_)
             return false;
         pressed_ = false;
-		OnRelease();
+        OnRelease();
 
         if (!this->ContainsMouse(event))
             return false;
         return function(event);
     };
 
-	release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function);
+    if (!press_event_)
+        BindPress(observer, [](sf::Event) { return true; });
+
+    release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function);
 }
 }  // namespace gui::mixins

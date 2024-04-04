@@ -21,4 +21,8 @@ bool Observer::Notify(sf::Event& event_data) {
     return false;
 }
 
+void Observer::Unbind(Event* event) {
+	events_[event->type_].erase(event);
+}
+
 }  // namespace events

@@ -12,6 +12,6 @@ void Scaleable::BindScale(events::Observer &observer) {
         return false;
     };
 
-	event = observer.Bind(sf::Event::Resized, event_function);
+    event = observer.Bind(sf::Event::Resized, event_function);
 }
 }  // namespace gui::mixins

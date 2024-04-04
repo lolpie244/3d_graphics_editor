@@ -26,7 +26,7 @@ bool Hoverable::ContainsMouse(sf::Event event) {
 }
 
 void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function) {
-	auto event_function = [this, &function](sf::Event event) {
+    auto event_function = [this, &function](sf::Event event) {
         if (mouse_in_flag_ || !this->ContainsMouse(event))
             return false;
 
@@ -44,6 +44,6 @@ void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUN
         mouse_in_flag_ = false;
         return function(event);
     };
-	mouse_out_event_ = observer.Bind(sf::Event::MouseMoved, event_function, Depth());
+    mouse_out_event_ = observer.Bind(sf::Event::MouseMoved, event_function, Depth());
 }
 }  // namespace gui::mixins

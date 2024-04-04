@@ -13,9 +13,7 @@ class Clickable : virtual public Hoverable {
 
 	virtual void OnRelease(){};
 
-	bool State() const { return pressed_; }
-
-    enum State { RELEASED, PRESSED };
+	bool IsPressed() const { return pressed_; }
 
    protected:
     std::unique_ptr<events::Event> press_event_;
