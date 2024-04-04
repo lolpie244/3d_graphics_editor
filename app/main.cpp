@@ -14,5 +14,4 @@ int main() {
 	stage_manager.NextStage(std::move(test_stage));
 
 	stage_manager.Start();
-	// stage_manager.Wait();
 }

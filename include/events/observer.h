@@ -1,10 +1,11 @@
 #pragma once
 
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <list>
 #include <memory>
 #include <set>
-#include <unordered_map>
+#include <unordered_set>
 
 #include "event.h"
 
@@ -13,6 +14,8 @@ namespace events {
 class Observer {
    public:
     std::unique_ptr<Event> Bind(sf::Event::EventType event, const EVENT_FUNC& func, int depth = 0);
+    std::unique_ptr<Event> KeyBind(const std::unordered_set<sf::Keyboard::Key>& keys, const EVENT_FUNC& func,
+                                   int depth = 0);
     bool Notify(sf::Event& event);
 
    protected:

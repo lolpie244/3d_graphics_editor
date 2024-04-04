@@ -12,17 +12,17 @@ class Event {
    public:
     Event(Observer& observer, sf::Event::EventType type, EVENT_FUNC func, int depth = 0);
 
-    ~Event();
+    virtual ~Event();
 
-   private:
-	int depth_;
+   protected:
+    int depth_;
     int id_ = max_event_id++;
-	EVENT_FUNC function_;
+    EVENT_FUNC function_;
     Observer& observer_;
     sf::Event::EventType type_;
 
-	static int max_event_id;
+    static int max_event_id;
 
-	friend Observer;
+    friend Observer;
 };
 }  // namespace events
