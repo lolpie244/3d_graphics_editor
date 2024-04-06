@@ -1,9 +1,12 @@
 #include "test_stage.h"
 
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/System/Vector2.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <algorithm>
 #include <memory>
 
+#include "gui/elements/text.h"
 #include "stage/stage_manager.h"
 #include "test_stage1/test_stage1.h"
 
@@ -16,6 +19,12 @@ TestStage::TestStage() {
         this->Stop(stage::StageState::Exit);
         return true;
     }));
+	std::unique_ptr<gui::Text> a = std::make_unique<gui::Text>(sf::Vector2f(100, 100), sf::Vector2f(200, 200));
+
+	a->SfText().setFillColor(sf::Color::Red);
+	a->SetText("Help me");
+	a->SetFontSize(50);
+    elements.push_back(std::move(a));
 }
 
 void TestStage::Run() {
@@ -26,5 +35,6 @@ void TestStage::Run() {
 
     window->clear();
     window->draw(shape);
+    for (auto& element : elements) window->draw(*element);
     FrameEnd();
 }

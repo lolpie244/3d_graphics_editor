@@ -1,11 +1,11 @@
 #pragma once
 
 #include <SFML/Graphics/Texture.hpp>
-#include "gui/elements/base.h"
+#include "gui/elements/sprite_element.h"
 #include "gui/propteries/clickable.h"
 namespace gui
 {
-class Button : virtual public GuiElement, virtual public mixins::Clickable
+class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable
 {
 public:
 	Button();

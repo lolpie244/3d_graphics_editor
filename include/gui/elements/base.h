@@ -1,39 +1,41 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <memory>
+#include <future>
 #include <utility>
 
 namespace gui {
-class GuiElement {
+class GuiElement: public sf::Drawable {
    public:
-    GuiElement();
-    virtual ~GuiElement();
-
-    virtual void Enable() = 0;
-    virtual void Disable() = 0;
+    virtual ~GuiElement() = default;
 
     int Id() const;
     int Depth() const;
     sf::Vector2f Position() const;
     sf::Vector2f Size() const;
-    sf::Vector2f LeftCorner() const;
+    virtual sf::Vector2f LeftCorner() const = 0;
 
-    virtual void Resize(sf::Vector2f size);
+    virtual void Enable();
+    virtual void Disable();
 
+    virtual void SetPosition(sf::Vector2f position) = 0;
+    virtual void Resize(sf::Vector2f size) = 0;
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
    protected:
     int id_ = max_object_id++;
     bool is_active_ = true;
 
-    sf::Sprite sprite_;
-	sf::Texture texture_;
     sf::Vector2f size_;
     sf::Vector2f position_;
-    int depth_;
+    int depth_ = 0;
 
    private:
-    static int max_object_id;
+    static std::atomic<int> max_object_id;
 };
 }  // namespace gui
