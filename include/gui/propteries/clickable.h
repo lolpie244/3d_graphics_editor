@@ -6,7 +6,7 @@
 namespace gui::mixins {
 class Clickable : virtual public Hoverable {
    public:
-    virtual ~Clickable();
+    virtual ~Clickable() = default;
 
     virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function);
     virtual void BindRelease(events::Observer& observer, const events::EVENT_FUNC& function);

@@ -25,10 +25,17 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
+        if (exit_) {
+            CurrentStage()->Stop(StageState::Exit);
+            PreviousStage();
+            continue;
+        }
+
         if (CurrentStage()->State() == StageState::Run)
             CurrentStage()->Run();
         else
             PreviousStage();
     }
 }
+void StageManager::Exit() { exit_ = true; }
 }  // namespace stage

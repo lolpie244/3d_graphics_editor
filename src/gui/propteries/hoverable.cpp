@@ -26,8 +26,8 @@ bool Hoverable::ContainsMouse(sf::Event event) {
 }
 
 void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function) {
-    auto event_function = [this, &function](sf::Event event) {
-        if (mouse_in_flag_ || !this->ContainsMouse(event))
+    auto event_function = [this, function](sf::Event event) {
+        if (!is_active_ || mouse_in_flag_ || !this->ContainsMouse(event))
             return false;
 
         mouse_in_flag_ = true;
@@ -37,8 +37,8 @@ void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC
     mouse_in_event_ = observer.Bind(sf::Event::MouseMoved, event_function, Depth());
 }
 void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function) {
-    auto event_function = [this, &function](sf::Event event) {
-        if (!mouse_in_flag_ || this->ContainsMouse(event))
+    auto event_function = [this, function](sf::Event event) {
+        if (!is_active_ || !mouse_in_flag_ || this->ContainsMouse(event))
             return false;
 
         mouse_in_flag_ = false;

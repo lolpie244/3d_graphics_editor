@@ -11,7 +11,7 @@ namespace gui::mixins
 class Scaleable : virtual public gui::GuiElement
 {
 public:
-	virtual ~Scaleable() {}
+	virtual ~Scaleable() = default;
 	void BindScale(events::Observer &observer);
 
 protected:

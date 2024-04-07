@@ -7,8 +7,8 @@
 
 namespace gui::mixins {
 void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
-    auto event_function = [this, &function](sf::Event event) {
-        if (!this->ContainsMouse(event))
+    auto event_function = [this, function](sf::Event event) {
+        if (!is_active_ || !this->ContainsMouse(event))
             return false;
 
         pressed_ = true;
@@ -19,13 +19,13 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
 }
 
 void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC& function) {
-    auto event_function = [this, &function](sf::Event event) {
+    auto event_function = [this, function](sf::Event event) {
         if (!pressed_)
             return false;
         pressed_ = false;
         OnRelease();
 
-        if (!this->ContainsMouse(event))
+        if (!is_active_ || !this->ContainsMouse(event))
             return false;
         return function(event);
     };

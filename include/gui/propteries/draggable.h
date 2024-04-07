@@ -9,7 +9,7 @@
 namespace gui::mixins {
 class Draggable : virtual public Clickable {
    public:
-    virtual ~Draggable();
+    virtual ~Draggable() = default;
 
     void bind_drag(events::Observer &observer, const events::EVENT_FUNC &function);
 

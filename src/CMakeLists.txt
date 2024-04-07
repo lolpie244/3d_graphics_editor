@@ -19,6 +19,10 @@ add_library(${PROJECT_NAME}-static STATIC
 
 	utils/utils.cpp
 )
-target_include_directories(${PROJECT_NAME}-static PUBLIC ../include)
-target_link_libraries(${PROJECT_NAME}-static sfml-graphics sfml-audio)
+target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
+	${CMAKE_BINARY_DIR}/include)
+target_link_libraries(${PROJECT_NAME}-static
+	sfml-graphics sfml-audio
+	${lunasvg}
+)
 

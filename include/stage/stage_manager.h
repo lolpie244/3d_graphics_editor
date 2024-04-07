@@ -19,11 +19,13 @@ class StageManager : public Singleton<StageManager> {
     void PreviousStage();
 
     void Start();
+	void Exit();
 
    public:
     std::shared_ptr<sf::RenderWindow> window;
 
    private:
     std::stack<std::unique_ptr<Stage>> stages_;
+	bool exit_ = false;
 };
 }  // namespace stage

@@ -1,4 +1,6 @@
 #include "stage/stage.h"
+#include <SFML/Window/Event.hpp>
+#include "stage/stage_manager.h"
 
 namespace stage {
 
@@ -14,6 +16,10 @@ void Stage::PollEvents() {
     sf::Event event;
     while (window->pollEvent(event)) {
 		observer_.Notify(event);
+
+		if (event.type == sf::Event::Closed) {
+			StageManager::Instance().Exit();
+		}
 	}
 }
 

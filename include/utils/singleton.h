@@ -1,4 +1,3 @@
-
 template <typename Derived>
 class Singleton {
    public:

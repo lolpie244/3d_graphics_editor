@@ -10,7 +10,7 @@
 namespace gui::mixins {
 class Hoverable : virtual public GuiElement {
    public:
-    virtual ~Hoverable();
+    virtual ~Hoverable() = default;
 
     void BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function);

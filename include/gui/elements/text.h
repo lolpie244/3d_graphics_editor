@@ -9,14 +9,13 @@
 namespace gui {
 class Text : virtual public GuiElement {
    public:
-	Text(sf::Vector2f max_size, sf::Vector2f position);
+	Text(sf::Vector2f position, sf::Vector2f max_size);
 
 	virtual sf::Vector2f LeftCorner() const override;
 
     virtual void Resize(sf::Vector2f size) override;
     virtual void SetPosition(sf::Vector2f position) override;
-	virtual void SetText(std::string text);
-	virtual void SetFontSize(uint size);
+	virtual void SetText(const sf::String& text);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
