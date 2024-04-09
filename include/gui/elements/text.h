@@ -5,9 +5,10 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "base.h"
+#include "gui/propteries/scaleable.h"
 
 namespace gui {
-class Text : virtual public GuiElement {
+class Text : virtual public GuiElement, virtual public mixins::DefaultScale {
    public:
 	Text(sf::Vector2f position, sf::Vector2f max_size);
 

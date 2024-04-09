@@ -1,24 +1,32 @@
 #pragma once
 
-#include "events/observer.h"
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Keyboard.hpp>
+
 #include "events/event.h"
+#include "events/observer.h"
 #include "gui/elements/base.h"
-#include <SFML/Graphics/RenderTarget.hpp>
-#include <SFML/Window/Window.hpp>
 
-namespace gui::mixins
-{
-class Scaleable : virtual public gui::GuiElement
-{
-public:
-	virtual ~Scaleable() = default;
-	void BindScale(events::Observer &observer);
+namespace gui::mixins {
+class Scaleable : virtual public gui::GuiElement {
+   public:
+    virtual ~Scaleable() = default;
+    void BindScale(events::Observer &observer);
 
-protected:
-	std::unique_ptr<events::Event> event;
-	virtual void scale() = 0;
+   protected:
+    virtual void scale(const sf::Vector2f& window_scale) = 0;
+	sf::Vector2f oldScale();
 
+   protected:
+    std::unique_ptr<events::Event> event;
 
-	// virtual void scale(sf::RenderTarget &render) = 0;
+   private:
+    sf::Vector2f old_scale_ = sf::Vector2f(1, 1);
 };
-} // namespace gui::mixins
+
+// scale by width and height. The same as default scale
+class DefaultScale : virtual public Scaleable {
+   protected:
+    void scale(const sf::Vector2f& window_scale) override;
+};
+}  // namespace gui::mixins

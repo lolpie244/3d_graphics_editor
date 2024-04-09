@@ -6,6 +6,7 @@
 #include "gui/elements/sprite_element.h"
 #include "gui/elements/text.h"
 #include "gui/propteries/clickable.h"
+#include "gui/propteries/scaleable.h"
 
 namespace gui {
 
@@ -20,7 +21,7 @@ class ButtonText : virtual public Text {
     sf::Vector2f borders_size_;
 };
 
-class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable {
+class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable, virtual public mixins::DefaultScale {
    public:
     Button(sf::Vector2f position, sf::Vector2f size, sf::Vector2f border_size = sf::Vector2f(0.1, 0.1));
     virtual ~Button() = default;

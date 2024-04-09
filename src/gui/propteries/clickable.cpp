@@ -18,6 +18,10 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
     press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function);
 }
 
+bool Clickable::ContainsMouse(sf::Event event) {
+    return this->Contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+}
+
 void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC& function) {
     auto event_function = [this, function](sf::Event event) {
         if (!pressed_)

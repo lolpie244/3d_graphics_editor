@@ -22,7 +22,7 @@ bool Hoverable::Contains(sf::Vector2f point) {
 }
 
 bool Hoverable::ContainsMouse(sf::Event event) {
-    return this->Contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y));
+    return this->Contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y));
 }
 
 void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function) {

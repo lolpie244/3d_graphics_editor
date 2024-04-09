@@ -8,6 +8,8 @@ class Clickable : virtual public Hoverable {
    public:
     virtual ~Clickable() = default;
 
+	bool ContainsMouse(sf::Event event);
+
     virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function);
     virtual void BindRelease(events::Observer& observer, const events::EVENT_FUNC& function);
 

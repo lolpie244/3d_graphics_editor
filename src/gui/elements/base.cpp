@@ -17,7 +17,7 @@ void GuiElement::Disable() {
 
 void GuiElement::SetPosition(sf::Vector2f position) { RunForChilds(&GuiElement::SetPosition, this, position); }
 
-void GuiElement::Resize(sf::Vector2f position) { RunForChilds(&GuiElement::Resize, this, position); }
+void GuiElement::Resize(sf::Vector2f size) { RunForChilds(&GuiElement::Resize, this, size); }
 
 void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     RunForChilds(&GuiElement::draw, this, target, states);
@@ -27,6 +27,5 @@ int GuiElement::Id() const { return id_; }
 int GuiElement::Depth() const { return depth_; }
 sf::Vector2f GuiElement::Position() const { return position_; }
 sf::Vector2f GuiElement::Size() const { return size_; }
-sf::Vector2f GuiElement::LeftCorner() const { return position_ - size_ / 2.0f; }
 
 }  // namespace gui
