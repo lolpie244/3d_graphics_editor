@@ -9,6 +9,7 @@ namespace gui::mixins {
 void Scaleable::BindScale(events::Observer &observer) {
     auto event_function = [this](sf::Event event) {
         this->scale();
+		RunForChilds(&Scaleable::scale, this);
         return false;
     };
 

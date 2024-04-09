@@ -6,8 +6,22 @@ namespace gui {
 
 std::atomic<int> GuiElement::max_object_id{0};
 
-void GuiElement::Enable() { is_active_ = true; }
-void GuiElement::Disable() { is_active_ = false; }
+void GuiElement::Enable() {
+    is_active_ = true;
+    RunForChilds(&GuiElement::Enable, this);
+}
+void GuiElement::Disable() {
+    is_active_ = false;
+    RunForChilds(&GuiElement::Disable, this);
+}
+
+void GuiElement::SetPosition(sf::Vector2f position) { RunForChilds(&GuiElement::SetPosition, this, position); }
+
+void GuiElement::Resize(sf::Vector2f position) { RunForChilds(&GuiElement::Resize, this, position); }
+
+void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    RunForChilds(&GuiElement::draw, this, target, states);
+}
 
 int GuiElement::Id() const { return id_; }
 int GuiElement::Depth() const { return depth_; }

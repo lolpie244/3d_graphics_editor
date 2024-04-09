@@ -5,12 +5,14 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Transformable.hpp>
 #include <SFML/System/Vector2.hpp>
-#include <memory>
 #include <future>
+#include <memory>
 #include <utility>
 
+#include "utils/tree.h"
+
 namespace gui {
-class GuiElement: public sf::Drawable {
+class GuiElement : public sf::Drawable, public Tree {
    public:
     virtual ~GuiElement() = default;
 
@@ -23,10 +25,10 @@ class GuiElement: public sf::Drawable {
     virtual void Enable();
     virtual void Disable();
 
-    virtual void SetPosition(sf::Vector2f position) = 0;
-    virtual void Resize(sf::Vector2f size) = 0;
+    virtual void SetPosition(sf::Vector2f position);
+    virtual void Resize(sf::Vector2f size);
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
    protected:
     int id_ = max_object_id++;
     bool is_active_ = true;

@@ -10,29 +10,24 @@
 
 namespace gui {
 
-Button::Button(sf::Vector2f position, sf::Vector2f size, sf::Vector2f border_size)
-    : SpriteGuiElement(position, size),
-      borders_size_(sf::Vector2f(1 - border_size.x, 1 - border_size.y)),
-      text_(sf::Vector2f(position), sf::Vector2f(size.x * borders_size_.x, size.y * borders_size_.y)) {}
-
-gui::Text& Button::Text() { return text_; }
-
-void Button::Resize(sf::Vector2f size) {
-    SpriteGuiElement::Resize(size);
-
-    std::cout << borders_size_.x << ' ' << borders_size_.y << '\n';
-
-    this->text_.Resize(sf::Vector2f(size.x * borders_size_.x, size.y * borders_size_.y));
+ButtonText::ButtonText(Button* button, sf::Vector2f border_size)
+    : Text(button->Position(), button->Size()), borders_size_(sf::Vector2f(1 - border_size.x, 1 - border_size.y)) {
+    this->Resize(this->Size());
+    this->SetParent(button);
 }
+
+void ButtonText::Resize(sf::Vector2f size) {
+    Text::Resize(sf::Vector2f(size.x * borders_size_.x, size.y * borders_size_.y));
+}
+
+Button::Button(sf::Vector2f position, sf::Vector2f size, sf::Vector2f border_size)
+    : SpriteGuiElement(position, size), text_(this, border_size) {}
+
+gui::ButtonText& Button::Text() { return text_; }
 
 void Button::SetPosition(sf::Vector2f position) {
     SpriteGuiElement::SetPosition(position);
     this->text_.SetPosition(position);
-}
-
-void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    SpriteGuiElement::draw(target, states);
-    this->text_.draw(target, states);
 }
 
 void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {

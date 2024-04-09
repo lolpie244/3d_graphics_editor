@@ -4,6 +4,8 @@
 #include <SFML/System/Vector2.hpp>
 #include <iostream>
 
+#include "gui/elements/base.h"
+#include "utils/settings.h"
 #include "utils/texture.h"
 
 namespace gui {
@@ -16,27 +18,31 @@ sf::Vector2f SpriteGuiElement::LeftCorner() const { return this->sprite_.getGlob
 
 void SpriteGuiElement::Resize(sf::Vector2f size) {
     size_ = size;
-	if (svg_texture_ == nullptr)
-		return;
+    if (svg_texture_ == nullptr)
+        return;
 
-	auto real_size = sprite_.getLocalBounds();
-	auto scale = sf::Vector2f(real_size.width / size.x, real_size.height / size.y);
+    auto real_size = sprite_.getLocalBounds();
+    auto scale = sf::Vector2f(real_size.width / size.x, real_size.height / size.y);
 
-	if (scale.x >= 2.0 || scale.y >= 2.0) {
-		this->SetTexture(svg_texture_);
-		return;
-	}
-	sprite_.scale(scale.x, scale.y);
+    if (std::max(scale.x, scale.y) >= settings::SVG_RESIZE_COEF ||
+        std::min(scale.x, scale.y) <= 1 / settings::SVG_RESIZE_COEF) {
+        this->SetTexture(svg_texture_);
+        return;
+    }
+    sprite_.scale(scale.x, scale.y);
+    GuiElement::Resize(size);
 }
 
 void SpriteGuiElement::SetPosition(sf::Vector2f position) {
     this->sprite_.setPosition(position);
     position_ = position;
+    GuiElement::SetPosition(position);
 }
 
 void SpriteGuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     if (is_active_) {
         target.draw(this->sprite_, states);
+        GuiElement::draw(target, states);
     }
 }
 

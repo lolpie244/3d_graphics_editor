@@ -8,16 +8,26 @@
 #include "gui/propteries/clickable.h"
 
 namespace gui {
+
+class Button;
+
+class ButtonText : virtual public Text {
+   public:
+    ButtonText(Button* button, sf::Vector2f border_size);
+    virtual void Resize(sf::Vector2f size) override;
+
+   private:
+    sf::Vector2f borders_size_;
+};
+
 class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable {
    public:
     Button(sf::Vector2f position, sf::Vector2f size, sf::Vector2f border_size = sf::Vector2f(0.1, 0.1));
     virtual ~Button() = default;
 
-    virtual void Resize(sf::Vector2f size) override;
     virtual void SetPosition(sf::Vector2f position) override;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-    gui::Text& Text();
+    gui::ButtonText& Text();
 
     void BindPress(events::Observer& observer, const events::EVENT_FUNC& function) override;
     void OnRelease() override;
@@ -26,8 +36,7 @@ class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable
     void update_texture();
 
    private:
-	sf::Vector2f borders_size_;
-    gui::Text text_;
+    ButtonText text_;
     sf::Texture pressed_texture_;
 };
 }  // namespace gui
