@@ -30,7 +30,7 @@ TestStage::TestStage() {
         return true;
     }));
 
-    std::unique_ptr<gui::Button> but = std::make_unique<gui::Button>(sf::Vector2f(200, 200), sf::Vector2f(200, 100));
+    std::unique_ptr<gui::Button> but = std::make_unique<gui::Button>(utils::Vector2f(200, 200), utils::Vector2f(200, 100));
     auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
     but->SetTexture(theme->getElement("g548"));
 

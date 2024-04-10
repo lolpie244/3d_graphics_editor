@@ -6,7 +6,7 @@
 
 namespace gui {
 
-Text::Text(sf::Vector2f position, sf::Vector2f max_size) {
+Text::Text(utils::Vector2f position, utils::Vector2f max_size) {
     font_.loadFromFile("resources/other_font.ttf");
     this->text_.setFont(font_);
 
@@ -14,14 +14,14 @@ Text::Text(sf::Vector2f position, sf::Vector2f max_size) {
     this->SetPosition(position);
 }
 
-sf::Vector2f Text::LeftCorner() const { return text_.getGlobalBounds().getPosition(); }
+utils::Vector2f Text::LeftCorner() const { return text_.getGlobalBounds().getPosition(); }
 
 void Text::SetText(const sf::String& text) {
     text_.setString(text);
     this->Resize(this->size_);
 }
 
-void Text::Resize(sf::Vector2f size) {
+void Text::Resize(utils::Vector2f size) {
 	text_.setCharacterSize(size.y);
 
     auto real_size = text_.getLocalBounds().getSize();
@@ -33,7 +33,7 @@ void Text::Resize(sf::Vector2f size) {
     size_ = size;
 }
 
-void Text::SetPosition(sf::Vector2f position) {
+void Text::SetPosition(utils::Vector2f position) {
     this->text_.setPosition(position);
     position_ = position;
 }

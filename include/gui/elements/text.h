@@ -10,12 +10,12 @@
 namespace gui {
 class Text : virtual public GuiElement, virtual public mixins::DefaultScale {
    public:
-	Text(sf::Vector2f position, sf::Vector2f max_size);
+	Text(utils::Vector2f position, utils::Vector2f max_size);
 
-	virtual sf::Vector2f LeftCorner() const override;
+	virtual utils::Vector2f LeftCorner() const override;
 
-    virtual void Resize(sf::Vector2f size) override;
-    virtual void SetPosition(sf::Vector2f position) override;
+    virtual void Resize(utils::Vector2f size) override;
+    virtual void SetPosition(utils::Vector2f position) override;
 	virtual void SetText(const sf::String& text);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

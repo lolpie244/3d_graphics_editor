@@ -14,19 +14,19 @@ class Button;
 
 class ButtonText : virtual public Text {
    public:
-    ButtonText(Button* button, sf::Vector2f border_size);
-    virtual void Resize(sf::Vector2f size) override;
+    ButtonText(Button* button, utils::Vector2f border_size);
+    virtual void Resize(utils::Vector2f size) override;
 
    private:
-    sf::Vector2f borders_size_;
+    utils::Vector2f borders_size_;
 };
 
 class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable, virtual public mixins::DefaultScale {
    public:
-    Button(sf::Vector2f position, sf::Vector2f size, sf::Vector2f border_size = sf::Vector2f(0.1, 0.1));
+    Button(utils::Vector2f position, utils::Vector2f size, utils::Vector2f border_size = {0.1, 0.1});
     virtual ~Button() = default;
 
-    virtual void SetPosition(sf::Vector2f position) override;
+    virtual void SetPosition(utils::Vector2f position) override;
 
     gui::ButtonText& Text();
 

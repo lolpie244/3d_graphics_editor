@@ -15,7 +15,7 @@ class Hoverable : virtual public GuiElement {
     void BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function);
 
-    virtual bool Contains(sf::Vector2f point);
+    virtual bool Contains(utils::Vector2f point);
     bool ContainsMouse(sf::Event event);
 
    protected:

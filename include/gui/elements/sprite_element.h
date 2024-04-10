@@ -8,13 +8,13 @@
 namespace gui {
 class SpriteGuiElement : virtual public GuiElement {
    public:
-    SpriteGuiElement(sf::Vector2f position, sf::Vector2f size);
+    SpriteGuiElement(utils::Vector2f position, utils::Vector2f size);
     virtual ~SpriteGuiElement() = default;
 
-    sf::Vector2f LeftCorner() const override;
+    utils::Vector2f LeftCorner() const override;
 
-    virtual void Resize(sf::Vector2f size) override;
-    virtual void SetPosition(sf::Vector2f position) override;
+    virtual void Resize(utils::Vector2f size) override;
+    virtual void SetPosition(utils::Vector2f position) override;
     virtual void SetTexture(std::shared_ptr<utils::Texture> new_texture);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

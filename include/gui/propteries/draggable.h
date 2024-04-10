@@ -14,9 +14,9 @@ class Draggable : virtual public Clickable {
     void bind_drag(events::Observer &observer, const events::EVENT_FUNC &function);
 
    protected:
-    std::function<bool(sf::Event, sf::Vector2<float> moved_to)> drag_event_;
+    std::function<bool(sf::Event, utils::Vector2<float> moved_to)> drag_event_;
 
    private:
-    sf::Vector2<float> last_position_;
+    utils::Vector2<float> last_position_;
 };
 }  // namespace gui::mixins

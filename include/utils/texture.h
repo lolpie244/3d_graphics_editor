@@ -16,7 +16,7 @@ namespace utils {
 class Texture {
    public:
     virtual ~Texture() = default;
-    virtual sf::Texture getTexture(sf::Vector2f size) = 0;
+    virtual sf::Texture getTexture(utils::Vector2f size) = 0;
 };
 class SvgTexture;
 
@@ -26,7 +26,7 @@ class SvgTextureElement : public Texture {
    public:
     SvgTextureElement() = delete;
 
-    sf::Texture getTexture(sf::Vector2f size) override {
+    sf::Texture getTexture(utils::Vector2f size) override {
         sf::Image image;
         sf::Texture result;
 
@@ -53,7 +53,7 @@ class SvgTexture : public Texture {
         return std::shared_ptr<SvgTexture>(new SvgTexture(file));
     }
 
-    sf::Texture getTexture(sf::Vector2f size) {
+    sf::Texture getTexture(utils::Vector2f size) {
         sf::Image image;
         sf::Texture result;
 

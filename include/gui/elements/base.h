@@ -10,6 +10,7 @@
 #include <utility>
 
 #include "utils/tree.h"
+#include "utils/vector2.h"
 
 namespace gui {
 class GuiElement : public sf::Drawable, public Tree {
@@ -18,23 +19,23 @@ class GuiElement : public sf::Drawable, public Tree {
 
     int Id() const;
     int Depth() const;
-    sf::Vector2f Position() const;
-    sf::Vector2f Size() const;
-    virtual sf::Vector2f LeftCorner() const = 0;
+    utils::Vector2f Position() const;
+    utils::Vector2f Size() const;
+    virtual utils::Vector2f LeftCorner() const = 0;
 
     virtual void Enable();
     virtual void Disable();
 
-    virtual void SetPosition(sf::Vector2f position);
-    virtual void Resize(sf::Vector2f size);
+    virtual void SetPosition(utils::Vector2f position);
+    virtual void Resize(utils::Vector2f size);
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
    protected:
     int id_ = max_object_id++;
     bool is_active_ = true;
 
-    sf::Vector2f size_;
-    sf::Vector2f position_;
+    utils::Vector2f size_;
+    utils::Vector2f position_;
     int depth_ = 0;
 
    private:
