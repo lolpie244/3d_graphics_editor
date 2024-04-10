@@ -21,7 +21,7 @@ class ButtonText : virtual public Text {
     utils::Vector2f borders_size_;
 };
 
-class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable, virtual public mixins::DefaultScale {
+class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable, virtual public mixins::Scaleable {
    public:
     Button(utils::Vector2f border_size = {0.1, 0.1});
     Button(utils::Vector2f position, utils::Vector2f size, utils::Vector2f border_size = {0.1, 0.1});

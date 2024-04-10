@@ -19,7 +19,7 @@ utils::Vector2f SpriteGuiElement::LeftCorner() const {
 }
 
 void SpriteGuiElement::Resize(utils::Vector2<float> size) {
-    size_ = size;
+	GuiElement::Resize(size);
 
     if (svg_texture_ == nullptr)
         return;
@@ -34,7 +34,6 @@ void SpriteGuiElement::Resize(utils::Vector2<float> size) {
     }
 
     sprite_.setScale(scale);
-    GuiElement::Resize(size);
 }
 
 void SpriteGuiElement::SetPosition(utils::Vector2f position) {

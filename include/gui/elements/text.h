@@ -8,7 +8,7 @@
 #include "gui/propteries/scaleable.h"
 
 namespace gui {
-class Text : virtual public GuiElement, virtual public mixins::DefaultScale {
+class Text : virtual public GuiElement, virtual public mixins::Scaleable {
    public:
 	Text(utils::Vector2f position, utils::Vector2f max_size);
 	Text() = default;

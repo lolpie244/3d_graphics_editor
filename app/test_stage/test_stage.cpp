@@ -31,8 +31,9 @@ TestStage::TestStage() {
         return true;
     }));
 
-	auto button_list = std::make_unique<gui::ButtonsList>(utils::Vector2f(200, 100), utils::Vector2f(380, 98));
 	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
+	auto button_list = std::make_unique<gui::ButtonsList>(utils::Vector2f(200, 100), utils::Vector2f(95, 24));
+	// button_list->SetScale<gui::mixins::DefaultScale>();
 
 	button_list->SetButtonTexture(theme->getElement("g4"));
 	button_list->SetFontColor(sf::Color::Black);

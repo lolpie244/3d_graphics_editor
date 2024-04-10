@@ -30,7 +30,7 @@ class ButtonFromList : virtual public Button {
     size_t id_;
 };
 
-class ButtonsList : public virtual GuiElement, public virtual mixins::DefaultScale {
+class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable {
    public:
     ButtonsList(utils::Vector2f position, utils::Vector2f size);
 
