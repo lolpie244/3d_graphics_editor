@@ -9,36 +9,39 @@
 class Tree {
    public:
     void SetParent(Tree* new_parent) {
-        new_parent->childs.insert(this);
+        new_parent->childs.push_back(this);
         this->parent = new_parent;
     }
     void DeleteChild(Tree* child) {
-        childs.erase(child);
         child->parent = nullptr;
     }
 
     template <typename Derived, typename Callable, typename... Args>
     void RunForChilds(Callable&& function, Derived* obj, Args&&... args) {
-        if (this->parent)
-            std::invoke(std::forward<Callable>(function), obj, std::forward<Args>(args)...);
+        if (running_)
+            return;
+        running_ = true;
 
         for (auto* child : childs) {
             auto next = dynamic_cast<Derived*>(child);
             if (next != nullptr)
-                child->RunForChilds(std::forward<Callable>(function), dynamic_cast<Derived*>(child),
-                                    std::forward<Args>(args)...);
+				std::invoke(std::forward<Callable>(function), next, std::forward<Args>(args)...);
         }
+        running_ = false;
     }
 
     template <typename Derived, typename Callable, typename... Args>
     void RunForChilds(Callable&& function, const Derived* obj, Args&&... args) const {
-        if (this->parent)
-            std::invoke(std::forward<Callable>(function), obj, std::forward<Args>(args)...);
+        if (running_)
+            return;
+        running_ = true;
 
         for (auto* child : childs) {
-            child->RunForChilds(std::forward<Callable>(function), static_cast<Derived*>(child),
-                                std::forward<Args>(args)...);
+            auto next = dynamic_cast<Derived*>(child);
+			if (next != nullptr)
+				std::invoke(std::forward<Callable>(function), next, std::forward<Args>(args)...);
         }
+        running_ = false;
     }
 
     virtual ~Tree() {
@@ -49,6 +52,7 @@ class Tree {
     }
 
    protected:
-    std::unordered_set<Tree*> childs;
+    std::list<Tree*> childs;
     Tree* parent = nullptr;
+    mutable bool running_ = false;
 };

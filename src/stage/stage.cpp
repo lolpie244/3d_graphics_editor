@@ -2,13 +2,27 @@
 
 #include <SFML/Window/Event.hpp>
 
+#include "gui/propteries/scaleable.h"
 #include "stage/stage_manager.h"
 
 namespace stage {
 
-void Stage::Start() { state_ = StageState::Run; }
+void Stage::Start() {
+    if (state_ == StageState::Init)
+        this->Init();
+
+    state_ = StageState::Run;
+}
 
 void Stage::Stop(StageState with_state) { state_ = with_state; }
+
+void Stage::Init() {
+    for (auto& element : elements) {
+        auto scalable = dynamic_cast<gui::mixins::Scaleable*>(element.get());
+        if (scalable != nullptr)
+            scalable->BindScale(observer_);
+    }
+}
 
 void Stage::PollEvents() {
     sf::Event event;

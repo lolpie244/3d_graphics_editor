@@ -8,7 +8,4 @@ class TestStage : public stage::Stage {
    public:
 	TestStage();
     void Run() override;
-
-	std::vector<std::unique_ptr<gui::GuiElement>> elements;
-	std::vector<std::unique_ptr<events::Event>> events;
 };

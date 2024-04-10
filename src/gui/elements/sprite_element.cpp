@@ -39,7 +39,6 @@ void SpriteGuiElement::Resize(utils::Vector2<float> size) {
 
 void SpriteGuiElement::SetPosition(utils::Vector2f position) {
     this->sprite_.setPosition(position.x, position.y);
-    position_ = position;
     GuiElement::SetPosition(position);
 }
 

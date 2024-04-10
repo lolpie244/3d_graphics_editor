@@ -9,6 +9,7 @@ namespace gui {
 class SpriteGuiElement : virtual public GuiElement {
    public:
     SpriteGuiElement(utils::Vector2f position, utils::Vector2f size);
+    SpriteGuiElement() = default;
     virtual ~SpriteGuiElement() = default;
 
     utils::Vector2f LeftCorner() const override;

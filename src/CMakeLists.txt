@@ -6,6 +6,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/elements/sprite_element.cpp
 	gui/elements/text.cpp
 	gui/elements/button.cpp
+	gui/elements/button_list.cpp
 	gui/elements/slider.cpp
 	gui/elements/radio_button.cpp
 

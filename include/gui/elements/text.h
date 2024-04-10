@@ -11,6 +11,7 @@ namespace gui {
 class Text : virtual public GuiElement, virtual public mixins::DefaultScale {
    public:
 	Text(utils::Vector2f position, utils::Vector2f max_size);
+	Text() = default;
 
 	virtual utils::Vector2f LeftCorner() const override;
 

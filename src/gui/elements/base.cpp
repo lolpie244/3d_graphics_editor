@@ -15,9 +15,15 @@ void GuiElement::Disable() {
     RunForChilds(&GuiElement::Disable, this);
 }
 
-void GuiElement::SetPosition(utils::Vector2f position) { RunForChilds(&GuiElement::SetPosition, this, position); }
+void GuiElement::SetPosition(utils::Vector2f position) {
+    this->position_ = position;
+    RunForChilds(&GuiElement::SetPosition, this, position);
+}
 
-void GuiElement::Resize(utils::Vector2f size) { RunForChilds(&GuiElement::Resize, this, size); }
+void GuiElement::Resize(utils::Vector2f size) {
+    this->size_ = size;
+    RunForChilds(&GuiElement::Resize, this, size);
+}
 
 void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
     RunForChilds(&GuiElement::draw, this, target, states);

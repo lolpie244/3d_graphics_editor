@@ -11,12 +11,28 @@
 #include <stdexcept>
 #include <string>
 
+#include "utils/vector2.h"
+
 namespace utils {
 
 class Texture {
    public:
     virtual ~Texture() = default;
-    virtual sf::Texture getTexture(utils::Vector2f size) = 0;
+    sf::Texture getTexture(utils::Vector2f size) {
+		if (size == old_size_)
+			return texture_;
+		texture_ = this->loadTexture(size);
+		old_size_ = size;
+
+		return texture_;
+	}
+
+protected:
+	virtual sf::Texture loadTexture(utils::Vector2f size) = 0;
+
+private:
+	utils::Vector2f old_size_;
+	sf::Texture texture_;
 };
 class SvgTexture;
 
@@ -26,7 +42,7 @@ class SvgTextureElement : public Texture {
    public:
     SvgTextureElement() = delete;
 
-    sf::Texture getTexture(utils::Vector2f size) override {
+    sf::Texture loadTexture(utils::Vector2f size) override {
         sf::Image image;
         sf::Texture result;
 
@@ -53,7 +69,7 @@ class SvgTexture : public Texture {
         return std::shared_ptr<SvgTexture>(new SvgTexture(file));
     }
 
-    sf::Texture getTexture(utils::Vector2f size) {
+    sf::Texture loadTexture(utils::Vector2f size) {
         sf::Image image;
         sf::Texture result;
 

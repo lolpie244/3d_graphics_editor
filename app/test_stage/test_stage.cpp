@@ -14,6 +14,7 @@
 #include <memory>
 
 #include "gui/elements/button.h"
+#include "gui/elements/buttons_list.h"
 #include "gui/elements/text.h"
 #include "gui/propteries/scaleable.h"
 #include "stage/stage_manager.h"
@@ -30,24 +31,21 @@ TestStage::TestStage() {
         return true;
     }));
 
-    std::unique_ptr<gui::Button> but = std::make_unique<gui::Button>(utils::Vector2f(200, 200), utils::Vector2f(200, 100));
-    auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
-    but->SetTexture(theme->getElement("g548"));
+	auto button_list = std::make_unique<gui::ButtonsList>(utils::Vector2f(200, 100), utils::Vector2f(380, 98));
+	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
 
-    but->Text().SetText(L"Тест");
-    but->Text().SfText().setFillColor(sf::Color::White);
-    but->BindPress(observer_, [](sf::Event event) {
-        stage::StageManager::Instance().NextStage(std::make_unique<TestStage1>());
-        return true;
-    });
+	button_list->SetButtonTexture(theme->getElement("g4"));
+	button_list->SetFontColor(sf::Color::Black);
 
-    elements.push_back(std::move(but));
+	button_list->AddButton("start", "Start button");
+	button_list->AddButton("pause", "Pause button");
+	button_list->AddButton("exit", "Exit button");
 
-    for (auto& element : elements) {
-        auto scalable = dynamic_cast<gui::mixins::Scaleable*>(element.get());
-        if (scalable != nullptr)
-            scalable->BindScale(observer_);
-    }
+	button_list->Button("start")->BindPress(observer_, [](sf::Event event) {std::cout << "start\n"; return true;});
+	button_list->Button("pause")->BindPress(observer_, [](sf::Event event) {std::cout << "pause\n"; return true;});
+	button_list->Button("exit")->BindPress(observer_, [](sf::Event event) {std::cout << "exit\n"; return true;});
+
+	elements.push_back(std::move(button_list));
 }
 
 void TestStage::Run() {

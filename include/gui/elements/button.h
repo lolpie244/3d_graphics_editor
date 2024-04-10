@@ -23,10 +23,10 @@ class ButtonText : virtual public Text {
 
 class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable, virtual public mixins::DefaultScale {
    public:
+    Button(utils::Vector2f border_size = {0.1, 0.1});
     Button(utils::Vector2f position, utils::Vector2f size, utils::Vector2f border_size = {0.1, 0.1});
-    virtual ~Button() = default;
 
-    virtual void SetPosition(utils::Vector2f position) override;
+    virtual ~Button() = default;
 
     gui::ButtonText& Text();
 
@@ -36,7 +36,7 @@ class Button : virtual public SpriteGuiElement, virtual public mixins::Clickable
    private:
     void update_texture();
 
-   private:
+   protected:
     ButtonText text_;
     sf::Texture pressed_texture_;
 };
