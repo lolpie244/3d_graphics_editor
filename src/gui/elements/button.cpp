@@ -47,8 +47,6 @@ void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& fun
     };
 
     mixins::Clickable::BindPress(observer, event_function);
-	if (!release_event_)
-		Button::BindRelease(observer, [](sf::Event){return false;});
 }
 
 void Button::OnRelease() { update_texture(); }

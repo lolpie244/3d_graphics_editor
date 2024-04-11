@@ -16,6 +16,9 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
     };
 
     press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function);
+
+	if (!release_event_)
+		BindRelease(observer, [](sf::Event){return false;});
 }
 
 bool Clickable::ContainsMouse(sf::Event event) {
@@ -34,9 +37,9 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
         return function(event);
     };
 
+    release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function);
+
     if (!press_event_)
         BindPress(observer, [](sf::Event) { return true; });
-
-    release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function);
 }
 }  // namespace gui::mixins
