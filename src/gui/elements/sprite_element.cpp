@@ -48,7 +48,7 @@ void SpriteGuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) c
     }
 }
 
-void SpriteGuiElement::SetTexture(std::shared_ptr<utils::Texture> new_texture) {
+void SpriteGuiElement::SetTexture(utils::Texture new_texture) {
     svg_texture_ = new_texture;
 
     this->texture_ = svg_texture_->getTexture(this->size_);

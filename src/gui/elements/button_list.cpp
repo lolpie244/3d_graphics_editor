@@ -66,10 +66,9 @@ void ButtonsList::AddButton(ButtonType button) {
     button->Resize(this->Size());
     button->SetPosition(this->Position() + (float)buttons_.size() * PositionCoef());
     button->Text().SfText().setFillColor(font_color_);
+	button->SetPressedTexture(pressed_texture_);
+	button->SetReleasedTexture(pressed_texture_);
     button->is_active_ = this->is_active_;
-
-    if (button_texture_)
-        button->SetTexture(button_texture_);
 
     buttons_.push_back(button);
 }
@@ -83,9 +82,14 @@ void ButtonsList::SetFontColor(sf::Color color) {
     for (auto& button : buttons_) { button->Text().SfText().setFillColor(color); }
 }
 
-void ButtonsList::SetButtonTexture(std::shared_ptr<utils::Texture> texture) {
-    button_texture_ = texture;
-    for (auto& button : buttons_) { button->SetTexture(button_texture_); }
+void ButtonsList::SetReleasedTexture(Button::TextureInfo texture) {
+    released_texture_ = texture;
+    for (auto& button : buttons_) { button->SetReleasedTexture(released_texture_); }
+}
+
+void ButtonsList::SetPressedTexture(Button::TextureInfo texture) {
+    pressed_texture_ = texture;
+    for (auto& button : buttons_) { button->SetPressedTexture(pressed_texture_); }
 }
 
 void ButtonsList::SetOrientation(ListOrientation orientation) {

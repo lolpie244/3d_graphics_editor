@@ -8,21 +8,10 @@
 namespace stage {
 
 void Stage::Start() {
-    if (state_ == StageState::Init)
-        this->Init();
-
     state_ = StageState::Run;
 }
 
 void Stage::Stop(StageState with_state) { state_ = with_state; }
-
-void Stage::Init() {
-    for (auto& element : elements) {
-        auto scalable = dynamic_cast<gui::mixins::Scaleable*>(element.get());
-        if (scalable != nullptr)
-            scalable->BindScale(observer_);
-    }
-}
 
 void Stage::PollEvents() {
     sf::Event event;
@@ -40,6 +29,8 @@ void Stage::PollEvents() {
 }
 
 void Stage::FrameEnd() {
+    window->clear();
+	window->draw(elements_);
     window->display();
 
     if (!window->isOpen())

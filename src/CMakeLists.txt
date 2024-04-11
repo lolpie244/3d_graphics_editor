@@ -2,6 +2,8 @@ add_library(${PROJECT_NAME}-static STATIC
 	events/observer.cpp
 	events/event.cpp
 
+	gui/elements_container.cpp
+
 	gui/elements/base.cpp
 	gui/elements/sprite_element.cpp
 	gui/elements/text.cpp

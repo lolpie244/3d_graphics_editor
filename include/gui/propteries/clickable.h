@@ -18,8 +18,8 @@ class Clickable : virtual public Hoverable {
 	bool IsPressed() const { return pressed_; }
 
    protected:
-    std::unique_ptr<events::Event> press_event_;
-    std::unique_ptr<events::Event> release_event_;
+	events::Event press_event_;
+    events::Event release_event_;
 
     bool pressed_ = false;
 };

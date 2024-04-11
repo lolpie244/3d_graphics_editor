@@ -23,7 +23,7 @@ class Scaleable : virtual public gui::GuiElement {
    public:
     virtual ~Scaleable() = default;
     void BindScale(events::Observer& observer);
-	
+
 	utils::Vector2f oldScale();
 
     template <typename T>
@@ -33,7 +33,7 @@ class Scaleable : virtual public gui::GuiElement {
 
     void Scale(const utils::Vector2f& window_size);
    protected:
-    std::unique_ptr<events::Event> event;
+	events::Event event;
     std::unique_ptr<NoScale> scale_method_ = std::make_unique<NoScale>();
 
    private:

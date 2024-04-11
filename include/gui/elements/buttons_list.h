@@ -33,7 +33,6 @@ class ButtonFromList : virtual public Button {
    private:
     virtual void Resize(utils::Vector2f size) override { Button::Resize(size); };
     virtual void SetPosition(utils::Vector2f position) override { Button::SetPosition(position); };
-    virtual void SetTexture(std::shared_ptr<utils::Texture> new_texture) override { Button::SetTexture(new_texture); };
 };
 
 class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable, public virtual mixins::Hoverable {
@@ -52,7 +51,8 @@ class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable,
     void AddButtons(const std::initializer_list<ButtonType>& buttons);
 
     void SetFontColor(sf::Color color);
-    void SetButtonTexture(std::shared_ptr<utils::Texture> texture);
+    void SetReleasedTexture(Button::TextureInfo texture);
+    void SetPressedTexture(Button::TextureInfo texture);
     void SetOrientation(ListOrientation orientation);
 
    private:
@@ -63,6 +63,7 @@ class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable,
     ListOrientation orientation_;
     sf::Color font_color_;
 
-    std::shared_ptr<utils::Texture> button_texture_;
+	Button::TextureInfo released_texture_;
+    Button::TextureInfo pressed_texture_;
 };
 }  // namespace gui

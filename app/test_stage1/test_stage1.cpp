@@ -19,7 +19,7 @@ TestStage1::TestStage1() {
         return false;
     }));
 
-	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
+	// auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
 
 }
 

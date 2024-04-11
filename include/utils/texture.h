@@ -15,9 +15,9 @@
 
 namespace utils {
 
-class Texture {
+class mTextureType {
    public:
-    virtual ~Texture() = default;
+    virtual ~mTextureType() = default;
     sf::Texture getTexture(utils::Vector2f size) {
 		if (size == old_size_)
 			return texture_;
@@ -34,9 +34,12 @@ private:
 	utils::Vector2f old_size_;
 	sf::Texture texture_;
 };
+
+
+typedef std::shared_ptr<mTextureType> Texture;
 class SvgTexture;
 
-class SvgTextureElement : public Texture {
+class SvgTextureElement : public mTextureType {
     friend SvgTexture;
 
    public:
@@ -63,7 +66,7 @@ class SvgTextureElement : public Texture {
     std::shared_ptr<lunasvg::Document> document_;
 };
 
-class SvgTexture : public Texture {
+class SvgTexture : public mTextureType {
    public:
     static std::shared_ptr<SvgTexture> loadFromFile(const std::string& file) {
         return std::shared_ptr<SvgTexture>(new SvgTexture(file));
