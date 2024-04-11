@@ -14,7 +14,7 @@ Text::Text(utils::Vector2f position, utils::Vector2f max_size) {
     this->SetPosition(position);
 }
 
-utils::Vector2f Text::LeftCorner() const { return text_.getGlobalBounds().getPosition(); }
+sf::Rect<float> Text::Rect() const { return text_.getGlobalBounds(); }
 
 void Text::SetText(const sf::String& text) {
     text_.setString(text);

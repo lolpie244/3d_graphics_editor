@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Keyboard.hpp>
 #include <initializer_list>
 #include <memory>
 #include <vector>
@@ -9,11 +11,13 @@
 #include "gui/elements/base.h"
 #include "gui/elements/button.h"
 #include "gui/elements/sprite_element.h"
+#include "gui/propteries/hoverable.h"
 #include "gui/propteries/scaleable.h"
 #include "utils/texture.h"
 #include "utils/vector2.h"
 
 namespace gui {
+enum ListOrientation { Horizontal, Vertical };
 
 class ButtonsList;
 
@@ -21,32 +25,42 @@ class ButtonFromList : virtual public Button {
     friend ButtonsList;
 
    public:
-	ButtonFromList() = default;
-	ButtonFromList(const sf::String& text);
+    ButtonFromList() = default;
+    ButtonFromList(const sf::String& text);
 
-    void SetPosition(utils::Vector2f position) override;
+    void AddButtonList(events::Observer& observer, ButtonsList* button_list, ListOrientation orientation);
 
    private:
-    size_t id_;
+    virtual void Resize(utils::Vector2f size) override { Button::Resize(size); };
+    virtual void SetPosition(utils::Vector2f position) override { Button::SetPosition(position); };
+    virtual void SetTexture(std::shared_ptr<utils::Texture> new_texture) override { Button::SetTexture(new_texture); };
 };
 
-class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable {
+class ButtonsList : public virtual GuiElement, virtual public mixins::Scaleable, public virtual mixins::Hoverable {
+    using ButtonType = std::shared_ptr<ButtonFromList>;
+    friend ButtonFromList;
+
    public:
-    ButtonsList(utils::Vector2f position, utils::Vector2f size);
+    ButtonsList(ListOrientation orientation = ListOrientation::Vertical);
+    ButtonsList(utils::Vector2f position, utils::Vector2f size,
+                ListOrientation orientation = ListOrientation::Vertical);
 
-	utils::Vector2f LeftCorner() const override;
+    sf::Rect<float> Rect() const override;
+    void SetPosition(utils::Vector2f position) override;
 
-    void AddButton(const std::string& name, std::unique_ptr<ButtonFromList> button);
-    void AddButton(const std::string& name, const sf::String& text="");
+    void AddButton(ButtonType button);
+    void AddButtons(const std::initializer_list<ButtonType>& buttons);
 
     void SetFontColor(sf::Color color);
     void SetButtonTexture(std::shared_ptr<utils::Texture> texture);
-
-	ButtonFromList* Button(const std::string& name);
-
+    void SetOrientation(ListOrientation orientation);
 
    private:
-    std::unordered_map<std::string, std::unique_ptr<ButtonFromList>> buttons_;
+    utils::Vector2f PositionCoef() const;
+
+   private:
+    std::vector<ButtonType> buttons_;
+    ListOrientation orientation_;
     sf::Color font_color_;
 
     std::shared_ptr<utils::Texture> button_texture_;

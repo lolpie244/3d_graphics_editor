@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Graphics/Rect.hpp>
 #include <SFML/Graphics/Texture.hpp>
 
 #include "base.h"
@@ -12,7 +13,7 @@ class SpriteGuiElement : virtual public GuiElement {
     SpriteGuiElement() = default;
     virtual ~SpriteGuiElement() = default;
 
-    utils::Vector2f LeftCorner() const override;
+	sf::Rect<float> Rect() const override;
 
     virtual void Resize(utils::Vector2f size) override;
     virtual void SetPosition(utils::Vector2f position) override;

@@ -13,7 +13,7 @@ class Text : virtual public GuiElement, virtual public mixins::Scaleable {
 	Text(utils::Vector2f position, utils::Vector2f max_size);
 	Text() = default;
 
-	virtual utils::Vector2f LeftCorner() const override;
+	sf::Rect<float> Rect() const override;
 
     virtual void Resize(utils::Vector2f size) override;
     virtual void SetPosition(utils::Vector2f position) override;

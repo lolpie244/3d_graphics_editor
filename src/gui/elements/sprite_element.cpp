@@ -14,8 +14,8 @@ SpriteGuiElement::SpriteGuiElement(utils::Vector2f position, utils::Vector2f siz
     this->Resize(size);
 }
 
-utils::Vector2f SpriteGuiElement::LeftCorner() const {
-    return this->sprite_.getGlobalBounds().getPosition();
+sf::Rect<float> SpriteGuiElement::Rect() const {
+    return this->sprite_.getGlobalBounds();
 }
 
 void SpriteGuiElement::Resize(utils::Vector2<float> size) {

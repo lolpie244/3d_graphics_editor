@@ -21,7 +21,7 @@ class GuiElement : public sf::Drawable, public Tree {
     int Depth() const;
     utils::Vector2f Position() const;
     utils::Vector2f Size() const;
-    virtual utils::Vector2f LeftCorner() const = 0;
+    virtual sf::Rect<float> Rect() const = 0;
 
     virtual void Enable();
     virtual void Disable();

@@ -32,21 +32,35 @@ TestStage::TestStage() {
     }));
 
 	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
-	auto button_list = std::make_unique<gui::ButtonsList>(utils::Vector2f(200, 100), utils::Vector2f(95, 24));
-	// button_list->SetScale<gui::mixins::DefaultScale>();
 
+	auto other_button_list = std::make_unique<gui::ButtonsList>();
+	other_button_list->SetButtonTexture(theme->getElement("g4"));
+	other_button_list->SetFontColor(sf::Color::Black);
+
+	auto start = std::make_shared<gui::ButtonFromList>("Starting here");
+	auto pause = std::make_shared<gui::ButtonFromList>("Pause");
+	auto exit = std::make_shared<gui::ButtonFromList>("Exit");
+
+	start->BindPress(observer_, [](sf::Event event) {std::cout << "start\n"; return true;});
+	pause->BindPress(observer_, [](sf::Event event) {std::cout << "pause\n"; return true;});
+	exit->BindPress(observer_, [](sf::Event event) {std::cout << "exit\n"; return true;});
+
+	other_button_list->AddButtons({start, pause, exit});
+	//////////////////////////////////////////////////////////////////////
+
+	auto button_list = std::make_unique<gui::ButtonsList>(utils::Vector2f(200, 100), utils::Vector2f(120, 24));
 	button_list->SetButtonTexture(theme->getElement("g4"));
 	button_list->SetFontColor(sf::Color::Black);
 
-	button_list->AddButton("start", "Start button");
-	button_list->AddButton("pause", "Pause button");
-	button_list->AddButton("exit", "Exit button");
+	auto test = std::make_shared<gui::ButtonFromList>("Test");
+	auto menu = std::make_shared<gui::ButtonFromList>("Menu");
+	button_list->AddButtons({test, menu});
 
-	button_list->Button("start")->BindPress(observer_, [](sf::Event event) {std::cout << "start\n"; return true;});
-	button_list->Button("pause")->BindPress(observer_, [](sf::Event event) {std::cout << "pause\n"; return true;});
-	button_list->Button("exit")->BindPress(observer_, [](sf::Event event) {std::cout << "exit\n"; return true;});
+	menu->AddButtonList(observer_, other_button_list.get(), gui::ListOrientation::Horizontal);
+	test->BindPress(observer_, [](sf::Event event) {std::cout << "test\n"; return true;});
 
 	elements.push_back(std::move(button_list));
+	elements.push_back(std::move(other_button_list));
 }
 
 void TestStage::Run() {

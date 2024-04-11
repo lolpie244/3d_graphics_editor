@@ -13,12 +13,7 @@ bool Hoverable::Contains(utils::Vector2f point) {
     if (check_transparecy_) {
         throw std::runtime_error("NOT IMPLEMENTED");
     }
-
-    utils::Vector2f left_corner = this->LeftCorner();
-    utils::Vector2f rigth_corner = this->LeftCorner() + this->Size();
-
-    return left_corner.x <= point.x && point.x <= rigth_corner.x && left_corner.y <= point.y &&
-           point.y <= rigth_corner.y;
+    return is_active_ && this->Rect().contains(point);
 }
 
 bool Hoverable::ContainsMouse(sf::Event event) {
@@ -35,6 +30,8 @@ void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC
     };
 
     mouse_in_event_ = observer.Bind(sf::Event::MouseMoved, event_function, Depth());
+    if (!mouse_out_event_)
+        BindMouseOut(observer, [](sf::Event) { return false; });
 }
 void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function) {
     auto event_function = [this, function](sf::Event event) {
@@ -45,5 +42,7 @@ void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUN
         return function(event);
     };
     mouse_out_event_ = observer.Bind(sf::Event::MouseMoved, event_function, Depth());
+    if (!mouse_in_event_)
+        BindMouseIn(observer, [](sf::Event) { return false; });
 }
 }  // namespace gui::mixins
