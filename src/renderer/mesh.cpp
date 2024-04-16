@@ -19,7 +19,5 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>&
     VAO.AddBuffer(IBO);
 }
 
-unsigned int Mesh::size() const {
-	return this->count_;
-}
+unsigned int Mesh::size() const { return this->count_; }
 }  // namespace renderer

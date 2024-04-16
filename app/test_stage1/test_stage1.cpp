@@ -24,24 +24,20 @@ TestStage1::TestStage1() {
         return false;
     }));
 
-	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
+    auto theme = utils::SvgTexture::loadFromFile("resources/theme.svg");
     shader.loadFromFile("shaders/texture_shader.vert", "shaders/texture_shader.frag");
-	texture = theme->getElement("g586")->getTexture({300, 300});
+    texture = theme->getElement("g586")->getTexture({300, 300});
 
-	std::vector<renderer::Mesh::Vertex> vertices {
-		{{-0.5, -0.5, 0}, {0, 0}},
-		{{ 0.5, -0.5, 0}, {1, 0}},
-		{{ 0.5,  0.5, 0}, {1, 1}},
-		{{-0.5,  0.5, 0}, {0, 1}}
-	};
+    std::vector<renderer::Mesh::Vertex> vertices{
+        {{-0.5, -0.5, 0}, {0, 0}}, {{0.5, -0.5, 0}, {1, 0}}, {{0.5, 0.5, 0}, {1, 1}}, {{-0.5, 0.5, 0}, {0, 1}}};
 
-	std::vector<unsigned int> indices{0, 1, 2, 2, 3, 0};
-	mesh = std::make_shared<renderer::Mesh>(vertices, indices);
+    std::vector<unsigned int> indices{0, 1, 2, 2, 3, 0};
+    mesh = std::make_shared<renderer::Mesh>(vertices, indices);
 }
 
 void TestStage1::Run() {
     PollEvents();
-	shader.setUniform("u_Texture", texture);
-	sf::Texture::bind(&texture);
-	renderer::GL_Renderer::Instance().Draw(*mesh, shader);
+    shader.setUniform("u_Texture", texture);
+    sf::Texture::bind(&texture);
+    renderer::GL_Renderer::Instance().Draw(*mesh, shader);
 }

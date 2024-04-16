@@ -26,7 +26,7 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
-		renderer::GL_Renderer::Instance().Clear();
+        renderer::GL_Renderer::Instance().Clear();
 
         if (exit_) {
             CurrentStage()->Stop(StageState::Exit);
@@ -36,9 +36,8 @@ void StageManager::Start() {
 
         if (CurrentStage()->State() == StageState::Run) {
             CurrentStage()->Run();
-			CurrentStage()->FrameEnd();
-		}
-        else
+            CurrentStage()->FrameEnd();
+        } else
             PreviousStage();
     }
 }

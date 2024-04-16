@@ -14,12 +14,10 @@ SpriteGuiElement::SpriteGuiElement(utils::Vector2f position, utils::Vector2f siz
     this->Resize(size);
 }
 
-sf::Rect<float> SpriteGuiElement::Rect() const {
-    return this->sprite_.getGlobalBounds();
-}
+sf::Rect<float> SpriteGuiElement::Rect() const { return this->sprite_.getGlobalBounds(); }
 
 void SpriteGuiElement::Resize(utils::Vector2<float> size) {
-	GuiElement::Resize(size);
+    GuiElement::Resize(size);
 
     if (svg_texture_ == nullptr)
         return;

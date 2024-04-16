@@ -30,7 +30,6 @@ void ButtonText::SetOffset(utils::Vector2f offset) {
 void ButtonText::SetBordersSize(utils::Vector2f borders_size) {
     auto old_borders_size = borders_size_;
     borders_size_ = {1 - borders_size.x, 1 - borders_size.y};
-	// std::cout << "123 " << old_borders_size << " | " << borders_size_ << '\n';
     this->Resize(this->Size() / old_borders_size);
 }
 
@@ -69,9 +68,9 @@ void Button::update_texture() {
     } else {
         current_texture_ = &pressed_texture_;
     }
-	if (current_texture_->texture == nullptr) {
-		return;
-	}
+    if (current_texture_->texture == nullptr) {
+        return;
+    }
 
     this->SetTexture(current_texture_->texture);
     this->Text().SetOffset(current_texture_->offset);

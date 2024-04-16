@@ -21,7 +21,7 @@ class Stage {
     virtual void PollEvents();
     virtual void FrameEnd();
 
-	StageState State();
+    StageState State();
 
     virtual ~Stage() {}
 
@@ -30,7 +30,7 @@ class Stage {
     std::shared_ptr<sf::RenderWindow> window = StageManager::Instance().window;
     std::atomic<StageState> state_ = StageState::Run;
 
-	gui::ElementContainer elements_;
-	std::vector<events::Event> events;
+    gui::ElementContainer elements_;
+    std::vector<events::Event> events;
 };
 }  // namespace stage

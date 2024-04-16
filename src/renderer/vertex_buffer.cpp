@@ -34,7 +34,7 @@ void VertexBuffer::Write(int offset, void* data, size_t size) {
     }
 
     Bind();
-	glBufferSubData(type_, offset, size, data);
+    glBufferSubData(type_, offset, size, data);
     Unbind();
 }
 

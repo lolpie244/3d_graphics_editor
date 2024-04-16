@@ -7,9 +7,7 @@
 
 namespace stage {
 
-void Stage::Start() {
-    state_ = StageState::Run;
-}
+void Stage::Start() { state_ = StageState::Run; }
 
 void Stage::Stop(StageState with_state) { state_ = with_state; }
 
@@ -29,11 +27,11 @@ void Stage::PollEvents() {
 }
 
 void Stage::FrameEnd() {
-	window->pushGLStates();
-	window->draw(elements_);
-	window->popGLStates();
+    window->pushGLStates();
+    window->draw(elements_);
+    window->popGLStates();
 
-	window->display();
+    window->display();
     if (!window->isOpen())
         this->Stop(StageState::Exit);
 }

@@ -17,8 +17,8 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
 
     press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function);
 
-	if (!release_event_)
-		BindRelease(observer, [](sf::Event){return false;});
+    if (!release_event_)
+        BindRelease(observer, [](sf::Event) { return false; });
 }
 
 bool Clickable::ContainsMouse(sf::Event event) {

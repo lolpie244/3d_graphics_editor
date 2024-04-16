@@ -7,7 +7,7 @@
 namespace gui {
 
 Text::Text(utils::Vector2f position, utils::Vector2f max_size) {
-    font_.loadFromFile("resources/other_font.ttf");
+    font_.loadFromFile("resources/font.ttf");
     this->text_.setFont(font_);
 
     this->Resize(max_size);
@@ -22,7 +22,7 @@ void Text::SetText(const sf::String& text) {
 }
 
 void Text::Resize(utils::Vector2f size) {
-	text_.setCharacterSize(size.y);
+    text_.setCharacterSize(size.y);
 
     auto real_size = text_.getLocalBounds().getSize();
     auto bounds = text_.getLocalBounds();

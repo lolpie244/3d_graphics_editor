@@ -33,21 +33,19 @@ TestStage::TestStage() {
         return true;
     }));
 
-	auto theme = utils::SvgTexture::loadFromFile("resources/theme1.svg");
-	auto button = std::make_shared<gui::Button>(utils::Vector2f(200, 100), utils::Vector2f(380, 94));
-	button->Text().SetText(L"Help me");
-	button->Text().SfText().setFillColor(sf::Color::Black);
-	button->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
-	button->SetPressedTexture({theme->getElement("g517"), {0, 0.1}, {0.2, 0.3}});
+    auto theme = utils::SvgTexture::loadFromFile("resources/theme.svg");
+    auto button = std::make_shared<gui::Button>(utils::Vector2f(200, 100), utils::Vector2f(380, 94));
+    button->Text().SetText(L"Help me");
+    button->Text().SfText().setFillColor(sf::Color::Black);
+    button->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
+    button->SetPressedTexture({theme->getElement("g517"), {0, 0.1}, {0.2, 0.3}});
 
-	button->BindRelease(observer_, [](sf::Event){
+    button->BindRelease(observer_, [](sf::Event) {
         stage::StageManager::Instance().NextStage(std::make_unique<TestStage1>());
-		return true;
-	});
+        return true;
+    });
 
-	elements_.Insert({button});
+    elements_.Insert({button});
 }
 
-void TestStage::Run() {
-    PollEvents();
-}
+void TestStage::Run() { PollEvents(); }

@@ -23,3 +23,8 @@ build:
 .PHONY: run
 run: build
 	build/app/3d_graphics
+
+
+.PHONY: format
+format:
+	find . -regex '.*\.\(cpp\|hpp\|cc\|cxx\)' -exec clang-format -style=file -i {} \;

@@ -26,8 +26,8 @@ void GuiElement::Resize(utils::Vector2f size) {
 }
 
 void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	if (is_active_)
-		RunForChilds(&GuiElement::draw, this, target, states);
+    if (is_active_)
+        RunForChilds(&GuiElement::draw, this, target, states);
 }
 
 int GuiElement::Id() const { return id_; }
