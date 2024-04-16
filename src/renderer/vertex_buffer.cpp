@@ -2,8 +2,10 @@
 
 #include <GL/glew.h>
 
+#include <cstdint>
 #include <cstring>
 #include <iostream>
+#include <stdexcept>
 
 namespace renderer {
 
@@ -26,15 +28,13 @@ void VertexBuffer::Allocate(void* data, size_t size) {
     Unbind();
 }
 
-void VertexBuffer::Write(void* data, size_t size) {
-    if (size != this->size_) {
-        std::cout << "VertexBuffer::Write: different size; Realocate memory\n";
-        Allocate(data, size);
-        return;
+void VertexBuffer::Write(int offset, void* data, size_t size) {
+    if (offset + size > this->size_) {
+        throw std::runtime_error("VertexBuffer::Write: size is larger that allocated\n");
     }
+
     Bind();
-    void* ptr = glMapBuffer(type_, GL_WRITE_ONLY);
-    memcpy(ptr, data, size);
+	glBufferSubData(type_, offset, size, data);
     Unbind();
 }
 

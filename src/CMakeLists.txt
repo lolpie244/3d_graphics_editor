@@ -20,6 +20,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	renderer/renderer.cpp
 	renderer/vertex_array.cpp
 	renderer/vertex_buffer.cpp
+	renderer/mesh.cpp
 
 	stage/stage.cpp
 	stage/stage_manager.cpp

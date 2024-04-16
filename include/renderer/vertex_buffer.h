@@ -14,12 +14,14 @@ class VertexBuffer {
     void Unbind() const;
 
 	void Allocate(void* data, size_t size);
-	void Write(void* data, size_t size);
+	void Write(int offset, void* data, size_t size);
 
    private:
     unsigned int buffer_id_;
 	unsigned int draw_;
 	unsigned int type_;
 	size_t size_;
+
+	int count;
 };
 }  // namespace renderer

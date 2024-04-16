@@ -18,24 +18,39 @@ namespace renderer {
 		glBindVertexArray(0);
 	}
 
-	void VertexArray::SetBuffer(const VertexBuffer& vbo, const VertexLayout& layout) {
+	void VertexArray::AddBuffer(const VertexBuffer& vbo, const VertexLayout& layout) {
 		Bind();
 		vbo.Bind();
 		unsigned int offset = 0;
+		attribute_count_ = layout.Elements().size();
 
-		for (int i = 0; i < layout.Elements().size(); i++) {
+		for (int i = 0; i < attribute_count_; i++) {
 			glEnableVertexAttribArray(i);
-			auto& element = layout.Elements()[i];
-			glVertexAttribPointer(i, element.count, element.type, element.normalize, layout.Stride(), (const void*)offset);
-			offset += element.count * element.size;
+			auto& attribute = layout.Elements()[i];
+			glVertexAttribPointer(i, attribute.count, attribute.type, attribute.normalize, layout.Stride(), (const void*)offset);
+			offset += attribute.count * attribute.size;
 		}
 		vbo.Unbind();
 		Unbind();
 	}
 
-	void VertexArray::SetBuffer(const VertexBuffer& vbo, const VertexBuffer& ibo, const VertexLayout& layout) {
+	void VertexArray::AddBuffer(const VertexBuffer& vbo) {
 		Bind();
-		ibo.Bind();
-		SetBuffer(vbo, layout);
+		vbo.Bind();
+		Unbind();
+	}
+
+	void VertexArray::EnableAttributes() {
+		Bind();
+		for (int i = 0; i < attribute_count_; i++)
+			glEnableVertexAttribArray(i);
+		Unbind();
+	}
+
+	void VertexArray::DisableAttributes() {
+		Bind();
+		for (int i = 0; i < attribute_count_; i++)
+			glDisableVertexAttribArray(i);
+		Unbind();
 	}
 }

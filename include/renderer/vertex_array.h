@@ -12,10 +12,14 @@ class VertexArray {
     void Bind() const;
     void Unbind() const;
 
-    void SetBuffer(const VertexBuffer& vbo, const VertexLayout& layout);
-    void SetBuffer(const VertexBuffer& vbo, const VertexBuffer& ibo, const VertexLayout& layout);
+    void AddBuffer(const VertexBuffer& vbo);
+    void AddBuffer(const VertexBuffer& vbo, const VertexLayout& layout);
+
+	void EnableAttributes();
+	void DisableAttributes();
 
  private:
 	unsigned int id_;
+	unsigned int attribute_count_;
 };
 }  // namespace renderer

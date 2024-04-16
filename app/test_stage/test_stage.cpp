@@ -40,8 +40,8 @@ TestStage::TestStage() {
 	button->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
 	button->SetPressedTexture({theme->getElement("g517"), {0, 0.1}, {0.2, 0.3}});
 
-	button->BindPress(observer_, [](sf::Event){
-		std::cout << "TRUE\n";
+	button->BindRelease(observer_, [](sf::Event){
+        stage::StageManager::Instance().NextStage(std::make_unique<TestStage1>());
 		return true;
 	});
 
@@ -50,5 +50,4 @@ TestStage::TestStage() {
 
 void TestStage::Run() {
     PollEvents();
-    FrameEnd();
 }

@@ -29,10 +29,11 @@ void Stage::PollEvents() {
 }
 
 void Stage::FrameEnd() {
-    window->clear();
+	window->pushGLStates();
 	window->draw(elements_);
-    window->display();
+	window->popGLStates();
 
+	window->display();
     if (!window->isOpen())
         this->Stop(StageState::Exit);
 }
