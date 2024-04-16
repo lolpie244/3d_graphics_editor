@@ -17,6 +17,10 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/propteries/hoverable.cpp
 	gui/propteries/scaleable.cpp
 
+	renderer/renderer.cpp
+	renderer/vertex_array.cpp
+	renderer/vertex_buffer.cpp
+
 	stage/stage.cpp
 	stage/stage_manager.cpp
 
@@ -24,8 +28,10 @@ add_library(${PROJECT_NAME}-static STATIC
 )
 target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
 	${CMAKE_BINARY_DIR}/include)
+
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
+	OpenGL GLU GLEW::GLEW
 	${lunasvg}
 )
 

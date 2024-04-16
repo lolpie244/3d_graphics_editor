@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 
 project(3d_graphics CXX)
 
-find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system audio)
+add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
 
 include(ExternalProject)
 ExternalProject_Add(lunasvg-git
@@ -14,6 +14,11 @@ ExternalProject_Add(lunasvg-git
 )
 
 set(lunasvg ${CMAKE_BINARY_DIR}/lib/liblunasvg.a)
+
+find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system audio)
+find_package(OpenGL REQUIRED)
+find_package(GLEW REQUIRED)
+find_package(GLU REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(app)

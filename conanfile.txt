@@ -1,5 +1,6 @@
 [requires]
 sfml/2.6.1
+glew/2.2.0
 
 [generators]
 CMakeDeps
