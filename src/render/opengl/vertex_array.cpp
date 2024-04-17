@@ -1,4 +1,4 @@
-#include "render/vertex_array.h"
+#include "render/opengl/vertex_array.h"
 
 namespace render {
 VertexArray::VertexArray() { glGenVertexArrays(1, &id_); }

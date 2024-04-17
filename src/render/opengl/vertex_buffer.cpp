@@ -1,4 +1,4 @@
-#include "render/vertex_buffer.h"
+#include "render/opengl/vertex_buffer.h"
 
 #include <GL/glew.h>
 

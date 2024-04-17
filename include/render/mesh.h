@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "render/transform.h"
-#include "render/vertex_array.h"
-#include "render/vertex_buffer.h"
-#include "render/vertex_layout.h"
+#include "render/opengl/vertex_array.h"
+#include "render/opengl/vertex_buffer.h"
+#include "render/opengl/vertex_layout.h"
 
 namespace render {
 class Mesh : public Transform {

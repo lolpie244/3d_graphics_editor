@@ -1,6 +1,6 @@
 #include "render/mesh.h"
 
-#include "render/vertex_layout.h"
+#include "render/opengl/vertex_layout.h"
 
 namespace render {
 VertexLayout Mesh::Vertex::GetLayout() {

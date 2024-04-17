@@ -14,7 +14,7 @@
 
 #include "gui/elements/buttons_list.h"
 #include "render/mesh.h"
-#include "render/render.h"
+#include "render/renderer.h"
 #include "stage/stage.h"
 #include "utils/vector2.h"
 

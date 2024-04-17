@@ -17,11 +17,12 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/propteries/hoverable.cpp
 	gui/propteries/scaleable.cpp
 
-	render/render.cpp
-	render/vertex_array.cpp
-	render/vertex_buffer.cpp
-	render/transform.cpp
 	render/mesh.cpp
+	render/renderer.cpp
+	render/transform.cpp
+
+	render/opengl/vertex_array.cpp
+	render/opengl/vertex_buffer.cpp
 
 	stage/stage.cpp
 	stage/stage_manager.cpp

@@ -4,7 +4,7 @@
 #include "render/mesh.h"
 #include "stage/stage.h"
 #include "gui/elements/base.h"
-#include "utils/shader.h"
+#include "render/shader.h"
 
 class TestStage1 : public stage::Stage {
    public:
@@ -14,7 +14,7 @@ class TestStage1 : public stage::Stage {
 	std::vector<std::unique_ptr<gui::GuiElement>> elements;
 	std::vector<std::unique_ptr<events::mEventType>> events;
 
-	utils::Shader shader;
+	render::Shader shader;
 	sf::Texture texture;
 	std::shared_ptr<render::Mesh> mesh;
 };

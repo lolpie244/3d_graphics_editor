@@ -8,7 +8,7 @@
 #include "stage/stage_manager.h"
 #include "test_stage/test_stage.h"
 #include "test_stage1/test_stage1.h"
-#include "utils/opengl_error.h"
+#include "render/opengl/error_callback.h"
 
 int main() {
     stage::StageManager& stage_manager = stage::StageManager::Instance();

@@ -5,7 +5,7 @@
 #include <SFML/Graphics/Shader.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace utils {
+namespace render {
 class Shader : public sf::Shader {
    public:
 	using sf::Shader::setUniform;

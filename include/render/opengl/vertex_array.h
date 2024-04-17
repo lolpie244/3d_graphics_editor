@@ -1,5 +1,5 @@
 #pragma once
-#include "render/vertex_buffer.h"
+#include "render/opengl/vertex_buffer.h"
 #include "vertex_layout.h"
 
 namespace render {

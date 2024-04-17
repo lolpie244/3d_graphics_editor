@@ -5,7 +5,7 @@
 #include <memory>
 #include <thread>
 
-#include "render/render.h"
+#include "render/renderer.h"
 #include "stage/stage.h"
 
 namespace stage {
