@@ -39,6 +39,6 @@ inline void GLDebugMessageCallback(GLenum source, GLenum type, GLuint id, GLenum
         case GL_DEBUG_SEVERITY_NOTIFICATION: _severity = "NOTIFICATION"; break;
         default: _severity = "UNKNOWN"; break;
     }
-    printf("ERROR: %s of %s severity, raised from %s: %s\n", _type.c_str(), _severity.c_str(), _source.c_str(), msg);
+    printf("%s of %s severity, raised from %s: %s\n", _type.c_str(), _severity.c_str(), _source.c_str(), msg);
 }
 #endif

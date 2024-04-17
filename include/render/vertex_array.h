@@ -1,8 +1,8 @@
 #pragma once
-#include "renderer/vertex_buffer.h"
+#include "render/vertex_buffer.h"
 #include "vertex_layout.h"
 
-namespace renderer {
+namespace render {
 
 class VertexArray {
    public:
@@ -22,4 +22,4 @@ class VertexArray {
 	unsigned int id_;
 	unsigned int attribute_count_;
 };
-}  // namespace renderer
+}  // namespace render

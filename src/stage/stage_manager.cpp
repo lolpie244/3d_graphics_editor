@@ -5,7 +5,7 @@
 #include <memory>
 #include <thread>
 
-#include "renderer/renderer.h"
+#include "render/render.h"
 #include "stage/stage.h"
 
 namespace stage {
@@ -26,7 +26,7 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
-        renderer::GL_Renderer::Instance().Clear();
+        render::GL_render::Instance().Clear();
 
         if (exit_) {
             CurrentStage()->Stop(StageState::Exit);

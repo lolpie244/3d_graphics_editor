@@ -1,4 +1,4 @@
-#include "renderer/vertex_buffer.h"
+#include "render/vertex_buffer.h"
 
 #include <GL/glew.h>
 
@@ -7,7 +7,7 @@
 #include <iostream>
 #include <stdexcept>
 
-namespace renderer {
+namespace render {
 
 VertexBuffer::VertexBuffer(unsigned int type, void* data, size_t size, unsigned int draw)
     : type_(type), draw_(draw), size_(size) {
@@ -38,4 +38,4 @@ void VertexBuffer::Write(int offset, void* data, size_t size) {
     Unbind();
 }
 
-}  // namespace renderer
+}  // namespace render

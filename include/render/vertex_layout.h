@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace renderer {
+namespace render {
 class VertexLayout {
     struct Element {
         unsigned int type;
@@ -34,4 +34,4 @@ inline void VertexLayout::Add<float>(unsigned int count) {
     stride += count * sizeof(float);
 }
 
-}  // namespace renderer
+}  // namespace render

@@ -3,12 +3,13 @@
 #include <SFML/Graphics/Glsl.hpp>
 #include <vector>
 
-#include "renderer/vertex_array.h"
-#include "renderer/vertex_buffer.h"
-#include "renderer/vertex_layout.h"
+#include "render/transform.h"
+#include "render/vertex_array.h"
+#include "render/vertex_buffer.h"
+#include "render/vertex_layout.h"
 
-namespace renderer {
-class Mesh {
+namespace render {
+class Mesh : public Transform {
 	public:
 
     struct Vertex {
@@ -31,4 +32,4 @@ class Mesh {
    private:
     size_t count_;
 };
-}  // namespace renderer
+}  // namespace render

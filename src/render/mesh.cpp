@@ -1,8 +1,8 @@
-#include "renderer/mesh.h"
+#include "render/mesh.h"
 
-#include "renderer/vertex_layout.h"
+#include "render/vertex_layout.h"
 
-namespace renderer {
+namespace render {
 VertexLayout Mesh::Vertex::GetLayout() {
     VertexLayout result;
 
@@ -20,4 +20,4 @@ Mesh::Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>&
 }
 
 unsigned int Mesh::size() const { return this->count_; }
-}  // namespace renderer
+}  // namespace render

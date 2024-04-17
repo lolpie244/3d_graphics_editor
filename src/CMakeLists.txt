@@ -17,22 +17,21 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/propteries/hoverable.cpp
 	gui/propteries/scaleable.cpp
 
-	renderer/renderer.cpp
-	renderer/vertex_array.cpp
-	renderer/vertex_buffer.cpp
-	renderer/mesh.cpp
+	render/render.cpp
+	render/vertex_array.cpp
+	render/vertex_buffer.cpp
+	render/transform.cpp
+	render/mesh.cpp
 
 	stage/stage.cpp
 	stage/stage_manager.cpp
-
-	utils/utils.cpp
 )
 target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
 	${CMAKE_BINARY_DIR}/include)
 
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
-	OpenGL GLU GLEW::GLEW
+	OpenGL GLU GLEW::GLEW glm::glm
 	${lunasvg}
 )
 

@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <GL/glew.h>
 
-namespace renderer {
+namespace render {
 
 class VertexBuffer {
    public:
@@ -24,4 +24,4 @@ class VertexBuffer {
 
 	int count;
 };
-}  // namespace renderer
+}  // namespace render

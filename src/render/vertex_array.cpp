@@ -1,6 +1,6 @@
-#include "renderer/vertex_array.h"
+#include "render/vertex_array.h"
 
-namespace renderer {
+namespace render {
 VertexArray::VertexArray() { glGenVertexArrays(1, &id_); }
 
 VertexArray::~VertexArray() { glDeleteVertexArrays(1, &id_); }
@@ -43,4 +43,4 @@ void VertexArray::DisableAttributes() {
     for (int i = 0; i < attribute_count_; i++) glDisableVertexAttribArray(i);
     Unbind();
 }
-}  // namespace renderer
+}  // namespace render
