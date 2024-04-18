@@ -6,7 +6,6 @@
 
 #include "events/event.h"
 #include "events/observer.h"
-#include "gui/elements/base.h"
 #include "gui/elements_container.h"
 #include "render/camera.h"
 #include "utils/settings.h"

@@ -3,13 +3,13 @@
 #include <SFML/Graphics/Glsl.hpp>
 #include <vector>
 
-#include "render/transform.h"
+#include "math/transform.h"
 #include "render/opengl/vertex_array.h"
 #include "render/opengl/vertex_buffer.h"
 #include "render/opengl/vertex_layout.h"
 
 namespace render {
-class Mesh : public Transform {
+class Mesh : public math::Transform {
 	public:
 
     struct Vertex {

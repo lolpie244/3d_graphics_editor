@@ -14,14 +14,12 @@
 #include <iostream>
 #include <memory>
 
-#include "gui/elements/button.h"
-#include "gui/elements/buttons_list.h"
-#include "gui/elements/text.h"
-#include "gui/propteries/scaleable.h"
+#include "data/texture.h"
+#include "events/propterties/scaleable.h"
+#include "gui/button.h"
+#include "gui/text.h"
 #include "stage/stage_manager.h"
 #include "test_stage1/test_stage1.h"
-#include "utils/texture.h"
-#include "utils/vector2.h"
 
 TestStage::TestStage() {
     events.push_back(observer_.KeyBind({sf::Keyboard::Space, sf::Keyboard::A}, [](sf::Event event) {
@@ -33,8 +31,8 @@ TestStage::TestStage() {
         return true;
     }));
 
-    auto theme = utils::SvgTexture::loadFromFile("resources/theme.svg");
-    auto button = std::make_shared<gui::Button>(utils::Vector2f(200, 100), utils::Vector2f(380, 94));
+    auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
+    auto button = std::make_shared<gui::Button>(glm::vec3(200, 100, 0), math::Vector2f(380, 94));
     button->Text().SetText(L"Help me");
     button->Text().SfText().setFillColor(sf::Color::Black);
     button->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});

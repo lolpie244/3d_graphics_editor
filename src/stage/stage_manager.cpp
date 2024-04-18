@@ -8,7 +8,6 @@
 
 #include "render/renderer.h"
 #include "stage/stage.h"
-#include "utils/vector2.h"
 
 namespace stage {
 std::unique_ptr<Stage>& StageManager::CurrentStage() { return stages_.top(); }
@@ -54,7 +53,7 @@ std::unique_ptr<render::Camera>& StageManager::Camera() {
     return CurrentStage()->Camera();
 }
 
-utils::Vector2f StageManager::windowSize() { return utils::Vector2f(Window()->getSize().x, Window()->getSize().y); }
+math::Vector2f StageManager::windowSize() { return math::Vector2f(Window()->getSize().x, Window()->getSize().y); }
 
 void StageManager::Exit() { exit_ = true; }
 }  // namespace stage

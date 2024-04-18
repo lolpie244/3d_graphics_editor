@@ -6,7 +6,7 @@
 namespace render {
 void GL_render::Clear() { glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); }
 
-void GL_render::Draw(const Mesh& mesh, render::Shader& shader) {
+void GL_render::Draw(const Mesh& mesh, data::Shader& shader) {
     sf::Shader::bind(&shader);
     auto& camera = stage::StageManager::Instance().Camera();
 

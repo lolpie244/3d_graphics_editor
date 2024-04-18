@@ -13,13 +13,11 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <memory>
 
-#include "gui/elements/buttons_list.h"
+#include "data/texture.h"
 #include "render/mesh.h"
 #include "render/renderer.h"
-#include "render/transform.h"
 #include "stage/stage.h"
 #include "stage/stage_manager.h"
-#include "utils/vector2.h"
 
 TestStage1::TestStage1() {
     events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
@@ -30,7 +28,7 @@ TestStage1::TestStage1() {
         return false;
     }));
 
-    auto theme = utils::SvgTexture::loadFromFile("resources/theme.svg");
+    auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
     shader.loadFromFile("shaders/texture_shader.vert", "shaders/texture_shader.frag");
     texture = theme->getElement("g587")->getTexture({280, 420});
 
@@ -49,12 +47,12 @@ TestStage1::TestStage1() {
         if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
             return false;
 
-        utils::Vector2f new_pos_ = {(event.mouseMove.x - stage::StageManager::Instance().windowSize().x / 2.0f) /
-                                        stage::StageManager::Instance().windowSize().x,
-                                    (-event.mouseMove.y + stage::StageManager::Instance().windowSize().y / 2.0f) /
-                                        stage::StageManager::Instance().windowSize().y};
+        math::Vector2f new_pos_ = {(event.mouseMove.x - stage::StageManager::Instance().windowSize().x / 2.0f) /
+                                       stage::StageManager::Instance().windowSize().x,
+                                   (-event.mouseMove.y + stage::StageManager::Instance().windowSize().y / 2.0f) /
+                                       stage::StageManager::Instance().windowSize().y};
 
-        if (old_pos_ == utils::Vector2f{0, 0}) {
+        if (old_pos_ == math::Vector2f{0, 0}) {
             old_pos_ = new_pos_;
             return true;
         }
@@ -74,7 +72,7 @@ TestStage1::TestStage1() {
 void TestStage1::Run() {
     PollEvents();
 
-    mesh2->Rotate(1, render::Transform::Z);
+    mesh2->Rotate(1, math::Transform::Z);
 
     shader.setUniform("u_Texture", texture);
     sf::Texture::bind(&texture);

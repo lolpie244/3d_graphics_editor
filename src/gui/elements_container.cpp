@@ -1,12 +1,12 @@
 #include "gui/elements_container.h"
 
 #include "events/observer.h"
-#include "gui/propteries/scaleable.h"
+#include "events/propterties/scaleable.h"
 
 namespace gui {
 void ElementContainer::BindScale(events::Observer& observer) {
     for (auto& element : elements_) {
-        auto scalable = dynamic_cast<gui::mixins::Scaleable*>(element.get());
+        auto scalable = dynamic_cast<events::Scaleable*>(element.get());
         if (scalable != nullptr)
             scalable->BindScale(observer);
     }

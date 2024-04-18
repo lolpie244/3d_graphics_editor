@@ -2,7 +2,7 @@
 
 #include <SFML/Window/Event.hpp>
 
-#include "gui/propteries/scaleable.h"
+#include "events/propterties/scaleable.h"
 #include "render/renderer.h"
 #include "stage/stage_manager.h"
 

@@ -1,10 +1,10 @@
 #pragma once
 
 #include <glm/ext/matrix_float4x4.hpp>
-#include "transform.h"
+#include "math/transform.h"
 
 namespace render {
-class Camera : public Transform {
+class Camera : public math::Transform {
    public:
 	Camera(float fov);
 	const glm::mat4 ProjectionMatrix() const;

@@ -2,25 +2,25 @@ add_library(${PROJECT_NAME}-static STATIC
 	events/observer.cpp
 	events/event.cpp
 
+	events/propterties/clickable.cpp
+	events/propterties/draggable.cpp
+	events/propterties/hoverable.cpp
+	events/propterties/scaleable.cpp
+
 	gui/elements_container.cpp
+	gui/base.cpp
+	gui/sprite_element.cpp
+	gui/text.cpp
+	gui/button.cpp
+	gui/button_list.cpp
+	gui/slider.cpp
+	gui/radio_button.cpp
 
-	gui/elements/base.cpp
-	gui/elements/sprite_element.cpp
-	gui/elements/text.cpp
-	gui/elements/button.cpp
-	gui/elements/button_list.cpp
-	gui/elements/slider.cpp
-	gui/elements/radio_button.cpp
-
-	gui/propteries/clickable.cpp
-	gui/propteries/draggable.cpp
-	gui/propteries/hoverable.cpp
-	gui/propteries/scaleable.cpp
+	math/transform.cpp
 
 	render/mesh.cpp
 	render/camera.cpp
 	render/renderer.cpp
-	render/transform.cpp
 
 	render/opengl/vertex_array.cpp
 	render/opengl/vertex_buffer.cpp
