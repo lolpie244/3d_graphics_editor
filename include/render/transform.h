@@ -14,19 +14,22 @@ class Transform {
    public:
     const glm::mat4& GetTransformation() const;
 
-    void Scale(float x = 1, float y = 1, float z = 1);     // current scale * scale
+    virtual void Scale(float x = 1, float y = 1, float z = 1);     // current scale * scale
     void SetScale(float x = 1, float y = 1, float z = 1);  // scale
 
-    void Move(float x = 0, float y = 0, float z = 0);  // current move + move
+    virtual void Move(float x = 0, float y = 0, float z = 0);  // current move + move
     void SetMove(float x = 0, float y = 0, float z = 0);
 
-    void Rotate(float angle, Axis axis);  // current rotate + rotate
+    virtual void Rotate(float angle, Axis axis);  // current rotate + rotate
     void SetRotation(float angle, Axis axis);
 
+	void SetOrigin(float x = 0, float y = 0, float z = 0);
+
    private:
-    glm::mat4 translation_matrix_ = glm::mat4(1.0f);
-    glm::mat4 rotation_matrix_ = glm::mat4(1.0f);
-    glm::mat4 scale_matrix_ = glm::mat4(1.0f);
+    glm::vec3 position_ = glm::vec3(0.0f);
+    glm::vec3 rotation_ = glm::vec3(0.0f);
+    glm::vec3 scale_ = glm::vec3(1.0f);
+	glm::vec3 origin_ = glm::vec3(0.0f);
 
     mutable glm::mat4 final_matrix_;
     mutable bool changed_ = true;

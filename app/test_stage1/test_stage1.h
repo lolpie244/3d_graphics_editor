@@ -5,6 +5,7 @@
 #include "stage/stage.h"
 #include "gui/elements/base.h"
 #include "render/shader.h"
+#include "utils/vector2.h"
 
 class TestStage1 : public stage::Stage {
    public:
@@ -16,5 +17,8 @@ class TestStage1 : public stage::Stage {
 
 	render::Shader shader;
 	sf::Texture texture;
-	std::shared_ptr<render::Mesh> mesh;
+	std::shared_ptr<render::Mesh> mesh1;
+	std::shared_ptr<render::Mesh> mesh2;
+
+	utils::Vector2f old_pos_ = {0, 0};
 };

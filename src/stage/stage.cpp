@@ -3,6 +3,7 @@
 #include <SFML/Window/Event.hpp>
 
 #include "gui/propteries/scaleable.h"
+#include "render/renderer.h"
 #include "stage/stage_manager.h"
 
 namespace stage {

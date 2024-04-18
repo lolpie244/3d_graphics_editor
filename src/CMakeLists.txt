@@ -18,6 +18,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/propteries/scaleable.cpp
 
 	render/mesh.cpp
+	render/camera.cpp
 	render/renderer.cpp
 	render/transform.cpp
 
