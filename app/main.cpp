@@ -5,15 +5,16 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <memory>
 
+#include "render/camera.h"
+#include "render/opengl/error_callback.h"
 #include "stage/stage_manager.h"
 #include "test_stage/test_stage.h"
 #include "test_stage1/test_stage1.h"
-#include "render/opengl/error_callback.h"
 
 int main() {
     stage::StageManager& stage_manager = stage::StageManager::Instance();
-    stage_manager.window = std::make_shared<sf::RenderWindow>(sf::VideoMode(600, 600), "test");
-    stage_manager.window->setFramerateLimit(60);
+    stage_manager.InitWindow(sf::VideoMode(600, 600), "test");
+    stage_manager.Window()->setFramerateLimit(60);
 
     GLenum err = glewInit();
     if (GLEW_OK != err) {

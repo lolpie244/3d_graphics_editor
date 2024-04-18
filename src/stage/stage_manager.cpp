@@ -1,5 +1,6 @@
 #include "stage/stage_manager.h"
 
+#include <cassert>
 #include <future>
 #include <iostream>
 #include <memory>
@@ -7,6 +8,7 @@
 
 #include "render/renderer.h"
 #include "stage/stage.h"
+#include "utils/vector2.h"
 
 namespace stage {
 std::unique_ptr<Stage>& StageManager::CurrentStage() { return stages_.top(); }
@@ -41,5 +43,18 @@ void StageManager::Start() {
             PreviousStage();
     }
 }
+
+std::shared_ptr<sf::RenderWindow>& StageManager::Window() {
+    assert(window_ != nullptr && "Window is not initialized");
+    return window_;
+}
+
+std::unique_ptr<render::Camera>& StageManager::Camera() {
+    assert(!stages_.empty() && "No stage (with camera)");
+    return CurrentStage()->Camera();
+}
+
+utils::Vector2f StageManager::windowSize() { return utils::Vector2f(Window()->getSize().x, Window()->getSize().y); }
+
 void StageManager::Exit() { exit_ = true; }
 }  // namespace stage

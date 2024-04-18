@@ -18,10 +18,7 @@ class GL_render : public Singleton<GL_render> {
     void Draw(const Mesh& mesh, render::Shader& shader);
 
    protected:
-    GL_render() : Camera(settings::DEFAULT_FOV) {}
-
-   public:
-	render::Camera Camera;
+    GL_render() = default;
 };
 
 }  // namespace render

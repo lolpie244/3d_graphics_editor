@@ -24,7 +24,7 @@ void Scaleable::Scale(const utils::Vector2f& window_size) {
 }
 
 void Scaleable::BindScale(events::Observer& observer) {
-    Scale((utils::Vector2f)stage::StageManager::Instance().window->getSize());
+    Scale(stage::StageManager::Instance().windowSize());
 
     auto event_function = [this](sf::Event event) {
         Scale(utils::Vector2f(event.size.width, event.size.height));
