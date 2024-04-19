@@ -12,5 +12,6 @@ uniform mat4 u_View;
 void main()
 {
    gl_Position = u_Projection * u_View * u_Model * vec4(pos, 1.0);
+   gl_PointSize = 30;
    v_TexCoord = texCoord;
 }

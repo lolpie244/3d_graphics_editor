@@ -37,11 +37,11 @@ void Transform::SetPosition(float x, float y, float z) {
     Move(x, y, z);
 }
 
-void Transform::Rotate(float angle, Axis axis) {
+void Transform::Rotate(float angle, int axis) {
     changed_ = true;
     rotation_ += glm::vec3{angle * (axis & Axis::X), angle * (axis & Axis::Y), angle * (axis & Axis::Z)};
 }
-void Transform::SetRotation(float angle, Axis axis) {
+void Transform::SetRotation(float angle, int axis) {
     rotation_ = glm::vec3(0.0f);
     Rotate(angle, axis);
 }

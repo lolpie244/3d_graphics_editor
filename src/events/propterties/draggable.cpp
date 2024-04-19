@@ -1,6 +1,7 @@
 #include "events/propterties/draggable.h"
 
 #include <SFML/Window/Event.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 #include "utils/active.h"
 
@@ -13,6 +14,9 @@ void Draggable::BindDrag(events::Observer &observer, const EVENT_FUNC &function)
 
     auto func = [this, function](sf::Event event) {
         ReturnOnDisable(false);
+
+		if (!this->IsPressed())
+			return false;
 
         math::Vector2f new_position(event.mouseMove.x, event.mouseMove.y);
         auto move = new_position - last_position_;

@@ -15,7 +15,7 @@ class GL_render : public Singleton<GL_render> {
 
    public:
     void Clear();
-    void Draw(const Mesh& mesh, data::Shader& shader);
+    void Draw(const Mesh& mesh, data::Shader& shader, unsigned int mode = GL_TRIANGLES);
 
    protected:
     GL_render() = default;

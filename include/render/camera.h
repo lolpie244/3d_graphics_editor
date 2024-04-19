@@ -13,7 +13,7 @@ class Camera : public math::Transform {
 	void UpdateProjection();
 
     void Move(float x = 0, float y = 0, float z = 0) override;
-	void Rotate(float angle, Axis axis) override;
+	void Rotate(float angle, int axis) override;
 
    private:
     float fov_;

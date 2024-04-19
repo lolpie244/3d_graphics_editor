@@ -16,17 +16,11 @@ using settings::DEFAULT_RESOLUTION;
 
 math::Vector2f Scaleable::oldScale() { return old_scale_; }
 
-void Scaleable::window_scale(const math::Vector2f& window_size) {
-    auto scale_ = window_size / DEFAULT_RESOLUTION;
-    scale_method_->scale(this, scale_);
-    old_scale_ = scale_;
-}
-
 void Scaleable::BindScale(events::Observer& observer) {
-    window_scale(stage::StageManager::Instance().windowSize());
-
     auto event_function = [this](sf::Event event) {
-        window_scale(math::Vector2f(event.size.width, event.size.height));
+        auto scale_ = math::Vector2f(event.size.width, event.size.height) / DEFAULT_RESOLUTION;
+        scale_method_->scale(this, scale_);
+        old_scale_ = scale_;
         return false;
     };
 

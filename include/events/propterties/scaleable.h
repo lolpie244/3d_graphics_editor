@@ -27,12 +27,9 @@ class Scaleable : virtual public math::Transform, virtual public Activatable {
     math::Vector2f oldScale();
 
     template <typename T>
-    void SetScale() {
+    void SetScaleMethod() {
         scale_method_ = std::make_unique<T>();
     }
-
- protected:
-    void window_scale(const math::Vector2f& window_size);
 
    protected:
     events::Event event;

@@ -18,7 +18,10 @@ ButtonText::ButtonText(Button* button) : Text(button->Position(), button->Size()
 }
 
 void ButtonText::Resize(math::Vector2f size) { Text::Resize(size * borders_size_); }
-void ButtonText::Move(float x, float y, float z) { Text::Move(x, y, z); }
+void ButtonText::SetPosition(float x, float y, float z) {
+    auto new_pos = math::Vector2f{x, y} + this->Size() * offset_;
+    Text::SetPosition(new_pos.x, new_pos.y, z);
+}
 
 void ButtonText::SetOffset(math::Vector2f offset) {
     auto old_offset = offset_;

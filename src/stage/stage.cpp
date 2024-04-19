@@ -10,7 +10,14 @@ namespace stage {
 
 Stage::Stage() : window_(stage::StageManager::Instance().Window()) {}
 
-void Stage::Start() { state_ = StageState::Run; }
+void Stage::Start() {
+    state_ = StageState::Run;
+	sf::Event event;
+	event.type = sf::Event::Resized;
+	event.size.width = StageManager::Instance().windowSize().x;
+	event.size.height = StageManager::Instance().windowSize().y;
+    observer_.Notify(event);
+}
 
 void Stage::Stop(StageState with_state) { state_ = with_state; }
 

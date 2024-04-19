@@ -17,17 +17,17 @@ class Transform {
     const glm::mat4& GetTransformation() const;
 
     virtual void Scale(float x = 1, float y = 1, float z = 1);  // current scale * scale
-    void SetScale(float x = 1, float y = 1, float z = 1);       // scale
-    void SetScale(glm::vec3 data) { SetScale(data.x, data.y, data.z); }
+    virtual void SetScale(float x = 1, float y = 1, float z = 1);       // scale
+    virtual void SetScale(glm::vec3 data) { SetScale(data.x, data.y, data.z); }
 
     virtual void Move(float x = 0, float y = 0, float z = 0);  // current move + move
-    void SetPosition(float x = 0, float y = 0, float z = 0);
-    void SetPosition(glm::vec3 data) { SetPosition(data.x, data.y, data.z); }
+    virtual void SetPosition(float x = 0, float y = 0, float z = 0);
+    virtual void SetPosition(glm::vec3 data) { SetPosition(data.x, data.y, data.z); }
 
-    virtual void Rotate(float angle, Axis axis);  // current rotate + rotate
-    void SetRotation(float angle, Axis axis);
+    virtual void Rotate(float angle, int axis);  // current rotate + rotate
+    virtual void SetRotation(float angle, int axis);
 
-    void SetOrigin(float x = 0, float y = 0, float z = 0);
+    virtual void SetOrigin(float x = 0, float y = 0, float z = 0);
 
     glm::vec3 Position() const;
     glm::vec3 Scale() const;

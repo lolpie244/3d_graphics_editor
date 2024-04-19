@@ -18,7 +18,7 @@ class ButtonText : virtual public Text {
    public:
     ButtonText(Button* button);
     virtual void Resize(math::Vector2f size) override;
-    virtual void Move(float x = 0, float y = 0, float z = 0) override;
+    virtual void SetPosition(float x, float y, float z) override;
 
     void SetOffset(math::Vector2f offset);
     void SetBordersSize(math::Vector2f border_size);

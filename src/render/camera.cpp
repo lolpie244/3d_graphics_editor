@@ -9,7 +9,7 @@ namespace render {
 Camera::Camera(float fov) : fov_(fov) { UpdateProjection(); }
 
 void Camera::Move(float x, float y, float z) { Transform::Move(-x, -y, -z); }
-void Camera::Rotate(float angle, Axis axis) { Transform::Rotate(-angle, axis); }
+void Camera::Rotate(float angle, int axis) { Transform::Rotate(-angle, axis); }
 
 void Camera::SetFov(float fov) {
     fov_ = fov;

@@ -2,6 +2,7 @@
 sfml/2.6.1
 glew/2.2.0
 glm/cci.20230113
+tinyobjloader/2.0.0-rc10
 
 [generators]
 CMakeDeps

@@ -13,7 +13,7 @@
 
 int main() {
     stage::StageManager& stage_manager = stage::StageManager::Instance();
-    stage_manager.InitWindow(sf::VideoMode(600, 600), "test");
+    stage_manager.InitWindow(sf::VideoMode(800, 800), "test");
     stage_manager.Window()->setFramerateLimit(60);
 
     GLenum err = glewInit();
@@ -22,6 +22,7 @@ int main() {
         return 1;
     }
     glEnable(GL_BLEND);
+	glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 #if DEBUG
