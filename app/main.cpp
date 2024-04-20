@@ -12,8 +12,15 @@
 #include "test_stage1/test_stage1.h"
 
 int main() {
+    sf::ContextSettings settings;
+    settings.depthBits = 24;
+    settings.stencilBits = 8;
+    settings.antialiasingLevel = 4;
+    settings.majorVersion = 3;
+    settings.minorVersion = 0;
+
     stage::StageManager& stage_manager = stage::StageManager::Instance();
-    stage_manager.InitWindow(sf::VideoMode(800, 800), "test");
+    stage_manager.InitWindow(sf::VideoMode(800, 800), "test", sf::Style::Default, settings);
     stage_manager.Window()->setFramerateLimit(60);
 
     GLenum err = glewInit();
@@ -22,7 +29,8 @@ int main() {
         return 1;
     }
     glEnable(GL_BLEND);
-	glEnable(GL_PROGRAM_POINT_SIZE);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 #if DEBUG

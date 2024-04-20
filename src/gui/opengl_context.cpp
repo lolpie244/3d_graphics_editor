@@ -34,9 +34,7 @@ void OpenglContext::Resize(math::Vector2f size) {
     update_context();
 }
 
-void OpenglContext::SetLeftCorner(float x, float y, float z) {
-	GuiElement::Move(x - Rect().left, y - Rect().top, z);
-}
+void OpenglContext::SetLeftCorner(float x, float y, float z) { GuiElement::Move(x - Rect().left, y - Rect().top, z); }
 
 void OpenglContext::update_context() {
     auto rect = this->Rect();

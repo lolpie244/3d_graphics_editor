@@ -12,10 +12,10 @@ Stage::Stage() : window_(stage::StageManager::Instance().Window()) {}
 
 void Stage::Start() {
     state_ = StageState::Run;
-	sf::Event event;
-	event.type = sf::Event::Resized;
-	event.size.width = StageManager::Instance().windowSize().x;
-	event.size.height = StageManager::Instance().windowSize().y;
+    sf::Event event;
+    event.type = sf::Event::Resized;
+    event.size.width = StageManager::Instance().windowSize().x;
+    event.size.height = StageManager::Instance().windowSize().y;
     observer_.Notify(event);
 }
 

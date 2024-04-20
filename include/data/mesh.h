@@ -1,12 +1,8 @@
 #pragma once
 
-#include <bits/iterator_concepts.h>
-
-#include <fstream>
 #include <iostream>
 #include <unordered_map>
 #include <memory>
-#include <sstream>
 #include <vector>
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
@@ -28,7 +24,7 @@ class Mesh {
 
         std::vector<render::Mesh::Vertex> vertices;
         std::vector<unsigned int> indices;
-        std::unordered_map<glm::vec3, unsigned int, Vec3Hash> unique_vertices;
+        std::unordered_map<render::Mesh::Vertex, unsigned int, Vec3Hash> unique_vertices;
 
         auto& attrib = reader.GetAttrib();
 
@@ -41,15 +37,15 @@ class Mesh {
 
                 if (id.texcoord_index >= 0) {
                     vertex.texture_coords = {attrib.texcoords[2 * size_t(id.texcoord_index) + 0],
-                                             attrib.texcoords[2 * size_t(id.texcoord_index) + 1]};
+                                             1 - attrib.texcoords[2 * size_t(id.texcoord_index) + 1]};
                 }
 
-                if (unique_vertices.count(vertex.position) == 0) {
-                    unique_vertices[vertex.position] = vertices.size();
+                if (unique_vertices.count(vertex) == 0) {
+                    unique_vertices[vertex] = vertices.size();
                     vertices.push_back(vertex);
                 }
 
-                indices.push_back(unique_vertices[vertex.position]);
+                indices.push_back(unique_vertices[vertex]);
             }
         }
         return std::make_shared<render::Mesh>(vertices, indices);
@@ -57,8 +53,9 @@ class Mesh {
 
    private:
     struct Vec3Hash {
-        size_t operator()(const glm::vec3& v) const {
-            return std::hash<float>{}(v.x) ^ (std::hash<float>{}(v.y) << 1) ^ (std::hash<float>{}(v.z) << 2);
+        size_t operator()(const render::Mesh::Vertex& v) const {
+			auto fhash = std::hash<float>{};
+            return fhash(v.position.x) ^ (fhash(v.position.y) << 1) ^ (fhash(v.position.z) << 2) ^ (fhash(v.texture_coords.x) << 3) ^ (fhash(v.texture_coords.y) << 4);
         }
     };
 };

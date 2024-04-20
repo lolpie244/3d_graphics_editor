@@ -2,13 +2,8 @@
 
 #include <lunasvg.h>
 
-#include <SFML/Graphics/Image.hpp>
 #include <SFML/Graphics/Texture.hpp>
-#include <SFML/System/Vector2.hpp>
-#include <cmath>
-#include <iostream>
 #include <memory>
-#include <stdexcept>
 #include <string>
 
 #include "math/vector2.h"
@@ -18,22 +13,21 @@ class mTextureType {
    public:
     virtual ~mTextureType() = default;
     sf::Texture getTexture(math::Vector2f size) {
-		if (size == old_size_)
-			return texture_;
-		texture_ = this->loadTexture(size);
-		old_size_ = size;
+        if (size == old_size_)
+            return texture_;
+        texture_ = this->loadTexture(size);
+        old_size_ = size;
 
-		return texture_;
-	}
+        return texture_;
+    }
 
-protected:
-	virtual sf::Texture loadTexture(math::Vector2f size) = 0;
+   protected:
+    virtual sf::Texture loadTexture(math::Vector2f size) = 0;
 
-private:
-	math::Vector2f old_size_;
-	sf::Texture texture_;
+   private:
+    math::Vector2f old_size_ = {-1, -1};
+    sf::Texture texture_;
 };
-
 
 typedef std::shared_ptr<mTextureType> Texture;
 class SvgTexture;
@@ -94,4 +88,18 @@ class SvgTexture : public mTextureType {
     std::shared_ptr<lunasvg::Document> document_;
 };
 
-}  // namespace utils
+class PngTexture : public mTextureType {
+   public:
+    static std::shared_ptr<PngTexture> loadFromFile(const std::string& file) {
+        return std::shared_ptr<PngTexture>(new PngTexture(file));
+    }
+
+   protected:
+    PngTexture(const std::string& filename) { texture_.loadFromFile(filename); }
+    virtual sf::Texture loadTexture(math::Vector2f size) override { return texture_; };
+
+   protected:
+    sf::Texture texture_;
+};
+
+}  // namespace data

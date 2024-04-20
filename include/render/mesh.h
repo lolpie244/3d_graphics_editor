@@ -16,6 +16,8 @@ class Mesh : public math::Transform {
         glm::vec3 position;
         glm::vec2 texture_coords;
 
+        bool operator==(const Vertex& b) const { return position == b.position && texture_coords == b.texture_coords; }
+
         static VertexLayout GetLayout();
     };
 

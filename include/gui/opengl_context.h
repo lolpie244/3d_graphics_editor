@@ -2,10 +2,11 @@
 
 #include "events/propterties/draggable.h"
 #include "events/propterties/scaleable.h"
+#include "events/propterties/scrollable.h"
 #include "gui/base.h"
 
 namespace gui {
-class OpenglContext : virtual public GuiElement, virtual public events::Draggable, virtual public events::Scaleable {
+class OpenglContext : virtual public GuiElement, virtual public events::Draggable, virtual public events::Scaleable, virtual public events::Scrollable {
    public:
 	OpenglContext();
 	OpenglContext(glm::vec3 position, math::Vector2f size);

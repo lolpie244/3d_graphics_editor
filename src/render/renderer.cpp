@@ -1,4 +1,5 @@
 #include "render/renderer.h"
+
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Glsl.hpp>
 
@@ -15,7 +16,7 @@ void GL_render::Draw(const Mesh& mesh, data::Shader& shader, unsigned int mode) 
     shader.setUniform("u_Projection", camera->ProjectionMatrix());
     shader.setUniform("u_View", camera->GetTransformation());
     shader.setUniform("u_Model", mesh.GetTransformation());
-	shader.setUniform("u_Texture", mesh.texture);
+    shader.setUniform("u_Texture", mesh.texture);
 
     mesh.VAO.Bind();
     glDrawElements(mode, mesh.size(), GL_UNSIGNED_INT, NULL);

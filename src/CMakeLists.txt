@@ -6,6 +6,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	events/propterties/draggable.cpp
 	events/propterties/hoverable.cpp
 	events/propterties/scaleable.cpp
+	events/propterties/scrollable.cpp
 
 	gui/elements_container.cpp
 	gui/base.cpp

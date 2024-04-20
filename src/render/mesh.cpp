@@ -10,7 +10,7 @@ VertexLayout Mesh::Vertex::GetLayout() {
     VertexLayout result;
 
     result.Add<float>(3);  // position
-    result.Add<float>(2);  // position
+    result.Add<float>(2);  // texture coords
     return result;
 }
 
