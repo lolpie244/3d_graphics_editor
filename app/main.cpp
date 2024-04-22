@@ -21,7 +21,7 @@ int main() {
 
     stage::StageManager& stage_manager = stage::StageManager::Instance();
     stage_manager.InitWindow(sf::VideoMode(800, 800), "test", sf::Style::Default, settings);
-    stage_manager.Window()->setFramerateLimit(60);
+    stage_manager.Window()->setFramerateLimit(160);
 
     GLenum err = glewInit();
     if (GLEW_OK != err) {
@@ -33,10 +33,10 @@ int main() {
     glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-#if DEBUG
-    glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(GLDebugMessageCallback, 0);
-#endif
+    #if DEBUG
+        glEnable(GL_DEBUG_OUTPUT);
+        glDebugMessageCallback(GLDebugMessageCallback, 0);
+    #endif
 
     auto test_stage = std::make_unique<TestStage>();
     stage_manager.NextStage(std::move(test_stage));

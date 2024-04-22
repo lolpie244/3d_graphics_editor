@@ -18,6 +18,12 @@ class Shader : public sf::Shader {
         glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(data));
     }
 
+    void setUniform(const std::string& name, unsigned int data) {
+		sf::Shader::bind(this);
+		unsigned int transformLoc = glGetUniformLocation(getNativeHandle(), name.c_str());
+        glUniform1ui(transformLoc, data);
+    }
+
     void setUniform(const std::string& name, sf::Color color) {
 		this->setUniform(name, (sf::Glsl::Vec4)color);
     }

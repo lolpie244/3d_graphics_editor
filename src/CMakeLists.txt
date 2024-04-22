@@ -24,6 +24,8 @@ add_library(${PROJECT_NAME}-static STATIC
 	render/camera.cpp
 	render/renderer.cpp
 
+	render/opengl/frame_buffer.cpp
+	render/opengl/picking_texture.cpp
 	render/opengl/vertex_array.cpp
 	render/opengl/vertex_buffer.cpp
 

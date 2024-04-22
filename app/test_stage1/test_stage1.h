@@ -4,6 +4,7 @@
 #include "gui/opengl_context.h"
 #include "gui/sprite_element.h"
 #include "render/mesh.h"
+#include "render/opengl/picking_texture.h"
 #include "stage/stage.h"
 #include "data/shader.h"
 #include "math/vector2.h"
@@ -21,10 +22,10 @@ class TestStage1 : public stage::Stage {
 
 	data::Shader shader;
 	data::Shader point_shader;
+	data::Shader picking_shader;
 
 	sf::Texture texture;
-	std::shared_ptr<render::Mesh> mesh1;
-	std::shared_ptr<render::Mesh> mesh2;
+	std::shared_ptr<render::Mesh> mesh;
 
-	glm::vec3 old_pos_ = {0, 0, 0};
+	render::PickingTexture picking = render::PickingTexture(800, 800);
 };

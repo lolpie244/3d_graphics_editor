@@ -23,6 +23,7 @@
 #include "math/transform.h"
 #include "math/vector2.h"
 #include "render/mesh.h"
+#include "render/opengl/frame_buffer.h"
 #include "render/renderer.h"
 #include "stage/stage.h"
 #include "stage/stage_manager.h"
@@ -39,6 +40,8 @@ TestStage1::TestStage1() {
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
     shader.loadFromFile("shaders/texture_shader.vert", "shaders/texture_shader.frag");
     point_shader.loadFromFile("shaders/texture_shader.vert", "shaders/point_shader.frag");
+    picking_shader.loadFromFile("shaders/texture_shader.vert", "shaders/picking.frag");
+
     texture = theme->getElement("g546")->getTexture({400, 400});
 
     background = std::make_unique<gui::SpriteGuiElement>(glm::vec3{600, 600, -1}, math::Vector2f{1200, 1200});
@@ -54,8 +57,7 @@ TestStage1::TestStage1() {
 
     opengl_context->BindDrag(observer_, [this](sf::Event event, math::Vector2f moved) {
         auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved);
-
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
             stage::StageManager::Instance().Camera()->Move(-move.x, move.y);
             return true;
         }
@@ -76,22 +78,44 @@ TestStage1::TestStage1() {
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::Transform::X);
     ///////////////////////////////////////////
-    mesh2 = data::Mesh::loadFromFile("resources/cube.obj");
+    mesh = data::Mesh::loadFromFile("resources/cube.obj");
 
-    mesh2->Scale(0.5, 0.5, 0.5);
-    mesh2->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
+    mesh->Scale(0.5, 0.5, 0.5);
+    mesh->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
+
+    opengl_context->BindRelease(observer_, [this](sf::Event event) {
+        if (event.mouseButton.button != sf::Mouse::Left)
+            return false;
+
+        auto info = picking.ReadPixel(event.mouseButton.x, 800 - event.mouseButton.y);
+        return true;
+    });
 }
 
 void TestStage1::Run() {
     PollEvents();
-    mesh2->Rotate(1, math::Transform::Y);
+    // window_->pushGLStates();
+    // window_->draw(*background);
+    // window_->popGLStates();
 
-    window_->pushGLStates();
-    window_->draw(*background);
-    window_->popGLStates();
+    picking.buffer_.Bind();
+    picking.buffer_.Bind(render::FrameBuffer::Write);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    sf::Texture::bind(&mesh2->texture);
-    point_shader.setUniform("u_Color", sf::Color::Black);
-    render::GL_render::Instance().Draw(*mesh2, point_shader, GL_POINTS);
-    render::GL_render::Instance().Draw(*mesh2, shader);
+	picking_shader.setUniform("u_ObjectIndex", (unsigned int)2);
+	render::GL_render::Instance().Draw(*mesh, picking_shader);
+	
+    glReadBuffer(GL_COLOR_ATTACHMENT0);
+    constexpr std::array<GLenum, 2> attachments { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+    glDrawBuffers(attachments.size(), attachments.data());
+
+    picking.buffer_.Unbind(render::FrameBuffer::Write);
+    glBlitFramebuffer(
+        0, 0, 800, 800,
+        0, 0, 800, 800,
+        GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+    picking.buffer_.Unbind(render::FrameBuffer::Default);
+
+    FrameEnd();
 }
