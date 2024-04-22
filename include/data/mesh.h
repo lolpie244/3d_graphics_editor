@@ -13,7 +13,7 @@
 namespace data {
 class Mesh {
    public:
-    static std::shared_ptr<render::Mesh> loadFromFile(const std::string& filename) {
+    static std::shared_ptr<render::Mesh> loadFromFile(const std::string& filename, render::Mesh::Change is_changeable) {
         tinyobj::ObjReader reader;
         if (!reader.ParseFromFile(filename)) {
             if (!reader.Error().empty()) {
@@ -48,7 +48,7 @@ class Mesh {
                 indices.push_back(unique_vertices[vertex]);
             }
         }
-        return std::make_shared<render::Mesh>(vertices, indices);
+        return std::make_shared<render::Mesh>(vertices, indices, is_changeable);
     }
 
    private:

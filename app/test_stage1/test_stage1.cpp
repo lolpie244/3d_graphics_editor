@@ -55,9 +55,17 @@ TestStage1::TestStage1() {
 
     camera_->SetOrigin(0, 0, 0);
 
+	opengl_context->BindPress(observer_, [this](sf::Event event){
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+            this->pixel = picking.ReadPixel(event.mouseButton.x, 800 - event.mouseButton.y);
+            return true;
+        }
+		return false;
+	});
+
     opengl_context->BindDrag(observer_, [this](sf::Event event, math::Vector2f moved) {
-        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved);
         if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
+			auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved);
             stage::StageManager::Instance().Camera()->Move(-move.x, move.y);
             return true;
         }
@@ -66,6 +74,13 @@ TestStage1::TestStage1() {
             stage::StageManager::Instance().Camera()->Rotate(-moved.y * 0.5, math::Transform::X);
             return true;
         }
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->pixel.ObjectID) {
+			auto old = mesh->GetVertex(this->pixel.VertexId);
+			auto coord = math::to_world_coords(stage::StageManager::Instance().windowSize() / 2.0f + moved);
+			coord.y *= -1;
+			mesh->SetVertexPosition(this->pixel.VertexId, old.position + coord);
+			return true;
+		}
 
         return false;
     });
@@ -78,23 +93,13 @@ TestStage1::TestStage1() {
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::Transform::X);
     ///////////////////////////////////////////
-    mesh = data::Mesh::loadFromFile("resources/cube.obj");
+    mesh = data::Mesh::loadFromFile("resources/cube.obj", render::Mesh::Enable);
 
     mesh->Scale(0.5, 0.5, 0.5);
     mesh->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
-
-    opengl_context->BindRelease(observer_, [this](sf::Event event) {
-        if (event.mouseButton.button != sf::Mouse::Left)
-            return false;
-
-        auto info = picking.ReadPixel(event.mouseButton.x, 800 - event.mouseButton.y);
-        std::cout << info.ObjectID << ' ' << info.Test << ' ' << info.PrimID << '\n';
-        return true;
-    });
 }
 
 void TestStage1::Run() {
-    PollEvents();
     // window_->pushGLStates();
     // window_->draw(*background);
     // window_->popGLStates();
@@ -102,12 +107,14 @@ void TestStage1::Run() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         picking.buffer_.Bind(render::FrameBuffer::Write);
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        picking_shader.setUniform("u_ObjectIndex", 2);
-        render::GL_render::Instance().Draw(*mesh, picking_shader);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        picking_shader.setUniform("u_ObjectIndex", mesh->Id());
+        // render::GL_render::Instance().Draw(*mesh, picking_shader);
+        render::GL_render::Instance().Draw(*mesh, picking_shader, GL_POINTS);
         picking.buffer_.Unbind(render::FrameBuffer::Write);
     }
 
+    PollEvents();
     render::GL_render::Instance().Draw(*mesh, shader);
 
     FrameEnd();

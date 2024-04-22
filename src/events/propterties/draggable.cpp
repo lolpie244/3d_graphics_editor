@@ -3,14 +3,20 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
 
+#include "events/propterties/clickable.h"
 #include "utils/active.h"
 
 namespace events {
-void Draggable::BindDrag(events::Observer &observer, const EVENT_FUNC &function) {
-    this->BindPress(observer, [this](sf::Event event) {
+void Draggable::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
+    Clickable::BindPress(observer, [this, function](sf::Event event) {
         last_position_ = math::Vector2f(event.mouseButton.x, event.mouseButton.y);
-        return true;
+        return function(event);
     });
+}
+
+void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function) {
+    if (!press_event_)
+        this->BindPress(observer, [this](sf::Event event) { return true; });
 
     auto func = [this, function](sf::Event event) {
         ReturnOnDisable(false);

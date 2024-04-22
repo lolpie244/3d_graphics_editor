@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Glsl.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <atomic>
 #include <vector>
 
 #include "math/transform.h"
@@ -21,9 +22,21 @@ class Mesh : public math::Transform {
         static VertexLayout GetLayout();
     };
 
+	enum Change {
+		Disable = GL_STATIC_DRAW,
+		Enable = GL_DYNAMIC_DRAW,
+	};
+
    public:
     unsigned int size() const;
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices);
+    int Id() const;
+    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, Change is_changeable = Change::Disable);
+
+	const Vertex GetVertex(int id) const;
+	const Vertex GetVertexByIndex(int id) const;
+
+	void SetVertex(int id, Vertex data);
+	void SetVertexPosition(int id, glm::vec3 position);
 
    public:
     VertexArray VAO;
@@ -34,5 +47,13 @@ class Mesh : public math::Transform {
 
    private:
     size_t count_;
+	int id_ = max_object_id++;
+
+	Change changeable_;
+
+	std::vector<Vertex> vertices_;
+	std::vector<unsigned int> indices_;
+
+    static std::atomic<int> max_object_id;
 };
 }  // namespace render

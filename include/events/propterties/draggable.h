@@ -15,6 +15,7 @@ class Draggable : virtual public Clickable {
    public:
     virtual ~Draggable() = default;
 
+	virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function) override;
     void BindDrag(events::Observer &observer, const EVENT_FUNC &function);
 
    private:

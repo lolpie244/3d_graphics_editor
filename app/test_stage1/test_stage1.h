@@ -28,4 +28,5 @@ class TestStage1 : public stage::Stage {
 	std::shared_ptr<render::Mesh> mesh;
 
 	render::PickingTexture picking = render::PickingTexture(800, 800);
+	render::PickingTexture::Info pixel;
 };

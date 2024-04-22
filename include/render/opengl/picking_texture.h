@@ -6,7 +6,7 @@ class PickingTexture {
    public:
     struct Info {
         unsigned int ObjectID = 0;
-        unsigned int Test = 0;
+        unsigned int VertexId = 0;
         unsigned int PrimID = 0;
     };
 
