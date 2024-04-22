@@ -22,7 +22,7 @@ build:
 
 .PHONY: run
 run: build
-	build/app/3d_graphics
+	prime-run build/app/3d_graphics
 
 
 .PHONY: format

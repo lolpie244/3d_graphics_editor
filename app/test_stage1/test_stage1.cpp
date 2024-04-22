@@ -88,6 +88,7 @@ TestStage1::TestStage1() {
             return false;
 
         auto info = picking.ReadPixel(event.mouseButton.x, 800 - event.mouseButton.y);
+        std::cout << info.ObjectID << ' ' << info.Test << ' ' << info.PrimID << '\n';
         return true;
     });
 }
@@ -98,24 +99,16 @@ void TestStage1::Run() {
     // window_->draw(*background);
     // window_->popGLStates();
 
-    picking.buffer_.Bind();
-    picking.buffer_.Bind(render::FrameBuffer::Write);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+        picking.buffer_.Bind(render::FrameBuffer::Write);
 
-	picking_shader.setUniform("u_ObjectIndex", (unsigned int)2);
-	render::GL_render::Instance().Draw(*mesh, picking_shader);
-	
-    glReadBuffer(GL_COLOR_ATTACHMENT0);
-    constexpr std::array<GLenum, 2> attachments { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-    glDrawBuffers(attachments.size(), attachments.data());
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        picking_shader.setUniform("u_ObjectIndex", 2);
+        render::GL_render::Instance().Draw(*mesh, picking_shader);
+        picking.buffer_.Unbind(render::FrameBuffer::Write);
+    }
 
-    picking.buffer_.Unbind(render::FrameBuffer::Write);
-    glBlitFramebuffer(
-        0, 0, 800, 800,
-        0, 0, 800, 800,
-        GL_COLOR_BUFFER_BIT, GL_NEAREST);
-
-    picking.buffer_.Unbind(render::FrameBuffer::Default);
+    render::GL_render::Instance().Draw(*mesh, shader);
 
     FrameEnd();
 }

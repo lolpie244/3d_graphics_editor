@@ -5,9 +5,9 @@ namespace render {
 class PickingTexture {
    public:
     struct Info {
-        unsigned int ObjectID = -1;
-        unsigned int Test = -1;
-        unsigned int PrimID = -1;
+        unsigned int ObjectID = 0;
+        unsigned int Test = 0;
+        unsigned int PrimID = 0;
     };
 
    public:

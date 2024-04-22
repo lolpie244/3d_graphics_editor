@@ -1,15 +1,16 @@
 #version 330
 
-uniform uint u_ObjectIndex;
-uniform sampler2D u_Texture;
-in vec2 v_TexCoord;
+uniform int u_ObjectIndex;
 
-layout (location = 0) out vec4 FragColor;
-layout (location = 1) out uint InstanceId;
+out uvec3 FragColor;
 
 void main()
 {
-	vec4 texColor = texture(u_Texture, v_TexCoord);
-	FragColor = texColor;
-	InstanceId = u_ObjectIndex;
+	vec2 circCoord = 2.0 * gl_PointCoord - 1.0;
+   	if (dot(circCoord, circCoord) < 1.0) {
+		FragColor = uvec3(u_ObjectIndex, gl_PointCoord * 100);
+	} else {
+	   FragColor = uvec3(u_ObjectIndex, gl_PointCoord * 100);
+	}
+
 }
