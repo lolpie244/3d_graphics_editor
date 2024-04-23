@@ -3,57 +3,73 @@
 #include <SFML/Graphics/Glsl.hpp>
 #include <SFML/Graphics/Texture.hpp>
 #include <atomic>
+#include <iostream>
 #include <vector>
 
+#include "data/shader.h"
 #include "math/transform.h"
 #include "render/opengl/vertex_array.h"
 #include "render/opengl/vertex_buffer.h"
 #include "render/opengl/vertex_layout.h"
+#include "stage/stage_manager.h"
 
 namespace render {
-class Mesh : public math::Transform {
+
+enum MeshChange {
+    Disable = GL_STATIC_DRAW,
+    Enable = GL_DYNAMIC_DRAW,
+};
+
+template <typename Vertex>
+class Mesh {
    public:
-    struct Vertex {
-        glm::vec3 position;
-        glm::vec2 texture_coords;
+    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices,
+         MeshChange is_changeable = MeshChange::Disable)
+        : vertices_(vertices),
+          indices_(indices),
+          changeable_(is_changeable),
+          VBO(GL_ARRAY_BUFFER, (void*)vertices.data(), vertices.size() * sizeof(Vertex), is_changeable),
+          IBO(GL_ELEMENT_ARRAY_BUFFER, (void*)indices.data(), indices.size() * sizeof(Vertex)) {
+        VAO.AddBuffer(VBO, Vertex::GetLayout());
+        VAO.AddBuffer(IBO);
+    }
 
-        bool operator==(const Vertex& b) const { return position == b.position && texture_coords == b.texture_coords; }
+    const std::vector<Vertex>& Vertices() const { return vertices_; }
+    const std::vector<unsigned int>& Indices() const { return indices_; }
 
-        static VertexLayout GetLayout();
-    };
+    void SetVertex(int id, Vertex data) {
+        if (changeable_ == MeshChange::Disable) {
+            std::cout << "Try to change unchangeable mesh";
+            exit(1);
+        }
+        VBO.Write(id * sizeof(Vertex), &data, sizeof(data));
+        vertices_[id] = data;
+    }
+    void Draw(unsigned int type, data::Shader& shader, const math::Transform* transform) const {
+        shader.setUniform("u_Model", transform->GetTransformation());
+        Draw(type, shader);
+    }
 
-	enum Change {
-		Disable = GL_STATIC_DRAW,
-		Enable = GL_DYNAMIC_DRAW,
-	};
+    void Draw(unsigned int type, data::Shader& shader) const {
+        auto& camera = stage::StageManager::Instance().Camera();
+        shader.setUniform("u_Projection", camera->ProjectionMatrix());
+        shader.setUniform("u_View", camera->GetTransformation());
 
-   public:
-    unsigned int size() const;
-    int Id() const;
-    Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& indices, Change is_changeable = Change::Disable);
+        sf::Shader::bind(&shader);
+        VAO.Bind();
+        glDrawElements(type, Indices().size(), GL_UNSIGNED_INT, NULL);
+        VAO.Unbind();
+    }
 
-	const Vertex GetVertex(int id) const;
-	const Vertex GetVertexByIndex(int id) const;
-
-	void SetVertex(int id, Vertex data);
-	void SetVertexPosition(int id, glm::vec3 position);
-
-   public:
+   protected:
     VertexArray VAO;
     VertexBuffer VBO;
     VertexBuffer IBO;
 
-    sf::Texture texture;
-
    private:
-    size_t count_;
-	int id_ = max_object_id++;
+    MeshChange changeable_;
 
-	Change changeable_;
-
-	std::vector<Vertex> vertices_;
-	std::vector<unsigned int> indices_;
-
-    static std::atomic<int> max_object_id;
+    std::vector<Vertex> vertices_;
+    std::vector<unsigned int> indices_;
 };
 }  // namespace render

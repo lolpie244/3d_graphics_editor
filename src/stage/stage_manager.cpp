@@ -1,12 +1,6 @@
 #include "stage/stage_manager.h"
 
-#include <cassert>
-#include <future>
-#include <iostream>
-#include <memory>
-#include <thread>
-
-#include "render/renderer.h"
+#include <GL/glew.h>
 #include "stage/stage.h"
 
 namespace stage {
@@ -27,7 +21,7 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
-        render::GL_render::Instance().Clear();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (exit_) {
             CurrentStage()->Stop(StageState::Exit);

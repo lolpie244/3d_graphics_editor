@@ -2,31 +2,8 @@
 
 #include <GL/glew.h>
 
-#include <SFML/Graphics/CircleShape.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Shader.hpp>
-#include <SFML/Graphics/Texture.hpp>
-#include <SFML/Graphics/Transform.hpp>
-#include <SFML/Window/Event.hpp>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <memory>
-
-#include "data/mesh.h"
-#include "data/texture.h"
-#include "events/propterties/scaleable.h"
-#include "gui/opengl_context.h"
-#include "gui/sprite_element.h"
+#include "data/model.h"
 #include "math/points_cast.h"
-#include "math/transform.h"
-#include "math/vector2.h"
-#include "render/mesh.h"
-#include "render/opengl/frame_buffer.h"
-#include "render/renderer.h"
-#include "stage/stage.h"
-#include "stage/stage_manager.h"
 
 TestStage1::TestStage1() {
     events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
@@ -75,10 +52,10 @@ TestStage1::TestStage1() {
             return true;
         }
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->pixel.ObjectID) {
-			auto old = mesh->GetVertex(this->pixel.VertexId);
+			auto old = model->Vertex(this->pixel.VertexId);
 			auto coord = math::to_world_coords(stage::StageManager::Instance().windowSize() / 2.0f + moved);
 			coord.y *= -1;
-			mesh->SetVertexPosition(this->pixel.VertexId, old.position + coord);
+			model->SetVertexPosition(this->pixel.VertexId, old.position + coord);
 			return true;
 		}
 
@@ -93,10 +70,10 @@ TestStage1::TestStage1() {
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::Transform::X);
     ///////////////////////////////////////////
-    mesh = data::Mesh::loadFromFile("resources/cube.obj", render::Mesh::Enable);
+    model = data::Model::loadFromFile("resources/cube.obj", render::MeshChange::Enable);
 
-    mesh->Scale(0.5, 0.5, 0.5);
-    mesh->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
+    model->Scale(0.5, 0.5, 0.5);
+    model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
 }
 
 void TestStage1::Run() {
@@ -108,14 +85,11 @@ void TestStage1::Run() {
         picking.buffer_.Bind(render::FrameBuffer::Write);
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        picking_shader.setUniform("u_ObjectIndex", mesh->Id());
-        // render::GL_render::Instance().Draw(*mesh, picking_shader);
-        render::GL_render::Instance().Draw(*mesh, picking_shader, GL_POINTS);
+		model->DrawPoints(picking_shader);
         picking.buffer_.Unbind(render::FrameBuffer::Write);
     }
 
     PollEvents();
-    render::GL_render::Instance().Draw(*mesh, shader);
-
+    model->Draw(shader);
     FrameEnd();
 }

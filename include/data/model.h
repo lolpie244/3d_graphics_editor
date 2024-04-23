@@ -1,19 +1,18 @@
 #pragma once
 
 #include <iostream>
-#include <unordered_map>
 #include <memory>
+#include <unordered_map>
 #include <vector>
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
 
-#include "mesh.h"
-#include "render/mesh.h"
+#include "render/model.h"
 
 namespace data {
-class Mesh {
+class Model {
    public:
-    static std::shared_ptr<render::Mesh> loadFromFile(const std::string& filename, render::Mesh::Change is_changeable) {
+    static std::shared_ptr<render::Model> loadFromFile(const std::string& filename, render::MeshChange is_changeable) {
         tinyobj::ObjReader reader;
         if (!reader.ParseFromFile(filename)) {
             if (!reader.Error().empty()) {
@@ -22,15 +21,15 @@ class Mesh {
             exit(1);
         }
 
-        std::vector<render::Mesh::Vertex> vertices;
+        std::vector<render::ModelVertex> vertices;
         std::vector<unsigned int> indices;
-        std::unordered_map<render::Mesh::Vertex, unsigned int, Vec3Hash> unique_vertices;
+        std::unordered_map<render::ModelVertex, unsigned int, Vec3Hash> unique_vertices;
 
         auto& attrib = reader.GetAttrib();
 
         for (const auto& shape : reader.GetShapes()) {
             for (const auto& id : shape.mesh.indices) {
-                render::Mesh::Vertex vertex;
+                render::ModelVertex vertex;
                 vertex.position = {attrib.vertices[3 * size_t(id.vertex_index) + 0],
                                    attrib.vertices[3 * size_t(id.vertex_index) + 1],
                                    attrib.vertices[3 * size_t(id.vertex_index) + 2]};
@@ -48,16 +47,16 @@ class Mesh {
                 indices.push_back(unique_vertices[vertex]);
             }
         }
-        return std::make_shared<render::Mesh>(vertices, indices, is_changeable);
+        return std::make_shared<render::Model>(vertices, indices, is_changeable);
     }
 
    private:
     struct Vec3Hash {
-        size_t operator()(const render::Mesh::Vertex& v) const {
-			auto fhash = std::hash<float>{};
-            return fhash(v.position.x) ^ (fhash(v.position.y) << 1) ^ (fhash(v.position.z) << 2) ^ (fhash(v.texture_coords.x) << 3) ^ (fhash(v.texture_coords.y) << 4);
+        size_t operator()(const render::ModelVertex& v) const {
+            auto fhash = std::hash<float>{};
+            return fhash(v.position.x) ^ (fhash(v.position.y) << 1) ^ (fhash(v.position.z) << 2) ^
+                   (fhash(v.texture_coords.x) << 3) ^ (fhash(v.texture_coords.y) << 4);
         }
     };
 };
 }  // namespace data
-

@@ -1,9 +1,5 @@
 #include "stage/stage.h"
 
-#include <SFML/Window/Event.hpp>
-
-#include "events/propterties/scaleable.h"
-#include "render/renderer.h"
 #include "stage/stage_manager.h"
 
 namespace stage {

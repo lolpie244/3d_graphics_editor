@@ -5,8 +5,6 @@
 #include <SFML/Graphics/Shader.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include "mesh.h"
-
 namespace data {
 class Shader : public sf::Shader {
    public:

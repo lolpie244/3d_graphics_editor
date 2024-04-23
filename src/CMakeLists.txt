@@ -20,9 +20,8 @@ add_library(${PROJECT_NAME}-static STATIC
 
 	math/transform.cpp
 
-	render/mesh.cpp
+	render/model.cpp
 	render/camera.cpp
-	render/renderer.cpp
 
 	render/opengl/frame_buffer.cpp
 	render/opengl/picking_texture.cpp
