@@ -26,6 +26,7 @@ class TestStage1 : public stage::Stage {
     data::Shader point_shader;
     data::Shader picking_shader;
     data::Shader gizmo_shader;
+    data::Shader gizmo_picking;
 
     sf::Texture texture;
     std::shared_ptr<render::Model> model;

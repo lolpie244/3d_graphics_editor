@@ -23,7 +23,7 @@ struct Vec3Hash {
 };
 
 template <typename T>
-T Parse(const tinyobj::attrib_t& attr, tinyobj::index_t id) {
+T Parse(const tinyobj::ObjReader& attr, tinyobj::index_t id) {
     static_assert(false);
 }
 template <typename Vertex>
@@ -52,7 +52,7 @@ static std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadFromFile(co
 
     for (const auto& shape : reader.GetShapes()) {
         for (const auto& id : shape.mesh.indices) {
-            Vertex vertex = Parse<Vertex>(attrib, id);
+            Vertex vertex = Parse<Vertex>(reader, id);
             if (unique_vertices.count(vertex) == 0) {
                 unique_vertices[vertex] = vertices.size();
                 vertices.push_back(vertex);

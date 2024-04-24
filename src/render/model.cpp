@@ -4,8 +4,6 @@
 
 namespace render {
 
-std::atomic<int> Model::max_object_id{1};
-
 Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
              MeshChange is_changeable)
     : mesh_(vertices, indices, is_changeable) {
@@ -22,12 +20,12 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
 }
 
 void Model::Draw(data::Shader& shader) const {
-    shader.setUniform("u_ObjectIndex", id_);
+    shader.setUniform("u_ObjectIndex", Id());
     shader.setUniform("u_Texture", texture);
     this->mesh_.Draw(GL_TRIANGLES, shader, this);
 }
 void Model::DrawPoints(data::Shader& shader) const {
-    shader.setUniform("u_ObjectIndex", id_);
+    shader.setUniform("u_ObjectIndex", Id());
     this->mesh_.Draw(GL_POINTS, shader, this);
 }
 

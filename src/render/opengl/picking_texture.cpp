@@ -32,4 +32,13 @@ float PickingTexture::ReadDepth(unsigned int x, unsigned int y) {
     buffer_.Unbind(FrameBuffer::Read);
     return depth;
 }
+
+void PickingTexture::Bind() {
+	buffer_.Bind(render::FrameBuffer::Write);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void PickingTexture::Unbind() {
+	buffer_.Unbind(render::FrameBuffer::Write);
+}
 }  // namespace render

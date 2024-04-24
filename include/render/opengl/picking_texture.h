@@ -15,7 +15,8 @@ class PickingTexture {
     Info ReadPixel(unsigned int x, unsigned int y);
     float ReadDepth(unsigned int x, unsigned int y);
 
-	void Draw();
+	void Bind();
+	void Unbind();
 
    public:
     FrameBuffer buffer_;

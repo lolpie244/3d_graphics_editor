@@ -7,6 +7,7 @@
 #include "math/transform.h"
 #include "render/mesh.h"
 #include "render/model.h"
+#include "utils/uuid.h"
 
 namespace render {
 
@@ -22,7 +23,7 @@ struct GizmoVertex {
     }
 };
 
-class Gizmo : math::Transform {
+class Gizmo : math::Transform, public UUID {
    public:
     Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices);
 	void Draw(data::Shader& shader, Model* model);
@@ -30,5 +31,6 @@ class Gizmo : math::Transform {
    private:
 	float length_;
 	Mesh<GizmoVertex> mesh_;
+	std::array<sf::Color, 3> colors_{sf::Color::Green, sf::Color::Red, sf::Color::Blue};
 };
 }  // namespace render

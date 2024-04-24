@@ -8,8 +8,10 @@
 namespace data::parser {
 
 template <>
-inline render::GizmoVertex Parse(const tinyobj::attrib_t& attrib, tinyobj::index_t id) {
+inline render::GizmoVertex Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
     render::GizmoVertex vertex;
+	auto& attrib = reader.GetAttrib();
+
     vertex.position = {attrib.vertices[3 * size_t(id.vertex_index) + 0],
                        attrib.vertices[3 * size_t(id.vertex_index) + 1],
                        attrib.vertices[3 * size_t(id.vertex_index) + 2]};

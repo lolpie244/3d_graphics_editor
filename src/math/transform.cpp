@@ -39,7 +39,7 @@ void Transform::SetPosition(float x, float y, float z) {
 
 void Transform::Rotate(float angle, int axis) {
     changed_ = true;
-    rotation_ += glm::vec3{angle * (axis & Axis::X), angle * (axis & Axis::Y), angle * (axis & Axis::Z)};
+    rotation_ += to_vector(axis) * angle;
 }
 void Transform::SetRotation(float angle, int axis) {
     rotation_ = glm::vec3(0.0f);

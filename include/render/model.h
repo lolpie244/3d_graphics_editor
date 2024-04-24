@@ -4,6 +4,7 @@
 
 #include "data/shader.h"
 #include "mesh.h"
+#include "utils/uuid.h"
 
 namespace render {
 struct ModelVertex {
@@ -20,7 +21,7 @@ struct ModelVertex {
     }
 };
 
-class Model : public math::Transform {
+class Model : public math::Transform, public UUID {
    public:
     Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
           MeshChange is_changeable = MeshChange::Disable);
@@ -36,9 +37,6 @@ class Model : public math::Transform {
 
    private:
     Mesh<ModelVertex> mesh_;
-    int id_ = max_object_id++;
-
-    static std::atomic<int> max_object_id;
 };
 
 }  // namespace render

@@ -16,8 +16,10 @@ struct Vec3Hash<render::ModelVertex> {
 };
 
 template <>
-inline render::ModelVertex Parse<render::ModelVertex>(const tinyobj::attrib_t& attrib, tinyobj::index_t id) {
+inline render::ModelVertex Parse<render::ModelVertex>(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
     render::ModelVertex vertex;
+	auto& attrib = reader.GetAttrib();
+
     vertex.position = {attrib.vertices[3 * size_t(id.vertex_index) + 0],
                        attrib.vertices[3 * size_t(id.vertex_index) + 1],
                        attrib.vertices[3 * size_t(id.vertex_index) + 2]};
@@ -32,7 +34,7 @@ inline render::ModelVertex Parse<render::ModelVertex>(const tinyobj::attrib_t& a
 }
 
 namespace data {
-std::shared_ptr<render::Model> loadModel(const std::string& filename, render::MeshChange is_changeable) {
+inline std::shared_ptr<render::Model> loadModel(const std::string& filename, render::MeshChange is_changeable) {
 	auto data = parser::loadFromFile<render::ModelVertex>(filename);
 	return std::make_shared<render::Model>(data.first, data.second, is_changeable);
 }
