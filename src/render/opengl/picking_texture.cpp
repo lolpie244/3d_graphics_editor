@@ -18,9 +18,18 @@ PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
     buffer_.Bind(FrameBuffer::Read);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     Info pixel;
-    glReadPixels(x, y, 1, 1, GL_RGB_INTEGER, GL_UNSIGNED_INT, &pixel);
+    glReadPixels(x, y, 1, 1, FrameBuffer::RGB_INTEGER, GL_UNSIGNED_INT, &pixel);
     glReadBuffer(GL_NONE);
     buffer_.Unbind(FrameBuffer::Read);
     return pixel;
+}
+
+float PickingTexture::ReadDepth(unsigned int x, unsigned int y) {
+    buffer_.Bind(FrameBuffer::Read);
+    float depth;
+    glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+    glReadBuffer(GL_NONE);
+    buffer_.Unbind(FrameBuffer::Read);
+    return depth;
 }
 }  // namespace render

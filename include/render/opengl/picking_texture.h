@@ -13,6 +13,8 @@ class PickingTexture {
    public:
     PickingTexture(int width, int height);
     Info ReadPixel(unsigned int x, unsigned int y);
+    float ReadDepth(unsigned int x, unsigned int y);
+
 	void Draw();
 
    public:

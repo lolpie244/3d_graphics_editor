@@ -21,6 +21,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	math/transform.cpp
 
 	render/model.cpp
+	render/gizmo.cpp
 	render/camera.cpp
 
 	render/opengl/frame_buffer.cpp

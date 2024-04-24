@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-#include "data/model.h"
+#include "data/model_loader.h"
 #include "math/points_cast.h"
 
 TestStage1::TestStage1() {
@@ -15,9 +15,10 @@ TestStage1::TestStage1() {
     }));
 
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
-    shader.loadFromFile("shaders/texture_shader.vert", "shaders/texture_shader.frag");
-    point_shader.loadFromFile("shaders/texture_shader.vert", "shaders/point_shader.frag");
-    picking_shader.loadFromFile("shaders/texture_shader.vert", "shaders/picking.frag");
+    shader.loadFromFile("shaders/texture.vert", "shaders/texture.frag");
+    point_shader.loadFromFile("shaders/texture.vert", "shaders/point.frag");
+    picking_shader.loadFromFile("shaders/texture.vert", "shaders/picking.frag");
+    gizmo_shader.loadFromFile("shaders/gizmo.vert", "shaders/gizmo.frag");
 
     texture = theme->getElement("g546")->getTexture({400, 400});
 
@@ -54,7 +55,6 @@ TestStage1::TestStage1() {
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && this->pixel.ObjectID) {
 			auto old = model->Vertex(this->pixel.VertexId);
 			auto coord = math::to_world_coords(stage::StageManager::Instance().windowSize() / 2.0f + moved);
-			coord.y *= -1;
 			model->SetVertexPosition(this->pixel.VertexId, old.position + coord);
 			return true;
 		}
@@ -70,10 +70,12 @@ TestStage1::TestStage1() {
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::Transform::X);
     ///////////////////////////////////////////
-    model = data::Model::loadFromFile("resources/cube.obj", render::MeshChange::Enable);
+    model = data::loadModel("resources/cube.obj", render::MeshChange::Enable);
 
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
+	///////////////////////////////////////////
+	gizmo = data::loadGizmo("resources/gizmo/transform.obj");
 }
 
 void TestStage1::Run() {
@@ -88,8 +90,8 @@ void TestStage1::Run() {
 		model->DrawPoints(picking_shader);
         picking.buffer_.Unbind(render::FrameBuffer::Write);
     }
-
     PollEvents();
     model->Draw(shader);
+	gizmo->Draw(shader, model.get());
     FrameEnd();
 }

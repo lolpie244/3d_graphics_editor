@@ -1,62 +1,40 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
-#include <unordered_map>
-#include <vector>
-#define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
 
-#include "render/model.h"
+#include "model_loader.h"
+#include "render/gizmo.h"
 
-namespace data {
-class Model {
-   public:
-    static std::shared_ptr<render::Model> loadFromFile(const std::string& filename, render::MeshChange is_changeable) {
-        tinyobj::ObjReader reader;
-        if (!reader.ParseFromFile(filename)) {
-            if (!reader.Error().empty()) {
-                std::cout << "TinyObjReader: " << reader.Error();
-            }
-            exit(1);
-        }
+namespace data::parser {
+template <>
+struct Vec3Hash<render::ModelVertex> {
+    size_t operator()(const render::ModelVertex& v) const {
+        auto fhash = std::hash<float>{};
+        return fhash(v.position.x) ^ (fhash(v.position.y) << 1) ^ (fhash(v.position.z) << 2) ^
+               (fhash(v.texture_coords.x) << 3) ^ (fhash(v.texture_coords.y) << 4);
+    }
+};
 
-        std::vector<render::ModelVertex> vertices;
-        std::vector<unsigned int> indices;
-        std::unordered_map<render::ModelVertex, unsigned int, Vec3Hash> unique_vertices;
+template <>
+inline render::ModelVertex Parse<render::ModelVertex>(const tinyobj::attrib_t& attrib, tinyobj::index_t id) {
+    render::ModelVertex vertex;
+    vertex.position = {attrib.vertices[3 * size_t(id.vertex_index) + 0],
+                       attrib.vertices[3 * size_t(id.vertex_index) + 1],
+                       attrib.vertices[3 * size_t(id.vertex_index) + 2]};
 
-        auto& attrib = reader.GetAttrib();
-
-        for (const auto& shape : reader.GetShapes()) {
-            for (const auto& id : shape.mesh.indices) {
-                render::ModelVertex vertex;
-                vertex.position = {attrib.vertices[3 * size_t(id.vertex_index) + 0],
-                                   attrib.vertices[3 * size_t(id.vertex_index) + 1],
-                                   attrib.vertices[3 * size_t(id.vertex_index) + 2]};
-
-                if (id.texcoord_index >= 0) {
-                    vertex.texture_coords = {attrib.texcoords[2 * size_t(id.texcoord_index) + 0],
-                                             1 - attrib.texcoords[2 * size_t(id.texcoord_index) + 1]};
-                }
-
-                if (unique_vertices.count(vertex) == 0) {
-                    unique_vertices[vertex] = vertices.size();
-                    vertices.push_back(vertex);
-                }
-
-                indices.push_back(unique_vertices[vertex]);
-            }
-        }
-        return std::make_shared<render::Model>(vertices, indices, is_changeable);
+    if (id.texcoord_index >= 0) {
+        vertex.texture_coords = {attrib.texcoords[2 * size_t(id.texcoord_index) + 0],
+                                 1 - attrib.texcoords[2 * size_t(id.texcoord_index) + 1]};
     }
 
-   private:
-    struct Vec3Hash {
-        size_t operator()(const render::ModelVertex& v) const {
-            auto fhash = std::hash<float>{};
-            return fhash(v.position.x) ^ (fhash(v.position.y) << 1) ^ (fhash(v.position.z) << 2) ^
-                   (fhash(v.texture_coords.x) << 3) ^ (fhash(v.texture_coords.y) << 4);
-        }
-    };
-};
-}  // namespace data
+    return vertex;
+}
+}
+
+namespace data {
+std::shared_ptr<render::Model> loadModel(const std::string& filename, render::MeshChange is_changeable) {
+	auto data = parser::loadFromFile<render::ModelVertex>(filename);
+	return std::make_shared<render::Model>(data.first, data.second, is_changeable);
+}
+
+}  // namespace data::parser
