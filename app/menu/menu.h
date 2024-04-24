@@ -3,8 +3,8 @@
 #include "events/event.h"
 #include "stage/stage.h"
 
-class TestStage : public stage::Stage {
+class MenuStage : public stage::Stage {
    public:
-	TestStage();
+	MenuStage();
     void Run() override;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "frame_buffer.h"
 
 namespace render {
@@ -12,6 +13,9 @@ class PickingTexture {
 
    public:
     PickingTexture(int width, int height);
+
+	void Resize(int width, int height);
+
     Info ReadPixel(unsigned int x, unsigned int y);
     float ReadDepth(unsigned int x, unsigned int y);
 
@@ -19,6 +23,8 @@ class PickingTexture {
 	void Unbind();
 
    public:
-    FrameBuffer buffer_;
+	std::unique_ptr<FrameBuffer> buffer_;
+	int height_;
+	int width_;
 };
 }  // namespace render

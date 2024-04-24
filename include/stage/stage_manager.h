@@ -4,9 +4,10 @@
 #include <memory>
 #include <stack>
 
+#include "gui/opengl_context.h"
 #include "render/camera.h"
-#include "utils/singleton.h"
 #include "stage.h"
+#include "utils/singleton.h"
 
 namespace stage {
 
@@ -29,7 +30,7 @@ class StageManager : public Singleton<StageManager> {
 
     std::shared_ptr<sf::RenderWindow>& Window();
     std::unique_ptr<render::Camera>& Camera();
-	math::Vector2f windowSize();
+    math::Vector2f windowSize();
 
    private:
     std::shared_ptr<sf::RenderWindow> window_;

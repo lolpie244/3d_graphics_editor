@@ -5,11 +5,11 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <memory>
 
+#include "editor/editor.h"
+#include "menu/menu.h"
 #include "render/camera.h"
 #include "render/opengl/error_callback.h"
 #include "stage/stage_manager.h"
-#include "test_stage/test_stage.h"
-#include "test_stage1/test_stage1.h"
 
 int main() {
     sf::ContextSettings settings;
@@ -33,12 +33,12 @@ int main() {
     glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    #if DEBUG
-        glEnable(GL_DEBUG_OUTPUT);
-        glDebugMessageCallback(GLDebugMessageCallback, 0);
-    #endif
+#if DEBUG
+    glEnable(GL_DEBUG_OUTPUT);
+    glDebugMessageCallback(GLDebugMessageCallback, 0);
+#endif
 
-    auto test_stage = std::make_unique<TestStage>();
+    auto test_stage = std::make_unique<MenuStage>();
     stage_manager.NextStage(std::move(test_stage));
 
     stage_manager.Start();

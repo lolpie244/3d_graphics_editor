@@ -1,4 +1,4 @@
-#include "test_stage.h"
+#include "menu.h"
 
 #include <lunasvg.h>
 
@@ -15,15 +15,15 @@
 #include <memory>
 
 #include "data/texture.h"
+#include "editor/editor.h"
 #include "events/propterties/scaleable.h"
 #include "gui/button.h"
 #include "gui/text.h"
 #include "stage/stage_manager.h"
-#include "test_stage1/test_stage1.h"
 
-TestStage::TestStage() {
+MenuStage::MenuStage() {
     events.push_back(observer_.KeyBind({sf::Keyboard::Space, sf::Keyboard::A}, [](sf::Event event) {
-        stage::StageManager::Instance().NextStage(std::make_unique<TestStage1>());
+        stage::StageManager::Instance().NextStage(std::make_unique<EditorStage>());
         return true;
     }));
     events.push_back(observer_.KeyBind({sf::Keyboard::Escape}, [this](sf::Event event) {
@@ -39,11 +39,11 @@ TestStage::TestStage() {
     button->SetPressedTexture({theme->getElement("g517"), {0, 0.1}, {0.2, 0.3}});
 
     button->BindRelease(observer_, [](sf::Event) {
-        stage::StageManager::Instance().NextStage(std::make_unique<TestStage1>());
+        stage::StageManager::Instance().NextStage(std::make_unique<EditorStage>());
         return true;
     });
 
     elements_.Insert({button});
 }
 
-void TestStage::Run() { PollEvents(); }
+void MenuStage::Run() { PollEvents(); }

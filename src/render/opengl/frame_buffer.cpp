@@ -17,8 +17,8 @@ void FrameBuffer::Unbind(Mode mode) const { glBindFramebuffer(mode, 0); }
 
 bool FrameBuffer::Valid() const {
     Bind(Mode::Default);
-	bool is_valid = glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
-	Unbind(Mode::Default);
+    bool is_valid = glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE;
+    Unbind(Mode::Default);
     return is_valid;
 }
 
@@ -30,10 +30,11 @@ std::pair<unsigned int, unsigned int> TextureType(FrameBuffer::TextureFormat for
         case FrameBuffer::RGB_INTEGER: return {GL_RGB32UI, GL_UNSIGNED_INT};
         case FrameBuffer::RED_INTEGER: return {GL_R16UI, GL_UNSIGNED_SHORT};
     }
+    return {0, 0};
 }
 
 void FrameBuffer::AttachTexture(unsigned int attachment, TextureFormat format) {
-	texture_ids_.push_back(0);
+    texture_ids_.push_back(0);
     unsigned int& texture = texture_ids_[texture_ids_.size() - 1];
 
     glGenTextures(1, &texture);
@@ -53,7 +54,7 @@ void FrameBuffer::AttachTexture(unsigned int attachment, TextureFormat format) {
 }
 
 void FrameBuffer::AttachRenderBuffer(unsigned int attachment, RenderBufferType type) {
-	render_buffer_ids_.push_back(0);
+    render_buffer_ids_.push_back(0);
     unsigned int& render_buffer = render_buffer_ids_[render_buffer_ids_.size() - 1];
     glGenRenderbuffers(1, &render_buffer);
 

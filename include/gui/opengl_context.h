@@ -4,6 +4,7 @@
 #include "events/propterties/scaleable.h"
 #include "events/propterties/scrollable.h"
 #include "gui/base.h"
+#include "render/opengl/picking_texture.h"
 
 namespace gui {
 class OpenglContext : virtual public GuiElement, virtual public events::Draggable, virtual public events::Scaleable, virtual public events::Scrollable {
@@ -15,6 +16,9 @@ class OpenglContext : virtual public GuiElement, virtual public events::Draggabl
     virtual void Move(float x = 0, float y = 0, float z = 0) override;
     virtual void Resize(math::Vector2f size) override;
     virtual void SetLeftCorner(float x = 0, float y = 0, float z = 0);
+
+ public:
+	render::PickingTexture PickingTexture;
 
  private:
 	void update_context();

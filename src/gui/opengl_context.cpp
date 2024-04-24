@@ -4,17 +4,18 @@
 
 #include "gui/base.h"
 #include "math/vector2.h"
+#include "render/opengl/picking_texture.h"
 #include "stage/stage_manager.h"
 #include "utils/settings.h"
 
 namespace gui {
-OpenglContext::OpenglContext() {
+OpenglContext::OpenglContext() : PickingTexture(0, 0) {
     auto window_size = settings::DEFAULT_RESOLUTION;
     this->SetPosition(window_size.first / 2.0f, window_size.second / 2.0f);
     this->Resize({window_size.first, window_size.second});
 }
 
-OpenglContext::OpenglContext(glm::vec3 position, math::Vector2f size) {
+OpenglContext::OpenglContext(glm::vec3 position, math::Vector2f size) : PickingTexture(0, 0) {
     this->SetPosition(position);
     this->Resize(size);
 }
@@ -31,6 +32,7 @@ void OpenglContext::Move(float x, float y, float z) {
 
 void OpenglContext::Resize(math::Vector2f size) {
     GuiElement::Resize(size);
+    PickingTexture.Resize(size.x, size.y);
     update_context();
 }
 

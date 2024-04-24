@@ -16,7 +16,7 @@ enum StageState { Run, Pause, Exit };
 
 class Stage {
    public:
-	Stage();
+    Stage();
     virtual ~Stage() = default;
 
     virtual void Run() = 0;

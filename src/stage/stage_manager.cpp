@@ -1,6 +1,7 @@
 #include "stage/stage_manager.h"
 
 #include <GL/glew.h>
+
 #include "stage/stage.h"
 
 namespace stage {
@@ -21,7 +22,7 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         if (exit_) {
             CurrentStage()->Stop(StageState::Exit);
@@ -43,7 +44,7 @@ std::shared_ptr<sf::RenderWindow>& StageManager::Window() {
 }
 
 std::unique_ptr<render::Camera>& StageManager::Camera() {
-    assert(!stages_.empty() && "No stage (with camera)");
+    assert(!stages_.empty() && "No stages");
     return CurrentStage()->Camera();
 }
 
