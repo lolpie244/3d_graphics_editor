@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "events/observer.h"
-#include "gui/elements/base.h"
+#include "gui/base.h"
 
 namespace gui {
 typedef std::shared_ptr<GuiElement> ElementType;

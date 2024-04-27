@@ -2,30 +2,42 @@ add_library(${PROJECT_NAME}-static STATIC
 	events/observer.cpp
 	events/event.cpp
 
+	events/propterties/clickable.cpp
+	events/propterties/draggable.cpp
+	events/propterties/hoverable.cpp
+	events/propterties/scaleable.cpp
+	events/propterties/scrollable.cpp
+
 	gui/elements_container.cpp
+	gui/base.cpp
+	gui/sprite_element.cpp
+	gui/text.cpp
+	gui/button.cpp
+	gui/button_list.cpp
+	gui/slider.cpp
+	gui/radio_button.cpp
+	gui/opengl_context.cpp
 
-	gui/elements/base.cpp
-	gui/elements/sprite_element.cpp
-	gui/elements/text.cpp
-	gui/elements/button.cpp
-	gui/elements/button_list.cpp
-	gui/elements/slider.cpp
-	gui/elements/radio_button.cpp
+	math/transform.cpp
 
-	gui/propteries/clickable.cpp
-	gui/propteries/draggable.cpp
-	gui/propteries/hoverable.cpp
-	gui/propteries/scaleable.cpp
+	render/model.cpp
+	render/gizmo.cpp
+	render/camera.cpp
+
+	render/opengl/frame_buffer.cpp
+	render/opengl/picking_texture.cpp
+	render/opengl/vertex_array.cpp
+	render/opengl/vertex_buffer.cpp
 
 	stage/stage.cpp
 	stage/stage_manager.cpp
-
-	utils/utils.cpp
 )
 target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
 	${CMAKE_BINARY_DIR}/include)
+
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
-	${lunasvg}
+	OpenGL GLU GLEW::GLEW glm::glm
+	${lunasvg} tinyobjloader::tinyobjloader
 )
 

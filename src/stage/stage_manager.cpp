@@ -1,9 +1,6 @@
 #include "stage/stage_manager.h"
 
-#include <future>
-#include <iostream>
-#include <memory>
-#include <thread>
+#include <GL/glew.h>
 
 #include "stage/stage.h"
 
@@ -25,17 +22,38 @@ void StageManager::PreviousStage() {
 
 void StageManager::Start() {
     while (!stages_.empty()) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         if (exit_) {
             CurrentStage()->Stop(StageState::Exit);
             PreviousStage();
             continue;
         }
 
-        if (CurrentStage()->State() == StageState::Run)
+        if (CurrentStage()->State() == StageState::Run) {
             CurrentStage()->Run();
-        else
+            CurrentStage()->FrameEnd();
+        } else
             PreviousStage();
     }
 }
+
+std::shared_ptr<sf::RenderWindow>& StageManager::Window() {
+    assert(window_ != nullptr && "Window is not initialized");
+    return window_;
+}
+
+std::unique_ptr<render::Camera>& StageManager::Camera() {
+    assert(!stages_.empty() && "No stages");
+    return CurrentStage()->Camera();
+}
+
+std::unique_ptr<gui::OpenglContext>& StageManager::Context() {
+    assert(!stages_.empty() && "No stages");
+    return CurrentStage()->Context();
+}
+
+math::Vector2f StageManager::windowSize() { return math::Vector2f(Window()->getSize().x, Window()->getSize().y); }
+
 void StageManager::Exit() { exit_ = true; }
 }  // namespace stage
