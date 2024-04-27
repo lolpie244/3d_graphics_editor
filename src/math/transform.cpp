@@ -48,8 +48,8 @@ void Transform::SetRotation(float angle, int axis) {
 
 void Transform::SetOrigin(float x, float y, float z) { origin_ = {x, y, z}; }
 
-glm::vec3 Transform::Position() const { return position_; }
-glm::vec3 Transform::Scale() const { return scale_; };
-glm::vec3 Transform::Origin() const { return origin_; };
+glm::vec3 Transform::GetPosition() const { return position_; }
+glm::vec3 Transform::GetScale() const { return scale_; };
+glm::vec3 Transform::GetOrigin() const { return origin_; };
 
 };  // namespace math

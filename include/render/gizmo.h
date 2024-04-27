@@ -4,6 +4,7 @@
 #include <array>
 
 #include "data/shader.h"
+#include "events/propterties/draggable.h"
 #include "math/transform.h"
 #include "render/mesh.h"
 #include "render/model.h"
@@ -23,14 +24,14 @@ struct GizmoVertex {
     }
 };
 
-class Gizmo : math::Transform, public UUID {
+class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::Transform {
    public:
     Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices);
-	void Draw(data::Shader& shader, Model* model);
+    void Draw(data::Shader& shader, Model* model);
 
    private:
-	float length_;
-	Mesh<GizmoVertex> mesh_;
-	std::array<sf::Color, 3> colors_{sf::Color::Green, sf::Color::Red, sf::Color::Blue};
+    float length_;
+    Mesh<GizmoVertex> mesh_;
+    std::array<sf::Color, 3> colors_{sf::Color::Green, sf::Color::Red, sf::Color::Blue};
 };
 }  // namespace render

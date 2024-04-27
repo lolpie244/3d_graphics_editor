@@ -1,6 +1,7 @@
 #include "render/gizmo.h"
 
 #include <SFML/Graphics/Color.hpp>
+#include <algorithm>
 
 #include "math/transform.h"
 #include "render/mesh.h"
@@ -14,6 +15,7 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     shader.setUniform("u_ObjectIndex", Id());
     math::Transform transform = *(math::Transform*)model;
 
+	transform.SetScale(this->GetScale());
     shader.setUniform("u_Color", colors_[0]);
     shader.setUniform("u_Id", math::X);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);

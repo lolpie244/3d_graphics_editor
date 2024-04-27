@@ -36,7 +36,7 @@ void Text::Resize(math::Vector2f size) {
 }
 
 void Text::Move(float x, float y, float z) {
-    this->text_.setPosition(this->Position().x + x, this->Position().y + y);
+    this->text_.setPosition(this->GetPosition().x + x, this->GetPosition().y + y);
     GuiElement::Move(x, y, z);
 }
 

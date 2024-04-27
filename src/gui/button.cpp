@@ -12,7 +12,7 @@
 
 namespace gui {
 
-ButtonText::ButtonText(Button* button) : Text(button->Position(), button->Size()) {
+ButtonText::ButtonText(Button* button) : Text(button->GetPosition(), button->Size()) {
     this->Resize(this->Size());
     this->SetParent(button);
 }
@@ -26,9 +26,9 @@ void ButtonText::SetPosition(float x, float y, float z) {
 void ButtonText::SetOffset(math::Vector2f offset) {
     auto old_offset = offset_;
     offset_ = offset;
-    auto new_position = math::Vector2f(this->Position()) - this->Size() * old_offset;
+    auto new_position = math::Vector2f(this->GetPosition()) - this->Size() * old_offset;
 
-    this->SetPosition(new_position.x, new_position.y, this->Position().z);
+    this->SetPosition(new_position.x, new_position.y, this->GetPosition().z);
 }
 
 void ButtonText::SetBordersSize(math::Vector2f borders_size) {

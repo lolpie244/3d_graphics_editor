@@ -34,7 +34,7 @@ void SpriteGuiElement::Resize(math::Vector2<float> size) {
 }
 
 void SpriteGuiElement::Move(float x, float y, float z) {
-    this->sprite_.setPosition(this->Position().x + x, this->Position().y + y);
+    this->sprite_.setPosition(this->GetPosition().x + x, this->GetPosition().y + y);
     GuiElement::Move(x, y, z);
 }
 

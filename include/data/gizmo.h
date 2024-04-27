@@ -29,8 +29,8 @@ struct Vec3Hash<render::GizmoVertex> {
 }  // namespace data::parser
 
 namespace data {
-inline std::shared_ptr<render::Gizmo> loadGizmo(const std::string& filename) {
+inline std::unique_ptr<render::Gizmo> loadGizmo(const std::string& filename) {
     auto data = parser::loadFromFile<render::GizmoVertex>(filename);
-    return std::make_shared<render::Gizmo>(data.first, data.second);
+    return std::make_unique<render::Gizmo>(data.first, data.second);
 }
 }  // namespace data

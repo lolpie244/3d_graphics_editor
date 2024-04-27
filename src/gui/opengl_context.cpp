@@ -21,7 +21,7 @@ OpenglContext::OpenglContext(glm::vec3 position, math::Vector2f size) : PickingT
 }
 
 sf::Rect<float> OpenglContext::Rect() const {
-    auto left_corner = math::Vector2f(this->Position()) - this->Size() / 2.0f;
+    auto left_corner = math::Vector2f(this->GetPosition()) - this->Size() / 2.0f;
     return {left_corner.x, left_corner.y, this->Size().x, this->Size().y};
 }
 

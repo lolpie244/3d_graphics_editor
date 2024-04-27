@@ -23,7 +23,7 @@ void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* butt
                         : math::Vector2f{this->Size().x, 0};
 
         button_list->Resize(this->Size());
-        button_list->SetPosition(this->Position() + glm::vec3(coef.x, coef.y, 0));
+        button_list->SetPosition(this->GetPosition() + glm::vec3(coef.x, coef.y, 0));
         return false;
     });
 
@@ -99,7 +99,7 @@ void ButtonsList::SetPressedTexture(Button::TextureInfo texture) {
 
 void ButtonsList::SetOrientation(ListOrientation orientation) {
     orientation_ = orientation;
-    this->SetPosition(this->Position());
+    this->SetPosition(this->GetPosition());
 }
 
 }  // namespace gui

@@ -18,7 +18,7 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
         return function(event);
     };
 
-    press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function, this->Position().z);
+    press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function, this->GetPosition().z);
 
     if (!release_event_)
         BindRelease(observer, [](sf::Event) { return false; });
@@ -42,7 +42,7 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
         return function(event);
     };
 
-    release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function, this->Position().z);
+    release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function, this->GetPosition().z);
 
     if (!press_event_)
         BindPress(observer, [](sf::Event) { return true; });

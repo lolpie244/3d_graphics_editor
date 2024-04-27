@@ -29,17 +29,17 @@ void Scaleable::BindScale(events::Observer& observer) {
 
 void DefaultScale::scale(Scaleable* obj, const math::Vector2f& window_scale) {
     auto current_scale = window_scale / obj->oldScale();
-    auto new_position = math::Vector2f(obj->Position()) * current_scale;
+    auto new_position = math::Vector2f(obj->GetPosition()) * current_scale;
 
     obj->Scale(current_scale.x, current_scale.y);
-    obj->SetPosition(new_position.x, new_position.y, obj->Position().z);
+    obj->SetPosition(new_position.x, new_position.y, obj->GetPosition().z);
 }
 
 void SaveProportionScale::scale(Scaleable* obj, const math::Vector2f& window_scale) {
     auto size_scale = std::min(window_scale.x, window_scale.y) / std::min(obj->oldScale().x, obj->oldScale().y);
-    auto new_position = math::Vector2f(obj->Position()) * (window_scale / obj->oldScale());
+    auto new_position = math::Vector2f(obj->GetPosition()) * (window_scale / obj->oldScale());
 
     obj->Scale(size_scale);
-    obj->SetPosition(new_position.x, new_position.y, obj->Position().z);
+    obj->SetPosition(new_position.x, new_position.y, obj->GetPosition().z);
 }
 }  // namespace events

@@ -2,10 +2,15 @@
 
 #include <GL/glew.h>
 
-#include "data/model_loader.h"
-#include "math/points_cast.h"
+#include <SFML/Window/Event.hpp>
+#include <SFML/Window/Keyboard.hpp>
 
-EditorStage::EditorStage() {
+#include "data/model_loader.h"
+#include "data/texture.h"
+#include "math/points_cast.h"
+#include "utils/settings.h"
+
+EditorStage::EditorStage() : gizmo(this->observer_) {
     events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
         if (event.key.code == sf::Keyboard::Escape) {
             this->Stop(stage::StageState::Exit);
@@ -18,8 +23,6 @@ EditorStage::EditorStage() {
     shader.loadFromFile("shaders/texture.vert", "shaders/texture.frag");
     point_shader.loadFromFile("shaders/texture.vert", "shaders/point.frag");
     picking_shader.loadFromFile("shaders/texture.vert", "shaders/picking.frag");
-    gizmo_shader.loadFromFile("shaders/gizmo.vert", "shaders/gizmo.frag");
-    gizmo_picking.loadFromFile("shaders/gizmo.vert", "shaders/picking.frag");
 
     opengl_context_->SetLeftCorner(50, 0);
     opengl_context_->Resize(math::Vector2f(1700, 1080));
@@ -53,24 +56,24 @@ EditorStage::EditorStage() {
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
     ///////////////////////////////////////////
-    gizmo = data::loadGizmo("resources/gizmo/arrow.obj");
-
     model->BindDrag(observer_, [this](sf::Event event, glm::vec3 move) {
-        model->SetVertexPosition(model->PressInfo().VertexId,
-                                 model->Vertex(model->PressInfo().VertexId).position + move * 5.0f);
+        model->SetVertexPosition(model->PressInfo().VertexId, model->Vertex(model->PressInfo().VertexId).position +
+                                                                  move * settings::MOUSE_SENSATIVITY);
         return true;
     });
+
+    gizmo.SetModel(model.get());
 }
 
 void EditorStage::Run() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
         model->DrawPoints(picking_shader);
-        // gizmo->Draw(gizmo_picking, model.get());
+        gizmo.DrawPicking();
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
     model->Draw(shader);
-    gizmo->Draw(gizmo_shader, model.get());
+    gizmo.Draw();
     FrameEnd();
 }
