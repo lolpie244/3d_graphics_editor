@@ -4,6 +4,7 @@
 
 #include "events/event.h"
 #include "events/observer.h"
+#include "stage/stage_manager.h"
 #include "utils/active.h"
 
 namespace events {
@@ -46,4 +47,19 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
     if (!press_event_)
         BindPress(observer, [](sf::Event) { return true; });
 }
+
+void Clickable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
+    auto func = [this, function](sf::Event event) {
+        this->pixel_info_ = stage::StageManager::Instance().Context()->PickingTexture.ReadPixel(event.mouseButton.x,
+                                                                                                event.mouseButton.y);
+        return function(event);
+    };
+    Clickable::BindPress(observer, func);
+}
+render::PickingTexture::Info Clickable3D::PressInfo() {
+	if (this->pressed_)
+		return this->pixel_info_;
+	return {0, 0, 0};
+}
+
 }  // namespace events

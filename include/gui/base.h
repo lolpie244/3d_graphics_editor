@@ -14,23 +14,24 @@
 #include "math/vector2.h"
 #include "utils/active.h"
 #include "utils/tree.h"
+#include "utils/uuid.h"
 
 namespace gui {
 class GuiElement : public Tree,
                    public sf::Drawable,
+                   virtual public UUID,
                    virtual public Activatable,
                    virtual public math::Transform,
                    virtual public events::Hoverable {
    public:
     virtual ~GuiElement() = default;
 
-    int Id() const;
-	math::Vector2f Size() const;
+    math::Vector2f Size() const;
 
     virtual sf::Rect<float> Rect() const = 0;
 
-	virtual void Enable() override;
-	virtual void Disable() override;
+    virtual void Enable() override;
+    virtual void Disable() override;
 
     virtual void Move(float x = 0, float y = 0, float z = 0) override;
     virtual void Scale(float x = 1, float y = 1, float z = 1) override;
@@ -40,10 +41,6 @@ class GuiElement : public Tree,
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
    protected:
-    int id_ = max_object_id++;
-	math::Vector2f size_;
-
-   private:
-    static std::atomic<int> max_object_id;
+    math::Vector2f size_;
 };
 }  // namespace gui

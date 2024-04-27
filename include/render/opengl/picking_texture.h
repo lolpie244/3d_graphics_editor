@@ -26,5 +26,10 @@ class PickingTexture {
 	std::unique_ptr<FrameBuffer> buffer_;
 	int height_;
 	int width_;
+
+	bool binded_ = false;
+
+	std::pair<std::pair<int, int>, Info> cached_info_;
+	std::pair<std::pair<int, int>, float> cached_depth_;
 };
 }  // namespace render

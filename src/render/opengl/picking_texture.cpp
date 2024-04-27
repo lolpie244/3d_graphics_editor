@@ -27,6 +27,8 @@ PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
     if (x >= width_ || y >= height_) {
         throw std::runtime_error("Out of bounds");
     }
+    if (cached_info_.first == std::pair<int, int>{x, y})
+        return cached_info_.second;
 
     buffer_->Bind(FrameBuffer::Read);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
@@ -34,6 +36,7 @@ PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
     glReadPixels(x, height_ - y, 1, 1, FrameBuffer::RGB_INTEGER, GL_UNSIGNED_INT, &pixel);
     glReadBuffer(GL_NONE);
     buffer_->Unbind(FrameBuffer::Read);
+    cached_info_ = {{x, y}, pixel};
     return pixel;
 }
 
@@ -41,19 +44,34 @@ float PickingTexture::ReadDepth(unsigned int x, unsigned int y) {
     if (x >= width_ || y >= height_) {
         throw std::runtime_error("Out of bounds");
     }
+    if (cached_depth_.first == std::pair<int, int>{x, y})
+        return cached_depth_.second;
 
     buffer_->Bind(FrameBuffer::Read);
     float depth;
     glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
     glReadBuffer(GL_NONE);
     buffer_->Unbind(FrameBuffer::Read);
+    cached_depth_ = {{x, y}, depth};
     return depth;
 }
 
 void PickingTexture::Bind() {
+    if (binded_) {
+        std::cerr << "Bind already binded buffer";
+        return;
+    }
+
+    binded_ = true;
+    cached_info_.first = {-1, -1};
+    cached_depth_.first = {-1, -1};
+
     buffer_->Bind(render::FrameBuffer::Write);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void PickingTexture::Unbind() { buffer_->Unbind(render::FrameBuffer::Write); }
+void PickingTexture::Unbind() {
+    binded_ = false;
+    buffer_->Unbind(render::FrameBuffer::Write);
+}
 }  // namespace render

@@ -8,8 +8,6 @@
 
 namespace gui {
 
-std::atomic<int> GuiElement::max_object_id{0};
-
 void GuiElement::Enable() {
     Activatable::Enable();
     RunForChilds(&GuiElement::Enable, this);
@@ -38,6 +36,5 @@ void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 
 bool GuiElement::Contains(math::Vector2f point) { return this->Rect().contains(point); }
 
-int GuiElement::Id() const { return id_; }
 math::Vector2f GuiElement::Size() const { return size_; }
 }  // namespace gui

@@ -48,6 +48,11 @@ std::unique_ptr<render::Camera>& StageManager::Camera() {
     return CurrentStage()->Camera();
 }
 
+std::unique_ptr<gui::OpenglContext>& StageManager::Context() {
+    assert(!stages_.empty() && "No stages");
+    return CurrentStage()->Context();
+}
+
 math::Vector2f StageManager::windowSize() { return math::Vector2f(Window()->getSize().x, Window()->getSize().y); }
 
 void StageManager::Exit() { exit_ = true; }

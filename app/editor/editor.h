@@ -18,8 +18,6 @@ class EditorStage : public stage::Stage {
 	void InitGui();
 	void InitScene();
 
-
-
     std::vector<std::unique_ptr<gui::GuiElement>> elements;
     std::vector<std::unique_ptr<events::mEventType>> events;
 
@@ -31,8 +29,4 @@ class EditorStage : public stage::Stage {
 
     std::shared_ptr<render::Model> model;
     std::shared_ptr<render::Gizmo> gizmo;
-
-    render::PickingTexture::Info pixel;
-	
-    gui::OpenglContext opengl_context_;
 };

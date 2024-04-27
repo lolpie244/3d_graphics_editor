@@ -8,6 +8,7 @@
 #include "math/transform.h"
 #include "math/vector2.h"
 #include "utils/active.h"
+#include "utils/uuid.h"
 
 namespace events {
 class Hoverable : virtual public math::Transform, virtual public Activatable {
@@ -25,5 +26,9 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
     events::Event mouse_out_event_;
     bool mouse_in_flag_ = false;
     bool check_transparecy_ = false;
+};
+class Hoverable3D : virtual public UUID, virtual public Hoverable {
+   public:
+    virtual bool Contains(math::Vector2f point);
 };
 }  // namespace events

@@ -1,5 +1,6 @@
 #include "stage/stage.h"
 
+#include "gui/opengl_context.h"
 #include "stage/stage_manager.h"
 
 namespace stage {
@@ -44,4 +45,5 @@ void Stage::FrameEnd() {
 
 StageState Stage::State() { return state_; }
 std::unique_ptr<render::Camera>& Stage::Camera() { return camera_; }
+std::unique_ptr<gui::OpenglContext>& Stage::Context() { return opengl_context_; }
 }  // namespace stage

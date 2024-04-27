@@ -11,7 +11,7 @@
 namespace gui {
 OpenglContext::OpenglContext() : PickingTexture(0, 0) {
     auto window_size = settings::DEFAULT_RESOLUTION;
-    this->SetPosition(window_size.first / 2.0f, window_size.second / 2.0f);
+    this->SetPosition(window_size.first / 2.0f, window_size.second / 2.0f, -100);
     this->Resize({window_size.first, window_size.second});
 }
 

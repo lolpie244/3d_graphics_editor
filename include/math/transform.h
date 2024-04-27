@@ -10,7 +10,7 @@ enum Axis {
     Z = 1 << 2,
 };
 
-inline glm::vec3 to_vector(unsigned int axis) {
+inline glm::vec3 axis_to_vector(unsigned int axis) {
     return {(axis & Axis::X) != 0, (axis & Axis::Y) != 0, (axis & Axis::Z) != 0};
 }
 

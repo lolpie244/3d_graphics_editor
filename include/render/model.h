@@ -25,7 +25,7 @@ struct ModelVertex {
     }
 };
 
-class Model : public UUID, virtual public math::Transform {
+class Model : virtual public UUID, virtual public math::Transform, virtual public events::Draggable3D {
    public:
     Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
           MeshChange is_changeable = MeshChange::Disable);
