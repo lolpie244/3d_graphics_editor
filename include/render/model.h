@@ -27,12 +27,17 @@ struct ModelVertex {
 
 class Model : virtual public UUID, virtual public math::Transform, virtual public events::Draggable3D {
    public:
+    enum DataType {
+        Point = 1,
+        Surface = 2,
+    };
+
+   public:
     Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
           MeshChange is_changeable = MeshChange::Disable);
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;
-    // bool Contains(math::Vector2f point) override;
 
     const ModelVertex Vertex(int id) const;
     void SetVertexPosition(int id, glm::vec3 new_position);
@@ -44,4 +49,5 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     Mesh<ModelVertex> mesh_;
 };
 
+typedef std::vector<std::unique_ptr<render::Model>> ModelsList;
 }  // namespace render

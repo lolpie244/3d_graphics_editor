@@ -4,10 +4,12 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 #include "data/model_loader.h"
 #include "data/texture.h"
 #include "math/points_cast.h"
+#include "render/model.h"
 #include "utils/settings.h"
 
 EditorStage::EditorStage() : gizmo(this->observer_) {
@@ -20,14 +22,17 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
     }));
 
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
-    shader.loadFromFile("shaders/texture.vert", "shaders/texture.frag");
-    point_shader.loadFromFile("shaders/texture.vert", "shaders/point.frag");
-    picking_shader.loadFromFile("shaders/texture.vert", "shaders/picking.frag");
-
     opengl_context_->SetLeftCorner(50, 0);
     opengl_context_->Resize(math::Vector2f(1700, 1080));
     opengl_context_->SetScaleMethod<events::DefaultScale>();
     opengl_context_->BindScale(observer_);
+
+    opengl_context_->BindPress(observer_, [this](sf::Event event) {
+        if (event.mouseButton.button != sf::Mouse::Left)
+            return false;
+        gizmo.SetModel(nullptr);
+        return true;
+    });
 
     opengl_context_->BindDrag(observer_, [this](sf::Event event, math::Vector2f moved) {
         if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
@@ -51,29 +56,44 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::X);
     ///////////////////////////////////////////
-    model = data::loadModel("resources/cube.obj", render::MeshChange::Enable);
+    auto model = data::loadModel("resources/cube.obj", render::MeshChange::Enable);
 
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
     ///////////////////////////////////////////
-    model->BindDrag(observer_, [this](sf::Event event, glm::vec3 move) {
-        model->SetVertexPosition(model->PressInfo().VertexId, model->Vertex(model->PressInfo().VertexId).position +
-                                                                  move * settings::MOUSE_SENSATIVITY);
-        return true;
-    });
 
-    gizmo.SetModel(model.get());
+    models.push_back(std::move(model));
+
+    for (auto& model : models) {
+        model->BindPress(observer_,
+                         [this, &model](sf::Event event) {
+                             std::cout << model->PressInfo().Data << '\n';
+
+                             if (model->PressInfo().Data == render::Model::Surface)
+                                 gizmo.SetModel(model.get());
+                             return true;
+                         },
+                         {sf::Mouse::Left});
+
+        model->BindDrag(observer_, [this, &model](sf::Event event, glm::vec3 move) {
+            if (model->PressInfo().Data != render::Model::Point)
+                return false;
+            model->SetVertexPosition(model->PressInfo().VertexId, model->Vertex(model->PressInfo().VertexId).position +
+                                                                      move * settings::MOUSE_SENSATIVITY);
+            return true;
+        });
+    }
 }
 
 void EditorStage::Run() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
-        model->DrawPoints(picking_shader);
+        draw_modes_[current_draw_mode_]->DrawPicker(models);
         gizmo.DrawPicking();
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
-    model->Draw(shader);
+    draw_modes_[current_draw_mode_]->Draw(models);
     gizmo.Draw();
     FrameEnd();
 }

@@ -43,13 +43,13 @@ Button::Button(glm::vec3 position, math::Vector2f size) : SpriteGuiElement(posit
 
 gui::ButtonText& Button::Text() { return text_; }
 
-void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
+void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
     auto event_function = [this, function](sf::Event event) {
         update_texture();
         return function(event);
     };
 
-    events::Clickable::BindPress(observer, event_function);
+    events::Clickable::BindPress(observer, event_function, buttons);
 }
 
 void Button::OnRelease() { update_texture(); }

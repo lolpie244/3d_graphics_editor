@@ -23,6 +23,7 @@ int main() {
     stage::StageManager& stage_manager = stage::StageManager::Instance();
     stage_manager.InitWindow(sf::VideoMode(1920, 1080), "test", sf::Style::Fullscreen, settings);
     stage_manager.Window()->setFramerateLimit(160);
+    stage_manager.Window()->setMouseCursorGrabbed(true);
 
     GLenum err = glewInit();
     if (GLEW_OK != err) {

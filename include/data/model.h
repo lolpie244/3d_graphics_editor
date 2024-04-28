@@ -34,9 +34,9 @@ inline render::ModelVertex Parse<render::ModelVertex>(const tinyobj::ObjReader& 
 }
 
 namespace data {
-inline std::shared_ptr<render::Model> loadModel(const std::string& filename, render::MeshChange is_changeable) {
+inline std::unique_ptr<render::Model> loadModel(const std::string& filename, render::MeshChange is_changeable) {
 	auto data = parser::loadFromFile<render::ModelVertex>(filename);
-	return std::make_shared<render::Model>(data.first, data.second, is_changeable);
+	return std::make_unique<render::Model>(data.first, data.second, is_changeable);
 }
 
 }  // namespace data::parser

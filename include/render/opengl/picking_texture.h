@@ -8,7 +8,7 @@ class PickingTexture {
     struct Info {
         unsigned int ObjectID = 0;
         unsigned int VertexId = 0;
-        unsigned int PrimID = 0;
+        unsigned int Data = 0;
     };
 
    public:

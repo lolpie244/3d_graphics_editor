@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Mouse.hpp>
 
 #include "data/texture.h"
 #include "events/propterties/clickable.h"
@@ -44,7 +45,8 @@ class Button : virtual public SpriteGuiElement, virtual public events::Clickable
 
     gui::ButtonText& Text();
 
-    void BindPress(events::Observer& observer, const events::EVENT_FUNC& function) override;
+    void BindPress(events::Observer& observer, const events::EVENT_FUNC& function,
+                   MouseButtons buttons = {sf::Mouse::Left}) override;
     void OnRelease() override;
 
     void SetPressedTexture(TextureInfo texture);

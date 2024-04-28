@@ -24,9 +24,9 @@ void PickingTexture::Resize(int width, int height) {
 }
 
 PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
-    if (x >= width_ || y >= height_) {
-        throw std::runtime_error("Out of bounds");
-    }
+    if (x >= width_ || y >= height_)
+        return {0, 0, 0};
+
     if (cached_info_.first == std::pair<int, int>{x, y})
         return cached_info_.second;
 

@@ -21,13 +21,19 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
 }
 
 void Model::Draw(data::Shader& shader) const {
-    shader.setUniform("u_ObjectIndex", Id());
+    shader.setUniform("u_Data", DataType::Surface);
+    shader.setUniform("u_ObjectId", Id());
+
     shader.setUniform("u_Texture", texture);
     this->mesh_.Draw(GL_TRIANGLES, shader, this);
 }
 void Model::DrawPoints(data::Shader& shader) const {
-    shader.setUniform("u_ObjectIndex", Id());
+    shader.setUniform("u_Data", DataType::Point);
+    shader.setUniform("u_ObjectId", Id());
+
+    shader.setUniform("u_Color", sf::Color::White);
     this->mesh_.Draw(GL_POINTS, shader, this);
+    this->mesh_.Draw(GL_LINES, shader, this);
 }
 
 const ModelVertex Model::Vertex(int id) const { return mesh_.Vertices()[id]; }
