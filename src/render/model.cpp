@@ -33,6 +33,7 @@ void Model::DrawPoints(data::Shader& shader) const {
 
     shader.setUniform("u_Color", sf::Color::White);
     this->mesh_.Draw(GL_POINTS, shader, this);
+    shader.setUniform("u_ObjectId", 0);
     this->mesh_.Draw(GL_LINES, shader, this);
 }
 

@@ -3,6 +3,7 @@ add_executable(${PROJECT_NAME}
 	menu/menu.cpp
 
 	editor/editor.cpp
+	editor/editor_events.cpp
 	editor/gizmo.cpp
 	editor/mode.cpp
 )
