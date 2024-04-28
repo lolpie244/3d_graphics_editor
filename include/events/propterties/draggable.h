@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/System/Vector2.hpp>
+#include <SFML/Window/Mouse.hpp>
 #include <glm/ext/vector_float3.hpp>
 
 #include "clickable.h"
@@ -22,13 +23,15 @@ class Draggable : virtual public Clickable {
    public:
     virtual ~Draggable() = default;
 
-    virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function,
-                           MouseButtons buttons = all_buttons_) override;
+    virtual void OnPress(sf::Event event) override;
+    virtual void OnRelease(sf::Event event) override;
     virtual void BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons = all_buttons_);
 
    private:
     glm::vec2 last_position_;
     events::Event move_event_;
+	bool is_draggable_ = false;
+	sf::Mouse::Button pressed_button_;
 };
 
 class Draggable3D : virtual public Clickable3D, virtual public Draggable {

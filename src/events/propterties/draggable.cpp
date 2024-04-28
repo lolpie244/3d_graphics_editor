@@ -9,25 +9,25 @@
 #include "utils/active.h"
 
 namespace events {
-void Draggable::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
-    Clickable::BindPress(
-        observer,
-        [this, function](sf::Event event) {
-            last_position_ = glm::vec2(event.mouseButton.x, event.mouseButton.y);
-            return function(event);
-        },
-        buttons);
+
+void Draggable::OnPress(sf::Event event) {
+	is_draggable_ = true;
+	last_position_ = {event.mouseButton.x, event.mouseButton.y};
+	pressed_button_ = event.mouseButton.button;
+}
+
+void Draggable::OnRelease(sf::Event event) {
+	is_draggable_ = false;
 }
 
 void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {
     if (!press_event_)
-        this->BindPress(
-            observer, [this](sf::Event event) { return true; }, buttons);
+        this->BindPress(observer, [this](sf::Event event) { return true; }, buttons);
 
-    auto func = [this, function](sf::Event event) {
+    auto func = [this, function, buttons](sf::Event event) {
         ReturnOnDisable(false);
 
-        if (!this->IsPressed())
+        if (!is_draggable_ || !buttons.contains(pressed_button_))
             return false;
 
         glm::vec2 new_position(event.mouseMove.x, event.mouseMove.y);

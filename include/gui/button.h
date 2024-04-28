@@ -47,7 +47,7 @@ class Button : virtual public SpriteGuiElement, virtual public events::Clickable
 
     void BindPress(events::Observer& observer, const events::EVENT_FUNC& function,
                    MouseButtons buttons = {sf::Mouse::Left}) override;
-    void OnRelease() override;
+    void OnRelease(sf::Event event) override;
 
     void SetPressedTexture(TextureInfo texture);
     void SetReleasedTexture(TextureInfo texture);

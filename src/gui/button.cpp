@@ -51,7 +51,7 @@ void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& fun
     events::Clickable::BindPress(observer, event_function, buttons);
 }
 
-void Button::OnRelease() { update_texture(); }
+void Button::OnRelease(sf::Event event) { update_texture(); }
 
 void Button::SetPressedTexture(TextureInfo texture) {
     pressed_texture_ = texture;

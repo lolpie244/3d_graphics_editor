@@ -38,25 +38,16 @@ void EditorStage::ClearSelection() {
 }
 
 bool EditorStage::ContextPress(sf::Event event) {
-    if (event.mouseButton.button != sf::Mouse::Left)
-        return false;
-
     ClearSelection();
     return true;
 }
 
 bool EditorStage::ContextDrag(sf::Event event, glm::vec2 move) {
-    if (event.mouseButton.button != sf::Mouse::Left)
-        return false;
-
     ClearSelection();
     return true;
 }
 
 bool EditorStage::ContextRelease(sf::Event event) {
-    if (event.mouseButton.button == sf::Mouse::Left) {
-        // for (float x = std::min(b))
-    }
 
     ClearSelection();
     return true;

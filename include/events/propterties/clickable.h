@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Window/Event.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <initializer_list>
 #include <unordered_set>
@@ -28,7 +29,8 @@ class Clickable : virtual public Hoverable {
     virtual void BindRelease(events::Observer& observer, const events::EVENT_FUNC& function,
                              MouseButtons buttons = all_buttons_);
 
-    virtual void OnRelease() {};
+    virtual void OnPress(sf::Event event) {}; // before buttons checking
+    virtual void OnRelease(sf::Event event) {};
 
     bool IsPressed() const { return pressed_; }
 	// glm::vec2 StartPosition() { };

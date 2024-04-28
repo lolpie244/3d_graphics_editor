@@ -12,7 +12,11 @@ namespace events {
 void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
     auto event_function = [this, function, buttons](sf::Event event) {
         ReturnOnDisable(false);
-        if (!this->ContainsMouse(event) || !buttons.contains(event.mouseButton.button))
+        if (!this->ContainsMouse(event))
+            return false;
+
+        OnPress(event);
+        if (!buttons.contains(event.mouseButton.button))
             return false;
 
         pressed_ = true;
@@ -22,8 +26,7 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
     press_event_ = observer.Bind(sf::Event::MouseButtonPressed, event_function, this->GetPosition().z);
 
     if (!release_event_)
-        BindRelease(
-            observer, [](sf::Event) { return false; }, buttons);
+        BindRelease(observer, [](sf::Event) { return false; }, buttons);
 }
 
 bool Clickable::ContainsMouse(sf::Event event) {
@@ -35,7 +38,7 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
         if (!pressed_)
             return false;
         pressed_ = false;
-        OnRelease();
+        OnRelease(event);
 
         ReturnOnDisable(false);
 
@@ -47,8 +50,7 @@ void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC
     release_event_ = observer.Bind(sf::Event::MouseButtonReleased, event_function, this->GetPosition().z);
 
     if (!press_event_)
-        BindPress(
-            observer, [](sf::Event) { return true; }, buttons);
+        BindPress(observer, [](sf::Event) { return true; }, buttons);
 }
 
 void Clickable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
