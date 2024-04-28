@@ -17,10 +17,13 @@ class EditorStage : public stage::Stage {
 	void ClearSelection();
 
    public:  // events
-    bool CameraMove(sf::Event event, math::Vector2f moved);
+    bool CameraMove(sf::Event event, glm::vec2 moved);
     bool CameraZoom(sf::Event event);
 
     bool ContextPress(sf::Event event);
+    bool ContextDrag(sf::Event event, glm::vec2 moved);
+    bool ContextRelease(sf::Event event);
+
     bool ModelPress(sf::Event event, render::Model* model);
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
 

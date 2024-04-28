@@ -1,6 +1,5 @@
 #include "render/model.h"
 
-#include "math/vector2.h"
 #include "stage/stage_manager.h"
 
 namespace render {

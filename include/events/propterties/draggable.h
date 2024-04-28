@@ -17,7 +17,7 @@ class Draggable : virtual public Clickable {
     friend Draggable3D;
 
    public:
-    typedef std::function<bool(sf::Event, math::Vector2f)> EVENT_FUNC;
+    typedef std::function<bool(sf::Event, glm::vec2)> EVENT_FUNC;
 
    public:
     virtual ~Draggable() = default;
@@ -27,7 +27,7 @@ class Draggable : virtual public Clickable {
     virtual void BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons = all_buttons_);
 
    private:
-    math::Vector2f last_position_;
+    glm::vec2 last_position_;
     events::Event move_event_;
 };
 

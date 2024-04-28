@@ -1,6 +1,8 @@
 #include "editor.h"
+
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
+
 #include "data/texture.h"
 
 void EditorStage::BindEvents() {
@@ -13,22 +15,21 @@ void EditorStage::BindEvents() {
     }));
 
     events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
-		auto next = 0;
-		if (event.key.code == sf::Keyboard::Left)
-			next -= 1;
+        auto next = 0;
+        if (event.key.code == sf::Keyboard::Left)
+            next -= 1;
 
-		if (event.key.code == sf::Keyboard::Right)
-			next += 1;
-		if (next)
-			gizmo.SetModel(nullptr);
+        if (event.key.code == sf::Keyboard::Right)
+            next += 1;
+        if (next)
+            gizmo.SetModel(nullptr);
 
-		current_draw_mode_ = (3 + current_draw_mode_ + next) % 3;
+        current_draw_mode_ = (3 + current_draw_mode_ + next) % 3;
         return next;
     }));
 
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); });
-    opengl_context_->BindDrag(observer_,
-                              [&](sf::Event event, math::Vector2f moved) { return CameraMove(event, moved); });
+    opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); });
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 
     for (auto& [_, model] : models) {
@@ -41,7 +42,7 @@ void EditorStage::BindEvents() {
 EditorStage::EditorStage() : gizmo(this->observer_) {
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
     opengl_context_->SetLeftCorner(50, 0);
-    opengl_context_->Resize(math::Vector2f(1700, 1080));
+    opengl_context_->Resize(glm::vec2(1700, 1080));
 
     camera_->Move(0, 0, 3.0f);
     camera_->Rotate(-40, math::X);
@@ -51,7 +52,7 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
     models[model->Id()] = std::move(model);
-	///////////////////////////////////////////
+    ///////////////////////////////////////////
     BindEvents();
 }
 

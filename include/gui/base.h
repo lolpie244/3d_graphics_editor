@@ -11,7 +11,7 @@
 
 #include "events/propterties/hoverable.h"
 #include "math/transform.h"
-#include "math/vector2.h"
+
 #include "utils/active.h"
 #include "utils/tree.h"
 #include "utils/uuid.h"
@@ -26,7 +26,7 @@ class GuiElement : public Tree,
    public:
     virtual ~GuiElement() = default;
 
-    math::Vector2f Size() const;
+    glm::vec2 Size() const;
 
     virtual sf::Rect<float> Rect() const = 0;
 
@@ -35,12 +35,12 @@ class GuiElement : public Tree,
 
     virtual void Move(float x = 0, float y = 0, float z = 0) override;
     virtual void Scale(float x = 1, float y = 1, float z = 1) override;
-    virtual void Resize(math::Vector2f size);
+    virtual void Resize(glm::vec2 size);
 
-    virtual bool Contains(math::Vector2f point) override;
+    virtual bool Contains(glm::vec2 point) override;
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
    protected:
-    math::Vector2f size_;
+    glm::vec2 size_;
 };
 }  // namespace gui

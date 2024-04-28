@@ -14,7 +14,7 @@
 #include "events/propterties/hoverable.h"
 #include "events/propterties/scaleable.h"
 #include "data/texture.h"
-#include "math/vector2.h"
+
 
 namespace gui {
 enum ListOrientation { Horizontal, Vertical };
@@ -31,7 +31,7 @@ class ButtonFromList : virtual public Button {
     void AddButtonList(events::Observer& observer, ButtonsList* button_list);
 
    private:
-    virtual void Resize(math::Vector2f size) override { Button::Resize(size); };
+    virtual void Resize(glm::vec2 size) override { Button::Resize(size); };
     virtual void Move(float x = 0, float y = 0, float z = 0) override { Button::Move(x, y, z); };
 };
 
@@ -41,7 +41,7 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
 
    public:
     ButtonsList(ListOrientation orientation = ListOrientation::Vertical);
-    ButtonsList(glm::vec3 position, math::Vector2f size,
+    ButtonsList(glm::vec3 position, glm::vec2 size,
                 ListOrientation orientation = ListOrientation::Vertical);
 
     sf::Rect<float> Rect() const override;
@@ -56,7 +56,7 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
     void SetOrientation(ListOrientation orientation);
 
    private:
-    math::Vector2f PositionCoef() const;
+    glm::vec2 PositionCoef() const;
 
    private:
     std::vector<ButtonType> buttons_;

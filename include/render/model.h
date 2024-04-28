@@ -5,7 +5,7 @@
 #include "data/shader.h"
 #include "events/propterties/clickable.h"
 #include "events/propterties/draggable.h"
-#include "math/vector2.h"
+
 #include "mesh.h"
 #include "render/opengl/picking_texture.h"
 #include "utils/uuid.h"

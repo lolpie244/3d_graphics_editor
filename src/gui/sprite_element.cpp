@@ -8,21 +8,21 @@
 #include "utils/settings.h"
 
 namespace gui {
-SpriteGuiElement::SpriteGuiElement(glm::vec3 position, math::Vector2f size) {
+SpriteGuiElement::SpriteGuiElement(glm::vec3 position, glm::vec2 size) {
     this->SetPosition(position.x, position.y, position.z);
     this->Resize(size);
 }
 
 sf::Rect<float> SpriteGuiElement::Rect() const { return this->sprite_.getGlobalBounds(); }
 
-void SpriteGuiElement::Resize(math::Vector2<float> size) {
+void SpriteGuiElement::Resize(glm::vec2 size) {
     GuiElement::Resize(size);
 
     if (svg_texture_ == nullptr)
         return;
 
     auto real_size = sprite_.getLocalBounds().getSize();
-    auto scale = size / real_size;
+    auto scale = size / glm::vec2{real_size.x, real_size.y};
 
     if (std::max(scale.x, scale.y) >= settings::SVG_RESIZE_COEF ||
         std::min(scale.x, scale.y) <= 1 / settings::SVG_RESIZE_COEF) {
@@ -30,7 +30,7 @@ void SpriteGuiElement::Resize(math::Vector2<float> size) {
         return;
     }
 
-    sprite_.setScale(scale);
+    sprite_.setScale(scale.x, scale.y);
 }
 
 void SpriteGuiElement::Move(float x, float y, float z) {

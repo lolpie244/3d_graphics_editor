@@ -3,7 +3,6 @@
 #include <SFML/System/Vector2.hpp>
 
 #include "math/transform.h"
-#include "math/vector2.h"
 #include "utils/active.h"
 
 namespace gui {
@@ -22,9 +21,9 @@ void GuiElement::Move(float x, float y, float z) {
     RunForChilds(&GuiElement::Move, this, x, y, z);
 }
 
-void GuiElement::Scale(float x, float y, float z) { Resize(size_ * math::Vector2f{x, y}); }
+void GuiElement::Scale(float x, float y, float z) { Resize(size_ * glm::vec2{x, y}); }
 
-void GuiElement::Resize(math::Vector2f size) {
+void GuiElement::Resize(glm::vec2 size) {
     size_ = size;
     RunForChilds(&GuiElement::Resize, this, size);
 }
@@ -34,7 +33,7 @@ void GuiElement::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         RunForChilds(&GuiElement::draw, this, target, states);
 }
 
-bool GuiElement::Contains(math::Vector2f point) { return this->Rect().contains(point); }
+bool GuiElement::Contains(glm::vec2 point) { return this->Rect().contains(point.x, point.y); }
 
-math::Vector2f GuiElement::Size() const { return size_; }
+glm::vec2 GuiElement::Size() const { return size_; }
 }  // namespace gui

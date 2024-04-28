@@ -2,7 +2,7 @@
 
 #include <glm/ext/vector_float3.hpp>
 
-#include "math/vector2.h"
+
 #include "stage/stage_manager.h"
 
 namespace math {
@@ -16,7 +16,7 @@ inline glm::vec3 to_ndc(glm::vec3 point) {
     };
 }
 
-inline glm::vec3 to_ndc(math::Vector2f point) { return to_ndc({point.x, point.y, 0}); }
+inline glm::vec3 to_ndc(glm::vec2 point) { return to_ndc({point.x, point.y, 0}); }
 
 inline glm::vec3 to_pixel(glm::vec3 point) {
     auto window_size = stage::StageManager::Instance().windowSize();
@@ -28,7 +28,7 @@ inline glm::vec3 to_pixel(glm::vec3 point) {
     };
 }
 
-inline glm::vec3 to_world_coords(math::Vector2f point) {
+inline glm::vec3 to_world_coords(glm::vec2 point) {
     auto& camera = stage::StageManager::Instance().Camera();
 
     glm::vec4 ndc_coords = glm::vec4(to_ndc({point.x, point.y, 0}), 1.0f);

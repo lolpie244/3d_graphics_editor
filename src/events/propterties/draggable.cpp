@@ -13,7 +13,7 @@ void Draggable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
     Clickable::BindPress(
         observer,
         [this, function](sf::Event event) {
-            last_position_ = math::Vector2f(event.mouseButton.x, event.mouseButton.y);
+            last_position_ = glm::vec2(event.mouseButton.x, event.mouseButton.y);
             return function(event);
         },
         buttons);
@@ -30,7 +30,7 @@ void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function,
         if (!this->IsPressed())
             return false;
 
-        math::Vector2f new_position(event.mouseMove.x, event.mouseMove.y);
+        glm::vec2 new_position(event.mouseMove.x, event.mouseMove.y);
         auto move = new_position - last_position_;
         last_position_ = new_position;
         return function(event, move);
@@ -39,7 +39,7 @@ void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function,
 }
 
 void Draggable3D::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {
-    auto func = [this, function](sf::Event event, math::Vector2f moved) {
+    auto func = [this, function](sf::Event event, glm::vec2 moved) {
         glm::vec3 move = math::to_world_coords(stage::StageManager::Instance().windowSize() / 2.0f + moved);
         return function(event, move);
     };
@@ -51,7 +51,7 @@ void Draggable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC
     Clickable3D::BindPress(
         observer,
         [this, function](sf::Event event) {
-            last_position_ = math::Vector2f(event.mouseButton.x, event.mouseButton.y);
+            last_position_ = glm::vec2(event.mouseButton.x, event.mouseButton.y);
             return function(event);
         },
         buttons);

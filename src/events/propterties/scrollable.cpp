@@ -3,7 +3,7 @@
 namespace events {
 
 bool Scrollable::ContainsMouse(sf::Event event) {
-    return this->Contains(math::Vector2f(event.mouseWheelScroll.x, event.mouseWheelScroll.y));
+    return this->Contains(glm::vec2(event.mouseWheelScroll.x, event.mouseWheelScroll.y));
 }
 
 void Scrollable::BindScroll(events::Observer& observer, const events::EVENT_FUNC& function) {

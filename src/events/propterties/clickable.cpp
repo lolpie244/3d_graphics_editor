@@ -27,7 +27,7 @@ void Clickable::BindPress(events::Observer& observer, const events::EVENT_FUNC& 
 }
 
 bool Clickable::ContainsMouse(sf::Event event) {
-    return this->Contains(math::Vector2f(event.mouseButton.x, event.mouseButton.y));
+    return this->Contains(glm::vec2(event.mouseButton.x, event.mouseButton.y));
 }
 
 void Clickable::BindRelease(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {

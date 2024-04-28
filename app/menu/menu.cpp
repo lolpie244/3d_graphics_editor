@@ -32,7 +32,7 @@ MenuStage::MenuStage() {
     }));
 
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
-    auto button = std::make_shared<gui::Button>(glm::vec3(200, 100, 0), math::Vector2f(380, 94));
+    auto button = std::make_shared<gui::Button>(glm::vec3(200, 100, 0), glm::vec2(380, 94));
     button->Text().SetText(L"Help me");
     button->Text().SfText().setFillColor(sf::Color::Black);
     button->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});

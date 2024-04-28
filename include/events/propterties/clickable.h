@@ -6,6 +6,7 @@
 
 #include "events/observer.h"
 #include "hoverable.h"
+
 #include "render/opengl/picking_texture.h"
 
 namespace events {
@@ -30,6 +31,7 @@ class Clickable : virtual public Hoverable {
     virtual void OnRelease() {};
 
     bool IsPressed() const { return pressed_; }
+	// glm::vec2 StartPosition() { };
 
    protected:
     events::Event press_event_;

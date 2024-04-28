@@ -31,7 +31,7 @@ class StageManager : public Singleton<StageManager> {
     std::unique_ptr<render::Camera>& Camera();
     std::shared_ptr<sf::RenderWindow>& Window();
 	std::unique_ptr<gui::OpenglContext>& Context();
-    math::Vector2f windowSize();
+    glm::vec2 windowSize();
 
    private:
     std::shared_ptr<sf::RenderWindow> window_;

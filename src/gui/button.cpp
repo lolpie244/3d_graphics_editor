@@ -8,7 +8,6 @@
 #include "events/event.h"
 #include "gui/sprite_element.h"
 #include "gui/text.h"
-#include "math/vector2.h"
 
 namespace gui {
 
@@ -17,21 +16,21 @@ ButtonText::ButtonText(Button* button) : Text(button->GetPosition(), button->Siz
     this->SetParent(button);
 }
 
-void ButtonText::Resize(math::Vector2f size) { Text::Resize(size * borders_size_); }
+void ButtonText::Resize(glm::vec2 size) { Text::Resize(size * borders_size_); }
 void ButtonText::SetPosition(float x, float y, float z) {
-    auto new_pos = math::Vector2f{x, y} + this->Size() * offset_;
+    auto new_pos = glm::vec2{x, y} + this->Size() * offset_;
     Text::SetPosition(new_pos.x, new_pos.y, z);
 }
 
-void ButtonText::SetOffset(math::Vector2f offset) {
+void ButtonText::SetOffset(glm::vec2 offset) {
     auto old_offset = offset_;
     offset_ = offset;
-    auto new_position = math::Vector2f(this->GetPosition()) - this->Size() * old_offset;
+    auto new_position = glm::vec2(this->GetPosition()) - this->Size() * old_offset;
 
     this->SetPosition(new_position.x, new_position.y, this->GetPosition().z);
 }
 
-void ButtonText::SetBordersSize(math::Vector2f borders_size) {
+void ButtonText::SetBordersSize(glm::vec2 borders_size) {
     auto old_borders_size = borders_size_;
     borders_size_ = {1 - borders_size.x, 1 - borders_size.y};
     this->Resize(this->Size() / old_borders_size);
@@ -39,7 +38,7 @@ void ButtonText::SetBordersSize(math::Vector2f borders_size) {
 
 Button::Button() : text_(this) {}
 
-Button::Button(glm::vec3 position, math::Vector2f size) : SpriteGuiElement(position, size), text_(this) {}
+Button::Button(glm::vec3 position, glm::vec2 size) : SpriteGuiElement(position, size), text_(this) {}
 
 gui::ButtonText& Button::Text() { return text_; }
 

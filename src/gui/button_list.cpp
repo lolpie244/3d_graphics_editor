@@ -4,7 +4,6 @@
 
 #include "events/observer.h"
 #include "gui/buttons_list.h"
-#include "math/vector2.h"
 
 namespace gui {
 ButtonFromList::ButtonFromList(const sf::String& text) { this->Text().SetText(text); }
@@ -19,8 +18,8 @@ void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* butt
     this->BindMouseIn(observer, [button_list, this](sf::Event event) {
         button_list->Enable();
         auto coef = dynamic_cast<ButtonsList*>(this->parent)->orientation_ == ListOrientation::Vertical
-                        ? math::Vector2f{0, this->Size().y}
-                        : math::Vector2f{this->Size().x, 0};
+                        ? glm::vec2{0, this->Size().y}
+                        : glm::vec2{this->Size().x, 0};
 
         button_list->Resize(this->Size());
         button_list->SetPosition(this->GetPosition() + glm::vec3(coef.x, coef.y, 0));
@@ -36,30 +35,27 @@ void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* butt
 
 ButtonsList::ButtonsList(ListOrientation orientation) : orientation_(orientation) {}
 
-ButtonsList::ButtonsList(glm::vec3 position, math::Vector2f size, ListOrientation orientation)
-    : orientation_(orientation) {
+ButtonsList::ButtonsList(glm::vec3 position, glm::vec2 size, ListOrientation orientation) : orientation_(orientation) {
     this->SetPosition(position);
     this->Resize(size);
 }
 
-math::Vector2f ButtonsList::PositionCoef() const {
-    return orientation_ == ListOrientation::Vertical ? math::Vector2f{0, this->Size().y}
-                                                     : math::Vector2f{this->Size().x, 0};
+glm::vec2 ButtonsList::PositionCoef() const {
+    return orientation_ == ListOrientation::Vertical ? glm::vec2{0, this->Size().y} : glm::vec2{this->Size().x, 0};
 }
 
 sf::Rect<float> ButtonsList::Rect() const {
     if (buttons_.empty())
         return {0, 0, 0, 0};
-
-    return {this->buttons_[0]->Rect().getPosition(),
-            this->Size() + (float)(this->buttons_.size() - 1) * PositionCoef()};
+    auto size = this->Size() + (float)(this->buttons_.size() - 1) * PositionCoef();
+    return {this->buttons_[0]->Rect().getPosition(), sf::Vector2f(size.x, size.y)};
 }
 
 void ButtonsList::Move(float x, float y, float z) {
     auto coef = PositionCoef();
 
     for (float i = 0; i < buttons_.size(); i++) {
-        auto new_pos = math::Vector2f{x, y} + i * coef;
+        auto new_pos = glm::vec2{x, y} + i * coef;
         buttons_[i]->SetPosition(new_pos.x, new_pos.y, z);
     }
 }

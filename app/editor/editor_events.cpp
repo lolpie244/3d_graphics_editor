@@ -10,7 +10,7 @@
 #include "render/model.h"
 #include "utils/settings.h"
 
-bool EditorStage::CameraMove(sf::Event event, math::Vector2f moved) {
+bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
         auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved);
         stage::StageManager::Instance().Camera()->Move(-move.x, move.y);
@@ -30,16 +30,33 @@ bool EditorStage::CameraZoom(sf::Event event) {
 }
 
 void EditorStage::ClearSelection() {
-	gizmo.SetModel(nullptr);
+    gizmo.SetModel(nullptr);
     for (auto& vertex : selected_vertexes_) {
         models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, sf::Color::White);
     }
-	selected_vertexes_.clear();
+    selected_vertexes_.clear();
 }
 
 bool EditorStage::ContextPress(sf::Event event) {
     if (event.mouseButton.button != sf::Mouse::Left)
         return false;
+
+    ClearSelection();
+    return true;
+}
+
+bool EditorStage::ContextDrag(sf::Event event, glm::vec2 move) {
+    if (event.mouseButton.button != sf::Mouse::Left)
+        return false;
+
+    ClearSelection();
+    return true;
+}
+
+bool EditorStage::ContextRelease(sf::Event event) {
+    if (event.mouseButton.button == sf::Mouse::Left) {
+        // for (float x = std::min(b))
+    }
 
     ClearSelection();
     return true;
