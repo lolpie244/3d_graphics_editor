@@ -1,5 +1,3 @@
-#include "editor.h"
-
 #include <GL/glew.h>
 
 #include <SFML/Window/Event.hpp>
@@ -7,6 +5,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 #include "data/model_loader.h"
+#include "editor.h"
 #include "math/points_cast.h"
 #include "render/model.h"
 #include "utils/settings.h"
@@ -30,16 +29,33 @@ bool EditorStage::CameraZoom(sf::Event event) {
     return true;
 }
 
+void EditorStage::ClearSelection() {
+	gizmo.SetModel(nullptr);
+    for (auto& vertex : selected_vertexes_) {
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, sf::Color::White);
+    }
+	selected_vertexes_.clear();
+}
+
 bool EditorStage::ContextPress(sf::Event event) {
     if (event.mouseButton.button != sf::Mouse::Left)
         return false;
-    gizmo.SetModel(nullptr);
+
+    ClearSelection();
     return true;
 }
 
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
-    if (model->PressInfo().Data == render::Model::Surface)
+    if (model->PressInfo().Data == render::Model::Surface) {
+        selected_vertexes_.clear();
         gizmo.SetModel(model);
+    }
+    if (model->PressInfo().Data == render::Model::Point) {
+        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
+            ClearSelection();
+        model->SetVertexColor(model->PressInfo().VertexId, sf::Color::Red);
+        selected_vertexes_.insert(model->PressInfo());
+    }
     return true;
 }
 
@@ -48,8 +64,12 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 move, render::Model* mode
     if (press_info.Data != render::Model::Point)
         return false;
 
-    model->SetVertexPosition(press_info.VertexId,
-                             model->Vertex(press_info.VertexId).position + move * settings::MOUSE_SENSATIVITY);
+    auto update_pos = [move](auto model, auto info) {
+        model->SetVertexPosition(info.VertexId,
+                                 model->Vertex(info.VertexId).position + move * settings::MOUSE_SENSATIVITY);
+    };
+
+    for (auto& vertex : selected_vertexes_) update_pos(models[vertex.ObjectID].get(), vertex);
+
     return true;
 }
-

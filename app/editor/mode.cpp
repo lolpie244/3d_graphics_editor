@@ -17,28 +17,28 @@ TransparentDraw::TransparentDraw() {
 }
 
 void TextureDraw::Draw(const render::ModelsList& models) {
-    for (auto& model : models) { model->Draw(shader_); }
+    for (auto& [_, model] : models) { model->Draw(shader_); }
 }
 
 void TextureDraw::DrawPicker(const render::ModelsList& models) {
-    for (auto& model : models) { model->Draw(picking_shader_); }
+    for (auto& [_, model] : models) { model->Draw(picking_shader_); }
 }
 
 void MixedDraw::Draw(const render::ModelsList& models) {
-    for (auto& model : models) {
+    for (auto& [_, model] : models) {
         model->Draw(shader_);
         model->DrawPoints(point_shader_);
     }
 }
 
 void MixedDraw::DrawPicker(const render::ModelsList& models) {
-    for (auto& model : models) { model->DrawPoints(picking_shader_); }
+    for (auto& [_, model] : models) { model->DrawPoints(picking_shader_); }
 }
 
 void TransparentDraw::Draw(const render::ModelsList& models) {
-    for (auto& model : models) { model->DrawPoints(shader_); }
+    for (auto& [_, model] : models) { model->DrawPoints(shader_); }
 }
 
 void TransparentDraw::DrawPicker(const render::ModelsList& models) {
-    for (auto& model : models) { model->DrawPoints(picking_shader_); }
+    for (auto& [_, model] : models) { model->DrawPoints(picking_shader_); }
 }

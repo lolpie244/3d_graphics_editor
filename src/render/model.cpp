@@ -31,7 +31,6 @@ void Model::DrawPoints(data::Shader& shader) const {
     shader.setUniform("u_Data", DataType::Point);
     shader.setUniform("u_ObjectId", Id());
 
-    shader.setUniform("u_Color", sf::Color::White);
     this->mesh_.Draw(GL_POINTS, shader, this);
     shader.setUniform("u_ObjectId", 0);
     this->mesh_.Draw(GL_LINES, shader, this);
@@ -45,6 +44,16 @@ void Model::SetVertexPosition(int id, glm::vec3 new_position) {
         if (mesh_.Vertices()[i].position == old_position) {
             auto new_data = mesh_.Vertices()[i];
             new_data.position = new_position;
+            mesh_.SetVertex(i, new_data);
+        }
+    }
+}
+
+void Model::SetVertexColor(int id, sf::Color color) {
+    for (int i = 0; i < mesh_.Vertices().size(); i++) {
+        if (mesh_.Vertices()[i].position == mesh_.Vertices()[id].position) {
+            auto new_data = mesh_.Vertices()[i];
+            new_data.color = {color.r, color.g, color.b, color.a};
             mesh_.SetVertex(i, new_data);
         }
     }

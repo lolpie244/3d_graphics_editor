@@ -14,13 +14,17 @@ namespace render {
 struct ModelVertex {
     glm::vec3 position;
     glm::vec2 texture_coords;
+    glm::vec4 color{255, 255, 255, 255};
 
-    bool operator==(const ModelVertex& b) const { return position == b.position && texture_coords == b.texture_coords; }
+    bool operator==(const ModelVertex& b) const {
+        return position == b.position && texture_coords == b.texture_coords && color == b.color;
+    }
 
     static VertexLayout GetLayout() {
         VertexLayout result;
         result.Add<float>(3);  // position
         result.Add<float>(2);  // texture coords
+        result.Add<float>(4);  // color
         return result;
     }
 };
@@ -41,6 +45,7 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
 
     const ModelVertex Vertex(int id) const;
     void SetVertexPosition(int id, glm::vec3 new_position);
+    void SetVertexColor(int id, sf::Color color);
 
    public:
     sf::Texture texture;
@@ -49,5 +54,5 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     Mesh<ModelVertex> mesh_;
 };
 
-typedef std::vector<std::unique_ptr<render::Model>> ModelsList;
+typedef std::unordered_map<int, std::unique_ptr<render::Model>> ModelsList;
 }  // namespace render

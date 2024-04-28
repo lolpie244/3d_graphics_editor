@@ -31,7 +31,7 @@ void EditorStage::BindEvents() {
                               [&](sf::Event event, math::Vector2f moved) { return CameraMove(event, moved); });
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 
-    for (auto& model : models) {
+    for (auto& [_, model] : models) {
         model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
         model->BindDrag(observer_,
                         [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); });
@@ -50,7 +50,7 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
 
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
-    models.push_back(std::move(model));
+    models[model->Id()] = std::move(model);
 	///////////////////////////////////////////
     BindEvents();
 }

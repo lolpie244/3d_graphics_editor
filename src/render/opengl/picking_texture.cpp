@@ -7,6 +7,11 @@
 #include "render/opengl/frame_buffer.h"
 
 namespace render {
+
+bool PickingTexture::Info::operator==(const Info& b) const {
+    return ObjectID == b.ObjectID && VertexId == b.VertexId && Data == b.Data;
+}
+
 PickingTexture::PickingTexture(int width, int height) : height_(height) { Resize(width, height); }
 
 void PickingTexture::Resize(int width, int height) {

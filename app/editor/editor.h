@@ -4,6 +4,9 @@
 #include "editor/mode.h"
 #include "events/event.h"
 #include "render/model.h"
+#include "render/opengl/picking_texture.h"
+
+using render::PickingTexture;
 
 class EditorStage : public stage::Stage {
    public:
@@ -11,7 +14,9 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void BindEvents();
 
- public: // events
+	void ClearSelection();
+
+   public:  // events
     bool CameraMove(sf::Event event, math::Vector2f moved);
     bool CameraZoom(sf::Event event);
 
@@ -22,7 +27,6 @@ class EditorStage : public stage::Stage {
    public:
     std::vector<std::unique_ptr<gui::GuiElement>> elements;
     std::vector<events::Event> events;
-
     render::ModelsList models;
 
     Gizmo gizmo;
@@ -32,5 +36,6 @@ class EditorStage : public stage::Stage {
         std::make_unique<TransparentDraw>(),
     };
 
+    std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> selected_vertexes_;
     int current_draw_mode_ = 0;
 };
