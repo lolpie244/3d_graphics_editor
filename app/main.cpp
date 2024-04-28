@@ -40,7 +40,8 @@ int main() {
     glDebugMessageCallback(GLDebugMessageCallback, 0);
 #endif
 
-    auto test_stage = std::make_unique<MenuStage>();
+    auto test_stage = std::make_unique<EditorStage>();
+    // auto test_stage = std::make_unique<MenuStage>();
     stage_manager.NextStage(std::move(test_stage));
 
     stage_manager.Start();

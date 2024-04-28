@@ -6,7 +6,6 @@
 
 #include "events/observer.h"
 #include "hoverable.h"
-
 #include "render/opengl/picking_texture.h"
 
 namespace events {
@@ -31,7 +30,6 @@ class Clickable : virtual public Hoverable {
     virtual void OnRelease() {};
 
     bool IsPressed() const { return pressed_; }
-	// glm::vec2 StartPosition() { };
 
    protected:
     events::Event press_event_;
@@ -45,7 +43,11 @@ class Clickable3D : virtual public Clickable, virtual public Hoverable3D {
     virtual void BindPress(events::Observer& observer, const events::EVENT_FUNC& function,
                            MouseButtons buttons = all_buttons_) override;
 
-    render::PickingTexture::Info PressInfo();
+    virtual render::PickingTexture::Info PressInfo() {
+        if (this->IsPressed())
+            return this->pixel_info_;
+        return {0, 0, 0};
+    }
 
    private:
     render::PickingTexture::Info pixel_info_;

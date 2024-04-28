@@ -59,10 +59,4 @@ void Clickable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC
     };
     Clickable::BindPress(observer, func, buttons);
 }
-render::PickingTexture::Info Clickable3D::PressInfo() {
-    if (this->IsPressed())
-        return this->pixel_info_;
-    return {0, 0, 0};
-}
-
 }  // namespace events

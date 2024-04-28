@@ -38,9 +38,6 @@ void EditorStage::ClearSelection() {
 }
 
 bool EditorStage::ContextPress(sf::Event event) {
-    if (event.mouseButton.button != sf::Mouse::Left)
-        return false;
-
     ClearSelection();
     return true;
 }
@@ -77,10 +74,9 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
 }
 
 bool EditorStage::ModelDrag(sf::Event event, glm::vec3 move, render::Model* model) {
-    auto press_info = model->PressInfo();
+    auto press_info = model->StartPointInfo();
     if (press_info.Data != render::Model::Point)
         return false;
-
     auto update_pos = [move](auto model, auto info) {
         model->SetVertexPosition(info.VertexId,
                                  model->Vertex(info.VertexId).position + move * settings::MOUSE_SENSATIVITY);
