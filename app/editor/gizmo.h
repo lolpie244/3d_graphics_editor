@@ -26,10 +26,6 @@ class Gizmo {
     void SetModel(render::Model* model);
     void SetMode(Mode mode);
 
- private:
-	bool MoveEvent(sf::Event event, glm::vec3 move);
-	bool ScaleEvent(sf::Event event, glm::vec3 move);
-
    private:
     std::unique_ptr<render::Gizmo> gizmos_[3]{
         data::loadGizmo("resources/gizmo/arrow.obj"),  // move

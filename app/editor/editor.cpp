@@ -2,7 +2,6 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
 
 #include "data/texture.h"
 
@@ -29,16 +28,14 @@ void EditorStage::BindEvents() {
         return next;
     }));
 
-    opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
-    opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); },
-                              {sf::Mouse::Right, sf::Mouse::Middle});
-
+    opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); });
+    opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); });
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 
     for (auto& [_, model] : models) {
         model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
-        model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
-                        {sf::Mouse::Left});
+        model->BindDrag(observer_,
+                        [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); });
     }
 }
 

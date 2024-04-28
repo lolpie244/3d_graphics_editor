@@ -16,11 +16,24 @@ Gizmo::Gizmo(events::Observer& observer) {
         gizmo->Move(0, 0, 100);
     }
 
-    gizmos_[Mode::Move]->BindDrag(
-        observer, [this](sf::Event event, glm::vec3 move) { return this->MoveEvent(event, move); }, {sf::Mouse::Left});
+    gizmos_[0]->BindDrag(observer,
+                         [this](sf::Event event, glm::vec3 move) {
+                             move = move * math::axis_to_vector(gizmos_[0]->PressInfo().Data) *
+                                    settings::MOUSE_SENSATIVITY;
+                             current_model_->Move(move.x, move.y, move.z);
+                             return true;
+                         },
+                         {sf::Mouse::Left});
 
-    gizmos_[Mode::Scale]->BindDrag(
-        observer, [this](sf::Event event, glm::vec3 move) { return this->ScaleEvent(event, move); }, {sf::Mouse::Left});
+    gizmos_[1]->BindDrag(observer,
+                         [this](sf::Event event, glm::vec3 move) {
+                             move = move * math::axis_to_vector(gizmos_[1]->PressInfo().Data) *
+                                    settings::MOUSE_SENSATIVITY;
+                             auto scale = current_model_->GetScale() + move;
+                             current_model_->SetScale(scale.x, scale.y, scale.z);
+                             return true;
+                         },
+                         {sf::Mouse::Left});
 
     hotkeys.push_back(observer.KeyBind({sf::Keyboard::M}, [this](sf::Event event) {
         this->SetMode(Gizmo::Move);
@@ -31,19 +44,6 @@ Gizmo::Gizmo(events::Observer& observer) {
         this->SetMode(Gizmo::Scale);
         return true;
     }));
-}
-
-bool Gizmo::MoveEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Move]->StartPointInfo().Data) * settings::MOUSE_SENSATIVITY;
-    current_model_->Move(move.x, move.y, move.z);
-    return true;
-}
-
-bool Gizmo::ScaleEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Scale]->StartPointInfo().Data) * settings::MOUSE_SENSATIVITY;
-    auto scale = current_model_->GetScale() + move;
-    current_model_->SetScale(scale.x, scale.y, scale.z);
-    return true;
 }
 
 void Gizmo::Draw() {
