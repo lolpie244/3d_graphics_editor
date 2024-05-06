@@ -11,18 +11,18 @@
 namespace events {
 
 void Draggable::OnPress(sf::Event event) {
-	is_draggable_ = true;
-	last_position_ = {event.mouseButton.x, event.mouseButton.y};
-	pressed_button_ = event.mouseButton.button;
+    is_draggable_ = true;
+    last_position_ = {event.mouseButton.x, event.mouseButton.y};
+    start_position_ = last_position_;
+    pressed_button_ = event.mouseButton.button;
 }
 
-void Draggable::OnRelease(sf::Event event) {
-	is_draggable_ = false;
-}
+void Draggable::OnRelease(sf::Event event) { is_draggable_ = false; }
 
 void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {
     if (!press_event_)
-        this->BindPress(observer, [this](sf::Event event) { return true; }, buttons);
+        this->BindPress(
+            observer, [this](sf::Event event) { return true; }, buttons);
 
     auto func = [this, function, buttons](sf::Event event) {
         ReturnOnDisable(false);

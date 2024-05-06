@@ -16,6 +16,7 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     math::Transform transform = *(math::Transform*)model;
 
     transform.SetScale(this->GetScale());
+    transform.SetRotation(0, math::Axis::X);
     shader.setUniform("u_Color", colors_[0]);
     shader.setUniform("u_Data", math::X);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);
@@ -30,5 +31,7 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     shader.setUniform("u_Data", math::Y);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);
 }
+
+glm::vec3 Gizmo::VertexPosition(int id) { return mesh_.Vertices()[id].position; }
 
 }  // namespace render

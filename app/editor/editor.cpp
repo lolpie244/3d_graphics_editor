@@ -46,8 +46,8 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
     opengl_context_->SetLeftCorner(50, 0);
     opengl_context_->Resize(glm::vec2(1700, 1080));
 
-    camera_->Move(0, 0, 3.0f);
-    camera_->Rotate(-40, math::X);
+    camera_->Move(0.0f, 0.0f, 3.0f);
+    camera_->SetOrigin(0, 0, 0);
     ///////////////////////////////////////////
     auto model = data::loadModel("resources/cube.obj", render::MeshChange::Enable);
 
