@@ -12,23 +12,22 @@
 
 namespace render {
 
-struct GizmoVertex {
+struct GizmoVertex : public Vertex<GizmoVertex> {
     glm::vec3 position;
 
-    bool operator==(const GizmoVertex& b) const { return position == b.position; }
-
-    static VertexLayout GetLayout() {
-        VertexLayout result;
-        result.Add<float>(3);  // position
-        return result;
-    }
+    size_t Hash() const;
+    VertexLayout Layout() const;
+    bool operator==(const GizmoVertex& b) const{ return position == b.position; }
+    void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
 class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::Transform {
    public:
     Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices);
+    static std::unique_ptr<render::Gizmo> loadFromFile(const std::string& filename);
+
     void Draw(data::Shader& shader, Model* model);
-	glm::vec3 VertexPosition(int id);
+    glm::vec3 VertexPosition(int id);
 
    private:
     float length_;

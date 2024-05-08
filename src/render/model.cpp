@@ -1,8 +1,44 @@
 #include "render/model.h"
 
+#include "data/model_loader.h"
 #include "stage/stage_manager.h"
 
 namespace render {
+
+bool ModelVertex::operator==(const ModelVertex& b) const {
+    return position == b.position && texture_coords == b.texture_coords && color == b.color;
+}
+
+VertexLayout ModelVertex::Layout() const {
+    VertexLayout result;
+    result.Add<float>(3);  // position
+    result.Add<float>(2);  // texture coords
+    result.Add<float>(4);  // color
+    return result;
+}
+
+void ModelVertex::Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
+    auto& attrib = reader.GetAttrib();
+
+    position = {
+        attrib.vertices[3 * size_t(id.vertex_index) + 0],
+        attrib.vertices[3 * size_t(id.vertex_index) + 1],
+        attrib.vertices[3 * size_t(id.vertex_index) + 2],
+    };
+
+    if (id.texcoord_index >= 0) {
+        texture_coords = {
+            attrib.texcoords[2 * size_t(id.texcoord_index) + 0],
+            1 - attrib.texcoords[2 * size_t(id.texcoord_index) + 1],
+        };
+    }
+}
+
+size_t ModelVertex::Hash() const {
+    auto fhash = std::hash<float>{};
+    return fhash(position.x) ^ (fhash(position.y) << 1) ^ (fhash(position.z) << 2) ^ (fhash(texture_coords.x) << 3) ^
+           (fhash(texture_coords.y) << 4);
+}
 
 Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
              MeshChange is_changeable)
@@ -17,6 +53,11 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
     }
 
     this->SetOrigin((min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
+}
+
+std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshChange is_changeable) {
+    auto data = data::parser::loadFromFile<render::ModelVertex>(filename);
+    return std::make_unique<render::Model>(data.first, data.second, is_changeable);
 }
 
 void Model::Draw(data::Shader& shader) const {

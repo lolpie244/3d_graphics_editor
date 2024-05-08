@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <vector>
 
-#include "data/gizmo.h"
 #include "events/event.h"
 #include "events/observer.h"
 #include "render/gizmo.h"
@@ -27,17 +26,17 @@ class Gizmo {
     void SetModel(render::Model* model);
     void SetMode(Mode mode);
 
- private:
-	void BindEvents(events::Observer& observer);
+   private:
+    void BindEvents(events::Observer& observer);
 
-	bool MoveEvent(sf::Event event, glm::vec3 move);
-	bool ScaleEvent(sf::Event event, glm::vec3 move);
+    bool MoveEvent(sf::Event event, glm::vec3 move);
+    bool ScaleEvent(sf::Event event, glm::vec3 move);
 
    private:
     std::unique_ptr<render::Gizmo> gizmos_[3]{
-        data::loadGizmo("resources/gizmo/arrow.obj"),  // move
-        data::loadGizmo("resources/gizmo/cube.obj"),   // scale
-        data::loadGizmo("resources/gizmo/arrow.obj"),  // rotate
+        render::Gizmo::loadFromFile("resources/gizmo/arrow.obj"),  // move
+        render::Gizmo::loadFromFile("resources/gizmo/cube.obj"),   // scale
+        render::Gizmo::loadFromFile("resources/gizmo/arrow.obj"),  // rotate
     };
 
     data::Shader gizmo_shader_;
@@ -46,5 +45,5 @@ class Gizmo {
     Mode current_mode_ = Mode::Move;
     render::Model* current_model_ = nullptr;
 
-	std::vector<events::Event> hotkeys;
+    std::vector<events::Event> hotkeys;
 };

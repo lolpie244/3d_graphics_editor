@@ -49,7 +49,7 @@ EditorStage::EditorStage() : gizmo(this->observer_) {
     camera_->Move(0.0f, 0.0f, 3.0f);
     camera_->SetOrigin(0, 0, 0);
     ///////////////////////////////////////////
-    auto model = data::loadModel("resources/cube.obj", render::MeshChange::Enable);
+    auto model = render::Model::loadFromFile("resources/cube.obj", render::MeshChange::Enable);
 
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});

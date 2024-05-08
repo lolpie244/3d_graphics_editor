@@ -2,7 +2,6 @@
 
 #include <SFML/Window/Mouse.hpp>
 
-#include "data/gizmo.h"
 #include "editor/editor.h"
 #include "editor/gizmo.h"
 #include "math/transform.h"
