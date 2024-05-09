@@ -41,23 +41,25 @@ std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
 void Gizmo::Draw(data::Shader& shader, Model* model) {
     glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_ObjectId", Id());
+	this->SetRotation({0, 0, 0});
+	this->SetPosition(0);
+
     math::Transform transform = *(math::Transform*)model;
 
-    transform.SetScale(this->GetScale());
-    transform.SetRotation(0, math::Axis::X);
+    transform.SetScale(1, 1, 1);
     shader.setUniform("u_Color", sf::Color::Green);
     shader.setUniform("u_Data", math::X);
-    mesh_.Draw(GL_TRIANGLES, shader, &transform);
+    mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-    transform.Rotate(-90, math::Axis::Y);
+	this->Rotate(-90, math::Y);
     shader.setUniform("u_Color", sf::Color::Red);
     shader.setUniform("u_Data", math::Z);
-    mesh_.Draw(GL_TRIANGLES, shader, &transform);
+    mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-    transform.Rotate(-90, math::Axis::X);
+	this->Rotate(90, math::Z);
     shader.setUniform("u_Color", sf::Color::Blue);
     shader.setUniform("u_Data", math::Y);
-    mesh_.Draw(GL_TRIANGLES, shader, &transform);
+    mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 }
 
 glm::vec3 Gizmo::VertexPosition(int id) { return mesh_.Vertices()[id].position; }
