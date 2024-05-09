@@ -31,6 +31,7 @@ class Transform {
 
     virtual void Rotate(float angle, int axis);  // current rotate + rotate
     virtual void SetRotation(float angle, int axis);
+    virtual void SetRotation(glm::vec3 angles);
 
     virtual void SetOrigin(float x = 0, float y = 0, float z = 0);
 

@@ -2,7 +2,8 @@
 
 layout (location = 0) in vec3 pos;
 layout (location = 1) in vec2 texCoord;
-layout (location = 2) in vec4 color;
+layout (location = 2) in vec3 normal;
+layout (location = 3) in vec4 color;
 
 out vec2 v_TexCoord;
 out vec4 v_Color;

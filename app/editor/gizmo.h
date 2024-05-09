@@ -12,9 +12,10 @@
 class Gizmo {
    public:
     enum Mode {
-        Move = 0,
-        Scale = 1,
-        Rotate = 2,
+        Move,
+        Scale,
+        Rotate,
+        EnumSize,
     };
 
    public:
@@ -29,14 +30,21 @@ class Gizmo {
    private:
     void BindEvents(events::Observer& observer);
 
+    bool PressEvent(sf::Event event);
     bool MoveEvent(sf::Event event, glm::vec3 move);
     bool ScaleEvent(sf::Event event, glm::vec3 move);
+    bool RotateEvent(sf::Event event, glm::vec3 move);
+
+    render::Gizmo* CurrentGizmo() { return gizmos_[current_mode_].get(); }
+	
+ private:
+	glm::vec3 GetPoint(glm::vec2 mouse);
 
    private:
     std::unique_ptr<render::Gizmo> gizmos_[3]{
-        render::Gizmo::loadFromFile("resources/gizmo/arrow.obj"),  // move
-        render::Gizmo::loadFromFile("resources/gizmo/cube.obj"),   // scale
-        render::Gizmo::loadFromFile("resources/gizmo/arrow.obj"),  // rotate
+        render::Gizmo::loadFromFile("resources/gizmo/arrow.obj"),   // move
+        render::Gizmo::loadFromFile("resources/gizmo/cube.obj"),    // scale
+        render::Gizmo::loadFromFile("resources/gizmo/circle.obj"),  // rotate
     };
 
     data::Shader gizmo_shader_;
@@ -44,6 +52,7 @@ class Gizmo {
 
     Mode current_mode_ = Mode::Move;
     render::Model* current_model_ = nullptr;
+    glm::vec3 old_point = {-1, -1, -1};
 
     std::vector<events::Event> hotkeys;
 };

@@ -17,7 +17,7 @@ struct GizmoVertex : public Vertex<GizmoVertex> {
 
     size_t Hash() const;
     VertexLayout Layout() const;
-    bool operator==(const GizmoVertex& b) const{ return position == b.position; }
+    bool operator==(const GizmoVertex& b) const { return position == b.position; }
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
@@ -32,6 +32,5 @@ class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual p
    private:
     float length_;
     Mesh<GizmoVertex> mesh_;
-    std::array<sf::Color, 3> colors_{sf::Color::Green, sf::Color::Red, sf::Color::Blue};
 };
 }  // namespace render

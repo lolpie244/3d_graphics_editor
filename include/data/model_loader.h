@@ -13,7 +13,7 @@
 
 namespace data::parser {
 template <typename Vertex>
-std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadFromFile(const std::string& filename) {
+std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadModelFromFile(const std::string& filename) {
     static_assert(std::is_base_of<render::Vertex<Vertex>, Vertex>::value);
 
     tinyobj::ObjReader reader;

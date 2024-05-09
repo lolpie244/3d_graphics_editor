@@ -10,7 +10,8 @@
 namespace render {
 struct ModelVertex : public Vertex<ModelVertex> {
     glm::vec3 position;
-    glm::vec2 texture_coords;
+    glm::vec2 texture_coord;
+    glm::vec3 normal;
     glm::vec4 color {255, 255, 255, 255};
 
     size_t Hash() const;

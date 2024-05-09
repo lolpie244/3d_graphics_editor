@@ -6,13 +6,14 @@
 namespace render {
 
 bool ModelVertex::operator==(const ModelVertex& b) const {
-    return position == b.position && texture_coords == b.texture_coords && color == b.color;
+    return position == b.position && texture_coord == b.texture_coord && normal == b.normal && color == b.color;
 }
 
 VertexLayout ModelVertex::Layout() const {
     VertexLayout result;
     result.Add<float>(3);  // position
-    result.Add<float>(2);  // texture coords
+    result.Add<float>(2);  // texture coord
+    result.Add<float>(3);  // normal
     result.Add<float>(4);  // color
     return result;
 }
@@ -26,18 +27,24 @@ void ModelVertex::Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
         attrib.vertices[3 * size_t(id.vertex_index) + 2],
     };
 
-    if (id.texcoord_index >= 0) {
-        texture_coords = {
+    if (id.texcoord_index >= 0)
+        texture_coord = {
             attrib.texcoords[2 * size_t(id.texcoord_index) + 0],
             1 - attrib.texcoords[2 * size_t(id.texcoord_index) + 1],
         };
-    }
+
+    if (id.normal_index >= 0)
+        normal = {
+            attrib.normals[3 * size_t(id.normal_index) + 0],
+            attrib.normals[3 * size_t(id.normal_index) + 1],
+            attrib.normals[3 * size_t(id.normal_index) + 2],
+        };
 }
 
 size_t ModelVertex::Hash() const {
     auto fhash = std::hash<float>{};
-    return fhash(position.x) ^ (fhash(position.y) << 1) ^ (fhash(position.z) << 2) ^ (fhash(texture_coords.x) << 3) ^
-           (fhash(texture_coords.y) << 4);
+    return fhash(position.x) ^ (fhash(position.y) << 1) ^ (fhash(position.z) << 2) ^ (fhash(texture_coord.x) << 3) ^
+           (fhash(texture_coord.y) << 4) ^ (fhash(normal.x) << 5) ^ (fhash(normal.y) << 6) ^ (fhash(normal.z) << 7);
 }
 
 Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
@@ -56,7 +63,7 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
 }
 
 std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshChange is_changeable) {
-    auto data = data::parser::loadFromFile<render::ModelVertex>(filename);
+    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
     return std::make_unique<render::Model>(data.first, data.second, is_changeable);
 }
 

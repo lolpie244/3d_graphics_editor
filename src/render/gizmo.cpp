@@ -34,7 +34,7 @@ Gizmo::Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigne
     : mesh_(vertices, indices) {}
 
 std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
-    auto data = data::parser::loadFromFile<GizmoVertex>(filename);
+    auto data = data::parser::loadModelFromFile<GizmoVertex>(filename);
     return std::make_unique<Gizmo>(data.first, data.second);
 }
 
@@ -45,17 +45,17 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
 
     transform.SetScale(this->GetScale());
     transform.SetRotation(0, math::Axis::X);
-    shader.setUniform("u_Color", colors_[0]);
+    shader.setUniform("u_Color", sf::Color::Green);
     shader.setUniform("u_Data", math::X);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);
 
     transform.Rotate(-90, math::Axis::Y);
-    shader.setUniform("u_Color", colors_[1]);
+    shader.setUniform("u_Color", sf::Color::Red);
     shader.setUniform("u_Data", math::Z);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);
 
     transform.Rotate(-90, math::Axis::X);
-    shader.setUniform("u_Color", colors_[2]);
+    shader.setUniform("u_Color", sf::Color::Blue);
     shader.setUniform("u_Data", math::Y);
     mesh_.Draw(GL_TRIANGLES, shader, &transform);
 }

@@ -46,6 +46,11 @@ void Transform::SetRotation(float angle, int axis) {
     Rotate(angle, axis);
 }
 
+void Transform::SetRotation(glm::vec3 angles) {
+    rotation_ = angles;
+    changed_ = true;
+}
+
 void Transform::SetOrigin(float x, float y, float z) { origin_ = {x, y, z}; }
 
 glm::vec3 Transform::GetPosition() const { return position_; }

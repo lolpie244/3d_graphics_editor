@@ -7,6 +7,7 @@
 #include "data/model_loader.h"
 #include "editor.h"
 #include "math/points_cast.h"
+#include "math/ray.h"
 #include "render/model.h"
 #include "utils/settings.h"
 
@@ -75,13 +76,13 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
     if (press_info.Data != render::Model::Point)
         return false;
 
-    glm::vec3 origin = Camera()->GetRealPosition();
-    glm::vec3 direction = glm::normalize(math::point_to_ray({event.mouseMove.x, event.mouseMove.y}));
+	math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
+
     glm::vec3 vertex_position =
         model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId).position, 1.0f);
 
     // TODO: fix point that is incorrect
-    auto intersect_point = origin + direction * glm::dot(vertex_position - origin, direction);
+    auto intersect_point = ray.SphereIntersection(vertex_position);
     intersect_point = glm::inverse(model->GetTransformation()) * glm::vec4(intersect_point, 1.0f);
 
     if (this->last_vertex_position == glm::vec3(-1, -1, -1)) {
