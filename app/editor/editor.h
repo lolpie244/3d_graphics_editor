@@ -1,32 +1,46 @@
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Shader.hpp>
-#include <memory>
-#include <vector>
+#include <SFML/Window/Event.hpp>
 
-#include "data/shader.h"
-#include "gui/opengl_context.h"
-#include "gui/sprite_element.h"
-#include "render/gizmo.h"
+#include "editor/gizmo.h"
+#include "editor/mode.h"
+#include "events/event.h"
 #include "render/model.h"
 #include "render/opengl/picking_texture.h"
-#include "stage/stage.h"
+
+using render::PickingTexture;
 
 class EditorStage : public stage::Stage {
    public:
     EditorStage();
     void Run() override;
-	void InitGui();
-	void InitScene();
+    void BindEvents();
 
+    void ClearSelection();
+
+   public:  // events
+    bool CameraMove(sf::Event event, glm::vec2 moved);
+    bool CameraZoom(sf::Event event);
+
+    bool ContextPress(sf::Event event);
+    bool ContextDrag(sf::Event event, glm::vec2 moved);
+    bool ContextRelease(sf::Event event);
+
+    bool ModelPress(sf::Event event, render::Model* model);
+    bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
+
+   private:
     std::vector<std::unique_ptr<gui::GuiElement>> elements;
-    std::vector<std::unique_ptr<events::mEventType>> events;
+    std::vector<events::Event> events;
+    render::ModelsList models;
 
-    data::Shader shader;
-    data::Shader point_shader;
-    data::Shader picking_shader;
-    data::Shader gizmo_shader;
-    data::Shader gizmo_picking;
+    Gizmo gizmo;
+    std::unique_ptr<DrawMode> draw_modes_[3]{
+        std::make_unique<TextureDraw>(),
+        std::make_unique<MixedDraw>(),
+        std::make_unique<TransparentDraw>(),
+    };
 
-    std::shared_ptr<render::Model> model;
-    std::shared_ptr<render::Gizmo> gizmo;
+    std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> selected_vertexes_;
+    int current_draw_mode_ = 0;
+
+	glm::vec3 last_vertex_position = {-1, -1, -1};
 };

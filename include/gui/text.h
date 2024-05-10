@@ -10,13 +10,13 @@
 namespace gui {
 class Text : virtual public GuiElement, virtual public events::Scaleable {
    public:
-	Text(glm::vec3 position, math::Vector2f max_size);
+	Text(glm::vec3 position, glm::vec2 max_size);
 	Text() = default;
 
 	sf::Rect<float> Rect() const override;
 
     virtual void Move(float x = 0, float y = 0, float z = 0) override;
-    virtual void Resize(math::Vector2f size) override;
+    virtual void Resize(glm::vec2 size) override;
 	virtual void SetText(const sf::String& text);
 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

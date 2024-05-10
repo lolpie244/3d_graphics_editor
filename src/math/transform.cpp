@@ -42,14 +42,20 @@ void Transform::Rotate(float angle, int axis) {
     rotation_ += axis_to_vector(axis) * angle;
 }
 void Transform::SetRotation(float angle, int axis) {
-    rotation_ = glm::vec3(0.0f);
+    rotation_ = rotation_ * axis_to_vector(Axis::X | Axis::Y | Axis::Z - axis); 
     Rotate(angle, axis);
+}
+
+void Transform::SetRotation(glm::vec3 angles) {
+    rotation_ = angles;
+    changed_ = true;
 }
 
 void Transform::SetOrigin(float x, float y, float z) { origin_ = {x, y, z}; }
 
-glm::vec3 Transform::Position() const { return position_; }
-glm::vec3 Transform::Scale() const { return scale_; };
-glm::vec3 Transform::Origin() const { return origin_; };
+glm::vec3 Transform::GetPosition() const { return position_; }
+glm::vec3 Transform::GetScale() const { return scale_; };
+glm::vec3 Transform::GetOrigin() const { return origin_; };
+glm::vec3 Transform::GetRotation() const { return rotation_; };
 
 };  // namespace math

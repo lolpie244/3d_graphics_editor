@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/VideoMode.hpp>
+#include <SFML/Window/WindowStyle.hpp>
 #include <memory>
 
 #include "editor/editor.h"
@@ -20,8 +21,9 @@ int main() {
     settings.minorVersion = 0;
 
     stage::StageManager& stage_manager = stage::StageManager::Instance();
-    stage_manager.InitWindow(sf::VideoMode(800, 800), "test", sf::Style::Default, settings);
-    stage_manager.Window()->setFramerateLimit(160);
+    stage_manager.InitWindow(sf::VideoMode(1920, 1080), "test", sf::Style::Fullscreen, settings);
+    stage_manager.Window()->setFramerateLimit(260);
+    stage_manager.Window()->setMouseCursorGrabbed(true);
 
     GLenum err = glewInit();
     if (GLEW_OK != err) {

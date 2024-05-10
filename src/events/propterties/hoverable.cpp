@@ -6,14 +6,13 @@
 
 #include "events/event.h"
 #include "events/observer.h"
-#include "math/vector2.h"
 #include "stage/stage_manager.h"
 #include "utils/active.h"
 
 namespace events {
 
 bool Hoverable::ContainsMouse(sf::Event event) {
-    return this->Contains(math::Vector2f(event.mouseMove.x, event.mouseMove.y));
+    return this->Contains(glm::vec2(event.mouseMove.x, event.mouseMove.y));
 }
 
 void Hoverable::BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function) {
@@ -44,7 +43,7 @@ void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUN
         BindMouseIn(observer, [](sf::Event) { return false; });
 }
 
-bool Hoverable3D::Contains(math::Vector2f point) {
+bool Hoverable3D::Contains(glm::vec2 point) {
     auto &picking_texture = stage::StageManager::Instance().Context()->PickingTexture;
     return picking_texture.ReadPixel(point.x, point.y).ObjectID == this->Id();
 }

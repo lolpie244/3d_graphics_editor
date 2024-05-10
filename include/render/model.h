@@ -3,39 +3,42 @@
 #include <SFML/Graphics/Transformable.hpp>
 
 #include "data/shader.h"
-#include "events/propterties/clickable.h"
-#include "events/propterties/draggable.h"
-#include "math/vector2.h"
 #include "mesh.h"
-#include "render/opengl/picking_texture.h"
 #include "utils/uuid.h"
+#include "vertex.h"
 
 namespace render {
-struct ModelVertex {
+struct ModelVertex : public Vertex<ModelVertex> {
     glm::vec3 position;
-    glm::vec2 texture_coords;
+    glm::vec2 texture_coord;
+    glm::vec3 normal;
+    glm::vec4 color {255, 255, 255, 255};
 
-    bool operator==(const ModelVertex& b) const { return position == b.position && texture_coords == b.texture_coords; }
-
-    static VertexLayout GetLayout() {
-        VertexLayout result;
-        result.Add<float>(3);  // position
-        result.Add<float>(2);  // texture coords
-        return result;
-    }
+    size_t Hash() const;
+    VertexLayout Layout() const;
+    bool operator==(const ModelVertex& b) const;
+    void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
 class Model : virtual public UUID, virtual public math::Transform, virtual public events::Draggable3D {
    public:
+    enum DataType {
+        Point = 1,
+        Surface = 2,
+    };
+
+   public:
     Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
           MeshChange is_changeable = MeshChange::Disable);
 
+	static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshChange is_changeable);
+
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;
-    // bool Contains(math::Vector2f point) override;
 
     const ModelVertex Vertex(int id) const;
     void SetVertexPosition(int id, glm::vec3 new_position);
+    void SetVertexColor(int id, sf::Color color);
 
    public:
     sf::Texture texture;
@@ -44,4 +47,5 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     Mesh<ModelVertex> mesh_;
 };
 
+typedef std::unordered_map<int, std::unique_ptr<render::Model>> ModelsList;
 }  // namespace render

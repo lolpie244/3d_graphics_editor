@@ -8,7 +8,7 @@
 
 namespace gui {
 
-Text::Text(glm::vec3 position, math::Vector2f max_size) {
+Text::Text(glm::vec3 position, glm::vec2 max_size) {
     font_.loadFromFile("resources/font.ttf");
     this->text_.setFont(font_);
 
@@ -23,7 +23,7 @@ void Text::SetText(const sf::String& text) {
     this->Resize(this->size_);
 }
 
-void Text::Resize(math::Vector2f size) {
+void Text::Resize(glm::vec2 size) {
     text_.setCharacterSize(size.y);
 
     auto real_size = text_.getLocalBounds().getSize();
@@ -36,7 +36,7 @@ void Text::Resize(math::Vector2f size) {
 }
 
 void Text::Move(float x, float y, float z) {
-    this->text_.setPosition(this->Position().x + x, this->Position().y + y);
+    this->text_.setPosition(this->GetPosition().x + x, this->GetPosition().y + y);
     GuiElement::Move(x, y, z);
 }
 

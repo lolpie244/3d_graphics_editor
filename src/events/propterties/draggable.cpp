@@ -9,44 +9,51 @@
 #include "utils/active.h"
 
 namespace events {
-void Draggable::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
-    Clickable::BindPress(observer, [this, function](sf::Event event) {
-        last_position_ = math::Vector2f(event.mouseButton.x, event.mouseButton.y);
-        return function(event);
-    });
+
+void Draggable::OnPress(sf::Event event) {
+    is_draggable_ = true;
+    last_position_ = {event.mouseButton.x, event.mouseButton.y};
+    start_position_ = last_position_;
+    pressed_button_ = event.mouseButton.button;
 }
 
-void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function) {
-    if (!press_event_)
-        this->BindPress(observer, [this](sf::Event event) { return false; });
+void Draggable::OnRelease(sf::Event event) { is_draggable_ = false; }
 
-    auto func = [this, function](sf::Event event) {
+void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {
+    if (!press_event_)
+        this->BindPress(
+            observer, [this](sf::Event event) { return true; }, buttons);
+
+    auto func = [this, function, buttons](sf::Event event) {
         ReturnOnDisable(false);
 
-        if (!this->IsPressed())
+        if (!is_draggable_ || !buttons.contains(pressed_button_))
             return false;
 
-        math::Vector2f new_position(event.mouseMove.x, event.mouseMove.y);
+        glm::vec2 new_position(event.mouseMove.x, event.mouseMove.y);
         auto move = new_position - last_position_;
         last_position_ = new_position;
         return function(event, move);
     };
-    move_event_ = observer.Bind(sf::Event::MouseMoved, func, this->Position().z);
+    move_event_ = observer.Bind(sf::Event::MouseMoved, func, this->GetPosition().z);
 }
 
-void Draggable3D::BindDrag(events::Observer& observer, const EVENT_FUNC& function) {
-    auto func = [this, function](sf::Event event, math::Vector2f moved) {
+void Draggable3D::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {
+    auto func = [this, function](sf::Event event, glm::vec2 moved) {
         glm::vec3 move = math::to_world_coords(stage::StageManager::Instance().windowSize() / 2.0f + moved);
         return function(event, move);
     };
 
-    Draggable::BindDrag(observer, func);
+    Draggable::BindDrag(observer, func, buttons);
 }
 
-void Draggable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC& function) {
-    Clickable3D::BindPress(observer, [this, function](sf::Event event) {
-        last_position_ = math::Vector2f(event.mouseButton.x, event.mouseButton.y);
-        return function(event);
-    });
+void Draggable3D::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
+    Clickable3D::BindPress(
+        observer,
+        [this, function](sf::Event event) {
+            last_position_ = glm::vec2(event.mouseButton.x, event.mouseButton.y);
+            return function(event);
+        },
+        buttons);
 }
 }  // namespace events

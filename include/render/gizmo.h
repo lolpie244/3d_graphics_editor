@@ -4,6 +4,7 @@
 #include <array>
 
 #include "data/shader.h"
+#include "events/propterties/draggable.h"
 #include "math/transform.h"
 #include "render/mesh.h"
 #include "render/model.h"
@@ -11,26 +12,25 @@
 
 namespace render {
 
-struct GizmoVertex {
+struct GizmoVertex : public Vertex<GizmoVertex> {
     glm::vec3 position;
 
+    size_t Hash() const;
+    VertexLayout Layout() const;
     bool operator==(const GizmoVertex& b) const { return position == b.position; }
-
-    static VertexLayout GetLayout() {
-        VertexLayout result;
-        result.Add<float>(3);  // position
-        return result;
-    }
+    void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Gizmo : math::Transform, public UUID {
+class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::Transform {
    public:
     Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices);
-	void Draw(data::Shader& shader, Model* model);
+    static std::unique_ptr<render::Gizmo> loadFromFile(const std::string& filename);
+
+    void Draw(data::Shader& shader, Model* model);
+    glm::vec3 VertexPosition(int id);
 
    private:
-	float length_;
-	Mesh<GizmoVertex> mesh_;
-	std::array<sf::Color, 3> colors_{sf::Color::Green, sf::Color::Red, sf::Color::Blue};
+    float length_;
+    Mesh<GizmoVertex> mesh_;
 };
 }  // namespace render

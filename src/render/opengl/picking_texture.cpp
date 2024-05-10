@@ -7,6 +7,11 @@
 #include "render/opengl/frame_buffer.h"
 
 namespace render {
+
+bool PickingTexture::Info::operator==(const Info& b) const {
+    return ObjectID == b.ObjectID && VertexId == b.VertexId && Data == b.Data;
+}
+
 PickingTexture::PickingTexture(int width, int height) : height_(height) { Resize(width, height); }
 
 void PickingTexture::Resize(int width, int height) {
@@ -24,9 +29,9 @@ void PickingTexture::Resize(int width, int height) {
 }
 
 PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
-    if (x >= width_ || y >= height_) {
-        throw std::runtime_error("Out of bounds");
-    }
+    if (x >= width_ || y >= height_)
+        return {0, 0, 0};
+
     if (cached_info_.first == std::pair<int, int>{x, y})
         return cached_info_.second;
 

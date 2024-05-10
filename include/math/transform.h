@@ -31,12 +31,14 @@ class Transform {
 
     virtual void Rotate(float angle, int axis);  // current rotate + rotate
     virtual void SetRotation(float angle, int axis);
+    virtual void SetRotation(glm::vec3 angles);
 
     virtual void SetOrigin(float x = 0, float y = 0, float z = 0);
 
-    glm::vec3 Position() const;
-    glm::vec3 Scale() const;
-    glm::vec3 Origin() const;
+    glm::vec3 GetPosition() const;
+    glm::vec3 GetScale() const;
+    glm::vec3 GetOrigin() const;
+    glm::vec3 GetRotation() const;
 
    protected:
     glm::vec3 position_ = glm::vec3(0.0f);

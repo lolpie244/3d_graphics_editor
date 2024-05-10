@@ -6,7 +6,7 @@
 
 #include "events/observer.h"
 #include "math/transform.h"
-#include "math/vector2.h"
+
 #include "utils/active.h"
 #include "utils/uuid.h"
 
@@ -18,7 +18,7 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
     void BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function);
 
-    virtual bool Contains(math::Vector2f point) = 0;
+    virtual bool Contains(glm::vec2 point) = 0;
     bool ContainsMouse(sf::Event event);
 
    protected:
@@ -29,6 +29,6 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
 };
 class Hoverable3D : virtual public UUID, virtual public Hoverable {
    public:
-    virtual bool Contains(math::Vector2f point);
+    virtual bool Contains(glm::vec2 point);
 };
 }  // namespace events

@@ -3,16 +3,17 @@
 #include <lunasvg.h>
 
 #include <SFML/Graphics/Texture.hpp>
+#include <glm/ext/vector_float2.hpp>
 #include <memory>
 #include <string>
 
-#include "math/vector2.h"
+
 
 namespace data {
 class mTextureType {
    public:
     virtual ~mTextureType() = default;
-    sf::Texture getTexture(math::Vector2f size) {
+    sf::Texture getTexture(glm::vec2 size) {
         if (size == old_size_)
             return texture_;
         texture_ = this->loadTexture(size);
@@ -22,10 +23,10 @@ class mTextureType {
     }
 
    protected:
-    virtual sf::Texture loadTexture(math::Vector2f size) = 0;
+    virtual sf::Texture loadTexture(glm::vec2 size) = 0;
 
    private:
-    math::Vector2f old_size_ = {-1, -1};
+    glm::vec2 old_size_ = {-1, -1};
     sf::Texture texture_;
 };
 
@@ -38,7 +39,7 @@ class SvgTextureElement : public mTextureType {
    public:
     SvgTextureElement() = delete;
 
-    sf::Texture loadTexture(math::Vector2f size) override {
+    sf::Texture loadTexture(glm::vec2 size) override {
         sf::Image image;
         sf::Texture result;
 
@@ -65,7 +66,7 @@ class SvgTexture : public mTextureType {
         return std::shared_ptr<SvgTexture>(new SvgTexture(file));
     }
 
-    sf::Texture loadTexture(math::Vector2f size) {
+    sf::Texture loadTexture(glm::vec2 size) {
         sf::Image image;
         sf::Texture result;
 
@@ -96,7 +97,7 @@ class PngTexture : public mTextureType {
 
    protected:
     PngTexture(const std::string& filename) { texture_.loadFromFile(filename); }
-    virtual sf::Texture loadTexture(math::Vector2f size) override { return texture_; };
+    virtual sf::Texture loadTexture(glm::vec2 size) override { return texture_; };
 
    protected:
     sf::Texture texture_;

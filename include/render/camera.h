@@ -16,14 +16,9 @@ class Camera : public math::Transform {
     void Move(float x = 0, float y = 0, float z = 0) override;
     void Rotate(float angle, int axis) override;
 
+    glm::vec3 GetRealPosition() const;
    private:
     float fov_;
     glm::mat4 projection_matrix_ = glm::mat4(1.0f);
-    glm::mat4 view_matrix_ = glm::mat4(1.0f);
-};
-
-class ArcBallCamera : public Camera {
-   public:
-    const glm::mat4& GetTransformation() const;
 };
 }  // namespace render

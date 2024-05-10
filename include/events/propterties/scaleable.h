@@ -7,7 +7,7 @@
 #include "events/event.h"
 #include "events/observer.h"
 #include "math/transform.h"
-#include "math/vector2.h"
+
 #include "utils/active.h"
 namespace events {
 
@@ -16,7 +16,7 @@ class Scaleable;
 // no scale at all
 class NoScale {
    public:
-    virtual void scale(Scaleable* obj, const math::Vector2f& window_scale) {};
+    virtual void scale(Scaleable* obj, const glm::vec2& window_scale) {};
 };
 
 class Scaleable : virtual public math::Transform, virtual public Activatable {
@@ -24,7 +24,7 @@ class Scaleable : virtual public math::Transform, virtual public Activatable {
     virtual ~Scaleable() = default;
     void BindScale(events::Observer& observer);
 
-    math::Vector2f oldScale();
+    glm::vec2 oldScale();
 
     template <typename T>
     void SetScaleMethod() {
@@ -36,18 +36,18 @@ class Scaleable : virtual public math::Transform, virtual public Activatable {
     std::unique_ptr<NoScale> scale_method_ = std::make_unique<NoScale>();
 
    private:
-    math::Vector2f old_scale_{1, 1};
+    glm::vec2 old_scale_{1, 1};
 };
 
 // scale by width and height. The same as default scale
 class DefaultScale : virtual public NoScale {
    protected:
-    void scale(Scaleable* obj, const math::Vector2f& window_scale) override;
+    void scale(Scaleable* obj, const glm::vec2& window_scale) override;
 };
 
 // scale, but with saving texture proportions
 class SaveProportionScale : virtual public NoScale {
    protected:
-    void scale(Scaleable* obj, const math::Vector2f& window_scale) override;
+    void scale(Scaleable* obj, const glm::vec2& window_scale) override;
 };
 }  // namespace events

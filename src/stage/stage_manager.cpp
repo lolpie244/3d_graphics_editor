@@ -53,7 +53,7 @@ std::unique_ptr<gui::OpenglContext>& StageManager::Context() {
     return CurrentStage()->Context();
 }
 
-math::Vector2f StageManager::windowSize() { return math::Vector2f(Window()->getSize().x, Window()->getSize().y); }
+glm::vec2 StageManager::windowSize() { return glm::vec2(Window()->getSize().x, Window()->getSize().y); }
 
 void StageManager::Exit() { exit_ = true; }
 }  // namespace stage

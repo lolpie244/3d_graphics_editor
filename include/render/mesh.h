@@ -45,6 +45,11 @@ class Mesh {
         VBO.Write(id * sizeof(Vertex), &data, sizeof(data));
         vertices_[id] = data;
     }
+    void Draw(unsigned int type, data::Shader& shader, const glm::mat4& transform) const {
+        shader.setUniform("u_Model", transform);
+        Draw(type, shader);
+    }
+
     void Draw(unsigned int type, data::Shader& shader, const math::Transform* transform) const {
         shader.setUniform("u_Model", transform->GetTransformation());
         Draw(type, shader);
