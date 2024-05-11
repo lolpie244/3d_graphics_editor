@@ -55,7 +55,6 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
 
     auto axis = gizmos_[Mode::Rotate]->PressInfo().Data;
 
-	// TODO: fix rotation
 	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
     auto new_point = ray.PlainIntersection(gizmo_center, glm::normalize(normal));
 
@@ -66,24 +65,9 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
 
     auto old_vec = (old_point - gizmo_center);
     auto new_vec = (new_point - gizmo_center);
-    glm::vec2 A, B;
 
-    switch (axis) {
-        case math::X:
-            A = {old_vec.y, old_vec.z};
-            B = {new_vec.y, new_vec.z};
-            break;
-        case math::Y:
-            B = {old_vec.x, old_vec.z};
-            A = {new_vec.x, new_vec.z};
-            break;
-        case math::Z:
-            A = {old_vec.x, old_vec.y};
-            B = {new_vec.x, new_vec.y};
-            break;
-    };
-
-    float angle = glm::degrees(glm::orientedAngle(glm::normalize(A), glm::normalize(B)));
+	// TODO: fix
+    float angle = glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), glm::normalize(normal)));
 
     current_model_->Rotate(angle, axis);
     gizmos_[Mode::Rotate]->Rotate(angle, axis);
