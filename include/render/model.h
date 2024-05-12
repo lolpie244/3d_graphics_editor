@@ -25,6 +25,7 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     enum DataType {
         Point = 1,
         Surface = 2,
+        Pending = 3,
     };
 
    public:
@@ -35,15 +36,19 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;
 
-    const ModelVertex Vertex(int id) const;
-    void SetVertexPosition(int id, glm::vec3 new_position);
-    void SetVertexColor(int id, sf::Color color);
+    const ModelVertex Vertex(int id, unsigned int type) const;
+
+    void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
+    void SetVertexColor(int id, unsigned int type, sf::Color color);
+
+	int AddPenging(ModelVertex vertex);
 
    public:
     sf::Texture texture;
 
    private:
     Mesh<ModelVertex> mesh_;
+    Mesh<ModelVertex> pending_mesh_;
 };
 
 typedef std::unordered_map<int, std::unique_ptr<render::Model>> ModelsList;

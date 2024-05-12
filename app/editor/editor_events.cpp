@@ -35,7 +35,7 @@ bool EditorStage::CameraZoom(sf::Event event) {
 void EditorStage::ClearSelection() {
     gizmo.SetModel(nullptr);
     for (auto& vertex : selected_vertexes_) {
-        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, sf::Color::White);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::White);
     }
     selected_vertexes_.clear();
 }
@@ -62,10 +62,10 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
         selected_vertexes_.clear();
         gizmo.SetModel(model);
     }
-    if (model->PressInfo().Data == render::Model::Point) {
+    if (model->PressInfo().Data == render::Model::Point || model->PressInfo().Data == render::Model::Pending) {
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
             ClearSelection();
-        model->SetVertexColor(model->PressInfo().VertexId, sf::Color::Red);
+        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Data, sf::Color::Red);
         selected_vertexes_.insert(model->PressInfo());
     }
     return true;
@@ -73,13 +73,14 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
 
 bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model* model) {
     auto press_info = model->PressInfo();
-    if (press_info.Data != render::Model::Point)
+    if (press_info.Data != render::Model::Point && press_info.Data != render::Model::Pending)
         return false;
 
     math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
+    render::ModelVertex vertex;
 
     glm::vec3 vertex_position =
-        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId).position, 1.0f);
+        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId, press_info.Data).position, 1.0f);
 
     // TODO: fix point that is incorrect
     auto intersect_point = ray.SphereIntersection(vertex_position);
@@ -90,16 +91,33 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         return true;
     }
     auto move = intersect_point - last_vertex_position;
-    model->SetVertexPosition(press_info.VertexId, intersect_point);
+    model->SetVertexPosition(press_info.VertexId, press_info.Data, intersect_point);
 
     for (auto& vertex_info : selected_vertexes_) {
         if (vertex_info == press_info)
             continue;
 
         auto* model = models[vertex_info.ObjectID].get();
-        model->SetVertexPosition(vertex_info.VertexId, model->Vertex(vertex_info.VertexId).position + move);
+        model->SetVertexPosition(vertex_info.VertexId, vertex_info.Data,
+                                 model->Vertex(vertex_info.VertexId, vertex_info.Data).position + move);
     }
 
     this->last_vertex_position = intersect_point;
+    return true;
+}
+
+bool EditorStage::DuplicateSelected(sf::Event event) {
+    SelectedVertices new_selected;
+    for (auto vertex : selected_vertexes_) {
+		models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::White);
+
+        vertex.VertexId =
+            models[vertex.ObjectID]->AddPenging(models[vertex.ObjectID]->Vertex(vertex.VertexId, vertex.Data));
+        vertex.Data = render::Model::Pending;
+        new_selected.insert(vertex);
+		models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::Red);
+    }
+
+    selected_vertexes_ = new_selected;
     return true;
 }

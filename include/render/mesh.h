@@ -135,20 +135,20 @@ class Mesh {
             exit(1);
         }
 
-        auto& indices = this->triangulated_indices_;
+        auto* indices = &this->triangulated_indices_;
         if (!config_.triangulate) {
-            indices = raw_mesh_.indices;
+            indices = &raw_mesh_.indices;
         }
 
-        int old_capacity = indices.capacity();
-        int start_id = indices.size();
+        int old_capacity = indices->capacity();
+        int start_id = indices->size();
 
-        for (auto index : data) indices.push_back(index);
+        for (auto index : data) indices->push_back(index);
 
-        if (old_capacity == indices.capacity())
+        if (old_capacity == indices->capacity())
             IBO.Write(start_id * sizeof(unsigned int), &indices[start_id], data.size() * sizeof(unsigned int));
         else
-            IBO.Allocate(indices.data(), indices.capacity() * sizeof(Vertex));
+            IBO.Allocate(indices->data(), indices->capacity() * sizeof(Vertex));
     }
 
     void AddFace(const std::vector<unsigned int>& face) {
