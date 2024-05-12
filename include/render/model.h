@@ -12,7 +12,7 @@ struct ModelVertex : public Vertex<ModelVertex> {
     glm::vec3 position;
     glm::vec2 texture_coord;
     glm::vec3 normal;
-    glm::vec4 color {255, 255, 255, 255};
+    glm::vec4 color{255, 255, 255, 255};
 
     size_t Hash() const;
     VertexLayout Layout() const;
@@ -28,10 +28,9 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     };
 
    public:
-    Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
-          MeshChange is_changeable = MeshChange::Disable);
+    Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshChange is_changeable = MeshChange::Disable);
 
-	static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshChange is_changeable);
+    static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshChange is_changeable);
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;

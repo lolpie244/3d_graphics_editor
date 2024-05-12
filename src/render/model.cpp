@@ -47,11 +47,10 @@ size_t ModelVertex::Hash() const {
            (fhash(texture_coord.y) << 4) ^ (fhash(normal.x) << 5) ^ (fhash(normal.y) << 6) ^ (fhash(normal.z) << 7);
 }
 
-Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
-             MeshChange is_changeable)
-    : mesh_(vertices, indices, is_changeable) {
+Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshChange is_changeable)
+    : mesh_(mesh, is_changeable) {
     glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
-    for (auto& vertex : vertices) {
+    for (auto& vertex : mesh.vertices) {
         min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
                std::min(min.z, vertex.position.z)};
 
@@ -64,7 +63,7 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
 
 std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshChange is_changeable) {
     auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data.first, data.second, is_changeable);
+    return std::make_unique<render::Model>(data, is_changeable);
 }
 
 void Model::Draw(data::Shader& shader) const {

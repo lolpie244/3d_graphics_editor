@@ -30,12 +30,12 @@ void GizmoVertex::Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
     };
 }
 
-Gizmo::Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices)
-    : mesh_(vertices, indices) {}
+Gizmo::Gizmo(const Mesh<GizmoVertex>::RawMesh& mesh)
+    : mesh_(mesh) {}
 
 std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
     auto data = data::parser::loadModelFromFile<GizmoVertex>(filename);
-    return std::make_unique<Gizmo>(data.first, data.second);
+    return std::make_unique<Gizmo>(data);
 }
 
 void Gizmo::Draw(data::Shader& shader, Model* model) {

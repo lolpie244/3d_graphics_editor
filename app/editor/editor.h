@@ -40,7 +40,7 @@ class EditorStage : public stage::Stage {
     };
 
     std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> selected_vertexes_;
-    int current_draw_mode_ = 0;
+    int current_draw_mode_ = 1;
 
 	glm::vec3 last_vertex_position = {-1, -1, -1};
 };

@@ -6,18 +6,24 @@
 #include <unordered_map>
 #include <vector>
 
+#include "render/mesh.h"
+
 #define TINYOBJLOADER_IMPLEMENTATION
 #include <tiny_obj_loader.h>
 
 #include "render/vertex.h"
 
 namespace data::parser {
+
 template <typename Vertex>
-std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadModelFromFile(const std::string& filename) {
+render::Mesh<Vertex>::RawMesh loadModelFromFile(const std::string& filename) {
     static_assert(std::is_base_of<render::Vertex<Vertex>, Vertex>::value);
 
     tinyobj::ObjReader reader;
-    if (!reader.ParseFromFile(filename)) {
+    tinyobj::ObjReaderConfig config;
+    config.triangulate = false;
+
+    if (!reader.ParseFromFile(filename, config)) {
         if (!reader.Error().empty()) {
             std::cout << "TinyObjReader: " << reader.Error();
         }
@@ -25,14 +31,12 @@ std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadModelFromFile(cons
     }
 
     struct Hash {
-		size_t operator()(const Vertex& v) const { return v.Hash(); }
-	};
+        size_t operator()(const Vertex& v) const { return v.Hash(); }
+    };
 
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     std::unordered_map<Vertex, unsigned int, Hash> unique_vertices;
-
-    auto& attrib = reader.GetAttrib();
 
     for (const auto& shape : reader.GetShapes()) {
         for (const auto& id : shape.mesh.indices) {
@@ -44,7 +48,12 @@ std::pair<std::vector<Vertex>, std::vector<unsigned int>> loadModelFromFile(cons
             }
             indices.push_back(unique_vertices[vertex]);
         }
+        return typename render::Mesh<Vertex>::RawMesh{
+            .vertices = vertices,
+            .indices = indices,
+            .face_vertices = shape.mesh.num_face_vertices,
+        };
     }
-    return {vertices, indices};
+    return {};
 }
 }  // namespace data::parser
