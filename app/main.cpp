@@ -34,6 +34,7 @@ int main() {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glLineWidth(2);
 
 #if DEBUG
     glEnable(GL_DEBUG_OUTPUT);

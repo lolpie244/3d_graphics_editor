@@ -76,7 +76,7 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
     if (press_info.Data != render::Model::Point)
         return false;
 
-	math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
+    math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
 
     glm::vec3 vertex_position =
         model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId).position, 1.0f);

@@ -47,8 +47,7 @@ size_t ModelVertex::Hash() const {
            (fhash(texture_coord.y) << 4) ^ (fhash(normal.x) << 5) ^ (fhash(normal.y) << 6) ^ (fhash(normal.z) << 7);
 }
 
-Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
-    : mesh_(mesh, config) {
+Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config) : mesh_(mesh, config) {
     glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
     for (auto& vertex : mesh.vertices) {
         min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
@@ -75,11 +74,14 @@ void Model::Draw(data::Shader& shader) const {
 }
 void Model::DrawPoints(data::Shader& shader) const {
     shader.setUniform("u_Data", DataType::Point);
-    shader.setUniform("u_ObjectId", Id());
-
-    this->mesh_.Draw(GL_POINTS, shader, this);
     shader.setUniform("u_ObjectId", 0);
-    this->mesh_.Draw(GL_LINES, shader, this);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    this->mesh_.Draw(GL_TRIANGLES, shader, this);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    shader.setUniform("u_ObjectId", Id());
+    this->mesh_.Draw(GL_POINTS, shader, this);
 }
 
 const ModelVertex Model::Vertex(int id) const { return mesh_.Vertices()[id]; }
