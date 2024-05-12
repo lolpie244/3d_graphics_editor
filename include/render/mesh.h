@@ -2,8 +2,10 @@
 
 #include <SFML/Graphics/Glsl.hpp>
 #include <SFML/Graphics/Texture.hpp>
+#include <algorithm>
 #include <atomic>
 #include <iostream>
+#include <iterator>
 #include <vector>
 
 #include "data/shader.h"
@@ -39,7 +41,8 @@ class Mesh {
     Mesh(const RawMesh& mesh, MeshConfig config)
         : raw_mesh_(mesh),
           config_(config),
-          VBO(GL_ARRAY_BUFFER, (void*)mesh.vertices.data(), mesh.vertices.size() * sizeof(Vertex), config.changeable),
+          VBO(GL_ARRAY_BUFFER, (void*)mesh.vertices.data(), mesh.vertices.capacity() * sizeof(Vertex),
+              config.changeable),
           IBO(GL_ELEMENT_ARRAY_BUFFER, nullptr, 0, config.changeable) {
         VAO.AddBuffer(VBO, Vertex::GetLayout());
         VAO.AddBuffer(IBO);
@@ -47,7 +50,7 @@ class Mesh {
         int current_index = 0;
 
         if (!config_.triangulate) {
-            IBO.Allocate(raw_mesh_.indices.data(), raw_mesh_.indices.size() * sizeof(unsigned int));
+            IBO.Allocate(raw_mesh_.indices.data(), raw_mesh_.indices.capacity() * sizeof(unsigned int));
             return;
         }
 
@@ -61,7 +64,7 @@ class Mesh {
 
             current_index += size;
         }
-        IBO.Allocate(triangulated_indices_.data(), triangulated_indices_.size() * sizeof(unsigned int));
+        IBO.Allocate(triangulated_indices_.data(), triangulated_indices_.capacity() * sizeof(unsigned int));
     }
 
     const std::vector<Vertex>& Vertices() const { return raw_mesh_.vertices; }
@@ -79,6 +82,9 @@ class Mesh {
         VBO.Write(id * sizeof(Vertex), &data, sizeof(data));
         raw_mesh_.vertices[id] = data;
 
+        if (!config_.triangulate)
+            return;
+
         int face_idx = 0;
         int face_sum = 0;
         int real_index = 0;
@@ -93,9 +99,6 @@ class Mesh {
             if (raw_mesh_.indices[i] != id)
                 continue;
 
-            if (!config_.triangulate)
-                return;
-
             std::vector<glm::vec3> positions(raw_mesh_.face_vertices[face_idx]);
 
             for (int i = 0; i < raw_mesh_.face_vertices[face_idx]; i++)
@@ -109,6 +112,70 @@ class Mesh {
                       result.size() * sizeof(unsigned int));
         }
     }
+    void AddVertices(const std::vector<Vertex>& data) {
+        if (config_.changeable == MeshConfig::Static) {
+            std::cout << "Try to change unchangeable mesh";
+            exit(1);
+        }
+
+        int old_capacity = raw_mesh_.vertices.capacity();
+        int start_id = raw_mesh_.vertices.size();
+
+        for (auto& vertex : data) raw_mesh_.vertices.push_back(vertex);
+
+        if (raw_mesh_.vertices.capacity() == old_capacity)
+            VBO.Write(sizeof(Vertex) * start_id, &raw_mesh_.vertices[start_id], sizeof(Vertex) * data.size());
+        else
+            VBO.Allocate(raw_mesh_.vertices.data(), raw_mesh_.vertices.capacity() * sizeof(Vertex));
+    }
+
+    void AddIndices(const std::vector<unsigned int>& data) {
+        if (config_.changeable == MeshConfig::Static) {
+            std::cout << "Try to change unchangeable mesh";
+            exit(1);
+        }
+
+        auto& indices = this->triangulated_indices_;
+        if (!config_.triangulate) {
+            indices = raw_mesh_.indices;
+        }
+
+        int old_capacity = indices.capacity();
+        int start_id = indices.size();
+
+        for (auto index : data) indices.push_back(index);
+
+        if (old_capacity == indices.capacity())
+            IBO.Write(start_id * sizeof(unsigned int), &indices[start_id], data.size() * sizeof(unsigned int));
+        else
+            IBO.Allocate(indices.data(), indices.capacity() * sizeof(Vertex));
+    }
+
+    void AddFace(const std::vector<unsigned int>& face) {
+        raw_mesh_.face_vertices.push_back(face);
+        if (!config_.triangulate) {
+            AddIndices(face);
+            return;
+        }
+        int face_sum = sum(raw_mesh_.face_vertices.begin(), raw_mesh_.face_vertices.end());
+        int face_idx = raw_mesh_.face_vertices.size();
+
+        raw_mesh_.face_vertices.push_back(face.size());
+        std::copy(face.begin(), face.end(), std::back_inserter(raw_mesh_.indices));
+
+        int old_capacity = triangulated_indices_.capacity();
+        int start_size = triangulated_indices_.size();
+
+        std::vector<glm::vec3> positions(raw_mesh_.face_vertices[face_idx]);
+        for (int i = 0; i < raw_mesh_.face_vertices[face_idx]; i++)
+            positions[i] = raw_mesh_.vertices[raw_mesh_.indices[face_sum + i]].position;
+
+        auto result = math::EarCuttingTriangulate::Instance().Traingulate(positions);
+        for (int i = 0; i < result.size(); i++) result[i] = raw_mesh_.indices[result[i] + face_sum];
+
+        AddIndices(result);
+    }
+
     void Draw(unsigned int type, data::Shader& shader, const glm::mat4& transform) const {
         shader.setUniform("u_Model", transform);
         Draw(type, shader);
