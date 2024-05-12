@@ -28,9 +28,9 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     };
 
    public:
-    Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshChange is_changeable = MeshChange::Disable);
+    Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
 
-    static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshChange is_changeable);
+    static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;

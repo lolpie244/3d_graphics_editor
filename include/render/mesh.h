@@ -16,9 +16,14 @@
 
 namespace render {
 
-enum MeshChange {
-    Disable = GL_STATIC_DRAW,
-    Enable = GL_DYNAMIC_DRAW,
+struct MeshConfig {
+    enum Changeable {
+        Static = GL_STATIC_DRAW,
+        Dynamic = GL_DYNAMIC_DRAW,
+    };
+
+    Changeable changeable = Changeable::Static;
+    bool triangulate = true;
 };
 
 template <typename Vertex>
@@ -31,34 +36,43 @@ class Mesh {
     };
 
    public:
-    Mesh(const RawMesh& mesh, MeshChange is_changeable = MeshChange::Disable)
+    Mesh(const RawMesh& mesh, MeshConfig config)
         : raw_mesh_(mesh),
-          changeable_(is_changeable),
-          VBO(GL_ARRAY_BUFFER, (void*)mesh.vertices.data(), mesh.vertices.size() * sizeof(Vertex), is_changeable),
-          IBO(GL_ELEMENT_ARRAY_BUFFER, nullptr, 0, is_changeable) {
+          config_(config),
+          VBO(GL_ARRAY_BUFFER, (void*)mesh.vertices.data(), mesh.vertices.size() * sizeof(Vertex), config.changeable),
+          IBO(GL_ELEMENT_ARRAY_BUFFER, nullptr, 0, config.changeable) {
         VAO.AddBuffer(VBO, Vertex::GetLayout());
         VAO.AddBuffer(IBO);
 
         int current_index = 0;
+
+        if (!config_.triangulate) {
+            IBO.Allocate(raw_mesh_.indices.data(), raw_mesh_.indices.size() * sizeof(unsigned int));
+            return;
+        }
 
         for (auto size : mesh.face_vertices) {
             std::vector<glm::vec3> positions(size);
             for (int i = 0; i < size; i++) positions[i] = raw_mesh_.vertices[mesh.indices[current_index + i]].position;
 
             for (auto new_index : math::EarCuttingTriangulate::Instance().Traingulate(positions)) {
-                indices_.push_back(mesh.indices[current_index + new_index]);
+                triangulated_indices_.push_back(mesh.indices[current_index + new_index]);
             }
 
             current_index += size;
         }
-        IBO.Allocate(indices_.data(), indices_.size() * sizeof(unsigned int));
+        IBO.Allocate(triangulated_indices_.data(), triangulated_indices_.size() * sizeof(unsigned int));
     }
 
     const std::vector<Vertex>& Vertices() const { return raw_mesh_.vertices; }
-    const std::vector<unsigned int>& Indices() const { return indices_; }
+    const std::vector<unsigned int>& Indices() const {
+        if (config_.triangulate)
+            return triangulated_indices_;
+        return raw_mesh_.indices;
+    }
 
     void SetVertex(int id, Vertex data) {
-        if (changeable_ == MeshChange::Disable) {
+        if (config_.changeable == MeshConfig::Static) {
             std::cout << "Try to change unchangeable mesh";
             exit(1);
         }
@@ -79,15 +93,20 @@ class Mesh {
             if (raw_mesh_.indices[i] != id)
                 continue;
 
+            if (!config_.triangulate)
+                return;
+
             std::vector<glm::vec3> positions(raw_mesh_.face_vertices[face_idx]);
 
             for (int i = 0; i < raw_mesh_.face_vertices[face_idx]; i++)
                 positions[i] = raw_mesh_.vertices[raw_mesh_.indices[face_sum + i]].position;
 
             auto result = math::EarCuttingTriangulate::Instance().Traingulate(positions);
-            for (int i = 0; i < result.size(); i++) indices_[real_index + i] = raw_mesh_.indices[result[i] + face_sum];
+            for (int i = 0; i < result.size(); i++)
+                triangulated_indices_[real_index + i] = raw_mesh_.indices[result[i] + face_sum];
 
-            IBO.Write(real_index * sizeof(unsigned int), &indices_[real_index], result.size() * sizeof(unsigned int));
+            IBO.Write(real_index * sizeof(unsigned int), &triangulated_indices_[real_index],
+                      result.size() * sizeof(unsigned int));
         }
     }
     void Draw(unsigned int type, data::Shader& shader, const glm::mat4& transform) const {
@@ -117,9 +136,9 @@ class Mesh {
     VertexBuffer IBO;
 
    private:
-    MeshChange changeable_;
+    MeshConfig config_;
 
     RawMesh raw_mesh_;
-    std::vector<unsigned int> indices_;
+    std::vector<unsigned int> triangulated_indices_;
 };
 }  // namespace render

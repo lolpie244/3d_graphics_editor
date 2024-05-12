@@ -31,7 +31,7 @@ void GizmoVertex::Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
 }
 
 Gizmo::Gizmo(const Mesh<GizmoVertex>::RawMesh& mesh)
-    : mesh_(mesh) {}
+    : mesh_(mesh, MeshConfig{.changeable = MeshConfig::Static, .triangulate = true}) {}
 
 std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
     auto data = data::parser::loadModelFromFile<GizmoVertex>(filename);
@@ -41,8 +41,8 @@ std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
 void Gizmo::Draw(data::Shader& shader, Model* model) {
     glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_ObjectId", Id());
-	this->SetRotation({0, 0, 0});
-	this->SetPosition(0);
+    this->SetRotation({0, 0, 0});
+    this->SetPosition(0);
 
     math::Transform transform = *(math::Transform*)model;
 
@@ -51,12 +51,12 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     shader.setUniform("u_Data", math::X);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-	this->Rotate(-90, math::Y);
+    this->Rotate(-90, math::Y);
     shader.setUniform("u_Color", sf::Color::Red);
     shader.setUniform("u_Data", math::Z);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-	this->Rotate(90, math::Z);
+    this->Rotate(90, math::Z);
     shader.setUniform("u_Color", sf::Color::Blue);
     shader.setUniform("u_Data", math::Y);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
