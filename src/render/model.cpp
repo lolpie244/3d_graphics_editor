@@ -3,6 +3,7 @@
 #include "data/model_loader.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
+#include "utils/settings.h"
 
 namespace render {
 
@@ -84,20 +85,22 @@ void Model::DrawPoints(data::Shader& shader) const {
     shader.setUniform("u_Data", DataType::Point);
     this->mesh_.Draw(GL_POINTS, shader, this);
 
-	glClear(GL_DEPTH_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_Data", DataType::Pending);
     this->pending_mesh_.Draw(GL_POINTS, shader, this);
 }
 
-const ModelVertex Model::Vertex(int id, unsigned int type) const {
+const std::vector<ModelVertex>& Model::Vertices(unsigned int type) const {
     if (type == DataType::Pending)
-        return pending_mesh_.Vertices()[id];
-    return mesh_.Vertices()[id];
+        return pending_mesh_.Vertices();
+    return mesh_.Vertices();
 }
+
+const ModelVertex Model::Vertex(int id, unsigned int type) const { return Vertices(type)[id]; }
 
 void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position) {
     auto old_position = Vertex(id, type).position;
-	auto* mesh = type == DataType::Point ? &mesh_ : &pending_mesh_;
+    auto* mesh = GetMesh(type);
 
     for (int i = 0; i < mesh->Vertices().size(); i++) {
         if (mesh->Vertices()[i].position == old_position) {
@@ -108,24 +111,44 @@ void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position)
     }
 }
 
-void Model::SetVertexColor(int id, unsigned int type, sf::Color color) {
-	auto* mesh = type == DataType::Point ? &mesh_ : &pending_mesh_;
+void Model::SetVertexColor(int id, unsigned int type, glm::vec4 color) {
+    auto* mesh = GetMesh(type);
 
     for (int i = 0; i < mesh->Vertices().size(); i++) {
         if (mesh->Vertices()[i].position == mesh->Vertices()[id].position) {
             auto new_data = mesh->Vertices()[i];
-            new_data.color = {color.r, color.g, color.b, color.a};
+            new_data.color = color;
             mesh->SetVertex(i, new_data);
         }
     }
 }
 
+void Model::AddFace(const std::vector<unsigned int>& face) { mesh_.AddFace(face); }
+
 int Model::AddPenging(ModelVertex vertex) {
     unsigned int vertex_id = pending_mesh_.Vertices().size();
     pending_mesh_.AddVertices({vertex});
     pending_mesh_.AddIndices({vertex_id});
-    std::cout << vertex_id << '\n';
     return vertex_id;
+}
+
+std::vector<unsigned int> Model::RemovePendings(const std::vector<unsigned int> ids) {
+    unsigned int vertex_id = pending_mesh_.Vertices().size();
+    std::vector<render::ModelVertex> new_vertices;
+
+    int current_size = pending_mesh_.Indices().size();
+    for (auto id : ids) {
+        new_vertices.push_back(pending_mesh_.Vertices()[id]);
+        pending_mesh_.RemoveVertex(id);
+    }
+
+    int start_position = mesh_.Vertices().size();
+    mesh_.AddVertices(new_vertices);
+
+    std::vector<unsigned int> result;
+    for (int i = start_position; i < mesh_.Vertices().size(); i++) result.push_back(i);
+
+    return result;
 }
 
 }  // namespace render

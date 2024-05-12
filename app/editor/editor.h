@@ -30,6 +30,7 @@ class EditorStage : public stage::Stage {
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
 
 	bool DuplicateSelected(sf::Event event);
+	bool JoinSelected(sf::Event event);
 
    private:
     std::vector<std::unique_ptr<gui::GuiElement>> elements;

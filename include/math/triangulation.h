@@ -7,6 +7,7 @@
 #include <list>
 #include <vector>
 
+#include "math/utils.h"
 #include "utils.h"
 #include "utils/singleton.h"
 
@@ -80,9 +81,7 @@ class EarCuttingTriangulate : public Singleton<EarCuttingTriangulate> {
 
         std::list<std::pair<int, glm::vec2>> vertexes;
         for (int i = 0; i < positions.size(); i++) {
-            glm::vec3 vertex = positions[i];
-            std::swap(vertex[min_dimension], vertex[2]);
-            vertexes.push_back({i, vertex});
+            vertexes.push_back({i, math::erase(positions[i], min_dimension)});
         }
 
         return vertexes;

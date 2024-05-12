@@ -37,11 +37,18 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     void DrawPoints(data::Shader& shader) const;
 
     const ModelVertex Vertex(int id, unsigned int type) const;
+    const std::vector<ModelVertex>& Vertices(unsigned int type) const;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
-    void SetVertexColor(int id, unsigned int type, sf::Color color);
+    void SetVertexColor(int id, unsigned int type, glm::vec4 color);
+
+	void AddFace(const std::vector<unsigned int>& face);
 
 	int AddPenging(ModelVertex vertex);
+	std::vector<unsigned int> RemovePendings(const std::vector<unsigned int> ids);
+
+   private:
+	Mesh<ModelVertex>* GetMesh(unsigned int type) { return type == DataType::Point ? &mesh_ : &pending_mesh_; }
 
    public:
     sf::Texture texture;

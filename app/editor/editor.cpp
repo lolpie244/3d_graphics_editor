@@ -33,6 +33,9 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::D},
                                        [this](sf::Event event) { return DuplicateSelected(event); }));
 
+    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
+                                       [this](sf::Event event) { return JoinSelected(event); }));
+
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); },
                               {sf::Mouse::Right, sf::Mouse::Middle});

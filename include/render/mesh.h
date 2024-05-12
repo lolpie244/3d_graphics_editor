@@ -6,6 +6,7 @@
 #include <atomic>
 #include <iostream>
 #include <iterator>
+#include <numeric>
 #include <vector>
 
 #include "data/shader.h"
@@ -72,6 +73,18 @@ class Mesh {
         if (config_.triangulate)
             return triangulated_indices_;
         return raw_mesh_.indices;
+    }
+
+    void RemoveVertex(int id) {
+        auto* indices = &this->triangulated_indices_;
+        if (!config_.triangulate) {
+            indices = &raw_mesh_.indices;
+        }
+
+        indices->erase(std::remove(indices->begin(), indices->end(), id), indices->end());
+        IBO.Write(0, indices->data(), indices->size() * sizeof(unsigned int));
+
+        raw_mesh_.vertices.erase(raw_mesh_.vertices.begin() + id);
     }
 
     void SetVertex(int id, Vertex data) {
@@ -146,18 +159,18 @@ class Mesh {
         for (auto index : data) indices->push_back(index);
 
         if (old_capacity == indices->capacity())
-            IBO.Write(start_id * sizeof(unsigned int), &indices[start_id], data.size() * sizeof(unsigned int));
+            IBO.Write(start_id * sizeof(unsigned int), (void*)data.data(), data.size() * sizeof(unsigned int));
         else
             IBO.Allocate(indices->data(), indices->capacity() * sizeof(Vertex));
     }
 
     void AddFace(const std::vector<unsigned int>& face) {
-        raw_mesh_.face_vertices.push_back(face);
         if (!config_.triangulate) {
             AddIndices(face);
             return;
         }
-        int face_sum = sum(raw_mesh_.face_vertices.begin(), raw_mesh_.face_vertices.end());
+
+        int face_sum = std::accumulate(raw_mesh_.face_vertices.begin(), raw_mesh_.face_vertices.end(), 0);
         int face_idx = raw_mesh_.face_vertices.size();
 
         raw_mesh_.face_vertices.push_back(face.size());

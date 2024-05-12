@@ -3,11 +3,13 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <iterator>
 
 #include "data/model_loader.h"
 #include "editor.h"
 #include "math/points_cast.h"
 #include "math/ray.h"
+#include "math/utils.h"
 #include "render/model.h"
 #include "utils/settings.h"
 
@@ -35,7 +37,7 @@ bool EditorStage::CameraZoom(sf::Event event) {
 void EditorStage::ClearSelection() {
     gizmo.SetModel(nullptr);
     for (auto& vertex : selected_vertexes_) {
-        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::White);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, settings::DEFAULT_POINT_COLOR);
     }
     selected_vertexes_.clear();
 }
@@ -65,7 +67,7 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     if (model->PressInfo().Data == render::Model::Point || model->PressInfo().Data == render::Model::Pending) {
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
             ClearSelection();
-        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Data, sf::Color::Red);
+        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Data, settings::SELECTED_POINT_COLOR);
         selected_vertexes_.insert(model->PressInfo());
     }
     return true;
@@ -109,15 +111,41 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
 bool EditorStage::DuplicateSelected(sf::Event event) {
     SelectedVertices new_selected;
     for (auto vertex : selected_vertexes_) {
-		models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::White);
-
         vertex.VertexId =
             models[vertex.ObjectID]->AddPenging(models[vertex.ObjectID]->Vertex(vertex.VertexId, vertex.Data));
         vertex.Data = render::Model::Pending;
         new_selected.insert(vertex);
-		models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, sf::Color::Red);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, settings::SELECTED_POINT_COLOR);
     }
 
+    ClearSelection();
     selected_vertexes_ = new_selected;
+    return true;
+}
+
+bool EditorStage::JoinSelected(sf::Event event) {
+    if (selected_vertexes_.empty())
+        return false;
+
+    auto model = models[selected_vertexes_.begin()->ObjectID].get();
+
+    std::vector<unsigned int> indices;
+    std::vector<unsigned int> pending_vertices;
+
+    for (auto vertex : selected_vertexes_) {
+        if (vertex.Data == render::Model::Point)
+            indices.push_back(vertex.VertexId);
+        else {
+            model->SetVertexColor(vertex.VertexId, vertex.Data, settings::DEFAULT_POINT_COLOR);
+            pending_vertices.push_back(vertex.VertexId);
+        }
+    }
+
+    auto new_indices = model->RemovePendings(pending_vertices);
+    std::move(new_indices.begin(), new_indices.end(), std::back_inserter(indices));
+
+    math::sort_clockwise_polygon(model->Vertices(render::Model::Point), indices);
+
+    model->AddFace(indices);
     return true;
 }
