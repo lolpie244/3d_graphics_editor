@@ -37,7 +37,7 @@ bool EditorStage::CameraZoom(sf::Event event) {
 void EditorStage::ClearSelection() {
     gizmo.SetModel(nullptr);
     for (auto& vertex : selected_vertexes_) {
-        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, settings::DEFAULT_POINT_COLOR);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
     }
     selected_vertexes_.clear();
 }
@@ -60,14 +60,14 @@ bool EditorStage::ContextRelease(sf::Event event) {
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     last_vertex_position = {-1, -1, -1};
 
-    if (model->PressInfo().Data == render::Model::Surface) {
+    if (model->PressInfo().Type == render::Model::Surface) {
         selected_vertexes_.clear();
         gizmo.SetModel(model);
     }
-    if (model->PressInfo().Data == render::Model::Point || model->PressInfo().Data == render::Model::Pending) {
+    if (model->PressInfo().Type == render::Model::Point || model->PressInfo().Type == render::Model::Pending) {
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
             ClearSelection();
-        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Data, settings::SELECTED_POINT_COLOR);
+        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Type, settings::SELECTED_POINT_COLOR);
         selected_vertexes_.insert(model->PressInfo());
     }
     return true;
@@ -75,14 +75,14 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
 
 bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model* model) {
     auto press_info = model->PressInfo();
-    if (press_info.Data != render::Model::Point && press_info.Data != render::Model::Pending)
+    if (press_info.Type != render::Model::Point && press_info.Type != render::Model::Pending)
         return false;
 
     math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     render::ModelVertex vertex;
 
     glm::vec3 vertex_position =
-        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId, press_info.Data).position, 1.0f);
+        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId, press_info.Type).position, 1.0f);
 
     // TODO: fix point that is incorrect
     auto intersect_point = ray.SphereIntersection(vertex_position);
@@ -93,15 +93,15 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         return true;
     }
     auto move = intersect_point - last_vertex_position;
-    model->SetVertexPosition(press_info.VertexId, press_info.Data, intersect_point);
+    model->SetVertexPosition(press_info.VertexId, press_info.Type, intersect_point);
 
     for (auto& vertex_info : selected_vertexes_) {
         if (vertex_info == press_info)
             continue;
 
         auto* model = models[vertex_info.ObjectID].get();
-        model->SetVertexPosition(vertex_info.VertexId, vertex_info.Data,
-                                 model->Vertex(vertex_info.VertexId, vertex_info.Data).position + move);
+        model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
+                                 model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
     }
 
     this->last_vertex_position = intersect_point;
@@ -112,10 +112,10 @@ bool EditorStage::DuplicateSelected(sf::Event event) {
     SelectedVertices new_selected;
     for (auto vertex : selected_vertexes_) {
         vertex.VertexId =
-            models[vertex.ObjectID]->AddPenging(models[vertex.ObjectID]->Vertex(vertex.VertexId, vertex.Data));
-        vertex.Data = render::Model::Pending;
+            models[vertex.ObjectID]->AddPenging(models[vertex.ObjectID]->Vertex(vertex.VertexId, vertex.Type));
+        vertex.Type = render::Model::Pending;
         new_selected.insert(vertex);
-        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Data, settings::SELECTED_POINT_COLOR);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::SELECTED_POINT_COLOR);
     }
 
     ClearSelection();
@@ -133,10 +133,10 @@ bool EditorStage::JoinSelected(sf::Event event) {
     std::vector<unsigned int> pending_vertices;
 
     for (auto vertex : selected_vertexes_) {
-        if (vertex.Data == render::Model::Point)
+        if (vertex.Type == render::Model::Point)
             indices.push_back(vertex.VertexId);
         else {
-            model->SetVertexColor(vertex.VertexId, vertex.Data, settings::DEFAULT_POINT_COLOR);
+            model->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
             pending_vertices.push_back(vertex.VertexId);
         }
     }

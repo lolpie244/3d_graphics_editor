@@ -27,7 +27,7 @@ Gizmo::Gizmo(events::Observer& observer) {
 glm::vec3 Gizmo::GetPoint(glm::vec2 mouse) {
     auto ray = math::Ray::FromPoint(mouse);
     auto gizmo_center = current_model_->GetPosition();
-    auto axis = gizmos_[current_mode_]->PressInfo().Data;
+    auto axis = gizmos_[current_mode_]->PressInfo().Type;
 
     return ray.PlainIntersection(gizmo_center, math::axis_to_vector(axis));
 }
@@ -38,12 +38,12 @@ bool Gizmo::PressEvent(sf::Event event) {
 }
 
 bool Gizmo::MoveEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Data) * settings::MOUSE_SENSATIVITY;
+    move = move * math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
     current_model_->Move(move.x, move.y, move.z);
     return true;
 }
 bool Gizmo::ScaleEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Data) * settings::MOUSE_SENSATIVITY;
+    move = move * math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
     auto scale = current_model_->GetScale() + move;
     current_model_->SetScale(scale.x, scale.y, scale.z);
     return true;
@@ -53,7 +53,7 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
     auto ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     auto gizmo_center = current_model_->GetPosition();
 
-    auto axis = gizmos_[Mode::Rotate]->PressInfo().Data;
+    auto axis = gizmos_[Mode::Rotate]->PressInfo().Type;
 
     glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
     auto new_point = ray.PlainIntersection(gizmo_center, glm::normalize(normal));

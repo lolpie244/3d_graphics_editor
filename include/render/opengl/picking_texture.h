@@ -9,13 +9,13 @@ class PickingTexture {
     struct Info {
         unsigned int ObjectID = 0;
         unsigned int VertexId = 0;
-        unsigned int Data = 0;
+        unsigned int Type = 0;
         bool operator==(const Info& b) const;
 
         struct Hash {
             size_t operator()(const Info& v) const {
                 auto uihash = std::hash<unsigned int>{};
-                return uihash(v.ObjectID) ^ (uihash(v.VertexId) << 1) ^ (uihash(v.Data) << 2);
+                return uihash(v.ObjectID) ^ (uihash(v.VertexId) << 1) ^ (uihash(v.Type) << 2);
             }
         };
     };
