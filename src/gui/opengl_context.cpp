@@ -31,14 +31,15 @@ void OpenglContext::Move(float x, float y, float z) {
 
 void OpenglContext::Resize(glm::vec2 size) {
     GuiElement::Resize(size);
-    PickingTexture.Resize(size.x, size.y);
     update_context();
 }
 
 void OpenglContext::SetLeftCorner(float x, float y, float z) { GuiElement::Move(x - Rect().left, y - Rect().top, z); }
+glm::vec2 OpenglContext::LeftCorner() const { return {Rect().left, Rect().top}; }
 
 void OpenglContext::update_context() {
     auto rect = this->Rect();
+    PickingTexture.Resize(rect.width, rect.height);
     glViewport(rect.left, rect.top, rect.width, rect.height);
 }
 }  // namespace gui

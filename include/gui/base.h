@@ -11,7 +11,6 @@
 
 #include "events/propterties/hoverable.h"
 #include "math/transform.h"
-
 #include "utils/active.h"
 #include "utils/tree.h"
 #include "utils/uuid.h"

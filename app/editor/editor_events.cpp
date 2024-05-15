@@ -42,18 +42,52 @@ void EditorStage::ClearSelection() {
     selected_vertexes_.clear();
 }
 
+void EditorStage::Select(render::PickingTexture::Info info) {
+    auto model = models[info.ObjectID].get();
+
+    if (info.Type == render::Model::Surface) {
+        ClearSelection();
+        gizmo.SetModel(model);
+        return;
+    }
+
+    model->SetVertexColor(info.VertexId, info.Type, settings::SELECTED_POINT_COLOR);
+    selected_vertexes_.insert(info);
+}
+
 bool EditorStage::ContextPress(sf::Event event) {
-    ClearSelection();
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+        ClearSelection();
+
+    selection_rect_->Enable();
+    selection_rect_->SetRect(0, 0, 0, 0);
     return true;
 }
 
 bool EditorStage::ContextDrag(sf::Event event, glm::vec2 move) {
-    ClearSelection();
+    glm::vec2 start = Context()->StartPosition();
+    glm::vec2 end = glm::vec2{event.mouseMove.x, event.mouseMove.y};
+    auto size = end - start;
+
+    selection_rect_->SetRect(start.x, start.y, size.x, size.y);
     return true;
 }
 
 bool EditorStage::ContextRelease(sf::Event event) {
-    ClearSelection();
+    selection_rect_->Disable();
+    auto rect = selection_rect_->Rect();
+    auto position = glm::vec2(rect.left, rect.top);
+    auto size = glm::vec2(rect.width, rect.height);
+
+    for (auto& pixel : Context()->PickingTexture.ReadArea(position.x, position.y, size.x, size.y)) {
+        if (pixel.ObjectID == 0)
+            continue;
+        if (pixel.Type == render::Model::Surface) {
+            // TODO
+            continue;
+        }
+        Select(pixel);
+    }
     return true;
 }
 
@@ -61,14 +95,12 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     last_vertex_position = {-1, -1, -1};
 
     if (model->PressInfo().Type == render::Model::Surface) {
-        selected_vertexes_.clear();
-        gizmo.SetModel(model);
+        Select(model->PressInfo());
     }
     if (model->PressInfo().Type == render::Model::Point || model->PressInfo().Type == render::Model::Pending) {
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
             ClearSelection();
-        model->SetVertexColor(model->PressInfo().VertexId, model->PressInfo().Type, settings::SELECTED_POINT_COLOR);
-        selected_vertexes_.insert(model->PressInfo());
+        Select(model->PressInfo());
     }
     return true;
 }

@@ -26,6 +26,8 @@ class PickingTexture {
     void Resize(int width, int height);
 
     Info ReadPixel(unsigned int x, unsigned int y);
+    std::vector<Info> ReadArea(unsigned int x, unsigned int y, int width, int height);
+
     float ReadDepth(unsigned int x, unsigned int y);
 
     void Bind();
@@ -37,8 +39,5 @@ class PickingTexture {
     int width_;
 
     bool binded_ = false;
-
-    std::pair<std::pair<int, int>, Info> cached_info_;
-    std::pair<std::pair<int, int>, float> cached_depth_;
 };
 }  // namespace render
