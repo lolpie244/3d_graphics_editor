@@ -12,13 +12,18 @@ class SelectRect : public GuiElement {
    public:
     SelectRect() { SetPosition(0, 0, 1000); }
 
-    virtual sf::Rect<float> Rect() const { return selection_rect_; }
+    void Enable() override {
+        GuiElement::Enable();
+        SetRect(0, 0, 0, 0);
+    }
+
+    virtual sf::Rect<float> Rect() const override { return selection_rect_; }
 
     void SetRect(unsigned int x, unsigned int y, int width, int heigth) {
         selection_rect_ = sf::Rect<float>(std::min(x, x + width), std::min(y, y + heigth), abs(width), abs(heigth));
     }
 
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
         if (IsActive()) {
             sf::RectangleShape rectangle(selection_rect_.getSize());
             rectangle.setPosition(selection_rect_.getPosition());

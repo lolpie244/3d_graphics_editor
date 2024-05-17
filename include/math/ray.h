@@ -1,6 +1,6 @@
 #pragma once
 
-#define GLM_SWIZZLE_XYZW 
+#define GLM_SWIZZLE_XYZW
 #define GLM_SWIZZLE_STQP
 #include <glm/glm.hpp>
 
