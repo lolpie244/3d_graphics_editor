@@ -30,8 +30,10 @@ class MixedDraw : public DrawMode {
 
    private:
     data::Shader shader_;
-    data::Shader point_shader_;
     data::Shader picking_shader_;
+
+    data::Shader point_shader_;
+    data::Shader point_picking_shader_;
 };
 
 class TransparentDraw : public DrawMode {

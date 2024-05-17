@@ -32,7 +32,7 @@ class Draggable : virtual public Clickable {
    private:
     glm::vec2 last_position_;
     glm::vec2 start_position_;
-    events::Event move_event_;
+	std::unordered_map<int, events::Event> move_events_;
 	bool is_draggable_ = false;
 	sf::Mouse::Button pressed_button_;
 };

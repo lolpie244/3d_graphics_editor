@@ -18,6 +18,7 @@ class Clickable : virtual public Hoverable {
     };
 
     typedef const std::unordered_set<sf::Mouse::Button>& MouseButtons;
+    typedef const std::unordered_set<sf::Mouse::Button>& MouseButtonsType;
 
    public:
     virtual ~Clickable() = default;

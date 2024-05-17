@@ -27,7 +27,7 @@ Gizmo::Gizmo(events::Observer& observer) {
 glm::vec3 Gizmo::GetPoint(glm::vec2 mouse) {
     auto ray = math::Ray::FromPoint(mouse);
     auto gizmo_center = current_model_->GetPosition();
-    auto axis = gizmos_[current_mode_]->PressInfo().Data;
+    auto axis = gizmos_[current_mode_]->PressInfo().Type;
 
     return ray.PlainIntersection(gizmo_center, math::axis_to_vector(axis));
 }
@@ -38,12 +38,12 @@ bool Gizmo::PressEvent(sf::Event event) {
 }
 
 bool Gizmo::MoveEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Data) * settings::MOUSE_SENSATIVITY;
+    move = move * math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
     current_model_->Move(move.x, move.y, move.z);
     return true;
 }
 bool Gizmo::ScaleEvent(sf::Event event, glm::vec3 move) {
-    move = move * math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Data) * settings::MOUSE_SENSATIVITY;
+    move = move * math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
     auto scale = current_model_->GetScale() + move;
     current_model_->SetScale(scale.x, scale.y, scale.z);
     return true;
@@ -53,10 +53,9 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
     auto ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     auto gizmo_center = current_model_->GetPosition();
 
-    auto axis = gizmos_[Mode::Rotate]->PressInfo().Data;
+    auto axis = gizmos_[Mode::Rotate]->PressInfo().Type;
 
-	// TODO: fix rotation
-	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
+    glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
     auto new_point = ray.PlainIntersection(gizmo_center, glm::normalize(normal));
 
     if (old_point == glm::vec3{-1, -1, -1}) {
@@ -66,24 +65,10 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
 
     auto old_vec = (old_point - gizmo_center);
     auto new_vec = (new_point - gizmo_center);
-    glm::vec2 A, B;
 
-    switch (axis) {
-        case math::X:
-            A = {old_vec.y, old_vec.z};
-            B = {new_vec.y, new_vec.z};
-            break;
-        case math::Y:
-            B = {old_vec.x, old_vec.z};
-            A = {new_vec.x, new_vec.z};
-            break;
-        case math::Z:
-            A = {old_vec.x, old_vec.y};
-            B = {new_vec.x, new_vec.y};
-            break;
-    };
-
-    float angle = glm::degrees(glm::orientedAngle(glm::normalize(A), glm::normalize(B)));
+    // TODO: fix
+    float angle =
+        glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), glm::normalize(normal)));
 
     current_model_->Rotate(angle, axis);
     gizmos_[Mode::Rotate]->Rotate(angle, axis);

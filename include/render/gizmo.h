@@ -23,7 +23,7 @@ struct GizmoVertex : public Vertex<GizmoVertex> {
 
 class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::Transform {
    public:
-    Gizmo(const std::vector<GizmoVertex>& vertices, const std::vector<unsigned int>& indices);
+    Gizmo(const Mesh<GizmoVertex>::RawMesh& mesh);
     static std::unique_ptr<render::Gizmo> loadFromFile(const std::string& filename);
 
     void Draw(data::Shader& shader, Model* model);

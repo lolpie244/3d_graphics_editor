@@ -3,11 +3,13 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <iterator>
 
 #include "data/model_loader.h"
 #include "editor.h"
 #include "math/points_cast.h"
 #include "math/ray.h"
+#include "math/utils.h"
 #include "render/model.h"
 #include "utils/settings.h"
 
@@ -35,51 +37,84 @@ bool EditorStage::CameraZoom(sf::Event event) {
 void EditorStage::ClearSelection() {
     gizmo.SetModel(nullptr);
     for (auto& vertex : selected_vertexes_) {
-        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, sf::Color::White);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
     }
     selected_vertexes_.clear();
 }
 
+void EditorStage::Select(render::PickingTexture::Info info) {
+    auto model = models[info.ObjectID].get();
+
+    if (info.Type == render::Model::Surface) {
+        ClearSelection();
+        gizmo.SetModel(model);
+        return;
+    }
+
+    model->SetVertexColor(info.VertexId, info.Type, settings::SELECTED_POINT_COLOR);
+    selected_vertexes_.insert(info);
+}
+
 bool EditorStage::ContextPress(sf::Event event) {
-    ClearSelection();
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+        ClearSelection();
+
+    selection_rect_->Enable();
+    selection_rect_->SetRect(0, 0, 0, 0);
     return true;
 }
 
 bool EditorStage::ContextDrag(sf::Event event, glm::vec2 move) {
-    ClearSelection();
+    glm::vec2 start = Context()->StartPosition();
+    glm::vec2 end = glm::vec2{event.mouseMove.x, event.mouseMove.y};
+    auto size = end - start;
+
+    selection_rect_->SetRect(start.x, start.y, size.x, size.y);
     return true;
 }
 
 bool EditorStage::ContextRelease(sf::Event event) {
-    ClearSelection();
+    selection_rect_->Disable();
+    auto rect = selection_rect_->Rect();
+    auto position = glm::vec2(rect.left, rect.top);
+    auto size = glm::vec2(rect.width, rect.height);
+
+    for (auto& pixel : Context()->PickingTexture.ReadArea(position.x, position.y, size.x, size.y)) {
+        if (pixel.ObjectID == 0)
+            continue;
+        if (pixel.Type == render::Model::Surface) {
+            // TODO
+            continue;
+        }
+        Select(pixel);
+    }
     return true;
 }
 
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     last_vertex_position = {-1, -1, -1};
 
-    if (model->PressInfo().Data == render::Model::Surface) {
-        selected_vertexes_.clear();
-        gizmo.SetModel(model);
+    if (model->PressInfo().Type == render::Model::Surface) {
+        Select(model->PressInfo());
     }
-    if (model->PressInfo().Data == render::Model::Point) {
+    if (model->PressInfo().Type == render::Model::Point || model->PressInfo().Type == render::Model::Pending) {
         if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
             ClearSelection();
-        model->SetVertexColor(model->PressInfo().VertexId, sf::Color::Red);
-        selected_vertexes_.insert(model->PressInfo());
+        Select(model->PressInfo());
     }
     return true;
 }
 
 bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model* model) {
     auto press_info = model->PressInfo();
-    if (press_info.Data != render::Model::Point)
+    if (press_info.Type != render::Model::Point && press_info.Type != render::Model::Pending)
         return false;
 
-	math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
+    math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
+    render::ModelVertex vertex;
 
     glm::vec3 vertex_position =
-        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId).position, 1.0f);
+        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId, press_info.Type).position, 1.0f);
 
     // TODO: fix point that is incorrect
     auto intersect_point = ray.SphereIntersection(vertex_position);
@@ -90,16 +125,59 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         return true;
     }
     auto move = intersect_point - last_vertex_position;
-    model->SetVertexPosition(press_info.VertexId, intersect_point);
+    model->SetVertexPosition(press_info.VertexId, press_info.Type, intersect_point);
 
     for (auto& vertex_info : selected_vertexes_) {
         if (vertex_info == press_info)
             continue;
 
         auto* model = models[vertex_info.ObjectID].get();
-        model->SetVertexPosition(vertex_info.VertexId, model->Vertex(vertex_info.VertexId).position + move);
+        model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
+                                 model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
     }
 
     this->last_vertex_position = intersect_point;
+    return true;
+}
+
+bool EditorStage::DuplicateSelected(sf::Event event) {
+    SelectedVertices new_selected;
+    for (auto vertex : selected_vertexes_) {
+        vertex.VertexId =
+            models[vertex.ObjectID]->AddPenging(models[vertex.ObjectID]->Vertex(vertex.VertexId, vertex.Type));
+        vertex.Type = render::Model::Pending;
+        new_selected.insert(vertex);
+        models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::SELECTED_POINT_COLOR);
+    }
+
+    ClearSelection();
+    selected_vertexes_ = new_selected;
+    return true;
+}
+
+bool EditorStage::JoinSelected(sf::Event event) {
+    if (selected_vertexes_.empty())
+        return false;
+
+    auto model = models[selected_vertexes_.begin()->ObjectID].get();
+
+    std::vector<unsigned int> indices;
+    std::vector<unsigned int> pending_vertices;
+
+    for (auto vertex : selected_vertexes_) {
+        if (vertex.Type == render::Model::Point)
+            indices.push_back(vertex.VertexId);
+        else {
+            model->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
+            pending_vertices.push_back(vertex.VertexId);
+        }
+    }
+
+    auto new_indices = model->RemovePendings(pending_vertices);
+    std::move(new_indices.begin(), new_indices.end(), std::back_inserter(indices));
+
+    math::sort_clockwise_polygon(model->Vertices(render::Model::Point), indices);
+
+    model->AddFace(indices);
     return true;
 }

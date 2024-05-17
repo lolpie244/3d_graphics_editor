@@ -42,7 +42,7 @@ void Transform::Rotate(float angle, int axis) {
     rotation_ += axis_to_vector(axis) * angle;
 }
 void Transform::SetRotation(float angle, int axis) {
-    rotation_ = rotation_ * axis_to_vector(Axis::X | Axis::Y | Axis::Z - axis); 
+    rotation_ = rotation_ * axis_to_vector(Axis::X | Axis::Y | Axis::Z - axis);
     Rotate(angle, axis);
 }
 

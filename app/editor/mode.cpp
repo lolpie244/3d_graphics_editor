@@ -8,7 +8,8 @@ TextureDraw::TextureDraw() {
 MixedDraw::MixedDraw() {
     shader_.loadFromFile("shaders/texture.vert", "shaders/texture.frag");
     point_shader_.loadFromFile("shaders/texture.vert", "shaders/point.frag");
-    picking_shader_.loadFromFile("shaders/texture.vert", "shaders/picking.frag");
+    picking_shader_.loadFromFile("shaders/texture.vert", "shaders/picking_empty.frag");
+    point_picking_shader_.loadFromFile("shaders/texture.vert", "shaders/picking.frag");
 }
 
 TransparentDraw::TransparentDraw() {
@@ -32,7 +33,10 @@ void MixedDraw::Draw(const render::ModelsList& models) {
 }
 
 void MixedDraw::DrawPicker(const render::ModelsList& models) {
-    for (auto& [_, model] : models) { model->DrawPoints(picking_shader_); }
+    for (auto& [_, model] : models) {
+        model->Draw(picking_shader_);
+        model->DrawPoints(point_picking_shader_);
+    }
 }
 
 void TransparentDraw::Draw(const render::ModelsList& models) {

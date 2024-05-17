@@ -1,7 +1,9 @@
 #include "render/model.h"
 
 #include "data/model_loader.h"
+#include "render/mesh.h"
 #include "stage/stage_manager.h"
+#include "utils/settings.h"
 
 namespace render {
 
@@ -47,11 +49,10 @@ size_t ModelVertex::Hash() const {
            (fhash(texture_coord.y) << 4) ^ (fhash(normal.x) << 5) ^ (fhash(normal.y) << 6) ^ (fhash(normal.z) << 7);
 }
 
-Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigned int>& indices,
-             MeshChange is_changeable)
-    : mesh_(vertices, indices, is_changeable) {
+Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
+    : mesh_(mesh, config), pending_mesh_({}, MeshConfig({.changeable = MeshConfig::Dynamic, .triangulate = false})) {
     glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
-    for (auto& vertex : vertices) {
+    for (auto& vertex : mesh.vertices) {
         min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
                std::min(min.z, vertex.position.z)};
 
@@ -62,9 +63,9 @@ Model::Model(const std::vector<ModelVertex>& vertices, const std::vector<unsigne
     this->SetOrigin((min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
 }
 
-std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshChange is_changeable) {
+std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
     auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data.first, data.second, is_changeable);
+    return std::make_unique<render::Model>(data, config);
 }
 
 void Model::Draw(data::Shader& shader) const {
@@ -75,35 +76,79 @@ void Model::Draw(data::Shader& shader) const {
     this->mesh_.Draw(GL_TRIANGLES, shader, this);
 }
 void Model::DrawPoints(data::Shader& shader) const {
-    shader.setUniform("u_Data", DataType::Point);
-    shader.setUniform("u_ObjectId", Id());
-
-    this->mesh_.Draw(GL_POINTS, shader, this);
     shader.setUniform("u_ObjectId", 0);
-    this->mesh_.Draw(GL_LINES, shader, this);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    this->mesh_.Draw(GL_TRIANGLES, shader, this);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    shader.setUniform("u_ObjectId", Id());
+    shader.setUniform("u_Data", DataType::Point);
+    this->mesh_.Draw(GL_POINTS, shader, this);
+
+    glClear(GL_DEPTH_BUFFER_BIT);
+    shader.setUniform("u_Data", DataType::Pending);
+    this->pending_mesh_.Draw(GL_POINTS, shader, this);
 }
 
-const ModelVertex Model::Vertex(int id) const { return mesh_.Vertices()[id]; }
+const std::vector<ModelVertex>& Model::Vertices(unsigned int type) const {
+    if (type == DataType::Pending)
+        return pending_mesh_.Vertices();
+    return mesh_.Vertices();
+}
 
-void Model::SetVertexPosition(int id, glm::vec3 new_position) {
-    auto old_position = mesh_.Vertices()[id].position;
-    for (int i = 0; i < mesh_.Vertices().size(); i++) {
-        if (mesh_.Vertices()[i].position == old_position) {
-            auto new_data = mesh_.Vertices()[i];
+const ModelVertex Model::Vertex(int id, unsigned int type) const { return Vertices(type)[id]; }
+
+void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position) {
+    auto old_position = Vertex(id, type).position;
+    auto* mesh = GetMesh(type);
+
+    for (int i = 0; i < mesh->Vertices().size(); i++) {
+        if (mesh->Vertices()[i].position == old_position) {
+            auto new_data = mesh->Vertices()[i];
             new_data.position = new_position;
-            mesh_.SetVertex(i, new_data);
+            mesh->SetVertex(i, new_data);
         }
     }
 }
 
-void Model::SetVertexColor(int id, sf::Color color) {
-    for (int i = 0; i < mesh_.Vertices().size(); i++) {
-        if (mesh_.Vertices()[i].position == mesh_.Vertices()[id].position) {
-            auto new_data = mesh_.Vertices()[i];
-            new_data.color = {color.r, color.g, color.b, color.a};
-            mesh_.SetVertex(i, new_data);
+void Model::SetVertexColor(int id, unsigned int type, glm::vec4 color) {
+    auto* mesh = GetMesh(type);
+
+    for (int i = 0; i < mesh->Vertices().size(); i++) {
+        if (mesh->Vertices()[i].position == mesh->Vertices()[id].position) {
+            auto new_data = mesh->Vertices()[i];
+            new_data.color = color;
+            mesh->SetVertex(i, new_data);
         }
     }
+}
+
+void Model::AddFace(const std::vector<unsigned int>& face) { mesh_.AddFace(face); }
+
+int Model::AddPenging(ModelVertex vertex) {
+    unsigned int vertex_id = pending_mesh_.Vertices().size();
+    pending_mesh_.AddVertices({vertex});
+    pending_mesh_.AddIndices({vertex_id});
+    return vertex_id;
+}
+
+std::vector<unsigned int> Model::RemovePendings(const std::vector<unsigned int> ids) {
+    unsigned int vertex_id = pending_mesh_.Vertices().size();
+    std::vector<render::ModelVertex> new_vertices;
+
+    int current_size = pending_mesh_.Indices().size();
+    for (auto id : ids) {
+        new_vertices.push_back(pending_mesh_.Vertices()[id]);
+        pending_mesh_.RemoveVertex(id);
+    }
+
+    int start_position = mesh_.Vertices().size();
+    mesh_.AddVertices(new_vertices);
+
+    std::vector<unsigned int> result;
+    for (int i = start_position; i < mesh_.Vertices().size(); i++) result.push_back(i);
+
+    return result;
 }
 
 }  // namespace render
