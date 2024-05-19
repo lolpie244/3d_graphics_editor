@@ -48,6 +48,7 @@ void EditorStage::BindEvents() {
 
     for (auto& [_, model] : models) {
         model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
+        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); }, {sf::Mouse::Left});
         model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
                         {sf::Mouse::Left});
     }

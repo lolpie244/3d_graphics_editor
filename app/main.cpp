@@ -36,6 +36,9 @@ int main() {
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glLineWidth(2);
 
+	// glEnable(GL_PRIMITIVE_RESTART);
+	// glPrimitiveRestartIndex(0xFFFF);
+
 #if DEBUG
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(GLDebugMessageCallback, 0);

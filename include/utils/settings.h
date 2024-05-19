@@ -9,7 +9,8 @@ constexpr glm::vec2 DEFAULT_RESOLUTION = {1920, 1080};  // scale, on which resiz
 constexpr float DEFAULT_FOV = 45;
 constexpr float MOUSE_SENSATIVITY = 4.5;
 
-
 const glm::vec4 DEFAULT_POINT_COLOR = {255, 255, 255, 1};
 const glm::vec4 SELECTED_POINT_COLOR = {255, 0, 0, 1};
+
+constexpr int DYNAMIC_TRIANGULATE_LIMIT = 10;
 }

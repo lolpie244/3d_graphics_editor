@@ -29,7 +29,7 @@ bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
 
 bool EditorStage::CameraZoom(sf::Event event) {
     auto old_origin = Camera()->GetOrigin();
-    Camera()->Move(0, 0, -event.mouseWheelScroll.delta);
+    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * 0.1);
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
     return true;
 }
@@ -127,7 +127,15 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
     }
 
     this->last_vertex_position = intersect_point;
+	if (selected_vertexes_.size() <= settings::DYNAMIC_TRIANGULATE_LIMIT)
+		model->Triangulate(selected_vertexes_);
+
     return true;
+}
+
+bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
+	model->Triangulate(selected_vertexes_);
+	return true;
 }
 
 bool EditorStage::DuplicateSelected(sf::Event event) {

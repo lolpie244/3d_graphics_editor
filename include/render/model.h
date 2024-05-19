@@ -27,6 +27,7 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
         Surface = 2,
         Pending = 3,
     };
+    typedef std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> SelectedVertices;
 
    public:
     Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
@@ -42,13 +43,15 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);
 
-	void AddFace(const std::vector<unsigned int>& face);
+    void AddFace(const std::vector<unsigned int>& face);
 
-	int AddPenging(ModelVertex vertex);
-	std::vector<unsigned int> RemovePendings(const std::vector<unsigned int> ids);
+    int AddPenging(ModelVertex vertex);
+    std::vector<unsigned int> RemovePendings(const std::vector<unsigned int> ids);
+
+    void Triangulate(const SelectedVertices& vertices);
 
    private:
-	Mesh<ModelVertex>* GetMesh(unsigned int type) { return type == DataType::Point ? &mesh_ : &pending_mesh_; }
+    Mesh<ModelVertex>* GetMesh(unsigned int type) { return type == DataType::Point ? &mesh_ : &pending_mesh_; }
 
    public:
     sf::Texture texture;

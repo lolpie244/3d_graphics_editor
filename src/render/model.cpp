@@ -50,7 +50,7 @@ size_t ModelVertex::Hash() const {
 }
 
 Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
-    : mesh_(mesh, config), pending_mesh_({}, MeshConfig({.changeable = MeshConfig::Dynamic, .triangulate = false})) {
+    : mesh_(mesh, config), pending_mesh_(MeshConfig({.changeable = MeshConfig::Dynamic, .triangulate = false})) {
     glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
     for (auto& vertex : mesh.vertices) {
         min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
@@ -149,6 +149,17 @@ std::vector<unsigned int> Model::RemovePendings(const std::vector<unsigned int> 
     for (int i = start_position; i < mesh_.Vertices().size(); i++) result.push_back(i);
 
     return result;
+}
+
+void Model::Triangulate(const SelectedVertices& changed_vertices) {
+	std::vector<unsigned int> ids;
+
+	for (auto info : changed_vertices) {
+		if (info.ObjectID != Id() || info.Type != Model::Point)
+			continue;
+		ids.push_back(info.VertexId);
+	}
+	mesh_.Triangulate(ids);
 }
 
 }  // namespace render
