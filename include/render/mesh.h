@@ -181,7 +181,7 @@ class Mesh {
         Draw(type, shader);
     }
 
-    void Draw(unsigned int type, data::Shader& shader, const math::Transform* transform) const {
+    void Draw(unsigned int type, data::Shader& shader, const math::MatrixTransform* transform) const {
         shader.setUniform("u_Model", transform->GetTransformation());
         Draw(type, shader);
     }

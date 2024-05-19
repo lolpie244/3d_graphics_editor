@@ -80,7 +80,7 @@ bool EditorStage::ContextRelease(sf::Event event) {
     auto size = glm::vec2(rect.width, rect.height);
 
     for (auto& pixel : Context()->PickingTexture.ReadArea(position.x, position.y, size.x, size.y)) {
-        if (pixel.ObjectID == 0)
+        if (pixel.ObjectID == 0 || pixel.Type == render::Model::Surface)
             continue;
         Select(pixel);
     }

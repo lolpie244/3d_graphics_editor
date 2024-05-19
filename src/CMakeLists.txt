@@ -19,6 +19,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	gui/opengl_context.cpp
 
 	math/transform.cpp
+	math/model_transform.cpp
 
 	render/model.cpp
 	render/gizmo.cpp

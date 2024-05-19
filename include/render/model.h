@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Transformable.hpp>
 
 #include "data/shader.h"
+#include "math/transform.h"
 #include "mesh.h"
 #include "utils/uuid.h"
 #include "vertex.h"
@@ -20,7 +21,7 @@ struct ModelVertex : public Vertex<ModelVertex> {
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Model : virtual public UUID, virtual public math::Transform, virtual public events::Draggable3D {
+class Model : virtual public UUID, virtual public math::ModelTransform, virtual public events::Draggable3D {
    public:
     enum DataType {
         Point = 1,
@@ -31,6 +32,8 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
 
    public:
     Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
+
+	using math::ModelTransform::GetTransformation;
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
 

@@ -38,12 +38,18 @@ bool Gizmo::PressEvent(sf::Event event) {
 }
 
 bool Gizmo::MoveEvent(sf::Event event, glm::vec3 move) {
-    move = scale * move * math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
+	auto axis = math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Type);
+	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(axis, 1.0f);
+    move = scale * move * normal * settings::MOUSE_SENSATIVITY * axis;
+
     current_model_->Move(move.x, move.y, move.z);
     return true;
 }
 bool Gizmo::ScaleEvent(sf::Event event, glm::vec3 move) {
-    move = scale * move * math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Type) * settings::MOUSE_SENSATIVITY;
+	auto axis = math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Type);
+	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(axis, 1.0f);
+
+    move = scale * move * normal * settings::MOUSE_SENSATIVITY * axis;
     auto scale = current_model_->GetScale() + move;
     current_model_->SetScale(scale.x, scale.y, scale.z);
     return true;
@@ -56,7 +62,8 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
     auto axis = gizmos_[Mode::Rotate]->PressInfo().Type;
 
     glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
-    auto new_point = ray.PlainIntersection(gizmo_center, glm::normalize(normal));
+	normal = glm::normalize(normal);
+    auto new_point = ray.PlainIntersection(gizmo_center, normal);
 
     if (old_point == glm::vec3{-1, -1, -1}) {
         old_point = new_point;
@@ -66,12 +73,10 @@ bool Gizmo::RotateEvent(sf::Event event, glm::vec3 move) {
     auto old_vec = (old_point - gizmo_center);
     auto new_vec = (new_point - gizmo_center);
 
-    // TODO: fix
     float angle =
-        glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), glm::normalize(normal)));
+        glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), normal));
 
-    current_model_->Rotate(angle, axis);
-    gizmos_[Mode::Rotate]->Rotate(angle, axis);
+    current_model_->GlobalTransform.Rotate(-1 * angle, axis);
 
     old_point = new_point;
     return true;
@@ -101,13 +106,13 @@ void Gizmo::SetModel(render::Model* model) {
     max = model->GetTransformation() * glm::vec4(max, 1.0f);
 
     for (int gizmo_id = 0; gizmo_id < Mode::EnumSize; gizmo_id++) {
-        float scale = INT_MAX;
+        float new_scale = INT_MAX;
         auto gizmo_box = gizmos_[gizmo_id]->ModelMesh().MeshBox();
 
         for (int i = 0; i < 3; i++)
-            scale = std::min(scale, (max[i] - min[i]) / (gizmo_box.second[i] - gizmo_box.first[i]));
+            new_scale = std::min(new_scale, (max[i] - min[i]) / (gizmo_box.second[i] - gizmo_box.first[i]));
 
-        gizmos_[gizmo_id]->SetScale(scale, scale, scale);
+        gizmos_[gizmo_id]->SetScale(new_scale, new_scale, new_scale);
     }
 }
 void Gizmo::SetMode(Mode mode) { current_mode_ = mode; }
