@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "data/texture.h"
+#include "editor/network/network.h"
 #include "gui/select_rect.h"
 #include "render/mesh.h"
 
@@ -38,6 +39,21 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 
+    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::H}, [this](sf::Event event) {
+        if (connection_ == nullptr)
+            connection_ = std::make_unique<Host>(this);
+        return true;
+    }));
+
+    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::C}, [this](sf::Event event) {
+        if (connection_ == nullptr)
+            connection_ = std::make_unique<Client>(this);
+        return true;
+    }));
+
+    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
+                                       [this](sf::Event event) { return JoinSelected(event); }));
+
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
     opengl_context_->BindRelease(observer_, [&](sf::Event event) { return ContextRelease(event); }, {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return ContextDrag(event, moved); },
@@ -48,7 +64,8 @@ void EditorStage::BindEvents() {
 
     for (auto& [_, model] : models) {
         model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
-        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); }, {sf::Mouse::Left});
+        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); },
+                           {sf::Mouse::Left});
         model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
                         {sf::Mouse::Left});
     }
@@ -77,6 +94,8 @@ EditorStage::EditorStage() : gizmo(this->observer_, this->scale) {
 }
 
 void EditorStage::Run() {
+	PerformPendingVertexMovement();
+
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
         draw_modes_[current_draw_mode_]->DrawPicker(models);

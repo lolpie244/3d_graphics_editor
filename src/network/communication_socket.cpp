@@ -18,8 +18,6 @@
 #include "utils/settings.h"
 
 namespace tcp_socket {
-using std::string, std::stringstream;
-
 CommunicationSocket::CommunicationSocket(FileDescriptor socket_fd, sockaddr_storage address, bool is_server)
     : socket_fd(socket_fd), address(address), is_server(is_server) {}
 
@@ -38,47 +36,16 @@ void CommunicationSocket::send(const char *message) const {
     }
 }
 
-void CommunicationSocket::send(stringstream &message) const {
-    string next_message;
+void CommunicationSocket::send(std::stringstream &message) const {
+    std::string next_message;
     std::getline(message, next_message, '\0');
     send(next_message.c_str());
 }
 
-void CommunicationSocket::send(const string &message) const { send(message.c_str()); }
-
-template <typename FuncReturnType>
-std::future<FuncReturnType> CommunicationSocket::on_recieve(
-    std::function<FuncReturnType(char *message, const CommunicationSocket &socket)> callback_function) {
-    char buffer[settings::PACKAGE_SIZE];
-    int recieve_size = ::recv(socket_fd, buffer, settings::PACKAGE_SIZE, 0);
-
-    if (recieve_size <= 0) {
-        return std::async([]() { return FuncReturnType(); });
-    }
-
-    return std::async(std::launch::async, callback_function, buffer, *this);
-}
-
-template <typename FuncReturnType>
-std::future<FuncReturnType> CommunicationSocket::on_recieve(
-    std::function<FuncReturnType(stringstream &message, const CommunicationSocket &address)> callback_function) {
-    return on_recieve([callback_function](char *buffer, const CommunicationSocket &socket) {
-        stringstream message(buffer);
-        callback_function(message, socket);
-    });
-}
-
-template <typename FuncReturnType>
-std::future<FuncReturnType> CommunicationSocket::on_recieve(
-    std::function<FuncReturnType(string &message, const CommunicationSocket &address)> callback_function) {
-    return on_recieve([=](char *buffer, const CommunicationSocket &socket) {
-        string message(buffer);
-        callback_function(message, socket);
-    });
-}
+void CommunicationSocket::send(const std::string &message) const { send(message.c_str()); }
 
 CommunicationSocket::~CommunicationSocket() {
-    if (is_server)
-        ::close(socket_fd);
+    // if (is_server)
+    //     ::close(socket_fd);
 }
 }  // namespace tcp_socket

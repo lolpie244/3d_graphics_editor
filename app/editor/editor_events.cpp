@@ -7,6 +7,7 @@
 
 #include "data/model_loader.h"
 #include "editor.h"
+#include "editor/network/network.h"
 #include "math/points_cast.h"
 #include "math/ray.h"
 #include "math/utils.h"
@@ -32,7 +33,7 @@ bool EditorStage::CameraZoom(sf::Event event) {
     Camera()->Move(0, 0, -event.mouseWheelScroll.delta * scale);
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
 
-	scale = std::min(0.1, std::abs(scale - 0.001 * event.mouseWheelScroll.delta));
+    scale = std::min(0.1, std::abs(scale - 0.001 * event.mouseWheelScroll.delta));
     return true;
 }
 
@@ -126,18 +127,20 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         auto* model = models[vertex_info.ObjectID].get();
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
+        if (connection_)
+            connection_->SendVertexMoved(vertex_info, move);
     }
 
     this->last_vertex_position = intersect_point;
-	if (selected_vertexes_.size() <= settings::DYNAMIC_TRIANGULATE_LIMIT)
-		model->Triangulate(selected_vertexes_);
+    if (selected_vertexes_.size() <= settings::DYNAMIC_TRIANGULATE_LIMIT)
+        model->Triangulate(selected_vertexes_);
 
     return true;
 }
 
 bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
-	model->Triangulate(selected_vertexes_);
-	return true;
+    model->Triangulate(selected_vertexes_);
+    return true;
 }
 
 bool EditorStage::DuplicateSelected(sf::Event event) {
@@ -180,4 +183,13 @@ bool EditorStage::JoinSelected(sf::Event event) {
 
     model->AddFace(indices);
     return true;
+}
+
+void EditorStage::PerformPendingVertexMovement() {
+    for (auto& [vertex, moved_to] : PendingVertexMovement) {
+        auto* model = models.at(vertex.ObjectID).get();
+        model->SetVertexPosition(vertex.VertexId, vertex.Type,
+                                 model->Vertex(vertex.VertexId, vertex.Type).position + moved_to);
+    }
+    PendingVertexMovement.clear();
 }

@@ -1,4 +1,5 @@
 #include "network.h"
+#include "editor/editor.h"
 
 std::istream& operator>>(std::istream& is, render::PickingTexture::Info& vertex) {
     is >> vertex.ObjectID >> vertex.VertexId >> vertex.Type;
@@ -20,13 +21,20 @@ std::ostream& operator<<(std::ostream& os, const glm::vec3& vertex) {
     return os;
 }
 
+Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
+
 void Collaborator::SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to) {
     std::stringstream data;
     data << Events::VertexMove << ' ' << vertex << ' ' << moved_to << '\n';
     SendData(data.str());
 }
 
-void Collaborator::VertexMovedHandler(std::stringstream& data) { std::cout << "Receive data " << data.str() << '\n'; }
+void Collaborator::VertexMovedHandler(std::stringstream& data) {
+	render::PickingTexture::Info vertex;
+	glm::vec3 moved_to;
+	data >> vertex >> moved_to;
+	stage->PendingVertexMovement.push_back({vertex, moved_to});
+}
 
 void Collaborator::ReceiveData(std::stringstream& data) {
     static const std::unordered_map<unsigned int, EventHandler> events{
@@ -35,5 +43,6 @@ void Collaborator::ReceiveData(std::stringstream& data) {
 
     unsigned int event;
     data >> event;
-    events.at(event)(this, data);
+	if (events.contains(event))
+		events.at(event)(this, data);
 }

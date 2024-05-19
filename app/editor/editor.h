@@ -2,6 +2,7 @@
 
 #include "editor/gizmo.h"
 #include "editor/mode.h"
+#include "editor/network/network.h"
 #include "events/event.h"
 #include "gui/select_rect.h"
 #include "render/model.h"
@@ -10,15 +11,17 @@
 using render::PickingTexture;
 
 class EditorStage : public stage::Stage {
-	using SelectedVertices = render::Model::SelectedVertices;
+    using SelectedVertices = render::Model::SelectedVertices;
 
    public:
     EditorStage();
     void Run() override;
     void BindEvents();
 
-	void Select(render::PickingTexture::Info info);
+    void Select(render::PickingTexture::Info info);
     void ClearSelection();
+
+	void PerformPendingVertexMovement();
 
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
@@ -32,12 +35,15 @@ class EditorStage : public stage::Stage {
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
     bool ModelRelease(sf::Event event, render::Model* model);
 
-	bool DuplicateSelected(sf::Event event);
-	bool JoinSelected(sf::Event event);
+    bool DuplicateSelected(sf::Event event);
+    bool JoinSelected(sf::Event event);
+
+   public:
+    std::vector<std::pair<render::PickingTexture::Info, glm::vec3>> PendingVertexMovement;
 
    private:
-    std::vector<events::Event> events;
     render::ModelsList models;
+    std::vector<events::Event> events;
 
     Gizmo gizmo;
     std::unique_ptr<DrawMode> draw_modes_[3]{
@@ -45,11 +51,13 @@ class EditorStage : public stage::Stage {
         std::make_unique<MixedDraw>(),
         std::make_unique<TransparentDraw>(),
     };
-	std::shared_ptr<gui::SelectRect> selection_rect_;
+    std::shared_ptr<gui::SelectRect> selection_rect_;
 
     SelectedVertices selected_vertexes_;
-    int current_draw_mode_ = 0;
+    int current_draw_mode_ = 1;
 
-	glm::vec3 last_vertex_position = {-1, -1, -1};
-	float scale = 1;
+    glm::vec3 last_vertex_position = {-1, -1, -1};
+    float scale = 1;
+
+    std::unique_ptr<Collaborator> connection_;
 };

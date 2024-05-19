@@ -10,7 +10,7 @@ class FileDescriptor
 public:
 	FileDescriptor(): value(-1), count(new int(1)){};
 	FileDescriptor(int value): value(value), count(new int(1)) {
-		std::cout << "Create fd" << value << '\n';
+		std::cout << "Create fd " << value << '\n';
 
 	};
 	FileDescriptor(FileDescriptor const &fd) {
