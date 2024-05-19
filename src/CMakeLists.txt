@@ -30,6 +30,9 @@ add_library(${PROJECT_NAME}-static STATIC
 	render/opengl/vertex_array.cpp
 	render/opengl/vertex_buffer.cpp
 
+	network/communication_socket.cpp
+	network/connection_socket.cpp
+
 	stage/stage.cpp
 	stage/stage_manager.cpp
 )
