@@ -48,12 +48,13 @@ void EditorStage::BindEvents() {
 
     for (auto& [_, model] : models) {
         model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
+        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); }, {sf::Mouse::Left});
         model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
                         {sf::Mouse::Left});
     }
 }
 
-EditorStage::EditorStage() : gizmo(this->observer_) {
+EditorStage::EditorStage() : gizmo(this->observer_, this->scale) {
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
     opengl_context_->SetLeftCorner(50, 0);
     opengl_context_->Resize(glm::vec2(1700, 1080));

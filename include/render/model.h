@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Transformable.hpp>
 
 #include "data/shader.h"
+#include "math/transform.h"
 #include "mesh.h"
 #include "utils/uuid.h"
 #include "vertex.h"
@@ -20,16 +21,19 @@ struct ModelVertex : public Vertex<ModelVertex> {
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Model : virtual public UUID, virtual public math::Transform, virtual public events::Draggable3D {
+class Model : virtual public UUID, virtual public math::ModelTransform, virtual public events::Draggable3D {
    public:
     enum DataType {
         Point = 1,
         Surface = 2,
         Pending = 3,
     };
+    typedef std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> SelectedVertices;
 
    public:
     Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
+
+	using math::ModelTransform::GetTransformation;
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
 
@@ -38,17 +42,20 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
 
     const ModelVertex Vertex(int id, unsigned int type) const;
     const std::vector<ModelVertex>& Vertices(unsigned int type) const;
+	const Mesh<ModelVertex>& ModelMesh() const;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);
 
-	void AddFace(const std::vector<unsigned int>& face);
+    void AddFace(const std::vector<unsigned int>& face);
 
-	int AddPenging(ModelVertex vertex);
-	std::vector<unsigned int> RemovePendings(const std::vector<unsigned int> ids);
+    int AddPenging(ModelVertex vertex);
+    std::vector<unsigned int> RemovePendings(const std::vector<unsigned int> ids);
+
+    void Triangulate(const SelectedVertices& vertices);
 
    private:
-	Mesh<ModelVertex>* GetMesh(unsigned int type) { return type == DataType::Point ? &mesh_ : &pending_mesh_; }
+    Mesh<ModelVertex>* GetMesh(unsigned int type) { return type == DataType::Point ? &mesh_ : &pending_mesh_; }
 
    public:
     sf::Texture texture;

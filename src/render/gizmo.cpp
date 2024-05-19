@@ -42,9 +42,9 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_ObjectId", Id());
     this->SetRotation({0, 0, 0});
-    this->SetPosition(0);
+	this->SetPosition(0);
 
-    math::Transform transform = *(math::Transform*)model;
+    math::ModelTransform transform = *(math::ModelTransform*)model;
 
     transform.SetScale(1, 1, 1);
     shader.setUniform("u_Color", sf::Color::Green);
@@ -63,5 +63,7 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
 }
 
 glm::vec3 Gizmo::VertexPosition(int id) { return mesh_.Vertices()[id].position; }
+
+const Mesh<GizmoVertex>& Gizmo::ModelMesh() const { return mesh_; }
 
 }  // namespace render

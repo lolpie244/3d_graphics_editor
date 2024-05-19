@@ -5,7 +5,7 @@
 #include "math/transform.h"
 
 namespace render {
-class Camera : public math::Transform {
+class Camera : public math::LocalModelTransform {
    public:
     Camera(float fov);
     const glm::mat4 ProjectionMatrix() const;

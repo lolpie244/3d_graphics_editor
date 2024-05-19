@@ -22,11 +22,22 @@ class EarCuttingTriangulate : public Singleton<EarCuttingTriangulate> {
             return {0, 1, 2};
 
         auto vertexes = project_vertexes(positions);
-		bool is_clockwise = is_clockwise_polygon(vertexes);
+        bool is_clockwise = is_clockwise_polygon(vertexes);
         std::vector<unsigned int> result;
 
         auto it = vertexes.begin();
         int i = 0;
+
+        auto create_triangle = [&i, &result, &vertexes](auto& prev, auto& curr, auto& next) {
+            result.push_back(prev->first);
+            result.push_back(curr->first);
+            result.push_back(next->first);
+
+			i = 0;
+            vertexes.erase(curr);
+            curr = next;
+        };
+
         while (vertexes.size() > 3) {
             auto prev = it != vertexes.begin() ? std::prev(it) : std::prev(vertexes.end());
             auto next = it != std::prev(vertexes.end()) ? std::next(it) : vertexes.begin();
@@ -36,8 +47,14 @@ class EarCuttingTriangulate : public Singleton<EarCuttingTriangulate> {
 
             double angle = a.x * b.y - a.y * b.x;
 
+			if (i > vertexes.size()) {
+				create_triangle(prev, it, next);
+				continue;
+			}
+
             if (angle > 0 && !is_clockwise || angle < 0 && is_clockwise) {
                 it = next;
+				i++;
                 continue;
             }
 
@@ -51,18 +68,14 @@ class EarCuttingTriangulate : public Singleton<EarCuttingTriangulate> {
             }
             if (point_inside) {
                 it = next;
+				i++;
                 continue;
             }
-            result.push_back(prev->first);
-            result.push_back(it->first);
-            result.push_back(next->first);
 
-            vertexes.erase(it);
-            it = next;
+			create_triangle(prev, it, next);
         }
 
-		for (auto& [i, _] : vertexes)
-			result.push_back(i);
+        for (auto& [i, _] : vertexes) result.push_back(i);
 
         return result;
     }
@@ -88,7 +101,7 @@ class EarCuttingTriangulate : public Singleton<EarCuttingTriangulate> {
     }
 
     bool is_clockwise_polygon(const std::list<std::pair<int, glm::vec2>>& polygon) {
-		// if sum [(x2 - x1)(y2 + y1)] >= 0 -> clockwise
+        // if sum [(x2 - x1)(y2 + y1)] >= 0 -> clockwise
         float sum = 0;
         auto it = polygon.begin();
         for (; it != std::prev(polygon.end()); it++) {

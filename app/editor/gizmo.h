@@ -19,7 +19,7 @@ class Gizmo {
     };
 
    public:
-    Gizmo(events::Observer& observer);
+    Gizmo(events::Observer& observer, float& scale);
 
     void Draw();
     void DrawPicking();
@@ -46,6 +46,8 @@ class Gizmo {
         render::Gizmo::loadFromFile("resources/gizmo/cube.obj"),    // scale
         render::Gizmo::loadFromFile("resources/gizmo/circle.obj"),  // rotate
     };
+
+	const float& scale;
 
     data::Shader gizmo_shader_;
     data::Shader gizmo_picking_;

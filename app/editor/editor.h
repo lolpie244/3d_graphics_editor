@@ -10,7 +10,7 @@
 using render::PickingTexture;
 
 class EditorStage : public stage::Stage {
-	typedef std::unordered_set<PickingTexture::Info, PickingTexture::Info::Hash> SelectedVertices;
+	using SelectedVertices = render::Model::SelectedVertices;
 
    public:
     EditorStage();
@@ -30,6 +30,7 @@ class EditorStage : public stage::Stage {
 
     bool ModelPress(sf::Event event, render::Model* model);
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
+    bool ModelRelease(sf::Event event, render::Model* model);
 
 	bool DuplicateSelected(sf::Event event);
 	bool JoinSelected(sf::Event event);
@@ -50,4 +51,5 @@ class EditorStage : public stage::Stage {
     int current_draw_mode_ = 0;
 
 	glm::vec3 last_vertex_position = {-1, -1, -1};
+	float scale = 1;
 };

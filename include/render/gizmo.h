@@ -21,13 +21,15 @@ struct GizmoVertex : public Vertex<GizmoVertex> {
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::Transform {
+class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual public math::LocalModelTransform {
    public:
     Gizmo(const Mesh<GizmoVertex>::RawMesh& mesh);
     static std::unique_ptr<render::Gizmo> loadFromFile(const std::string& filename);
 
     void Draw(data::Shader& shader, Model* model);
     glm::vec3 VertexPosition(int id);
+
+	const Mesh<GizmoVertex>& ModelMesh() const;
 
    private:
     float length_;

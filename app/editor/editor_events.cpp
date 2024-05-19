@@ -15,7 +15,7 @@
 
 bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved);
+        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved) * scale;
         stage::StageManager::Instance().Camera()->Move(-move.x, -move.y);
         return true;
     }
@@ -29,8 +29,10 @@ bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
 
 bool EditorStage::CameraZoom(sf::Event event) {
     auto old_origin = Camera()->GetOrigin();
-    Camera()->Move(0, 0, -event.mouseWheelScroll.delta);
+    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * scale);
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
+
+	scale = std::min(0.1, std::abs(scale - 0.001 * event.mouseWheelScroll.delta));
     return true;
 }
 
@@ -46,7 +48,6 @@ void EditorStage::Select(render::PickingTexture::Info info) {
     auto model = models[info.ObjectID].get();
 
     if (info.Type == render::Model::Surface) {
-        ClearSelection();
         gizmo.SetModel(model);
         return;
     }
@@ -60,7 +61,6 @@ bool EditorStage::ContextPress(sf::Event event) {
         ClearSelection();
 
     selection_rect_->Enable();
-    selection_rect_->SetRect(0, 0, 0, 0);
     return true;
 }
 
@@ -80,12 +80,8 @@ bool EditorStage::ContextRelease(sf::Event event) {
     auto size = glm::vec2(rect.width, rect.height);
 
     for (auto& pixel : Context()->PickingTexture.ReadArea(position.x, position.y, size.x, size.y)) {
-        if (pixel.ObjectID == 0)
+        if (pixel.ObjectID == 0 || pixel.Type == render::Model::Surface)
             continue;
-        if (pixel.Type == render::Model::Surface) {
-            // TODO
-            continue;
-        }
         Select(pixel);
     }
     return true;
@@ -94,14 +90,10 @@ bool EditorStage::ContextRelease(sf::Event event) {
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     last_vertex_position = {-1, -1, -1};
 
-    if (model->PressInfo().Type == render::Model::Surface) {
-        Select(model->PressInfo());
-    }
-    if (model->PressInfo().Type == render::Model::Point || model->PressInfo().Type == render::Model::Pending) {
-        if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
-            ClearSelection();
-        Select(model->PressInfo());
-    }
+    if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
+        ClearSelection();
+
+    Select(model->PressInfo());
     return true;
 }
 
@@ -113,11 +105,15 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
     math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     render::ModelVertex vertex;
 
-    glm::vec3 vertex_position =
-        model->GetTransformation() * glm::vec4(model->Vertex(press_info.VertexId, press_info.Type).position, 1.0f);
+    auto current_vertex_position = last_vertex_position;
 
-    // TODO: fix point that is incorrect
-    auto intersect_point = ray.SphereIntersection(vertex_position);
+    if (current_vertex_position == glm::vec3{-1, -1, -1}) {
+        current_vertex_position = glm::vec4(model->Vertex(press_info.VertexId, press_info.Type).position, 1.0f);
+    }
+
+    current_vertex_position = model->GetTransformation() * glm::vec4(current_vertex_position, 1.0f);
+
+    auto intersect_point = ray.SphereIntersection(current_vertex_position);
     intersect_point = glm::inverse(model->GetTransformation()) * glm::vec4(intersect_point, 1.0f);
 
     if (this->last_vertex_position == glm::vec3(-1, -1, -1)) {
@@ -125,19 +121,23 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         return true;
     }
     auto move = intersect_point - last_vertex_position;
-    model->SetVertexPosition(press_info.VertexId, press_info.Type, intersect_point);
 
     for (auto& vertex_info : selected_vertexes_) {
-        if (vertex_info == press_info)
-            continue;
-
         auto* model = models[vertex_info.ObjectID].get();
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
     }
 
     this->last_vertex_position = intersect_point;
+	if (selected_vertexes_.size() <= settings::DYNAMIC_TRIANGULATE_LIMIT)
+		model->Triangulate(selected_vertexes_);
+
     return true;
+}
+
+bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
+	model->Triangulate(selected_vertexes_);
+	return true;
 }
 
 bool EditorStage::DuplicateSelected(sf::Event event) {
