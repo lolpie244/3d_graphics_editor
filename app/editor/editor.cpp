@@ -54,7 +54,7 @@ void EditorStage::BindEvents() {
     }
 }
 
-EditorStage::EditorStage() : gizmo(this->observer_) {
+EditorStage::EditorStage() : gizmo(this->observer_, this->scale) {
     auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
     opengl_context_->SetLeftCorner(50, 0);
     opengl_context_->Resize(glm::vec2(1700, 1080));

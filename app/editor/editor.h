@@ -48,7 +48,8 @@ class EditorStage : public stage::Stage {
 	std::shared_ptr<gui::SelectRect> selection_rect_;
 
     SelectedVertices selected_vertexes_;
-    int current_draw_mode_ = 1;
+    int current_draw_mode_ = 0;
 
 	glm::vec3 last_vertex_position = {-1, -1, -1};
+	float scale = 1;
 };

@@ -29,6 +29,8 @@ class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual p
     void Draw(data::Shader& shader, Model* model);
     glm::vec3 VertexPosition(int id);
 
+	const Mesh<GizmoVertex>& ModelMesh() const;
+
    private:
     float length_;
     Mesh<GizmoVertex> mesh_;

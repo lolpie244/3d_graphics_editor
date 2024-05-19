@@ -64,4 +64,6 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
 
 glm::vec3 Gizmo::VertexPosition(int id) { return mesh_.Vertices()[id].position; }
 
+const Mesh<GizmoVertex>& Gizmo::ModelMesh() const { return mesh_; }
+
 }  // namespace render

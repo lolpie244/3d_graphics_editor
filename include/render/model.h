@@ -39,6 +39,7 @@ class Model : virtual public UUID, virtual public math::Transform, virtual publi
 
     const ModelVertex Vertex(int id, unsigned int type) const;
     const std::vector<ModelVertex>& Vertices(unsigned int type) const;
+	const Mesh<ModelVertex>& ModelMesh() const;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);

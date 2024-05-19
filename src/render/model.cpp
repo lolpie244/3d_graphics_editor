@@ -51,15 +51,7 @@ size_t ModelVertex::Hash() const {
 
 Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
     : mesh_(mesh, config), pending_mesh_(MeshConfig({.changeable = MeshConfig::Dynamic, .triangulate = false})) {
-    glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
-    for (auto& vertex : mesh.vertices) {
-        min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
-               std::min(min.z, vertex.position.z)};
-
-        max = {std::max(max.x, vertex.position.x), std::max(max.y, vertex.position.y),
-               std::max(max.z, vertex.position.z)};
-    }
-
+    auto [min, max] = mesh_.MeshBox();
     this->SetOrigin((min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
 }
 
@@ -97,6 +89,12 @@ const std::vector<ModelVertex>& Model::Vertices(unsigned int type) const {
 }
 
 const ModelVertex Model::Vertex(int id, unsigned int type) const { return Vertices(type)[id]; }
+
+
+const Mesh<ModelVertex>& Model::ModelMesh() const {
+	return mesh_;
+}
+
 
 void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position) {
     auto old_position = Vertex(id, type).position;
@@ -152,14 +150,14 @@ std::vector<unsigned int> Model::RemovePendings(const std::vector<unsigned int> 
 }
 
 void Model::Triangulate(const SelectedVertices& changed_vertices) {
-	std::vector<unsigned int> ids;
+    std::vector<unsigned int> ids;
 
-	for (auto info : changed_vertices) {
-		if (info.ObjectID != Id() || info.Type != Model::Point)
-			continue;
-		ids.push_back(info.VertexId);
-	}
-	mesh_.Triangulate(ids);
+    for (auto info : changed_vertices) {
+        if (info.ObjectID != Id() || info.Type != Model::Point)
+            continue;
+        ids.push_back(info.VertexId);
+    }
+    mesh_.Triangulate(ids);
 }
 
 }  // namespace render

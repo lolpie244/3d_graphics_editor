@@ -197,6 +197,18 @@ class Mesh {
         VAO.Unbind();
     }
 
+    std::pair<glm::vec3, glm::vec3> MeshBox() const {
+        glm::vec3 min = {INT_MAX, INT_MAX, INT_MAX}, max{-INT_MAX, -INT_MAX, -INT_MAX};
+        for (auto& vertex : raw_mesh_.vertices) {
+            min = {std::min(min.x, vertex.position.x), std::min(min.y, vertex.position.y),
+                   std::min(min.z, vertex.position.z)};
+
+            max = {std::max(max.x, vertex.position.x), std::max(max.y, vertex.position.y),
+                   std::max(max.z, vertex.position.z)};
+        }
+        return {min, max};
+    }
+
    protected:
     VertexArray VAO;
     VertexBuffer VBO;
