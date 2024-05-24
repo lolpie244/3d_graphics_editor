@@ -24,6 +24,10 @@ build:
 run: build
 	prime-run build/app/3d_graphics
 
+.PHONY: run-intel
+run-intel: build
+	build/app/3d_graphics
+
 
 .PHONY: format
 format:

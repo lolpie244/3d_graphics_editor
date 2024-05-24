@@ -52,6 +52,8 @@ class Button : virtual public SpriteGuiElement, virtual public events::Clickable
     void SetPressedTexture(TextureInfo texture);
     void SetReleasedTexture(TextureInfo texture);
 
+	virtual void SetPosition(float x = 0, float y = 0, float z = 0) override;
+
    private:
     void SetTexture(data::Texture texture) override { SpriteGuiElement::SetTexture(texture); };
     void update_texture();
