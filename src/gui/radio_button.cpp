@@ -11,7 +11,7 @@ RadioButton::RadioButton(glm::vec3 position, glm::vec2 size) : RadioButton(posit
 RadioButton::RadioButton(glm::vec3 position, glm::vec2 size, GroupType group) : group_(group) {
     this->SetPosition(position.x, position.y, position.z);
     this->Resize(size);
-	group_->AddButton(this);
+    group_->AddButton(this);
 }
 
 RadioButton::~RadioButton() { group_->RemoveButton(this); }
@@ -38,7 +38,7 @@ RadioButton::GroupType RadioButton::Group() { return group_; }
 void RadioButton::SetGroup(GroupType new_group) {
     group_->RemoveButton(this);
     group_ = new_group;
-	group_->AddButton(this);
+    group_->AddButton(this);
 }
 
 }  // namespace gui

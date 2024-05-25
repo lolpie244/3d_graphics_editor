@@ -82,9 +82,8 @@ void Button::UpdateTexture() {
 }
 
 void Button::SetPosition(float x, float y, float z) {
-	SpriteGuiElement::SetPosition(x, y, z);
-	text_.SetPosition(x, y, z);
+    SpriteGuiElement::SetPosition(x, y, z);
+    text_.SetPosition(x, y, z);
 }
-
 
 }  // namespace gui

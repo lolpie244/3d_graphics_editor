@@ -1,5 +1,5 @@
-#include "network.h"
 #include "editor/editor.h"
+#include "network.h"
 
 std::istream& operator>>(std::istream& is, render::PickingTexture::Info& vertex) {
     is >> vertex.ObjectID >> vertex.VertexId >> vertex.Type;
@@ -30,10 +30,10 @@ void Collaborator::SendVertexMoved(render::PickingTexture::Info vertex, glm::vec
 }
 
 void Collaborator::VertexMovedHandler(std::stringstream& data) {
-	render::PickingTexture::Info vertex;
-	glm::vec3 moved_to;
-	data >> vertex >> moved_to;
-	stage->PendingVertexMovement.push_back({vertex, moved_to});
+    render::PickingTexture::Info vertex;
+    glm::vec3 moved_to;
+    data >> vertex >> moved_to;
+    stage->PendingVertexMovement.push_back({vertex, moved_to});
 }
 
 void Collaborator::ReceiveData(std::stringstream& data) {
@@ -43,6 +43,6 @@ void Collaborator::ReceiveData(std::stringstream& data) {
 
     unsigned int event;
     data >> event;
-	if (events.contains(event))
-		events.at(event)(this, data);
+    if (events.contains(event))
+        events.at(event)(this, data);
 }

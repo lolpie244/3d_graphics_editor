@@ -2,7 +2,7 @@
 
 #include "network.h"
 
-Host::Host(EditorStage* stage): Collaborator(stage) {
+Host::Host(EditorStage* stage) : Collaborator(stage) {
     socket = std::make_unique<tcp_socket::ConnectionSocket>(settings::PORT);
 
     listener = std::async(std::launch::async, [this]() {
@@ -35,9 +35,9 @@ void Host::ReceiveData(std::stringstream& data, const tcp_socket::CommunicationS
     if (events.contains(event))
         events.at(event)(this, socket, data);
     else {
-		data.seekg(0);
+        data.seekg(0);
         Collaborator::ReceiveData(data);
-	}
+    }
 }
 
 void Host::NewConnection(const tcp_socket::CommunicationSocket& socket, std::stringstream& data) {

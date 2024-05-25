@@ -34,5 +34,5 @@ void EditorStage::InitGui() {
         i++;
     }
 
-	elements_.Insert({selection_rect_});
+    elements_.Insert({selection_rect_});
 }

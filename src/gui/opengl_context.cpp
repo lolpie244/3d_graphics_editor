@@ -40,6 +40,7 @@ glm::vec2 OpenglContext::LeftCorner() const { return {Rect().left, Rect().top}; 
 void OpenglContext::update_context() {
     auto rect = this->Rect();
     PickingTexture.Resize(rect.width, rect.height);
-    glViewport(rect.left, settings::DEFAULT_RESOLUTION.y - rect.height, rect.width, settings::DEFAULT_RESOLUTION.y - rect.top);
+    glViewport(rect.left, settings::DEFAULT_RESOLUTION.y - rect.height, rect.width,
+               settings::DEFAULT_RESOLUTION.y - rect.top);
 }
 }  // namespace gui

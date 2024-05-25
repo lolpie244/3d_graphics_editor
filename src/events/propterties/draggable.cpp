@@ -36,7 +36,7 @@ void Draggable::BindDrag(events::Observer& observer, const EVENT_FUNC& function,
         last_position_ = new_position;
         return function(event, move);
     };
-	move_events_[hash(buttons)] = observer.Bind(sf::Event::MouseMoved, func, this->GetPosition().z);
+    move_events_[hash(buttons)] = observer.Bind(sf::Event::MouseMoved, func, this->GetPosition().z);
 }
 
 void Draggable3D::BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons) {

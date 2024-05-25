@@ -52,7 +52,7 @@ sf::Rect<float> ButtonsList::Rect() const {
 }
 
 void ButtonsList::Move(float x, float y, float z) {
-	GuiElement::Move(x, y, z);
+    GuiElement::Move(x, y, z);
 
     auto coef = PositionCoef();
 

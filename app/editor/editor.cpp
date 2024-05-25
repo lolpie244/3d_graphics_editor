@@ -68,12 +68,12 @@ EditorStage::EditorStage() : gizmo(this->observer_, this) {
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
     models[model->Id()] = std::move(model);
 
-	InitGui();
+    InitGui();
     BindEvents();
 }
 
 void EditorStage::Run() {
-	PerformPendingVertexMovement();
+    PerformPendingVertexMovement();
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
