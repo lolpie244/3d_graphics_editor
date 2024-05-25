@@ -16,12 +16,15 @@ class EditorStage : public stage::Stage {
    public:
     EditorStage();
     void Run() override;
+    void InitGui();
     void BindEvents();
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
 
-	void PerformPendingVertexMovement();
+	float Scale() const { return std::max(0.05f, scale_); }
+
+    void PerformPendingVertexMovement();
 
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
@@ -46,18 +49,19 @@ class EditorStage : public stage::Stage {
     std::vector<events::Event> events;
 
     Gizmo gizmo;
-    std::unique_ptr<DrawMode> draw_modes_[3]{
-        std::make_unique<TextureDraw>(),
-        std::make_unique<MixedDraw>(),
-        std::make_unique<TransparentDraw>(),
+    std::pair<sf::String, std::unique_ptr<DrawMode>> draw_modes_[3]{
+        {L"", std::make_unique<TextureDraw>()},
+        {L"󱎖", std::make_unique<MixedDraw>()},
+        {L"", std::make_unique<TransparentDraw>()},
     };
+    DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
+
     std::shared_ptr<gui::SelectRect> selection_rect_;
 
     SelectedVertices selected_vertexes_;
-    int current_draw_mode_ = 1;
 
     glm::vec3 last_vertex_position = {-1, -1, -1};
-    float scale = 1;
+    float scale_ = 1;
 
     std::unique_ptr<Collaborator> connection_;
 };

@@ -16,7 +16,7 @@
 
 bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved) * scale;
+        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved) * Scale();
         stage::StageManager::Instance().Camera()->Move(-move.x, -move.y);
         return true;
     }
@@ -30,10 +30,10 @@ bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
 
 bool EditorStage::CameraZoom(sf::Event event) {
     auto old_origin = Camera()->GetOrigin();
-    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * scale);
+    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * Scale());
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
 
-    scale = std::min(0.1, std::abs(scale - 0.001 * event.mouseWheelScroll.delta));
+    scale_ = scale_ - 0.5 * event.mouseWheelScroll.delta;
     return true;
 }
 

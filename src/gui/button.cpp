@@ -45,26 +45,26 @@ gui::ButtonText& Button::Text() { return text_; }
 
 void Button::BindPress(events::Observer& observer, const events::EVENT_FUNC& function, MouseButtons buttons) {
     auto event_function = [this, function](sf::Event event) {
-        update_texture();
+        UpdateTexture();
         return function(event);
     };
 
     events::Clickable::BindPress(observer, event_function, buttons);
 }
 
-void Button::OnRelease(sf::Event event) { update_texture(); }
+void Button::OnRelease(sf::Event event) { UpdateTexture(); }
 
 void Button::SetPressedTexture(TextureInfo texture) {
     pressed_texture_ = texture;
-    update_texture();
+    UpdateTexture();
 }
 
 void Button::SetReleasedTexture(TextureInfo texture) {
     released_texture_ = texture;
-    update_texture();
+    UpdateTexture();
 }
 
-void Button::update_texture() {
+void Button::UpdateTexture() {
     TextureInfo* current_texture_;
 
     if (released_texture_.texture && (!this->IsPressed() || pressed_texture_.texture == nullptr)) {
@@ -82,7 +82,7 @@ void Button::update_texture() {
 }
 
 void Button::SetPosition(float x, float y, float z) {
-	GuiElement::SetPosition(x, y, z);
+	SpriteGuiElement::SetPosition(x, y, z);
 	text_.SetPosition(x, y, z);
 }
 

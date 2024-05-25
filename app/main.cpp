@@ -22,7 +22,6 @@ int main() {
 
     stage::StageManager& stage_manager = stage::StageManager::Instance();
     stage_manager.InitWindow(sf::VideoMode(1920, 1080), "test", sf::Style::Fullscreen, settings);
-    stage_manager.Window()->setFramerateLimit(260);
     stage_manager.Window()->setMouseCursorGrabbed(true);
 
     GLenum err = glewInit();
@@ -35,9 +34,6 @@ int main() {
     glEnable(GL_PROGRAM_POINT_SIZE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glLineWidth(2);
-
-	// glEnable(GL_PRIMITIVE_RESTART);
-	// glPrimitiveRestartIndex(0xFFFF);
 
 #if DEBUG
     glEnable(GL_DEBUG_OUTPUT);

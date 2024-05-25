@@ -14,7 +14,7 @@
 #include "math/ray.h"
 #include "math/transform.h"
 
-Gizmo::Gizmo(events::Observer& observer, float& scale): scale(scale) {
+Gizmo::Gizmo(events::Observer& observer, EditorStage* stage): stage_(stage) {
     gizmo_shader_.loadFromFile("shaders/gizmo.vert", "shaders/gizmo.frag");
     gizmo_picking_.loadFromFile("shaders/gizmo.vert", "shaders/picking.frag");
 
@@ -40,7 +40,7 @@ bool Gizmo::PressEvent(sf::Event event) {
 bool Gizmo::MoveEvent(sf::Event event, glm::vec3 move) {
 	auto axis = math::axis_to_vector(gizmos_[Mode::Move]->PressInfo().Type);
 	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(axis, 1.0f);
-    move = scale * move * normal * settings::MOUSE_SENSATIVITY * axis;
+    move = stage_->Scale() * 2 * move * normal * settings::MOUSE_SENSATIVITY * axis;
 
     current_model_->Move(move.x, move.y, move.z);
     return true;
@@ -49,7 +49,7 @@ bool Gizmo::ScaleEvent(sf::Event event, glm::vec3 move) {
 	auto axis = math::axis_to_vector(gizmos_[Mode::Scale]->PressInfo().Type);
 	glm::vec3 normal = current_model_->GetTransformation() * glm::vec4(axis, 1.0f);
 
-    move = scale * move * normal * settings::MOUSE_SENSATIVITY * axis;
+    move = stage_->Scale() * 2 * move * normal * settings::MOUSE_SENSATIVITY * axis;
     auto scale = current_model_->GetScale() + move;
     current_model_->SetScale(scale.x, scale.y, scale.z);
     return true;

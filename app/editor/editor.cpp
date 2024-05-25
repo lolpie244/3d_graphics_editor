@@ -19,20 +19,6 @@ void EditorStage::BindEvents() {
         return true;
     }));
 
-    events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
-        auto next = 0;
-        if (event.key.code == sf::Keyboard::Left)
-            next -= 1;
-
-        if (event.key.code == sf::Keyboard::Right)
-            next += 1;
-        if (next)
-            gizmo.SetModel(nullptr);
-
-        current_draw_mode_ = (3 + current_draw_mode_ + next) % 3;
-        return next;
-    }));
-
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::D},
                                        [this](sf::Event event) { return DuplicateSelected(event); }));
 
@@ -71,25 +57,18 @@ void EditorStage::BindEvents() {
     }
 }
 
-EditorStage::EditorStage() : gizmo(this->observer_, this->scale) {
-    auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
-    opengl_context_->SetLeftCorner(50, 0);
-    opengl_context_->Resize(glm::vec2(1700, 1080));
-
+EditorStage::EditorStage() : gizmo(this->observer_, this) {
     camera_->Move(0.0f, 0.0f, 3.0f);
     camera_->SetOrigin(0, 0, 0);
     ///////////////////////////////////////////
     auto model = render::Model::loadFromFile(
-        "resources/cube_1.obj", render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+        "resources/lock.obj", render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
 
     model->Scale(0.5, 0.5, 0.5);
     model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
     models[model->Id()] = std::move(model);
-    ///////////////////////////////////////////
-    selection_rect_ = std::make_shared<gui::SelectRect>();
-    selection_rect_->Disable();
-    ///////////////////////////////////////////
-    elements_.Insert({selection_rect_});
+
+	InitGui();
     BindEvents();
 }
 
@@ -98,12 +77,12 @@ void EditorStage::Run() {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
-        draw_modes_[current_draw_mode_]->DrawPicker(models);
+        current_draw_mode_->DrawPicker(models);
         gizmo.DrawPicking();
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
-    draw_modes_[current_draw_mode_]->Draw(models);
+    current_draw_mode_->Draw(models);
     gizmo.Draw();
     FrameEnd();
 }

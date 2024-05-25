@@ -47,9 +47,9 @@ MenuStage::MenuStage() {
 	auto button_list = std::make_shared<gui::ButtonsList>(glm::vec3(900, 300, 0), glm::vec2(380, 94));
 
 
-	auto test = std::make_shared<gui::ButtonFromList>(L"Кнопка 1");
-	auto test1 = std::make_shared<gui::ButtonFromList>(L"Кнопка 2");
-	auto test2 = std::make_shared<gui::ButtonFromList>(L"Випадне меню");
+	auto test = std::make_shared<gui::ButtonFromList>(L"");
+	auto test1 = std::make_shared<gui::ButtonFromList>(L"󱎖");
+	auto test2 = std::make_shared<gui::ButtonFromList>(L"");
 
 	auto test3 = std::make_shared<gui::ButtonFromList>(L"Кнопка 3");
 	auto test4 = std::make_shared<gui::ButtonFromList>(L"Кнопка 4");

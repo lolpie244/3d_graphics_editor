@@ -9,6 +9,8 @@
 #include "render/model.h"
 #include "stage/stage.h"
 
+class EditorStage;
+
 class Gizmo {
    public:
     enum Mode {
@@ -19,7 +21,7 @@ class Gizmo {
     };
 
    public:
-    Gizmo(events::Observer& observer, float& scale);
+    Gizmo(events::Observer& observer, EditorStage* stage);
 
     void Draw();
     void DrawPicking();
@@ -36,7 +38,7 @@ class Gizmo {
     bool RotateEvent(sf::Event event, glm::vec3 move);
 
     render::Gizmo* CurrentGizmo() { return gizmos_[current_mode_].get(); }
-	
+
  private:
 	glm::vec3 GetPoint(glm::vec2 mouse);
 
@@ -47,7 +49,7 @@ class Gizmo {
         render::Gizmo::loadFromFile("resources/gizmo/circle.obj"),  // rotate
     };
 
-	const float& scale;
+	EditorStage* stage_;
 
     data::Shader gizmo_shader_;
     data::Shader gizmo_picking_;
