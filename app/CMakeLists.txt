@@ -6,6 +6,10 @@ add_executable(${PROJECT_NAME}
 	editor/editor_events.cpp
 	editor/gizmo.cpp
 	editor/mode.cpp
+
+	editor/network/collaborator.cpp
+	editor/network/host.cpp
+	editor/network/client.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} ${PROJECT_NAME}-static)

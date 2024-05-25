@@ -17,7 +17,7 @@ void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* butt
 
     this->BindMouseIn(observer, [button_list, this](sf::Event event) {
         button_list->Enable();
-        auto coef = dynamic_cast<ButtonsList*>(this->parent)->orientation_ == ListOrientation::Vertical
+        auto coef = dynamic_cast<ButtonsList*>(this->parent)->orientation_ == ListOrientation::Horizontal
                         ? glm::vec2{0, this->Size().y}
                         : glm::vec2{this->Size().x, 0};
 
@@ -52,6 +52,8 @@ sf::Rect<float> ButtonsList::Rect() const {
 }
 
 void ButtonsList::Move(float x, float y, float z) {
+	GuiElement::Move(x, y, z);
+
     auto coef = PositionCoef();
 
     for (float i = 0; i < buttons_.size(); i++) {
@@ -61,7 +63,7 @@ void ButtonsList::Move(float x, float y, float z) {
 }
 
 void ButtonsList::AddButton(ButtonType button) {
-    auto button_move_to = (float)buttons_.size() * PositionCoef();
+    auto button_move_to = glm::vec2(position_) + (float)buttons_.size() * PositionCoef();
 
     button->SetParent(this);
     button->Resize(this->Size());

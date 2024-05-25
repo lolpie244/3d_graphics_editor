@@ -6,6 +6,7 @@
 #include <stdexcept>
 
 #include "events/event.h"
+#include "gui/base.h"
 #include "gui/sprite_element.h"
 #include "gui/text.h"
 
@@ -79,5 +80,11 @@ void Button::update_texture() {
     this->Text().SetOffset(current_texture_->offset);
     this->Text().SetBordersSize(current_texture_->borders_size);
 }
+
+void Button::SetPosition(float x, float y, float z) {
+	GuiElement::SetPosition(x, y, z);
+	text_.SetPosition(x, y, z);
+}
+
 
 }  // namespace gui
