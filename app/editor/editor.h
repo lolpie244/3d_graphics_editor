@@ -18,6 +18,7 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void InitGui();
     void BindEvents();
+	void BindModelEvents(render::Model*);
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
@@ -59,6 +60,12 @@ class EditorStage : public stage::Stage {
         {L"󰩨", render::Gizmo::loadFromFile<render::ScaleGizmo>("resources/gizmo/cube.obj")},
         {L"󰶘", render::Gizmo::loadFromFile<render::RotateGizmo>("resources/gizmo/circle.obj")},
     };
+
+	std::pair<sf::String, sf::String> default_figures_[3] {
+		{L"Куб", "resources/default/cube.obj"},
+		{L"Площина", "resources/default/plane.obj"},
+		{L"Піраміда", "resources/default/pyramid.obj"},
+	};
     DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
     render::Gizmo* current_gizmo_ = gizmos_[0].second.get();
 

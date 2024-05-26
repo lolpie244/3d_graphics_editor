@@ -1,4 +1,5 @@
 #include <SFML/Window/Event.hpp>
+#include <memory>
 
 #include "data/texture.h"
 #include "editor.h"
@@ -21,7 +22,9 @@ void EditorStage::InitGui() {
     file_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
 
     auto file_button = std::make_shared<gui::ButtonFromList>(L"Файл");
+    auto figures_button = std::make_shared<gui::ButtonFromList>(L"Фігури");
     auto network_button = std::make_shared<gui::ButtonFromList>(L"Мережа");
+    menu_bar->AddButtons({file_button, figures_button, network_button});
 
     file_button->AddButtonList(observer_, file_button_list);
     auto new_file = std::make_shared<gui::ButtonFromList>(L"Новий файл");
@@ -30,16 +33,41 @@ void EditorStage::InitGui() {
     auto save_as_file = std::make_shared<gui::ButtonFromList>(L"Зберегти як");
     auto import_model = std::make_shared<gui::ButtonFromList>(L"Імпорт");
     file_button_list->AddButtons({new_file, open_file, save_file, save_as_file, import_model});
-
+    /////////////////////////////////////
     auto network_button_list = std::make_shared<gui::ButtonsList>();
     network_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
-
     network_button->AddButtonList(observer_, network_button_list);
+
     auto client = std::make_shared<gui::ButtonFromList>(L"Клієнт");
     auto server = std::make_shared<gui::ButtonFromList>(L"Сервер");
     network_button_list->AddButtons({client, server});
+    ////////////////////////////////////
+    auto figures_button_list = std::make_shared<gui::ButtonsList>();
+    figures_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
+    figures_button->AddButtonList(observer_, figures_button_list);
 
-    menu_bar->AddButtons({file_button, network_button});
+    for (auto& [name, filename] : default_figures_) {
+        auto button = std::make_shared<gui::ButtonFromList>(name);
+
+        button->BindPress(observer_, [this, &filename](sf::Event) {
+            auto model = render::Model::loadFromFile(
+                filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+
+            model->texture =
+                data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
+
+			BindModelEvents(model.get());
+
+			models.insert({model->Id(), std::move(model)});
+
+            // models[model->Id()] = std::move(model);
+
+            return true;
+        });
+
+		figures_button_list->AddButton(button);
+    }
+
     client->BindPress(observer_, [this](sf::Event) {
         if (connection_ == nullptr)
             connection_ = std::make_unique<Client>(this);
@@ -90,7 +118,7 @@ void EditorStage::InitGui() {
 
         mode->BindDrag(observer_, [this, &mode](sf::Event event, glm::vec3 moved) {
             mode->MouseMove({event.mouseMove.x, event.mouseMove.y},
-                            2.0f * moved * Scale() * settings::MOUSE_SENSATIVITY, mode->PressInfo().Type);
+                            moved * settings::MOUSE_SENSATIVITY, mode->PressInfo().Type);
             return true;
         });
 

@@ -47,14 +47,13 @@ void EditorStage::BindEvents() {
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); },
                               {sf::Mouse::Right, sf::Mouse::Middle});
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
+}
 
-    for (auto& [_, model] : models) {
-        model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
-        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); },
-                           {sf::Mouse::Left});
-        model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
-                        {sf::Mouse::Left});
-    }
+void EditorStage::BindModelEvents(render::Model* model) {
+    model->BindPress(observer_, [this, model](sf::Event event) { return ModelPress(event, model); }, {sf::Mouse::Left});
+    model->BindRelease(observer_, [this, model](sf::Event event) { return ModelRelease(event, model); }, {sf::Mouse::Left});
+    model->BindDrag(observer_, [this, model](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model); },
+                    {sf::Mouse::Left});
 }
 
 EditorStage::EditorStage() {
@@ -63,13 +62,6 @@ EditorStage::EditorStage() {
 
     camera_->Move(0.0f, 0.0f, 3.0f);
     camera_->SetOrigin(0, 0, 0);
-    ///////////////////////////////////////////
-    auto model = render::Model::loadFromFile(
-        "resources/lock.obj", render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-
-    model->Scale(0.5, 0.5, 0.5);
-    model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
-    models[model->Id()] = std::move(model);
 
     InitGui();
     BindEvents();
