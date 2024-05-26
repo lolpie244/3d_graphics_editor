@@ -5,7 +5,6 @@ add_executable(${PROJECT_NAME}
 	editor/editor.cpp
 	editor/editor_events.cpp
 	editor/editor_gui.cpp
-	editor/gizmo.cpp
 	editor/mode.cpp
 
 	editor/network/collaborator.cpp

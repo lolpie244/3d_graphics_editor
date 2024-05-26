@@ -3,8 +3,10 @@
 #include <SFML/Graphics/Color.hpp>
 #include <algorithm>
 #include <cmath>
+#include <glm/gtx/vector_angle.hpp>
 
 #include "data/model_loader.h"
+#include "math/ray.h"
 #include "math/transform.h"
 #include "render/mesh.h"
 
@@ -33,18 +35,16 @@ void GizmoVertex::Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id) {
 Gizmo::Gizmo(const Mesh<GizmoVertex>::RawMesh& mesh)
     : mesh_(mesh, MeshConfig{.changeable = MeshConfig::Static, .triangulate = true}) {}
 
-std::unique_ptr<Gizmo> Gizmo::loadFromFile(const std::string& filename) {
-    auto data = data::parser::loadModelFromFile<GizmoVertex>(filename);
-    return std::make_unique<Gizmo>(data);
-}
+void Gizmo::Draw(data::Shader& shader) {
+    if (current_model_ == nullptr)
+        return;
 
-void Gizmo::Draw(data::Shader& shader, Model* model) {
     glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_ObjectId", Id());
     this->SetRotation({0, 0, 0});
     this->SetPosition(0);
 
-    math::ModelTransform transform = *(math::ModelTransform*)model;
+    math::ModelTransform transform = *(math::ModelTransform*)current_model_;
 
     transform.SetScale(1, 1, 1);
     shader.setUniform("u_Color", sf::Color::Green);
@@ -62,8 +62,64 @@ void Gizmo::Draw(data::Shader& shader, Model* model) {
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 }
 
-glm::vec3 Gizmo::VertexPosition(int id) { return mesh_.Vertices()[id].position; }
+void Gizmo::SetModel(render::Model* model) {
+    current_model_ = model;
 
-const Mesh<GizmoVertex>& Gizmo::ModelMesh() const { return mesh_; }
+    if (model == nullptr)
+        return;
+
+    auto [min, max] = model->ModelMesh().MeshBox();
+    min = model->GetTransformation() * glm::vec4(min, 1.0f);
+    max = model->GetTransformation() * glm::vec4(max, 1.0f);
+
+    float new_scale = INT_MAX;
+    auto gizmo_box = this->mesh_.MeshBox();
+
+    for (int i = 0; i < 3; i++)
+        new_scale = std::min(new_scale, (max[i] - min[i]) / (gizmo_box.second[i] - gizmo_box.first[i]));
+
+    this->SetScale(new_scale, new_scale, new_scale);
+}
+
+void Gizmo::Reset() { current_model_ = nullptr; }
+
+glm::vec3 Gizmo::Normal(unsigned int axis) const {
+    return current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
+}
+
+void TranslateGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
+    mouse_moved = mouse_moved * Normal(axis) * math::axis_to_vector(axis);
+    current_model_->Move(mouse_moved.x, mouse_moved.y, mouse_moved.z);
+}
+
+void ScaleGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
+    mouse_moved = mouse_moved * Normal(axis) * math::axis_to_vector(axis);
+    auto scale = current_model_->GetScale() + mouse_moved;
+    current_model_->SetScale(scale.x, scale.y, scale.z);
+}
+
+void RotateGizmo::MousePress() { last_position = {-1, -1, -1}; }
+
+void RotateGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
+    auto ray = math::Ray::FromPoint(mouse_position);
+    auto gizmo_center = current_model_->GetPosition();
+
+    glm::vec3 normal = Normal(axis);
+    normal = glm::normalize(normal);
+    auto new_point = ray.PlainIntersection(gizmo_center, normal);
+
+    if (last_position == glm::vec3{-1, -1, -1}) {
+        last_position = new_point;
+        return;
+    }
+
+    auto old_vec = (last_position - gizmo_center);
+    auto new_vec = (new_point - gizmo_center);
+
+    float angle = glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), normal));
+
+    current_model_->GlobalTransform.Rotate(-1 * angle, axis);
+    last_position = new_point;
+}
 
 }  // namespace render

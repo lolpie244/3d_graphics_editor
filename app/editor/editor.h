@@ -1,10 +1,10 @@
 #include <SFML/Window/Event.hpp>
 
-#include "editor/gizmo.h"
 #include "editor/mode.h"
 #include "editor/network/network.h"
 #include "events/event.h"
 #include "gui/select_rect.h"
+#include "render/gizmo.h"
 #include "render/model.h"
 #include "render/opengl/picking_texture.h"
 
@@ -48,13 +48,22 @@ class EditorStage : public stage::Stage {
     render::ModelsList models;
     std::vector<events::Event> events;
 
-    Gizmo gizmo;
     std::pair<sf::String, std::unique_ptr<DrawMode>> draw_modes_[3]{
         {L"", std::make_unique<TextureDraw>()},
         {L"󱎖", std::make_unique<MixedDraw>()},
         {L"", std::make_unique<TransparentDraw>()},
     };
+
+    std::pair<sf::String, std::unique_ptr<render::Gizmo>> gizmos_[3]{
+        {L"", render::Gizmo::loadFromFile<render::TranslateGizmo>("resources/gizmo/arrow.obj")},
+        {L"󰩨", render::Gizmo::loadFromFile<render::ScaleGizmo>("resources/gizmo/cube.obj")},
+        {L"󰶘", render::Gizmo::loadFromFile<render::RotateGizmo>("resources/gizmo/circle.obj")},
+    };
     DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
+    render::Gizmo* current_gizmo_ = gizmos_[0].second.get();
+
+	data::Shader gizmo_shader_;
+    data::Shader gizmo_picking_;
 
     std::shared_ptr<gui::SelectRect> selection_rect_;
 

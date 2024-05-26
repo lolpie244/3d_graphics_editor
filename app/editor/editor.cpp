@@ -57,7 +57,10 @@ void EditorStage::BindEvents() {
     }
 }
 
-EditorStage::EditorStage() : gizmo(this->observer_, this) {
+EditorStage::EditorStage() {
+    gizmo_shader_.loadFromFile("shaders/gizmo.vert", "shaders/gizmo.frag");
+    gizmo_picking_.loadFromFile("shaders/gizmo.vert", "shaders/picking.frag");
+
     camera_->Move(0.0f, 0.0f, 3.0f);
     camera_->SetOrigin(0, 0, 0);
     ///////////////////////////////////////////
@@ -78,11 +81,11 @@ void EditorStage::Run() {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
         current_draw_mode_->DrawPicker(models);
-        gizmo.DrawPicking();
+        current_gizmo_->Draw(gizmo_picking_);
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
     current_draw_mode_->Draw(models);
-    gizmo.Draw();
+    current_gizmo_->Draw(gizmo_shader_);
     FrameEnd();
 }

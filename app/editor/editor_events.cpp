@@ -38,7 +38,7 @@ bool EditorStage::CameraZoom(sf::Event event) {
 }
 
 void EditorStage::ClearSelection() {
-    gizmo.SetModel(nullptr);
+    current_gizmo_->Reset();
     for (auto& vertex : selected_vertexes_) {
         models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
     }
@@ -49,7 +49,7 @@ void EditorStage::Select(render::PickingTexture::Info info) {
     auto model = models[info.ObjectID].get();
 
     if (info.Type == render::Model::Surface) {
-        gizmo.SetModel(model);
+		current_gizmo_->SetModel(model);
         return;
     }
 
