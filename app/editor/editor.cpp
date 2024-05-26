@@ -49,11 +49,16 @@ void EditorStage::BindEvents() {
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 }
 
-void EditorStage::BindModelEvents(render::Model* model) {
-    model->BindPress(observer_, [this, model](sf::Event event) { return ModelPress(event, model); }, {sf::Mouse::Left});
-    model->BindRelease(observer_, [this, model](sf::Event event) { return ModelRelease(event, model); }, {sf::Mouse::Left});
-    model->BindDrag(observer_, [this, model](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model); },
-                    {sf::Mouse::Left});
+void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
+    model->BindPress(observer_, [this, model = model.get()](sf::Event event) { return ModelPress(event, model); },
+                     {sf::Mouse::Left});
+    model->BindRelease(observer_, [this, model = model.get()](sf::Event event) { return ModelRelease(event, model); },
+                       {sf::Mouse::Left});
+    model->BindDrag(
+        observer_,
+        [this, model = model.get()](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model); },
+        {sf::Mouse::Left});
+    models.insert({model->Id(), std::move(model)});
 }
 
 EditorStage::EditorStage() {

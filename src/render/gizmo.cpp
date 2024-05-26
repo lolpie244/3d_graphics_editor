@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <algorithm>
 #include <cmath>
+#include <glm/ext/quaternion_geometric.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
 #include "data/model_loader.h"
@@ -83,43 +84,57 @@ void Gizmo::SetModel(render::Model* model) {
 
 void Gizmo::Reset() { current_model_ = nullptr; }
 
-glm::vec3 Gizmo::Normal(unsigned int axis) const {
-    return current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
-}
-
-void TranslateGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
-    mouse_moved = mouse_moved * Normal(axis) * math::axis_to_vector(axis);
-    current_model_->Move(mouse_moved.x, mouse_moved.y, mouse_moved.z);
-}
-
-void ScaleGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
-    mouse_moved = mouse_moved * Normal(axis) * math::axis_to_vector(axis);
-    auto scale = current_model_->GetScale() + mouse_moved;
-    current_model_->SetScale(scale.x, scale.y, scale.z);
-}
-
-void RotateGizmo::MousePress() { last_position = {-1, -1, -1}; }
-
-void RotateGizmo::MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) {
+void Gizmo::MouseMove(glm::vec2 mouse_position, unsigned int axis) {
     auto ray = math::Ray::FromPoint(mouse_position);
     auto gizmo_center = current_model_->GetPosition();
 
     glm::vec3 normal = Normal(axis);
-    normal = glm::normalize(normal);
-    auto new_point = ray.PlainIntersection(gizmo_center, normal);
+    auto new_position = ray.PlainIntersection(gizmo_center, normal);
 
     if (last_position == glm::vec3{-1, -1, -1}) {
-        last_position = new_point;
+        last_position = new_position;
         return;
     }
 
+    Apply(last_position, new_position, axis);
+    last_position = new_position;
+}
+
+glm::vec3 Gizmo::Normal(unsigned int axis) const {
+    auto rotate = current_model_->GetRotation();
+
+    auto matrix_ = glm::rotate(glm::mat4(1.0f), glm::radians(rotate.x), {1, 0, 0});
+    matrix_ = glm::rotate(matrix_, glm::radians(rotate.y), {0, 1, 0});
+    matrix_ = glm::rotate(matrix_, glm::radians(rotate.z), {0, 0, 1});
+
+    return glm::normalize(final_matrix_ * glm::vec4(math::axis_to_vector(axis), 1.0f));
+}
+
+void TranslateGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) {
+    auto mouse_moved = (new_position - last_position) * math::axis_to_vector(axis);
+    current_model_->Move(mouse_moved.x, mouse_moved.y, mouse_moved.z);
+}
+
+void ScaleGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) {
+    auto mouse_moved = (new_position - last_position) * math::axis_to_vector(axis);
+    auto scale = current_model_->GetScale() + mouse_moved;
+    current_model_->SetScale(scale.x, scale.y, scale.z);
+}
+
+glm::vec3 RotateGizmo::Normal(unsigned int axis) const {
+    return current_model_->GetTransformation() * glm::vec4(math::axis_to_vector(axis), 1.0f);
+}
+
+void RotateGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) {
+    auto gizmo_center = current_model_->GetPosition();
+    glm::vec3 normal = Normal(axis);
+
     auto old_vec = (last_position - gizmo_center);
-    auto new_vec = (new_point - gizmo_center);
+    auto new_vec = (new_position - gizmo_center);
 
     float angle = glm::degrees(glm::orientedAngle(glm::normalize(old_vec), glm::normalize(new_vec), normal));
 
     current_model_->GlobalTransform.Rotate(-1 * angle, axis);
-    last_position = new_point;
 }
 
 }  // namespace render

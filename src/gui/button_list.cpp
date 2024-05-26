@@ -10,7 +10,7 @@ ButtonFromList::ButtonFromList(const sf::String& text) { this->Text().SetText(te
 
 void ButtonFromList::AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list) {
     this->button_list_ = button_list;
-	this->button_list_->SetParent(this);
+    this->button_list_->SetParent(this);
     button_list->Disable();
     button_list->BindMouseOut(observer, [button_list, this](sf::Event event) {
         button_list->Disable();
@@ -74,7 +74,7 @@ void ButtonsList::AddButton(ButtonType button) {
     button->Move(button_move_to.x, button_move_to.y);
     button->Text().SfText().setFillColor(font_color_);
     button->SetPressedTexture(pressed_texture_);
-    button->SetReleasedTexture(pressed_texture_);
+    button->SetReleasedTexture(released_texture_);
     button->is_active_ = this->is_active_;
 
     buttons_.push_back(button);

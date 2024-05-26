@@ -49,7 +49,7 @@ void EditorStage::Select(render::PickingTexture::Info info) {
     auto model = models[info.ObjectID].get();
 
     if (info.Type == render::Model::Surface) {
-		current_gizmo_->SetModel(model);
+        current_gizmo_->SetModel(model);
         return;
     }
 

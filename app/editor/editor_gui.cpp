@@ -56,16 +56,11 @@ void EditorStage::InitGui() {
             model->texture =
                 data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
 
-			BindModelEvents(model.get());
-
-			models.insert({model->Id(), std::move(model)});
-
-            // models[model->Id()] = std::move(model);
-
+            AddModel(std::move(model));
             return true;
         });
 
-		figures_button_list->AddButton(button);
+        figures_button_list->AddButton(button);
     }
 
     client->BindPress(observer_, [this](sf::Event) {
@@ -117,8 +112,7 @@ void EditorStage::InitGui() {
         });
 
         mode->BindDrag(observer_, [this, &mode](sf::Event event, glm::vec3 moved) {
-            mode->MouseMove({event.mouseMove.x, event.mouseMove.y},
-                            moved * settings::MOUSE_SENSATIVITY, mode->PressInfo().Type);
+            mode->MouseMove({event.mouseMove.x, event.mouseMove.y}, mode->PressInfo().Type);
             return true;
         });
 

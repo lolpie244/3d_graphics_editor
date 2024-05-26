@@ -37,16 +37,19 @@ class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual p
     render::Model* GetModel() { return current_model_; }
 
     void Reset();
-    virtual void MousePress(){};
-    virtual void MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) = 0;
+    virtual void MousePress() { last_position = {-1, -1, -1}; };
+    virtual void MouseMove(glm::vec2 mouse_position, unsigned int axis);
 
    protected:
-    glm::vec3 Normal(unsigned int axis) const;
+    virtual glm::vec3 Normal(unsigned int axis) const;
+    virtual void Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) = 0;
 
    protected:
     render::Model* current_model_ = nullptr;
 
    private:
+    glm::vec3 last_position = {-1, -1, -1};
+
     float length_;
     Mesh<GizmoVertex> mesh_;
 };
@@ -55,24 +58,24 @@ class TranslateGizmo : public Gizmo {
    public:
     using Gizmo::Gizmo;
 
-    void MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) override;
+   protected:
+    void Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) override;
 };
 
 class ScaleGizmo : public Gizmo {
    public:
     using Gizmo::Gizmo;
 
-    void MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) override;
+   protected:
+    void Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) override;
 };
 
 class RotateGizmo : public Gizmo {
    public:
     using Gizmo::Gizmo;
 
-    void MousePress() override;
-    void MouseMove(glm::vec2 mouse_position, glm::vec3 mouse_moved, unsigned int axis) override;
-
-   private:
-    glm::vec3 last_position = {-1, -1, -1};
+   protected:
+	glm::vec3 Normal(unsigned int axis) const override;
+    void Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) override;
 };
 }  // namespace render

@@ -18,12 +18,12 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void InitGui();
     void BindEvents();
-	void BindModelEvents(render::Model*);
+	void AddModel(std::unique_ptr<render::Model> model);
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
 
-	float Scale() const { return std::max(0.05f, scale_); }
+    float Scale() const { return std::max(0.05f, scale_); }
 
     void PerformPendingVertexMovement();
 
@@ -61,15 +61,16 @@ class EditorStage : public stage::Stage {
         {L"󰶘", render::Gizmo::loadFromFile<render::RotateGizmo>("resources/gizmo/circle.obj")},
     };
 
-	std::pair<sf::String, sf::String> default_figures_[3] {
-		{L"Куб", "resources/default/cube.obj"},
-		{L"Площина", "resources/default/plane.obj"},
-		{L"Піраміда", "resources/default/pyramid.obj"},
-	};
+    std::pair<sf::String, sf::String> default_figures_[4]{
+        {L"Куб", "resources/default/cube.obj"},
+        {L"Площина", "resources/default/plane.obj"},
+        {L"Піраміда", "resources/default/pyramid.obj"},
+        {L"С'юзан", "resources/default/susan.obj"},
+    };
     DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
     render::Gizmo* current_gizmo_ = gizmos_[0].second.get();
 
-	data::Shader gizmo_shader_;
+    data::Shader gizmo_shader_;
     data::Shader gizmo_picking_;
 
     std::shared_ptr<gui::SelectRect> selection_rect_;

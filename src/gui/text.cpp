@@ -1,5 +1,6 @@
 #include "gui/text.h"
 
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <glm/ext/vector_float3.hpp>
@@ -12,6 +13,7 @@ namespace gui {
 Text::Text(glm::vec3 position, glm::vec2 max_size) {
     font_.loadFromFile(settings::FONT_FILE);
     this->text_.setFont(font_);
+    this->text_.setFillColor(sf::Color::Black);
 
     this->Resize(max_size);
     this->SetPosition(position.x, position.y, position.z);
