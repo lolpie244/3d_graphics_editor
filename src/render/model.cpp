@@ -91,6 +91,7 @@ const std::vector<ModelVertex>& Model::Vertices(unsigned int type) const {
 const ModelVertex Model::Vertex(int id, unsigned int type) const { return Vertices(type)[id]; }
 
 const Mesh<ModelVertex>& Model::ModelMesh() const { return mesh_; }
+std::pair<glm::vec3, glm::vec3> Model::MeshBox() const { return mesh_.MeshBox(); }
 
 void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position) {
     auto old_position = Vertex(id, type).position;

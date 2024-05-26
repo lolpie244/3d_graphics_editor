@@ -62,6 +62,23 @@ void EditorStage::InitGui() {
 
         figures_button_list->AddButton(button);
     }
+    auto light_button = std::make_shared<gui::ButtonFromList>(L"Джерело світла");
+    figures_button_list->AddButton(light_button);
+
+    auto light_button_list = std::make_shared<gui::ButtonsList>();
+	light_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
+	light_button->AddButtonList(observer_, light_button_list);
+
+    for (auto& [name, color] : lights_colors_) {
+        auto button = std::make_shared<gui::ButtonFromList>(name);
+        button->BindPress(observer_, [this, &color](sf::Event) {
+            AddLight(color);
+            return true;
+        });
+		light_button_list->AddButton(button);
+    }
+
+    ///////////////////////////////////////////
 
     client->BindPress(observer_, [this](sf::Event) {
         if (connection_ == nullptr)

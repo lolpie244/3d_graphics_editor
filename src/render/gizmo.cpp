@@ -63,13 +63,13 @@ void Gizmo::Draw(data::Shader& shader) {
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 }
 
-void Gizmo::SetModel(render::Model* model) {
+void Gizmo::SetModel(GizmoSupport* model) {
     current_model_ = model;
 
     if (model == nullptr)
         return;
 
-    auto [min, max] = model->ModelMesh().MeshBox();
+    auto [min, max] = model->MeshBox();
     min = model->GetTransformation() * glm::vec4(min, 1.0f);
     max = model->GetTransformation() * glm::vec4(max, 1.0f);
 
@@ -117,8 +117,7 @@ void TranslateGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsi
 
 void ScaleGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) {
     auto mouse_moved = (new_position - last_position) * math::axis_to_vector(axis);
-    auto scale = current_model_->GetScale() + mouse_moved;
-    current_model_->SetScale(scale.x, scale.y, scale.z);
+    current_model_->Scale(mouse_moved.x, mouse_moved.y, mouse_moved.z);
 }
 
 glm::vec3 RotateGizmo::Normal(unsigned int axis) const {

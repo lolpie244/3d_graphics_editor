@@ -24,6 +24,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	render/model.cpp
 	render/gizmo.cpp
 	render/camera.cpp
+	render/light.cpp
 
 	render/opengl/frame_buffer.cpp
 	render/opengl/picking_texture.cpp

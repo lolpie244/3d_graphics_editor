@@ -11,6 +11,7 @@
 #include "math/points_cast.h"
 #include "math/ray.h"
 #include "math/utils.h"
+#include "render/light.h"
 #include "render/model.h"
 #include "utils/settings.h"
 
@@ -140,6 +141,12 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
 
 bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
     model->Triangulate(selected_vertexes_);
+    return true;
+}
+
+bool EditorStage::LightPress(sf::Event event, render::Light* light) {
+    ClearSelection();
+    current_gizmo_->SetModel(light);
     return true;
 }
 

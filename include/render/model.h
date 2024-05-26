@@ -5,6 +5,7 @@
 #include "data/shader.h"
 #include "math/transform.h"
 #include "mesh.h"
+#include "render/model_for_gizmo.h"
 #include "utils/uuid.h"
 #include "vertex.h"
 
@@ -21,7 +22,7 @@ struct ModelVertex : public Vertex<ModelVertex> {
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Model : virtual public UUID, virtual public math::ModelTransform, virtual public events::Draggable3D {
+class Model : virtual public UUID, virtual public GizmoSupport, virtual public events::Draggable3D {
    public:
     enum DataType {
         Point = 1,
@@ -33,7 +34,7 @@ class Model : virtual public UUID, virtual public math::ModelTransform, virtual 
    public:
     Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
 
-	using math::ModelTransform::GetTransformation;
+    using math::ModelTransform::GetTransformation;
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
 
@@ -42,7 +43,8 @@ class Model : virtual public UUID, virtual public math::ModelTransform, virtual 
 
     const ModelVertex Vertex(int id, unsigned int type) const;
     const std::vector<ModelVertex>& Vertices(unsigned int type) const;
-	const Mesh<ModelVertex>& ModelMesh() const;
+    const Mesh<ModelVertex>& ModelMesh() const;
+    std::pair<glm::vec3, glm::vec3> MeshBox() const override;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);

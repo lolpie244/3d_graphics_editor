@@ -9,6 +9,7 @@
 #include "math/transform.h"
 #include "render/mesh.h"
 #include "render/model.h"
+#include "render/model_for_gizmo.h"
 #include "utils/uuid.h"
 
 namespace render {
@@ -33,8 +34,8 @@ class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual p
 
     void Draw(data::Shader& shader);
 
-    void SetModel(render::Model* model);
-    render::Model* GetModel() { return current_model_; }
+    void SetModel(GizmoSupport* model);
+    GizmoSupport* GetModel() { return current_model_; }
 
     void Reset();
     virtual void MousePress() { last_position = {-1, -1, -1}; };
@@ -45,7 +46,7 @@ class Gizmo : virtual public UUID, virtual public events::Draggable3D, virtual p
     virtual void Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) = 0;
 
    protected:
-    render::Model* current_model_ = nullptr;
+    GizmoSupport* current_model_ = nullptr;
 
    private:
     glm::vec3 last_position = {-1, -1, -1};

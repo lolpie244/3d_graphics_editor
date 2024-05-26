@@ -5,8 +5,10 @@
 #include "events/event.h"
 #include "gui/select_rect.h"
 #include "render/gizmo.h"
+#include "render/light.h"
 #include "render/model.h"
 #include "render/opengl/picking_texture.h"
+#include "utils/utils.h"
 
 using render::PickingTexture;
 
@@ -18,7 +20,8 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void InitGui();
     void BindEvents();
-	void AddModel(std::unique_ptr<render::Model> model);
+    void AddModel(std::unique_ptr<render::Model> model);
+    void AddLight(glm::vec4 color);
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
@@ -39,6 +42,8 @@ class EditorStage : public stage::Stage {
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
     bool ModelRelease(sf::Event event, render::Model* model);
 
+    bool LightPress(sf::Event event, render::Light* light);
+
     bool DuplicateSelected(sf::Event event);
     bool JoinSelected(sf::Event event);
 
@@ -47,6 +52,7 @@ class EditorStage : public stage::Stage {
 
    private:
     render::ModelsList models;
+    render::LightList lights;
     std::vector<events::Event> events;
 
     std::pair<sf::String, std::unique_ptr<DrawMode>> draw_modes_[3]{
@@ -66,6 +72,13 @@ class EditorStage : public stage::Stage {
         {L"Площина", "resources/default/plane.obj"},
         {L"Піраміда", "resources/default/pyramid.obj"},
         {L"С'юзан", "resources/default/susan.obj"},
+    };
+
+    std::pair<sf::String, glm::vec4> lights_colors_[4]{
+        {L"Білий", ToVector(sf::Color::White)},
+        {L"Червоний", ToVector(sf::Color::Red)},
+        {L"Зелений", ToVector(sf::Color::Green)},
+        {L"Синій", ToVector(sf::Color::Blue)},
     };
     DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
     render::Gizmo* current_gizmo_ = gizmos_[0].second.get();

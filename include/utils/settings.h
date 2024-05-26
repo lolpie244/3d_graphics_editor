@@ -21,4 +21,6 @@ constexpr int DYNAMIC_TRIANGULATE_LIMIT = 10;
 constexpr int PACKAGE_SIZE = 1000;
 constexpr char PORT[] = "2341" ;
 constexpr int INET_FAMILY = AF_INET6;
+
+constexpr int MAXIMUM_LIGHT_COUNT = 8;
 }

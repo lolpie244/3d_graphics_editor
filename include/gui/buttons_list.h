@@ -27,6 +27,8 @@ class ButtonFromList : virtual public Button {
     ButtonFromList() = default;
     ButtonFromList(const sf::String& text);
 
+    void Enable() override;
+
     void AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list);
 
    private:
@@ -43,7 +45,8 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
 
    public:
     ButtonsList(float space = 0, ListOrientation orientation = ListOrientation::Vertical);
-    ButtonsList(glm::vec3 position, glm::vec2 size, float space = 0, ListOrientation orientation = ListOrientation::Vertical);
+    ButtonsList(glm::vec3 position, glm::vec2 size, float space = 0,
+                ListOrientation orientation = ListOrientation::Vertical);
 
     sf::Rect<float> Rect() const override;
     void Move(float x = 0, float y = 0, float z = 0) override;
@@ -64,7 +67,7 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
     ListOrientation orientation_;
     sf::Color font_color_;
 
-	float space_ = 0;
+    float space_ = 0;
 
     Button::TextureInfo released_texture_;
     Button::TextureInfo pressed_texture_;

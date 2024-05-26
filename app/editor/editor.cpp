@@ -3,11 +3,13 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <algorithm>
 #include <memory>
 
 #include "data/texture.h"
 #include "editor/network/network.h"
 #include "gui/select_rect.h"
+#include "render/light.h"
 #include "render/mesh.h"
 
 void EditorStage::BindEvents() {
@@ -61,9 +63,18 @@ void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
     models.insert({model->Id(), std::move(model)});
 }
 
+void EditorStage::AddLight(glm::vec4 color) {
+    auto light = std::make_unique<render::Light>(render::Light::LightData{
+        .color = color, .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}});
+
+    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
+                     {sf::Mouse::Left});
+    lights.insert({light->Id(), std::move(light)});
+}
+
 EditorStage::EditorStage() {
-    gizmo_shader_.loadFromFile("shaders/gizmo.vert", "shaders/gizmo.frag");
-    gizmo_picking_.loadFromFile("shaders/gizmo.vert", "shaders/picking.frag");
+    gizmo_shader_.loadFromFile("shaders/color.vert", "shaders/color.frag");
+    gizmo_picking_.loadFromFile("shaders/color.vert", "shaders/picking.frag");
 
     camera_->Move(0.0f, 0.0f, 3.0f);
     camera_->SetOrigin(0, 0, 0);
@@ -77,12 +88,12 @@ void EditorStage::Run() {
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
-        current_draw_mode_->DrawPicker(models);
+        current_draw_mode_->DrawPicker(models, lights);
         current_gizmo_->Draw(gizmo_picking_);
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
-    current_draw_mode_->Draw(models);
+    current_draw_mode_->Draw(models, lights);
     current_gizmo_->Draw(gizmo_shader_);
     FrameEnd();
 }
