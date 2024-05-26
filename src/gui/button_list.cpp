@@ -10,9 +10,9 @@ namespace gui {
 ButtonFromList::ButtonFromList(const sf::String& text) { this->Text().SetText(text); }
 
 void ButtonFromList::Enable() {
-	GuiElement::Enable();
-	if (button_list_)
-		button_list_->Disable();
+    GuiElement::Enable();
+    if (button_list_)
+        button_list_->Disable();
 }
 
 void ButtonFromList::AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list) {
@@ -24,16 +24,16 @@ void ButtonFromList::AddButtonList(events::Observer& observer, std::shared_ptr<B
             if (button->button_list_ && button->button_list_->ContainsMouse(event))
                 return false;
         }
-		ButtonsList* parent = button_list_.get();
-		while (parent != nullptr) {
-			if (!parent->parent || parent->ContainsMouse(event))
-				break;
-			parent->Disable();
-			auto button = dynamic_cast<ButtonFromList*>(parent->parent);
-			if (!button)
-				break;
-			parent = dynamic_cast<ButtonsList*>(button->parent);
-		}
+        ButtonsList* parent = button_list_.get();
+        while (parent != nullptr) {
+            if (!parent->parent || parent->ContainsMouse(event))
+                break;
+            parent->Disable();
+            auto button = dynamic_cast<ButtonFromList*>(parent->parent);
+            if (!button)
+                break;
+            parent = dynamic_cast<ButtonsList*>(button->parent);
+        }
         return false;
     });
 

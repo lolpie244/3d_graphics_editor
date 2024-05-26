@@ -11,6 +11,7 @@
 #include "gui/select_rect.h"
 #include "render/light.h"
 #include "render/mesh.h"
+#include "utils/settings.h"
 
 void EditorStage::BindEvents() {
     opengl_context_->SetScaleMethod<events::DefaultScale>();
@@ -42,6 +43,8 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 
+    events.push_back(observer_.KeyBind({sf::Keyboard::Delete}, [this](sf::Event event) { return DeleteModel(event); }));
+
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
     opengl_context_->BindRelease(observer_, [&](sf::Event event) { return ContextRelease(event); }, {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return ContextDrag(event, moved); },
@@ -64,6 +67,9 @@ void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
 }
 
 void EditorStage::AddLight(glm::vec4 color) {
+    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
+        return;
+
     auto light = std::make_unique<render::Light>(render::Light::LightData{
         .color = color, .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}});
 

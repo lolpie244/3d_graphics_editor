@@ -44,7 +44,7 @@ void TextureDraw::Draw(const render::ModelsList& models, const render::LightList
 }
 
 void TextureDraw::DrawPicker(const render::ModelsList& models, const render::LightList& lights) {
-	DrawLightsPicker(lights);
+    DrawLightsPicker(lights);
     for (auto& [_, model] : models) { model->Draw(picking_shader_); }
 }
 
@@ -57,7 +57,7 @@ void MixedDraw::Draw(const render::ModelsList& models, const render::LightList& 
 }
 
 void MixedDraw::DrawPicker(const render::ModelsList& models, const render::LightList& lights) {
-	DrawLightsPicker(lights);
+    DrawLightsPicker(lights);
     for (auto& [_, model] : models) {
         model->Draw(picking_shader_);
         model->DrawPoints(point_picking_shader_);

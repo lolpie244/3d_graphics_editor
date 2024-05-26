@@ -144,6 +144,17 @@ bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
     return true;
 }
 
+bool EditorStage::DeleteModel(sf::Event event) {
+    if (!current_gizmo_->GetModel())
+        return false;
+    auto id = current_gizmo_->GetModel()->Id();
+    models.erase(id);
+    lights.erase(id);
+    current_gizmo_->Reset();
+
+    return true;
+}
+
 bool EditorStage::LightPress(sf::Event event, render::Light* light) {
     ClearSelection();
     current_gizmo_->SetModel(light);

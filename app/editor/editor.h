@@ -42,6 +42,8 @@ class EditorStage : public stage::Stage {
     bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
     bool ModelRelease(sf::Event event, render::Model* model);
 
+	bool DeleteModel(sf::Event event);
+
     bool LightPress(sf::Event event, render::Light* light);
 
     bool DuplicateSelected(sf::Event event);

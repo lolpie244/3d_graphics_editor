@@ -66,8 +66,8 @@ void EditorStage::InitGui() {
     figures_button_list->AddButton(light_button);
 
     auto light_button_list = std::make_shared<gui::ButtonsList>();
-	light_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
-	light_button->AddButtonList(observer_, light_button_list);
+    light_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
+    light_button->AddButtonList(observer_, light_button_list);
 
     for (auto& [name, color] : lights_colors_) {
         auto button = std::make_shared<gui::ButtonFromList>(name);
@@ -75,7 +75,7 @@ void EditorStage::InitGui() {
             AddLight(color);
             return true;
         });
-		light_button_list->AddButton(button);
+        light_button_list->AddButton(button);
     }
 
     ///////////////////////////////////////////

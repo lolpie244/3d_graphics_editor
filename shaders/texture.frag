@@ -32,7 +32,7 @@ vec3 calculatePointLight(Light light, vec3 vertexPosition, vec3 vertexNormal, ve
     vec3 ambient = light.ambient;
 
 	// diffuse
-	vec3 lightDirection = normalize(vec3(light.position) - vertexPosition);
+	vec3 lightDirection = normalize(light.position - vertexPosition);
 	float diffuseStength = max(0.0, dot(lightDirection, vertexNormal));
     vec3 diffuse = light.color * diffuseStength;
 
