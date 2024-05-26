@@ -8,13 +8,12 @@
 #include <memory>
 #include <vector>
 
+#include "data/texture.h"
+#include "events/propterties/hoverable.h"
+#include "events/propterties/scaleable.h"
 #include "gui/base.h"
 #include "gui/button.h"
 #include "gui/sprite_element.h"
-#include "events/propterties/hoverable.h"
-#include "events/propterties/scaleable.h"
-#include "data/texture.h"
-
 
 namespace gui {
 enum ListOrientation { Horizontal, Vertical };
@@ -28,11 +27,14 @@ class ButtonFromList : virtual public Button {
     ButtonFromList() = default;
     ButtonFromList(const sf::String& text);
 
-    void AddButtonList(events::Observer& observer, ButtonsList* button_list);
+    void AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list);
 
    private:
     virtual void Resize(glm::vec2 size) override { Button::Resize(size); };
     virtual void Move(float x = 0, float y = 0, float z = 0) override { Button::Move(x, y, z); };
+
+   private:
+    std::shared_ptr<ButtonsList> button_list_;
 };
 
 class ButtonsList : public virtual GuiElement, virtual public events::Scaleable, public virtual events::Hoverable {
@@ -40,9 +42,8 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
     friend ButtonFromList;
 
    public:
-    ButtonsList(ListOrientation orientation = ListOrientation::Vertical);
-    ButtonsList(glm::vec3 position, glm::vec2 size,
-                ListOrientation orientation = ListOrientation::Vertical);
+    ButtonsList(float space = 0, ListOrientation orientation = ListOrientation::Vertical);
+    ButtonsList(glm::vec3 position, glm::vec2 size, float space = 0, ListOrientation orientation = ListOrientation::Vertical);
 
     sf::Rect<float> Rect() const override;
     void Move(float x = 0, float y = 0, float z = 0) override;
@@ -63,7 +64,9 @@ class ButtonsList : public virtual GuiElement, virtual public events::Scaleable,
     ListOrientation orientation_;
     sf::Color font_color_;
 
-	Button::TextureInfo released_texture_;
+	float space_ = 0;
+
+    Button::TextureInfo released_texture_;
     Button::TextureInfo pressed_texture_;
 };
 }  // namespace gui

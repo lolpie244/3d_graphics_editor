@@ -5,11 +5,12 @@
 #include <glm/ext/vector_float3.hpp>
 
 #include "math/transform.h"
+#include "utils/settings.h"
 
 namespace gui {
 
 Text::Text(glm::vec3 position, glm::vec2 max_size) {
-    font_.loadFromFile("resources/font.ttf");
+    font_.loadFromFile(settings::FONT_FILE);
     this->text_.setFont(font_);
 
     this->Resize(max_size);

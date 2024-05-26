@@ -58,7 +58,7 @@ MenuStage::MenuStage() {
         std::make_shared<gui::ButtonsList>(glm::vec3(300, 300, 0), glm::vec2(380, 94), gui::ListOrientation::Vertical);
     button_list2->AddButtons({test3, test4});
 
-    test2->AddButtonList(observer_, button_list2.get());
+    test2->AddButtonList(observer_, button_list2);
 
     button_list->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
     button_list2->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
