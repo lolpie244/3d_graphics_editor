@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <algorithm>
 #include <cmath>
+#include <glm/ext/matrix_clip_space.hpp>
 #include <glm/ext/quaternion_geometric.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
@@ -10,6 +11,7 @@
 #include "math/ray.h"
 #include "math/transform.h"
 #include "render/mesh.h"
+#include "stage/stage_manager.h"
 
 namespace render {
 VertexLayout GizmoVertex::Layout() const {
@@ -44,6 +46,8 @@ void Gizmo::Draw(data::Shader& shader) {
     shader.setUniform("u_ObjectId", Id());
     this->SetRotation({0, 0, 0});
     this->SetPosition(0);
+    auto scale = stage::StageManager::Instance().Camera()->GetPosition().z * settings::GIZMO_SCALE;
+    this->SetScale(scale, scale, scale);
 
     math::ModelTransform transform = *(math::ModelTransform*)current_model_;
 
@@ -52,35 +56,18 @@ void Gizmo::Draw(data::Shader& shader) {
     shader.setUniform("u_Data", math::X);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-    this->Rotate(-90, math::Y);
+    this->Rotate(90, math::Y);
     shader.setUniform("u_Color", sf::Color::Red);
     shader.setUniform("u_Data", math::Z);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 
-    this->Rotate(90, math::Z);
+    this->Rotate(-90, math::Z);
     shader.setUniform("u_Color", sf::Color::Blue);
     shader.setUniform("u_Data", math::Y);
     mesh_.Draw(GL_TRIANGLES, shader, transform.GetTransformation() * this->GetTransformation());
 }
 
-void Gizmo::SetModel(GizmoSupport* model) {
-    current_model_ = model;
-
-    if (model == nullptr)
-        return;
-
-    auto [min, max] = model->MeshBox();
-    min = model->GetTransformation() * glm::vec4(min, 1.0f);
-    max = model->GetTransformation() * glm::vec4(max, 1.0f);
-
-    float new_scale = INT_MAX;
-    auto gizmo_box = this->mesh_.MeshBox();
-
-    for (int i = 0; i < 3; i++)
-        new_scale = std::min(new_scale, (max[i] - min[i]) / (gizmo_box.second[i] - gizmo_box.first[i]));
-
-    this->SetScale(new_scale, new_scale, new_scale);
-}
+void Gizmo::SetModel(GizmoSupport* model) { current_model_ = model; }
 
 void Gizmo::Reset() { current_model_ = nullptr; }
 
@@ -117,7 +104,9 @@ void TranslateGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsi
 
 void ScaleGizmo::Apply(glm::vec3 last_position, glm::vec3 new_position, unsigned int axis) {
     auto mouse_moved = (new_position - last_position) * math::axis_to_vector(axis);
-    current_model_->Scale(mouse_moved.x, mouse_moved.y, mouse_moved.z);
+    mouse_moved.x *= -1;
+    auto scale = current_model_->GetScale() + mouse_moved;
+    current_model_->SetScale(scale.x, scale.y, scale.z);
 }
 
 glm::vec3 RotateGizmo::Normal(unsigned int axis) const {

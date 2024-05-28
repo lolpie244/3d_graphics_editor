@@ -17,6 +17,7 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
 
     void BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function);
+    void BindMouseMove(events::Observer &observer, const events::EVENT_FUNC &function);
 
     virtual bool Contains(glm::vec2 point) = 0;
     bool ContainsMouse(sf::Event event);
@@ -24,6 +25,7 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
    protected:
     events::Event mouse_in_event_;
     events::Event mouse_out_event_;
+    events::Event mouse_move_event_;
     bool mouse_in_flag_ = false;
     bool check_transparecy_ = false;
 };

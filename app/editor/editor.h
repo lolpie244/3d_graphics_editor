@@ -29,6 +29,7 @@ class EditorStage : public stage::Stage {
     float Scale() const { return std::max(0.05f, scale_); }
 
     void PerformPendingVertexMovement();
+	bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
@@ -39,7 +40,6 @@ class EditorStage : public stage::Stage {
     bool ContextRelease(sf::Event event);
 
     bool ModelPress(sf::Event event, render::Model* model);
-    bool ModelDrag(sf::Event event, glm::vec3 move, render::Model* model);
     bool ModelRelease(sf::Event event, render::Model* model);
 
 	bool DeleteModel(sf::Event event);
@@ -96,4 +96,6 @@ class EditorStage : public stage::Stage {
     float scale_ = 1;
 
     std::unique_ptr<Collaborator> connection_;
+
+	bool pending_move_ = false;
 };

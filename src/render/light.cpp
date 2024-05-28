@@ -18,7 +18,6 @@ VertexLayout LightVertex::Layout() const {
 Light::Light(LightData data)
     : mesh_(data::primitives::Cube<LightVertex>(0.2), MeshConfig{.changeable = MeshConfig::Static}), Data(data) {}
 
-std::pair<glm::vec3, glm::vec3> Light::MeshBox() const { return mesh_.MeshBox(); }
 void Light::Draw(data::Shader& shader) {
     shader.setUniform("u_ObjectId", Id());
 

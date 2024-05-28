@@ -59,6 +59,7 @@ void EditorStage::Select(render::PickingTexture::Info info) {
 }
 
 bool EditorStage::ContextPress(sf::Event event) {
+    pending_move_ = false;
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         ClearSelection();
 
@@ -90,6 +91,12 @@ bool EditorStage::ContextRelease(sf::Event event) {
 }
 
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
+    if (pending_move_) {
+        ClearSelection();
+        pending_move_ = false;
+        return true;
+    }
+
     last_vertex_position = {-1, -1, -1};
 
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
@@ -99,10 +106,11 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     return true;
 }
 
-bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model* model) {
-    auto press_info = model->PressInfo();
+bool EditorStage::MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info) {
     if (press_info.Type != render::Model::Point && press_info.Type != render::Model::Pending)
         return false;
+
+    auto model = models[press_info.ObjectID].get();
 
     math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     render::ModelVertex vertex;
@@ -173,6 +181,7 @@ bool EditorStage::DuplicateSelected(sf::Event event) {
 
     ClearSelection();
     selected_vertexes_ = new_selected;
+    pending_move_ = true;
     return true;
 }
 
@@ -200,6 +209,7 @@ bool EditorStage::JoinSelected(sf::Event event) {
     math::sort_clockwise_polygon(model->Vertices(render::Model::Point), indices);
 
     model->AddFace(indices);
+    ClearSelection();
     return true;
 }
 

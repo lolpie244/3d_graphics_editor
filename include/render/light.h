@@ -26,7 +26,6 @@ class Light : virtual public UUID, virtual public events::Clickable3D, virtual p
    public:
     Light(LightData data);
 
-    std::pair<glm::vec3, glm::vec3> MeshBox() const override;
     void Draw(data::Shader& shader);
     void Apply(int id, data::Shader& shader);
 

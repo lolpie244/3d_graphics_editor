@@ -44,7 +44,6 @@ class Model : virtual public UUID, virtual public GizmoSupport, virtual public e
     const ModelVertex Vertex(int id, unsigned int type) const;
     const std::vector<ModelVertex>& Vertices(unsigned int type) const;
     const Mesh<ModelVertex>& ModelMesh() const;
-    std::pair<glm::vec3, glm::vec3> MeshBox() const override;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);

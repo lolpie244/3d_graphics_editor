@@ -51,6 +51,11 @@ void EditorStage::BindEvents() {
                               {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); },
                               {sf::Mouse::Right, sf::Mouse::Middle});
+    opengl_context_->BindMouseMove(observer_, [&](sf::Event event) {
+        if (!pending_move_ || selected_vertexes_.empty())
+            return false;
+        return MoveSelectedPoints(event, *selected_vertexes_.begin());
+    });
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 }
 
@@ -59,10 +64,11 @@ void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
                      {sf::Mouse::Left});
     model->BindRelease(observer_, [this, model = model.get()](sf::Event event) { return ModelRelease(event, model); },
                        {sf::Mouse::Left});
-    model->BindDrag(
-        observer_,
-        [this, model = model.get()](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model); },
-        {sf::Mouse::Left});
+    model->BindDrag(observer_,
+                    [this, model = model.get()](sf::Event event, glm::vec3 move) {
+                        return MoveSelectedPoints(event, model->PressInfo());
+                    },
+                    {sf::Mouse::Left});
     models.insert({model->Id(), std::move(model)});
 }
 
@@ -82,7 +88,7 @@ EditorStage::EditorStage() {
     gizmo_shader_.loadFromFile("shaders/color.vert", "shaders/color.frag");
     gizmo_picking_.loadFromFile("shaders/color.vert", "shaders/picking.frag");
 
-    camera_->Move(0.0f, 0.0f, 3.0f);
+    camera_->Move(0, 0, 4.0f);
     camera_->SetOrigin(0, 0, 0);
 
     InitGui();
