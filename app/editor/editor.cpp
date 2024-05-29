@@ -96,7 +96,7 @@ EditorStage::EditorStage() {
 }
 
 void EditorStage::Run() {
-    PerformPendingVertexMovement();
+    PerformPendingFunctions();
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();

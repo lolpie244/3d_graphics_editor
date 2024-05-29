@@ -15,6 +15,7 @@ ExternalProject_Add(lunasvg-git
 )
 
 set(lunasvg ${CMAKE_BINARY_DIR}/lib/liblunasvg.a)
+set(tinyfiledialogs ${CMAKE_BINARY_DIR}/lib/libtinyfiledialogs.so)
 
 find_package(SFML 2.6.1 REQUIRED COMPONENTS graphics window system audio)
 find_package(OpenGL REQUIRED)

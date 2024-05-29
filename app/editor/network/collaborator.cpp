@@ -33,7 +33,11 @@ void Collaborator::VertexMovedHandler(std::stringstream& data) {
     render::PickingTexture::Info vertex;
     glm::vec3 moved_to;
     data >> vertex >> moved_to;
-    stage->PendingVertexMovement.push_back({vertex, moved_to});
+    stage->PendingFunctions.push_back([vertex, moved_to, this]() {
+        auto* model = stage->models.at(vertex.ObjectID).get();
+        model->SetVertexPosition(vertex.VertexId, vertex.Type,
+                                 model->Vertex(vertex.VertexId, vertex.Type).position + moved_to);
+    });
 }
 
 void Collaborator::ReceiveData(std::stringstream& data) {

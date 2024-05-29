@@ -213,11 +213,9 @@ bool EditorStage::JoinSelected(sf::Event event) {
     return true;
 }
 
-void EditorStage::PerformPendingVertexMovement() {
-    for (auto& [vertex, moved_to] : PendingVertexMovement) {
-        auto* model = models.at(vertex.ObjectID).get();
-        model->SetVertexPosition(vertex.VertexId, vertex.Type,
-                                 model->Vertex(vertex.VertexId, vertex.Type).position + moved_to);
-    }
-    PendingVertexMovement.clear();
+void EditorStage::PerformPendingFunctions() {
+	for (auto& function: PendingFunctions) {
+		function();
+	}
+    PendingFunctions.clear();
 }

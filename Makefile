@@ -11,7 +11,20 @@ openal_fix:
 
 .PHONY: setup
 setup:
+	mkdir -p build/include
+	mkdir -p build/lib
+	mkdir -p build/lib
 	conan install . -pr=./conan_profile --output-folder=build --build=missing -s build_type=${BUILD_TYPE}
+
+	wget -O build/tinyfiledialogs.zip https://sourceforge.net/projects/tinyfiledialogs/files/latest/download
+	unzip build/tinyfiledialogs.zip -d build/
+	cd build/tinyfiledialogs; \
+	gcc -fPIC -c tinyfiledialogs.c -o tinyfiledialogs.o; \
+	gcc -shared -o libtinyfiledialogs.so tinyfiledialogs.o
+
+	cp build/tinyfiledialogs/tinyfiledialogs.h build/include
+	cp build/tinyfiledialogs/libtinyfiledialogs.so build/lib
+
 
 ############### BUILD ###############
 .PHONY: build

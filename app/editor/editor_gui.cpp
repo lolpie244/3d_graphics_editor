@@ -1,3 +1,6 @@
+#include <tinyfiledialogs.h>
+
+#include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
 #include <memory>
 
@@ -64,19 +67,18 @@ void EditorStage::InitGui() {
     }
     auto light_button = std::make_shared<gui::ButtonFromList>(L"Джерело світла");
     figures_button_list->AddButton(light_button);
+    light_button->BindPress(observer_, [this](sf::Event) {
+        std::thread([this]() {
+            unsigned char lRgbColor[3];
+			if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
+				return;
 
-    auto light_button_list = std::make_shared<gui::ButtonsList>();
-    light_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
-    light_button->AddButtonList(observer_, light_button_list);
-
-    for (auto& [name, color] : lights_colors_) {
-        auto button = std::make_shared<gui::ButtonFromList>(name);
-        button->BindPress(observer_, [this, &color](sf::Event) {
-            AddLight(color);
-            return true;
-        });
-        light_button_list->AddButton(button);
-    }
+            PendingFunctions.push_back([this, lRgbColor]() {
+                this->AddLight({lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1});
+            });
+        }).detach();
+        return true;
+    });
 
     ///////////////////////////////////////////
 

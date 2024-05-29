@@ -28,7 +28,7 @@ class EditorStage : public stage::Stage {
 
     float Scale() const { return std::max(0.05f, scale_); }
 
-    void PerformPendingVertexMovement();
+    void PerformPendingFunctions();
 	bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
    public:  // events
@@ -50,10 +50,9 @@ class EditorStage : public stage::Stage {
     bool JoinSelected(sf::Event event);
 
    public:
-    std::vector<std::pair<render::PickingTexture::Info, glm::vec3>> PendingVertexMovement;
-
-   private:
+	std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
+   private:
     render::LightList lights;
     std::vector<events::Event> events;
 
