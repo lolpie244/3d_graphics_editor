@@ -1,6 +1,10 @@
 #include "render/model.h"
+#include <alpaca/alpaca.h>
+#include "utils/alpaca_types.h"
+#include <system_error>
 
 #include "data/model_loader.h"
+#include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
 #include "utils/settings.h"
@@ -53,11 +57,6 @@ Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
     : mesh_(mesh, config), pending_mesh_(MeshConfig({.changeable = MeshConfig::Dynamic, .triangulate = false})) {
     auto [min, max] = mesh_.MeshBox();
     this->SetOrigin((min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
-}
-
-std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
-    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data, config);
 }
 
 void Model::Draw(data::Shader& shader) const {
@@ -154,5 +153,42 @@ void Model::Triangulate(const SelectedVertices& changed_vertices) {
     }
     mesh_.Triangulate(ids);
 }
+
+
+std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
+	
+    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
+    return std::make_unique<render::Model>(data, config);
+}
+
+struct ModelFileData {
+    int id;
+	// std::vector<ModelVertex> vertices;
+	// std::vector<Face> faces;
+	//
+ //    Mesh<ModelVertex>::RawMesh mesh;
+    // std::vector<uint8_t> texture;
+};
+
+tcp_socket::BytesType Model::toBytes() const {
+	ModelFileData data {
+		.id = this->Id(),
+		// .mesh = this->mesh_.GetRawMesh()
+	};
+	// texture.copyToImage().saveToMemory(data.texture, "png");
+
+	tcp_socket::BytesType bytes;
+
+	alpaca::serialize(data, bytes);
+	return bytes;
+}
+
+std::unique_ptr<Model> Model::fromBytes(const tcp_socket::BytesType& raw_data, MeshConfig config) {
+	std::error_code ec;
+	auto data = alpaca::deserialize<ModelFileData>(raw_data, ec);
+
+	// return std::make_unique<render::Model>(data.mesh, config);
+}
+
 
 }  // namespace render

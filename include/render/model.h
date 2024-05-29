@@ -5,6 +5,7 @@
 #include "data/shader.h"
 #include "math/transform.h"
 #include "mesh.h"
+#include "network/communication_socket.h"
 #include "render/model_for_gizmo.h"
 #include "utils/uuid.h"
 #include "vertex.h"
@@ -37,6 +38,9 @@ class Model : virtual public UUID, virtual public GizmoSupport, virtual public e
     using math::ModelTransform::GetTransformation;
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
+
+	tcp_socket::BytesType toBytes() const;
+	static std::unique_ptr<Model> fromBytes(const tcp_socket::BytesType& data, MeshConfig config);
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;

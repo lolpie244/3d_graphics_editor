@@ -1,4 +1,4 @@
-#include <alpaca/alpaca.h>
+#include "utils/alpaca_types.h"
 
 #include "editor/editor.h"
 #include "network.h"
@@ -7,12 +7,11 @@ Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
 
 struct VertexMovedData {
     render::PickingTexture::Info vertex;
-    std::array<float, 3> moved_to;
+    glm::vec3 moved_to;
 };
 
 void Collaborator::SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to) {
-    SendData(Events::VertexMove,
-             VertexMovedData{.vertex = vertex, .moved_to = {moved_to[0], moved_to[1], moved_to[2]}});
+    SendData(Events::VertexMove, VertexMovedData{.vertex = vertex, .moved_to = moved_to});
 }
 
 void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {

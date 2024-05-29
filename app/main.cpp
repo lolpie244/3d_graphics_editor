@@ -24,6 +24,8 @@ int main() {
     stage_manager.InitWindow(sf::VideoMode(1920, 1080), "test", sf::Style::Fullscreen, settings);
     stage_manager.Window()->setMouseCursorGrabbed(true);
 
+	srand(time(nullptr));
+
     GLenum err = glewInit();
     if (GLEW_OK != err) {
         fprintf(stderr, "Error: %s\n", glewGetErrorString(err));

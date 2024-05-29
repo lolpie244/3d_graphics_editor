@@ -1,15 +1,12 @@
 #pragma once
 
 #include <atomic>
+#include <cstdlib>
 
 class UUID {
    public:
     int Id() const { return id_; }
 
    private:
-    int id_ = max_object_id_++;
-
-    static std::atomic<int> max_object_id_;
+    int id_ = rand();
 };
-
-inline std::atomic<int> UUID::max_object_id_{1};
