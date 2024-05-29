@@ -1,6 +1,7 @@
 #include <string>
 
 #include "network.h"
+#include "network/communication_socket.h"
 
 Host::Host(EditorStage* stage) : Collaborator(stage) {
     socket = std::make_unique<tcp_socket::ConnectionSocket>(settings::PORT);
@@ -10,8 +11,8 @@ Host::Host(EditorStage* stage) : Collaborator(stage) {
             bool recieve_successful;
             do {
                 auto future = socket.on_recieve<bool>(
-                    [this](std::stringstream& message, const tcp_socket::CommunicationSocket& socket) {
-                        ReceiveData(message, socket);
+                    [this](const tcp_socket::BytesType& bytes, const tcp_socket::CommunicationSocket& socket) {
+                        ReceiveData(ReceiveBytes(bytes), socket);
                         return true;
                     });
                 future.wait();
@@ -21,26 +22,23 @@ Host::Host(EditorStage* stage) : Collaborator(stage) {
     });
 }
 
-void Host::SendData(const std::string& data) {
+void Host::SendBytes(const tcp_socket::BytesType& data) {
     for (auto& socket : clients_sockets) { socket.send(data); }
 }
 
-void Host::ReceiveData(std::stringstream& data, const tcp_socket::CommunicationSocket& socket) {
+void Host::ReceiveData(const EventData& event, const tcp_socket::CommunicationSocket& socket) {
     static const std::unordered_map<unsigned int, EventHandler> events{
         {Host_ConnectionAttempt, &Host::NewConnection},
     };
 
-    unsigned int event;
-    data >> event;
-    if (events.contains(event))
-        events.at(event)(this, socket, data);
+    if (events.contains(event.event))
+        events.at(event.event)(this, socket, event.data);
     else {
-        data.seekg(0);
-        Collaborator::ReceiveData(data);
+        Collaborator::ReceiveData(event);
     }
 }
 
-void Host::NewConnection(const tcp_socket::CommunicationSocket& socket, std::stringstream& data) {
+void Host::NewConnection(const tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data) {
     clients_sockets.push_back(socket);
-    socket.send(std::to_string(Client_Connected));
+	SendData(Client_Connected);
 }

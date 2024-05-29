@@ -1,6 +1,7 @@
 #include <string>
 
 #include "network.h"
+#include "network/communication_socket.h"
 
 Client::Client(EditorStage* stage) : Collaborator(stage) {
     addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
@@ -10,13 +11,13 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     tcp_socket::ConnectionSocket host_socket(nullptr, settings::PORT, hints);
     this->socket = host_socket.connect();
 
-    SendData(std::to_string(Host_ConnectionAttempt));
+    SendData(Host_ConnectionAttempt);
     listener = std::async(std::launch::async, [this]() {
         bool recieve_successful;
         do {
             auto future = socket->on_recieve<bool>(
-                [this](std::stringstream& message, const tcp_socket::CommunicationSocket& socket) {
-                    ReceiveData(message);
+                [this](const tcp_socket::BytesType bytes, const tcp_socket::CommunicationSocket& socket) {
+                    ReceiveData(ReceiveBytes(bytes));
                     return true;
                 });
             future.wait();
@@ -25,4 +26,4 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     });
 }
 
-void Client::SendData(const std::string& data) { this->socket->send(data); }
+void Client::SendBytes(const tcp_socket::BytesType& data) { this->socket->send(data); }

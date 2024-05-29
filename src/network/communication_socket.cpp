@@ -27,23 +27,6 @@ bool CommunicationSocket::operator==(const CommunicationSocket &other_socket) {
 
 void CommunicationSocket::close_connection() const { ::close(socket_fd); }
 
-void CommunicationSocket::send(const char *message) const {
-    int send_size;
-    send_size = ::send(socket_fd, message, settings::PACKAGE_SIZE, 0);
-    if (send_size == -1) {
-        std::cout << "Send error: " << strerror(errno);
-        return;
-    }
-}
-
-void CommunicationSocket::send(std::stringstream &message) const {
-    std::string next_message;
-    std::getline(message, next_message, '\0');
-    send(next_message.c_str());
-}
-
-void CommunicationSocket::send(const std::string &message) const { send(message.c_str()); }
-
 CommunicationSocket::~CommunicationSocket() {
     // if (is_server)
     //     ::close(socket_fd);

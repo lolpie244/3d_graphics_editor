@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Window/Event.hpp>
+#include <array>
 #include <memory>
 
 #include "data/texture.h"
@@ -36,6 +37,21 @@ void EditorStage::InitGui() {
     auto save_as_file = std::make_shared<gui::ButtonFromList>(L"Зберегти як");
     auto import_model = std::make_shared<gui::ButtonFromList>(L"Імпорт");
     file_button_list->AddButtons({new_file, open_file, save_file, save_as_file, import_model});
+
+    import_model->BindPress(observer_, [this](sf::Event) {
+        std::thread([this]() {
+            std::array<const char *, 1> formats{"*.obj"};
+            const char *filename =
+                tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "obj files", false);
+
+            if (!filename)
+                return;
+
+            this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
+        }).detach();
+
+        return true;
+    });
     /////////////////////////////////////
     auto network_button_list = std::make_shared<gui::ButtonsList>();
     network_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
@@ -49,17 +65,11 @@ void EditorStage::InitGui() {
     figures_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
     figures_button->AddButtonList(observer_, figures_button_list);
 
-    for (auto& [name, filename] : default_figures_) {
+    for (auto &[name, filename] : default_figures_) {
         auto button = std::make_shared<gui::ButtonFromList>(name);
 
         button->BindPress(observer_, [this, &filename](sf::Event) {
-            auto model = render::Model::loadFromFile(
-                filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-
-            model->texture =
-                data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
-
-            AddModel(std::move(model));
+            AddModel(filename);
             return true;
         });
 
@@ -70,8 +80,8 @@ void EditorStage::InitGui() {
     light_button->BindPress(observer_, [this](sf::Event) {
         std::thread([this]() {
             unsigned char lRgbColor[3];
-			if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
-				return;
+            if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
+                return;
 
             PendingFunctions.push_back([this, lRgbColor]() {
                 this->AddLight({lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1});
@@ -97,7 +107,7 @@ void EditorStage::InitGui() {
 
     int i = 0;
 
-    for (auto& [name, mode] : draw_modes_) {
+    for (auto &[name, mode] : draw_modes_) {
         auto button =
             std::make_shared<gui::RadioButton>(glm::vec3(1650 + 90 * i, 70, 0), glm::vec2(82, 82), mode_group);
 
@@ -120,7 +130,7 @@ void EditorStage::InitGui() {
     auto gizmo_button_list = std::make_shared<gui::ButtonsList>(glm::vec3(60, 200, 0), glm::vec2(82, 82), 10);
     gizmo_button_list->SetReleasedTexture({theme->getElement("g582"), {0, 0.01}, {0.2, 0.3}});
     gizmo_button_list->SetPressedTexture({theme->getElement("g583"), {0, 0.1}, {0.2, 0.3}});
-    for (auto& [name, mode] : gizmos_) {
+    for (auto &[name, mode] : gizmos_) {
         auto button = std::make_shared<gui::ButtonFromList>(name);
 
         button->BindPress(observer_, [&mode, this](sf::Event event) {

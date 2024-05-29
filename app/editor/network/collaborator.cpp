@@ -1,52 +1,37 @@
+#include <alpaca/alpaca.h>
+
 #include "editor/editor.h"
 #include "network.h"
 
-std::istream& operator>>(std::istream& is, render::PickingTexture::Info& vertex) {
-    is >> vertex.ObjectID >> vertex.VertexId >> vertex.Type;
-    return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const render::PickingTexture::Info& vertex) {
-    os << vertex.ObjectID << ' ' << vertex.VertexId << ' ' << vertex.Type;
-    return os;
-}
-
-std::istream& operator>>(std::istream& is, glm::vec3& vertex) {
-    is >> vertex.x >> vertex.y >> vertex.z;
-    return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const glm::vec3& vertex) {
-    os << vertex.x << ' ' << vertex.y << ' ' << vertex.z;
-    return os;
-}
-
 Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
 
+struct VertexMovedData {
+    render::PickingTexture::Info vertex;
+    std::array<float, 3> moved_to;
+};
+
 void Collaborator::SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to) {
-    std::stringstream data;
-    data << Events::VertexMove << ' ' << vertex << ' ' << moved_to << '\n';
-    SendData(data.str());
+    SendData(Events::VertexMove,
+             VertexMovedData{.vertex = vertex, .moved_to = {moved_to[0], moved_to[1], moved_to[2]}});
 }
 
-void Collaborator::VertexMovedHandler(std::stringstream& data) {
-    render::PickingTexture::Info vertex;
-    glm::vec3 moved_to;
-    data >> vertex >> moved_to;
-    stage->PendingFunctions.push_back([vertex, moved_to, this]() {
+void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<VertexMovedData>(raw_data, ec);
+
+    stage->PendingFunctions.push_back([vertex = data.vertex, moved_to = data.moved_to, this]() {
         auto* model = stage->models.at(vertex.ObjectID).get();
-        model->SetVertexPosition(vertex.VertexId, vertex.Type,
-                                 model->Vertex(vertex.VertexId, vertex.Type).position + moved_to);
+        model->SetVertexPosition(
+            vertex.VertexId, vertex.Type,
+            model->Vertex(vertex.VertexId, vertex.Type).position + glm::vec3{moved_to[0], moved_to[1], moved_to[2]});
     });
 }
 
-void Collaborator::ReceiveData(std::stringstream& data) {
+void Collaborator::ReceiveData(const EventData& event) {
     static const std::unordered_map<unsigned int, EventHandler> events{
         {Events::VertexMove, &Collaborator::VertexMovedHandler},
     };
 
-    unsigned int event;
-    data >> event;
-    if (events.contains(event))
-        events.at(event)(this, data);
+    if (events.contains(event.event))
+        events.at(event.event)(this, event.data);
 }

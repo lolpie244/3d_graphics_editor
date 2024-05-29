@@ -43,6 +43,6 @@ target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
 	OpenGL GLU GLEW::GLEW glm::glm
-	${lunasvg} tinyobjloader::tinyobjloader
+	${lunasvg} tinyobjloader::tinyobjloader alpaca::alpaca
 )
 

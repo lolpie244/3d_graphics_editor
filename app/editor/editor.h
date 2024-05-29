@@ -20,7 +20,7 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void InitGui();
     void BindEvents();
-    void AddModel(std::unique_ptr<render::Model> model);
+    void AddModel(const std::string& filename);
     void AddLight(glm::vec4 color);
 
     void Select(render::PickingTexture::Info info);
@@ -75,12 +75,6 @@ class EditorStage : public stage::Stage {
         {L"С'юзан", "resources/default/susan.obj"},
     };
 
-    std::pair<sf::String, glm::vec4> lights_colors_[4]{
-        {L"Білий", ToVector(sf::Color::White)},
-        {L"Червоний", ToVector(sf::Color::Red)},
-        {L"Зелений", ToVector(sf::Color::Green)},
-        {L"Синій", ToVector(sf::Color::Blue)},
-    };
     DrawMode* current_draw_mode_ = draw_modes_[0].second.get();
     render::Gizmo* current_gizmo_ = gizmos_[0].second.get();
 

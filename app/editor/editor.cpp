@@ -59,7 +59,11 @@ void EditorStage::BindEvents() {
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 }
 
-void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
+void EditorStage::AddModel(const std::string& filename) {
+    auto model = render::Model::loadFromFile(
+        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+
+    model->texture = data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
     model->BindPress(observer_, [this, model = model.get()](sf::Event event) { return ModelPress(event, model); },
                      {sf::Mouse::Left});
     model->BindRelease(observer_, [this, model = model.get()](sf::Event event) { return ModelRelease(event, model); },
