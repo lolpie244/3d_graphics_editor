@@ -1,8 +1,11 @@
 #include "render/model.h"
 
+#include <algorithm>
+#include <cstdint>
 #include <system_error>
 
 #include "data/model_loader.h"
+#include "math/transform.h"
 #include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
@@ -155,25 +158,39 @@ void Model::Triangulate(const SelectedVertices& changed_vertices) {
 }
 
 std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
-    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data, config);
+    if (filename.ends_with(".obj")) {
+        auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
+        return std::make_unique<render::Model>(data, config);
+    } else {
+        std::ifstream input(filename, std::ios::binary);
+        std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
+        std::cout << buffer.size() << '\n';
+        return fromBytes(buffer, config);
+    }
 }
 
 struct ModelFileData {
     int id;
     std::vector<ModelVertexData> vertices;
     std::vector<Mesh<ModelVertex>::Face> faces;
-    std::vector<uint8_t> texture;
+    // std::vector<uint8_t> texture;
+
+    math::TransformData localTransform;
+    math::TransformData globalTransform;
 };
 
 tcp_socket::BytesType Model::toBytes() const {
-    ModelFileData data{.id = this->Id()};
-    data.vertices.resize(this->mesh_.GetRawMesh().vertices.size());
-    data.faces.resize(this->mesh_.GetRawMesh().faces.size());
+    std::vector<ModelVertexData> vertices(this->mesh_.GetRawMesh().vertices.size());
+    for (int i = 0; i < this->mesh_.GetRawMesh().vertices.size(); i++) {
+        vertices[i] = this->mesh_.GetRawMesh().vertices[i];
+    }
 
-    for (auto& vertex : this->mesh_.GetRawMesh().vertices) { data.vertices.push_back(vertex); }
-    for (auto& face : this->mesh_.GetRawMesh().faces) { data.faces.push_back(face); }
-    texture.copyToImage().saveToMemory(data.texture, "png");
+    ModelFileData data{.vertices = vertices,
+                       .faces = this->mesh_.GetRawMesh().faces,
+                       .localTransform = *this,
+                       .globalTransform = GlobalTransform};
+    // texture.copyToImage().
+    // texture.copyToImage().saveToMemory(data.texture, "png");
 
     tcp_socket::BytesType bytes;
 
@@ -184,14 +201,15 @@ tcp_socket::BytesType Model::toBytes() const {
 std::unique_ptr<Model> Model::fromBytes(const tcp_socket::BytesType& raw_data, MeshConfig config) {
     std::error_code ec;
     auto data = alpaca::deserialize<ModelFileData>(raw_data, ec);
-    Mesh<ModelVertex>::RawMesh raw_mesh;
+    std::vector<ModelVertex> vertices(data.vertices.begin(), data.vertices.end());
 
-    raw_mesh.vertices.resize(data.vertices.size());
-    raw_mesh.faces.resize(data.faces.size());
-    for (auto& vertex : data.vertices) { raw_mesh.vertices.push_back((ModelVertex)vertex); }
-    for (auto& face : data.faces) { raw_mesh.faces.push_back(face); }
+    Mesh<ModelVertex>::RawMesh raw_mesh{.vertices = vertices, .faces = data.faces};
 
-    return std::make_unique<render::Model>(raw_mesh, config);
+    auto result = std::make_unique<render::Model>(raw_mesh, config);
+
+    result->SetTransformData(data.localTransform);
+    result->GlobalTransform.SetTransformData(data.globalTransform);
+    return std::move(result);
 }
 
 }  // namespace render

@@ -16,7 +16,7 @@
 #include "utils/settings.h"
 
 namespace tcp_socket {
-using BytesType = std::array<uint8_t, settings::PACKAGE_SIZE>;
+using BytesType = std::vector<uint8_t>;
 
 class CommunicationSocket {
    private:

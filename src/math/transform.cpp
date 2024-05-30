@@ -46,4 +46,14 @@ glm::vec3 Transform::GetScale() const { return scale_; };
 glm::vec3 Transform::GetOrigin() const { return origin_; };
 glm::vec3 Transform::GetRotation() const { return rotation_; };
 
+void Transform::SetTransformData(const TransformData& other) {
+	changed_ = true;
+
+	this->position_ = other.position_;
+	this->rotation_ = other.rotation_;
+	this->scale_ = other.scale_;
+	this->origin_ = other.origin_;
+}
+
+
 };  // namespace math

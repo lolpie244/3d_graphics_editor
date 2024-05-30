@@ -11,6 +11,7 @@
 #include "gui/buttons_list.h"
 #include "gui/radio_button.h"
 #include "render/model.h"
+#include "utils/settings.h"
 
 void EditorStage::InitGui() {
     selection_rect_ = std::make_shared<gui::SelectRect>();
@@ -38,20 +39,9 @@ void EditorStage::InitGui() {
     auto import_model = std::make_shared<gui::ButtonFromList>(L"Імпорт");
     file_button_list->AddButtons({new_file, open_file, save_file, save_as_file, import_model});
 
-    import_model->BindPress(observer_, [this](sf::Event) {
-        std::thread([this]() {
-            std::array<const char *, 1> formats{"*.obj"};
-            const char *filename =
-                tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "obj files", false);
-
-            if (!filename)
-                return;
-
-            this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
-        }).detach();
-
-        return true;
-    });
+    open_file->BindPress(observer_, [this](sf::Event) { return OpenScene(); });
+    save_as_file->BindPress(observer_, [this](sf::Event) { return SaveAsScene(); });
+    import_model->BindPress(observer_, [this](sf::Event) { return ImportModel(); });
     /////////////////////////////////////
     auto network_button_list = std::make_shared<gui::ButtonsList>();
     network_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});

@@ -1,4 +1,5 @@
 #include <GL/glew.h>
+#include <tinyfiledialogs.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
@@ -216,4 +217,50 @@ bool EditorStage::JoinSelected(sf::Event event) {
 void EditorStage::PerformPendingFunctions() {
     for (auto& function : PendingFunctions) { function(); }
     PendingFunctions.clear();
+}
+
+bool EditorStage::OpenScene() {
+    std::thread([this]() {
+        std::array<const char*, 1> formats{settings::FILE_FORMAT};
+        const char* filename =
+            tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "Model files", false);
+
+        if (!filename)
+            return;
+
+        this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
+    }).detach();
+
+    return true;
+}
+
+bool EditorStage::SaveAsScene() {
+    std::thread([this]() {
+        std::array<const char*, 1> formats{settings::FILE_FORMAT};
+        const char* filename = tinyfd_saveFileDialog("Зберегти файл", "", formats.size(), formats.data(), "Model file");
+
+        if (!filename)
+            return;
+
+        std::ofstream file(filename, std::ios::binary);
+        auto data = models.begin()->second->toBytes();
+        file.write((char*)data.data(), data.size());
+    }).detach();
+
+    return true;
+}
+
+bool EditorStage::ImportModel() {
+    std::thread([this]() {
+        std::array<const char*, 2> formats{"*.obj", settings::FILE_FORMAT};
+        const char* filename =
+            tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "obj files", false);
+
+        if (!filename)
+            return;
+
+        this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
+    }).detach();
+
+    return true;
 }

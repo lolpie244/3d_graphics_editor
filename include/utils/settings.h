@@ -25,5 +25,5 @@ constexpr char PORT[] = "2341";
 constexpr int INET_FAMILY = AF_INET6;
 
 constexpr int MAXIMUM_LIGHT_COUNT = 8;
-constexpr char FILE_FORMAT[] = ".help";
+constexpr char FILE_FORMAT[] = "*.help";
 }  // namespace settings

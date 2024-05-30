@@ -28,9 +28,7 @@ typename std::enable_if<is_glm_vec<T>::value, void>::type
 type_info(
     std::vector<uint8_t> &typeids,
     std::unordered_map<std::string_view, std::size_t> &struct_visitor_map) {
-	typeids.push_back(to_byte<field_type::array>());
-	typeids.push_back(T::L);
-	type_info<T::T>(typeids, struct_visitor_map);
+	type_info<std::array<typename T::T, T::L>>(typeids, struct_visitor_map);
 }
 
 template <options O, typename Container, int L, typename T, glm::qualifier Q>

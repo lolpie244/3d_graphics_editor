@@ -49,6 +49,10 @@ class EditorStage : public stage::Stage {
     bool DuplicateSelected(sf::Event event);
     bool JoinSelected(sf::Event event);
 
+	bool SaveAsScene();
+	bool OpenScene();
+	bool ImportModel();
+
    public:
 	std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
