@@ -21,9 +21,9 @@ constexpr int DYNAMIC_TRIANGULATE_LIMIT = 10;
 constexpr float GIZMO_SCALE = 0.2;
 
 constexpr int PACKAGE_SIZE = 100000;
-constexpr char PORT[] = "2341";
+constexpr char PORT[] = "2345";
 constexpr int INET_FAMILY = AF_INET6;
 
 constexpr int MAXIMUM_LIGHT_COUNT = 8;
-constexpr char FILE_FORMAT[] = "*.help";
+constexpr char FILE_FORMAT[] = "*.model";
 }  // namespace settings

@@ -11,7 +11,7 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     tcp_socket::ConnectionSocket host_socket(nullptr, settings::PORT, hints);
     this->socket = host_socket.connect();
 
-    SendData(Host_ConnectionAttempt);
+    SendData(Event_Host_ConnectionAttempt);
     listener = std::async(std::launch::async, [this]() {
         bool recieve_successful;
         do {

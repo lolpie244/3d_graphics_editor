@@ -164,7 +164,6 @@ std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConf
     } else {
         std::ifstream input(filename, std::ios::binary);
         std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
-        std::cout << buffer.size() << '\n';
         return fromBytes(buffer, config);
     }
 }

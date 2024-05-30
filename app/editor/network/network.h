@@ -7,6 +7,7 @@
 
 #include "network/communication_socket.h"
 #include "network/connection_socket.h"
+#include "render/light.h"
 #include "render/model.h"
 #include "render/opengl/picking_texture.h"
 #include "utils/settings.h"
@@ -16,13 +17,16 @@ class EditorStage;
 class Collaborator {
    public:
     enum Events {
-        VertexMove,
-        VertexAdd,
-        ModelAdd,
+        Event_VertexMove,
+        Event_VertexAdd,
+        Event_ModelAdd,
+        Event_ModelTransform,
+        Event_LightAdd,
+        Event_LightTransform,
 
-        Host_ConnectionAttempt,
+        Event_Host_ConnectionAttempt,
 
-        Client_Connected
+        Event_Client_Connected
     };
 
     struct EventData {
@@ -34,11 +38,20 @@ class Collaborator {
 
    public:
     Collaborator(EditorStage* stage);
-    void SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to);
+    void VertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to);
     void VertexMovedHandler(const tcp_socket::BytesType& data);
 
-    void SendNewModel(render::Model* model);
+    void NewModel(render::Model* model);
     void NewModelHandler(const tcp_socket::BytesType& data);
+
+    void ModelTransform(render::Model* model);
+    void ModelTransformHandler(const tcp_socket::BytesType& data);
+
+    void NewLight(render::Light* light);
+    void NewLightHandler(const tcp_socket::BytesType& data);
+
+	void LightTransform(render::Light* light);
+    void LightTransformHandler(const tcp_socket::BytesType& data);
 
     template <typename T>
     void SendData(Events event, const T& data) {
@@ -67,6 +80,8 @@ class Collaborator {
         return alpaca::deserialize<EventData>(bytes, ec);
     }
 
+    virtual std::string Name() = 0;
+
    protected:
     virtual void SendBytes(const tcp_socket::BytesType& data) = 0;
     virtual void ReceiveData(const EventData& data);
@@ -82,6 +97,8 @@ class Host : public Collaborator {
 
    public:
     Host(EditorStage* stage);
+
+    std::string Name() override { return "HOST"; };
 
    protected:
     void SendBytes(const tcp_socket::BytesType& data) override;
@@ -99,6 +116,7 @@ class Host : public Collaborator {
 class Client : public Collaborator {
    public:
     Client(EditorStage* stage);
+    std::string Name() override { return "CLIENT"; };
 
    protected:
     void SendBytes(const tcp_socket::BytesType& data) override;

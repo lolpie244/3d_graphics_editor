@@ -42,8 +42,8 @@ class EditorStage : public stage::Stage {
     void PerformPendingFunctions();
     float Scale() const { return std::max(0.05f, scale_); }
 
-    void AddModel(std::unique_ptr<render::Model> model);
-    void AddLight(std::unique_ptr<render::Light> light);
+    void AddModel(std::unique_ptr<render::Model> model, bool send_request = true);
+    void AddLight(std::unique_ptr<render::Light> light, bool send_request = true);
 
     void SetFilename(const char* filename);
 
@@ -83,9 +83,9 @@ class EditorStage : public stage::Stage {
    public:
     std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
+    render::LightList lights;
 
    private:
-    render::LightList lights;
     std::vector<events::Event> events;
 
     std::pair<sf::String, std::unique_ptr<DrawMode>> draw_modes_[3]{
@@ -112,6 +112,7 @@ class EditorStage : public stage::Stage {
 
     data::Shader gizmo_shader_;
     data::Shader gizmo_picking_;
+	std::function<void(Collaborator*)> after_gizmo_transform_;
 
     std::shared_ptr<gui::SelectRect> selection_rect_;
 

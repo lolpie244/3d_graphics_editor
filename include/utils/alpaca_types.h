@@ -1,10 +1,8 @@
 #pragma once
 
 #include <alpaca/detail/field_type.h>
-#include <alpaca/detail/is_specialization.h>
 #include <alpaca/detail/options.h>
 #include <alpaca/detail/aggregate_arity.h>
-#include <alpaca/detail/type_info.h>
 #include <alpaca/detail/types/array.h>
 
 #include <array>

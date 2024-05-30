@@ -55,6 +55,7 @@ void EditorStage::Select(render::PickingTexture::Info info) {
 
     if (info.Type == render::Model::Surface) {
         current_gizmo_->SetModel(model);
+        after_gizmo_transform_ = [model](Collaborator* connection) { connection->ModelTransform(model); };
         return;
     }
 
@@ -141,7 +142,8 @@ bool EditorStage::MoveSelectedPoints(sf::Event event, render::PickingTexture::In
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
 
-        SendRequest([vertex_info, move](Collaborator* connection) { connection->SendVertexMoved(vertex_info, move); });
+        SendRequest([vertex_info, position = model->Vertex(vertex_info.VertexId, vertex_info.Type).position](
+                        Collaborator* connection) { connection->VertexMoved(vertex_info, position); });
     }
 
     this->last_vertex_position = intersect_point;
@@ -170,6 +172,7 @@ bool EditorStage::DeleteModel(sf::Event event) {
 bool EditorStage::LightPress(sf::Event event, render::Light* light) {
     ClearSelection();
     current_gizmo_->SetModel(light);
+    after_gizmo_transform_ = [light](Collaborator* connection) { connection->LightTransform(light); };
     return true;
 }
 
@@ -220,15 +223,6 @@ bool EditorStage::JoinSelected(sf::Event event) {
 void EditorStage::PerformPendingFunctions() {
     for (auto& function : PendingFunctions) { function(); }
     PendingFunctions.clear();
-}
-
-void EditorStage::AddLight(std::unique_ptr<render::Light> light) {
-    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
-        return;
-
-    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
-                     {sf::Mouse::Left});
-    lights.insert({light->Id(), std::move(light)});
 }
 
 bool EditorStage::AddLight(sf::Event event) {
@@ -305,7 +299,10 @@ bool EditorStage::SaveScene() {
 bool EditorStage::SaveAsScene() {
     RunAsync([this]() {
         std::array<const char*, 1> formats{settings::FILE_FORMAT};
-        const char* filename = tinyfd_saveFileDialog("Зберегти файл", "", formats.size(), formats.data(), "Model file");
+        std::string default_filename = settings::FILE_FORMAT;
+        default_filename = "file" + default_filename.substr(1, default_filename.size() - 1);
+        const char* filename = tinyfd_saveFileDialog("Зберегти файл", default_filename.c_str(), formats.size(),
+                                                     formats.data(), "Model file");
 
         if (!filename)
             return;

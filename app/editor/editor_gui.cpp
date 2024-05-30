@@ -62,7 +62,7 @@ void EditorStage::InitGui() {
 
         button->BindPress(observer_, [this, &filename](sf::Event) {
             auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
-			AddModel(std::move(model));
+            AddModel(std::move(model));
             return true;
         });
 
@@ -71,7 +71,7 @@ void EditorStage::InitGui() {
     auto light_button = std::make_shared<gui::ButtonFromList>(L"Джерело світла");
     figures_button_list->AddButton(light_button);
     light_button->BindPress(observer_, [this](sf::Event event) {
-		AddLight(event);
+        AddLight(event);
         return true;
     });
 
@@ -127,6 +127,8 @@ void EditorStage::InitGui() {
 
         mode->BindDrag(observer_, [this, &mode](sf::Event event, glm::vec3 moved) {
             mode->MouseMove({event.mouseMove.x, event.mouseMove.y}, mode->PressInfo().Type);
+            SendRequest(after_gizmo_transform_);
+
             return true;
         });
 

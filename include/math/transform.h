@@ -45,6 +45,7 @@ class Transform: protected TransformData {
     glm::vec3 GetOrigin() const;
     glm::vec3 GetRotation() const;
 
+	TransformData GetTransformData() const;
 	void SetTransformData(const TransformData& other);
 
    protected:

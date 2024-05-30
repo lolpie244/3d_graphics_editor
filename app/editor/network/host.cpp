@@ -28,7 +28,7 @@ void Host::SendBytes(const tcp_socket::BytesType& data) {
 
 void Host::ReceiveData(const EventData& event, const tcp_socket::CommunicationSocket& socket) {
     static const std::unordered_map<unsigned int, EventHandler> events{
-        {Host_ConnectionAttempt, &Host::NewConnection},
+        {Event_Host_ConnectionAttempt, &Host::NewConnection},
     };
 
     if (events.contains(event.event))
@@ -40,5 +40,5 @@ void Host::ReceiveData(const EventData& event, const tcp_socket::CommunicationSo
 
 void Host::NewConnection(const tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data) {
     clients_sockets.push_back(socket);
-    SendData(Client_Connected);
+    SendData(Event_Client_Connected);
 }

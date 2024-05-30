@@ -62,7 +62,7 @@ void EditorStage::BindEvents() {
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 }
 
-void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
+void EditorStage::AddModel(std::unique_ptr<render::Model> model, bool send_request) {
     model->texture = data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
     model->BindPress(observer_, [this, model = model.get()](sf::Event event) { return ModelPress(event, model); },
                      {sf::Mouse::Left});
@@ -74,10 +74,23 @@ void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
                     },
                     {sf::Mouse::Left});
 
-    SendRequest([model = model.get()](Collaborator* connection) { connection->SendNewModel(model); });
+    if (send_request)
+        SendRequest([model = model.get()](Collaborator* connection) { connection->NewModel(model); });
+
     models.insert({model->Id(), std::move(model)});
 }
 
+void EditorStage::AddLight(std::unique_ptr<render::Light> light, bool send_request) {
+    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
+        return;
+
+    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
+                     {sf::Mouse::Left});
+    if (send_request)
+        SendRequest([light = light.get()](Collaborator* connection) { connection->NewLight(light); });
+
+    lights.insert({light->Id(), std::move(light)});
+}
 
 void EditorStage::SendRequest(std::function<void(Collaborator*)> func) {
     if (!connection_)
@@ -109,6 +122,10 @@ EditorStage::EditorStage() {
 }
 
 void EditorStage::Run() {
+	window_->pushGLStates();
+    window_->draw(elements_);
+    window_->popGLStates();
+
     PerformPendingFunctions();
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
