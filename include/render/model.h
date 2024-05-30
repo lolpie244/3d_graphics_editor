@@ -11,11 +11,16 @@
 #include "vertex.h"
 
 namespace render {
-struct ModelVertex : public Vertex<ModelVertex> {
+
+struct ModelVertexData {
     glm::vec3 position;
     glm::vec2 texture_coord;
     glm::vec3 normal;
     glm::vec4 color{255, 255, 255, 255};
+};
+
+struct ModelVertex : public ModelVertexData, public Vertex<ModelVertex> {
+	using Data = ModelVertexData;
 
     size_t Hash() const;
     VertexLayout Layout() const;
@@ -39,8 +44,8 @@ class Model : virtual public UUID, virtual public GizmoSupport, virtual public e
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
 
-	tcp_socket::BytesType toBytes() const;
-	static std::unique_ptr<Model> fromBytes(const tcp_socket::BytesType& data, MeshConfig config);
+    tcp_socket::BytesType toBytes() const;
+    static std::unique_ptr<Model> fromBytes(const tcp_socket::BytesType& data, MeshConfig config);
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;

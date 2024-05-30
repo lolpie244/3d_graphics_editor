@@ -214,8 +214,6 @@ bool EditorStage::JoinSelected(sf::Event event) {
 }
 
 void EditorStage::PerformPendingFunctions() {
-	for (auto& function: PendingFunctions) {
-		function();
-	}
+    for (auto& function : PendingFunctions) { function(); }
     PendingFunctions.clear();
 }

@@ -1,7 +1,6 @@
-#include "utils/alpaca_types.h"
-
 #include "editor/editor.h"
 #include "network.h"
+#include "utils/alpaca_types.h"
 
 Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
 

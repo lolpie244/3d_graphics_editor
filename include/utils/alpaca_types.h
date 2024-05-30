@@ -32,12 +32,9 @@ type_info(
 	typeids.push_back(T::L);
 	type_info<T::T>(typeids, struct_visitor_map);
 }
-template <options O, typename T, typename Container>
-void to_bytes_router(const T &input, Container &bytes, std::size_t &byte_index);
 
 template <options O, typename Container, int L, typename T, glm::qualifier Q>
 void to_bytes(Container &bytes, std::size_t &byte_index, const glm::vec<L, T, Q> &input) {
-    // value of each element in list
     std::array<T, L> data;
 	for (int i = 0; i < L; i++)
 		data[i] = input[i];
@@ -45,12 +42,8 @@ void to_bytes(Container &bytes, std::size_t &byte_index, const glm::vec<L, T, Q>
     to_bytes<O, Container, T, L>(bytes, byte_index, data);
 }
 
-template <options O, typename T, typename Container>
-void from_bytes_router(T &output, Container &bytes, std::size_t &byte_index,
-                       std::size_t &end_index, std::error_code &error_code);
-
-template <options O, typename T, typename Container, int L>
-bool from_bytes(glm::vec<L, T> &output, Container &bytes, std::size_t &byte_index, std::size_t &end_index,
+template <options O, int L, typename T, glm::qualifier Q, typename Container>
+bool from_bytes(glm::vec<L, T, Q> &output, Container &bytes, std::size_t &byte_index, std::size_t &end_index,
                 std::error_code &error_code) {
     std::array<T, L> output_array;
     from_bytes<O, T, Container, L>(output_array, bytes, byte_index, end_index, error_code);

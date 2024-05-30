@@ -1,12 +1,12 @@
 #include "render/model.h"
-#include <alpaca/alpaca.h>
-#include "utils/alpaca_types.h"
+
 #include <system_error>
 
 #include "data/model_loader.h"
 #include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
+#include "utils/alpaca_types.h"
 #include "utils/settings.h"
 
 namespace render {
@@ -154,41 +154,44 @@ void Model::Triangulate(const SelectedVertices& changed_vertices) {
     mesh_.Triangulate(ids);
 }
 
-
 std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
-	
     auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
     return std::make_unique<render::Model>(data, config);
 }
 
 struct ModelFileData {
     int id;
-	// std::vector<ModelVertex> vertices;
-	// std::vector<Face> faces;
-	//
- //    Mesh<ModelVertex>::RawMesh mesh;
-    // std::vector<uint8_t> texture;
+    std::vector<ModelVertexData> vertices;
+    std::vector<Mesh<ModelVertex>::Face> faces;
+    std::vector<uint8_t> texture;
 };
 
 tcp_socket::BytesType Model::toBytes() const {
-	ModelFileData data {
-		.id = this->Id(),
-		// .mesh = this->mesh_.GetRawMesh()
-	};
-	// texture.copyToImage().saveToMemory(data.texture, "png");
+    ModelFileData data{.id = this->Id()};
+    data.vertices.resize(this->mesh_.GetRawMesh().vertices.size());
+    data.faces.resize(this->mesh_.GetRawMesh().faces.size());
 
-	tcp_socket::BytesType bytes;
+    for (auto& vertex : this->mesh_.GetRawMesh().vertices) { data.vertices.push_back(vertex); }
+    for (auto& face : this->mesh_.GetRawMesh().faces) { data.faces.push_back(face); }
+    texture.copyToImage().saveToMemory(data.texture, "png");
 
-	alpaca::serialize(data, bytes);
-	return bytes;
+    tcp_socket::BytesType bytes;
+
+    alpaca::serialize(data, bytes);
+    return bytes;
 }
 
 std::unique_ptr<Model> Model::fromBytes(const tcp_socket::BytesType& raw_data, MeshConfig config) {
-	std::error_code ec;
-	auto data = alpaca::deserialize<ModelFileData>(raw_data, ec);
+    std::error_code ec;
+    auto data = alpaca::deserialize<ModelFileData>(raw_data, ec);
+    Mesh<ModelVertex>::RawMesh raw_mesh;
 
-	// return std::make_unique<render::Model>(data.mesh, config);
+    raw_mesh.vertices.resize(data.vertices.size());
+    raw_mesh.faces.resize(data.faces.size());
+    for (auto& vertex : data.vertices) { raw_mesh.vertices.push_back((ModelVertex)vertex); }
+    for (auto& face : data.faces) { raw_mesh.faces.push_back(face); }
+
+    return std::make_unique<render::Model>(raw_mesh, config);
 }
-
 
 }  // namespace render

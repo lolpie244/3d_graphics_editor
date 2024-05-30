@@ -1,6 +1,5 @@
 #pragma once
 
-#include <alpaca/alpaca.h>
 #include <netdb.h>
 
 #include <cstring>
@@ -13,6 +12,7 @@
 
 #include "communication_socket.h"
 #include "file_descriptor.h"
+#include "utils/alpaca_types.h"
 #include "utils/settings.h"
 
 namespace tcp_socket {
@@ -50,7 +50,7 @@ class CommunicationSocket {
     template <typename FuncReturnType>
     std::future<FuncReturnType> on_recieve(
         std::function<FuncReturnType(const BytesType &data, const CommunicationSocket &socket)> callback_function) {
-		BytesType data;
+        BytesType data;
         int recieve_size = ::recv(socket_fd, data.data(), settings::PACKAGE_SIZE, 0);
 
         if (recieve_size <= 0) {
