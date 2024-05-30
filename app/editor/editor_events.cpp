@@ -5,13 +5,16 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <iterator>
+#include <system_error>
 
+#include "alpaca/alpaca.h"
 #include "data/model_loader.h"
 #include "editor.h"
 #include "editor/network/network.h"
 #include "math/points_cast.h"
 #include "math/ray.h"
 #include "math/utils.h"
+#include "network/communication_socket.h"
 #include "render/light.h"
 #include "render/model.h"
 #include "utils/settings.h"
@@ -138,7 +141,7 @@ bool EditorStage::MoveSelectedPoints(sf::Event event, render::PickingTexture::In
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
 
-        SendUpdate([this, vertex_info, move]() { connection_->SendVertexMoved(vertex_info, move); });
+        SendRequest([vertex_info, move](Collaborator* connection) { connection->SendVertexMoved(vertex_info, move); });
     }
 
     this->last_vertex_position = intersect_point;
@@ -219,40 +222,107 @@ void EditorStage::PerformPendingFunctions() {
     PendingFunctions.clear();
 }
 
+void EditorStage::AddModelFromFile(const std::string& filename) {
+    auto model = render::Model::loadFromFile(
+        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+    AddModel(std::move(model));
+}
+
+void EditorStage::AddModelFromMemory(int id, const tcp_socket::BytesType& bytes) {
+    auto model = render::Model::fromBytes(
+        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+
+    model->ForceSetId(id);
+    AddModel(std::move(model));
+}
+
+void EditorStage::AddModelFromMemory(const tcp_socket::BytesType& bytes) {
+    auto model = render::Model::fromBytes(
+        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+    AddModel(std::move(model));
+}
+
+void EditorStage::AddLight(glm::vec4 color) {
+    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
+        return;
+
+    auto light = std::make_unique<render::Light>(render::Light::LightData{
+        .color = color, .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}});
+
+    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
+                     {sf::Mouse::Left});
+    lights.insert({light->Id(), std::move(light)});
+}
+
+void EditorStage::LoadScene(const tcp_socket::BytesType& data) {
+    std::error_code ec;
+    auto scenes = alpaca::deserialize<SceneData>(data, ec);
+
+    for (auto& model : scenes.models) { AddModelFromMemory(model); }
+}
+
+bool EditorStage::NewScene() {
+    Clear();
+    current_filename_ = nullptr;
+    return true;
+}
+
 bool EditorStage::OpenScene() {
-    std::thread([this]() {
+    RunAsync([this]() {
         std::array<const char*, 1> formats{settings::FILE_FORMAT};
+        this->Clear();
+
         const char* filename =
             tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "Model files", false);
 
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() { AddModelFromFile(filename); });
-    }).detach();
+        this->PendingFunctions.push_back([this, filename]() {
+            std::ifstream input(filename, std::ios::binary);
+            std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
+            LoadScene(buffer);
+        });
+    });
+
+    return true;
+}
+
+bool EditorStage::SaveScene() {
+    if (current_filename_ == nullptr)
+        SaveAsScene();
+
+    RunAsync([this]() {
+        std::ofstream file(current_filename_, std::ios::binary);
+        SceneData scenes;
+        for (auto& [_, model] : models) { scenes.models.push_back(model->toBytes()); }
+
+        tcp_socket::BytesType bytes;
+        alpaca::serialize(scenes, bytes);
+        file.write((char*)bytes.data(), bytes.size());
+    });
 
     return true;
 }
 
 bool EditorStage::SaveAsScene() {
-    std::thread([this]() {
+    RunAsync([this]() {
         std::array<const char*, 1> formats{settings::FILE_FORMAT};
         const char* filename = tinyfd_saveFileDialog("Зберегти файл", "", formats.size(), formats.data(), "Model file");
 
         if (!filename)
             return;
 
-        std::ofstream file(filename, std::ios::binary);
-        auto data = models.begin()->second->toBytes();
-        file.write((char*)data.data(), data.size());
-    }).detach();
+        SetFilename(filename);
+        SaveScene();
+    });
 
     return true;
 }
 
 bool EditorStage::ImportModel() {
-    std::thread([this]() {
-        std::array<const char*, 2> formats{"*.obj", settings::FILE_FORMAT};
+    RunAsync([this]() {
+        std::array<const char*, 1> formats{"*.obj"};
         const char* filename =
             tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "obj files", false);
 
@@ -260,7 +330,7 @@ bool EditorStage::ImportModel() {
             return;
 
         this->PendingFunctions.push_back([this, filename]() { AddModelFromFile(filename); });
-    }).detach();
+    });
 
     return true;
 }

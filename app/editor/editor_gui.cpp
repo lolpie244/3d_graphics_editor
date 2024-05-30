@@ -33,13 +33,15 @@ void EditorStage::InitGui() {
 
     file_button->AddButtonList(observer_, file_button_list);
     auto new_file = std::make_shared<gui::ButtonFromList>(L"Новий файл");
-    auto open_file = std::make_shared<gui::ButtonFromList>(L"Створити файл");
+    auto open_file = std::make_shared<gui::ButtonFromList>(L"Відкрити файл");
     auto save_file = std::make_shared<gui::ButtonFromList>(L"Зберегти");
     auto save_as_file = std::make_shared<gui::ButtonFromList>(L"Зберегти як");
     auto import_model = std::make_shared<gui::ButtonFromList>(L"Імпорт");
     file_button_list->AddButtons({new_file, open_file, save_file, save_as_file, import_model});
 
+    new_file->BindPress(observer_, [this](sf::Event) { return NewScene(); });
     open_file->BindPress(observer_, [this](sf::Event) { return OpenScene(); });
+    save_file->BindPress(observer_, [this](sf::Event) { return SaveScene(); });
     save_as_file->BindPress(observer_, [this](sf::Event) { return SaveAsScene(); });
     import_model->BindPress(observer_, [this](sf::Event) { return ImportModel(); });
     /////////////////////////////////////

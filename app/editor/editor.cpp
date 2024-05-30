@@ -74,40 +74,27 @@ void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
                     },
                     {sf::Mouse::Left});
 
-	SendUpdate([this, model = model.get()](){connection_->SendNewModel(model);});
+    SendRequest([model = model.get()](Collaborator* connection) { connection->SendNewModel(model); });
     models.insert({model->Id(), std::move(model)});
 }
 
-void EditorStage::AddModelFromFile(const std::string& filename) {
-    auto model = render::Model::loadFromFile(
-        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-    AddModel(std::move(model));
-}
 
-void EditorStage::AddModelFromMemory(int id, const tcp_socket::BytesType& bytes) {
-    auto model = render::Model::fromBytes(
-        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-
-    model->ForceSetId(id);
-    AddModel(std::move(model));
-}
-
-void EditorStage::AddLight(glm::vec4 color) {
-    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
-        return;
-
-    auto light = std::make_unique<render::Light>(render::Light::LightData{
-        .color = color, .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}});
-
-    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
-                     {sf::Mouse::Left});
-    lights.insert({light->Id(), std::move(light)});
-}
-
-void EditorStage::SendUpdate(std::function<void(void)> func) {
+void EditorStage::SendRequest(std::function<void(Collaborator*)> func) {
     if (!connection_)
         return;
-    requests_.push_back(std::async(std::launch::async, func));
+    RunAsync([func, this]() { func(connection_.get()); });
+}
+
+void EditorStage::RunAsync(std::function<void(void)> func) {
+    requests_.push_back(std::async(std::launch::async, [this, func]() { func(); }));
+}
+
+void EditorStage::SetFilename(const char* filename) { current_filename_ = filename; }
+
+void EditorStage::Clear() {
+    ClearSelection();
+    models.clear();
+    lights.clear();
 }
 
 EditorStage::EditorStage() {

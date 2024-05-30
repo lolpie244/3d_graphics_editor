@@ -16,25 +16,37 @@ using render::PickingTexture;
 class EditorStage : public stage::Stage {
     using SelectedVertices = render::Model::SelectedVertices;
 
+    struct SceneData {
+        std::vector<tcp_socket::BytesType> models;
+    };
+
    public:
     EditorStage();
     void Run() override;
+    void Clear();
+
     void InitGui();
     void BindEvents();
+
+    void RunAsync(std::function<void(void)>);
+    void SendRequest(std::function<void(Collaborator*)>);
+
+    void PerformPendingFunctions();
+    float Scale() const { return std::max(0.05f, scale_); }
+
     void AddModel(std::unique_ptr<render::Model> model);
     void AddModelFromFile(const std::string& filename);
     void AddModelFromMemory(int id, const tcp_socket::BytesType& filename);
+    void AddModelFromMemory(const tcp_socket::BytesType& filename);
     void AddLight(glm::vec4 color);
+    void SetFilename(const char* filename);
+
+    void LoadScene(const tcp_socket::BytesType& data);
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
 
-    float Scale() const { return std::max(0.05f, scale_); }
-
-    void PerformPendingFunctions();
-	bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
-
-	void SendUpdate(std::function<void(void)>);
+    bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
@@ -47,20 +59,23 @@ class EditorStage : public stage::Stage {
     bool ModelPress(sf::Event event, render::Model* model);
     bool ModelRelease(sf::Event event, render::Model* model);
 
-	bool DeleteModel(sf::Event event);
+    bool DeleteModel(sf::Event event);
 
     bool LightPress(sf::Event event, render::Light* light);
 
     bool DuplicateSelected(sf::Event event);
     bool JoinSelected(sf::Event event);
 
-	bool SaveAsScene();
-	bool OpenScene();
-	bool ImportModel();
+    bool NewScene();
+    bool SaveScene();
+    bool SaveAsScene();
+    bool OpenScene();
+    bool ImportModel();
 
    public:
-	std::list<std::function<void()>> PendingFunctions;
+    std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
+
    private:
     render::LightList lights;
     std::vector<events::Event> events;
@@ -98,7 +113,9 @@ class EditorStage : public stage::Stage {
     float scale_ = 1;
 
     std::unique_ptr<Collaborator> connection_;
-	std::list<std::future<void>> requests_;
+    std::list<std::future<void>> requests_;
 
-	bool pending_move_ = false;
+    bool pending_move_ = false;
+
+    const char* current_filename_;
 };
