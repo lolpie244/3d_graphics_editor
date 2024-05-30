@@ -137,8 +137,8 @@ bool EditorStage::MoveSelectedPoints(sf::Event event, render::PickingTexture::In
         auto* model = models[vertex_info.ObjectID].get();
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
-        if (connection_)
-            connection_->SendVertexMoved(vertex_info, move);
+
+        SendUpdate([this, vertex_info, move]() { connection_->SendVertexMoved(vertex_info, move); });
     }
 
     this->last_vertex_position = intersect_point;
@@ -228,7 +228,7 @@ bool EditorStage::OpenScene() {
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
+        this->PendingFunctions.push_back([this, filename]() { AddModelFromFile(filename); });
     }).detach();
 
     return true;
@@ -259,7 +259,7 @@ bool EditorStage::ImportModel() {
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() { AddModel(filename); });
+        this->PendingFunctions.push_back([this, filename]() { AddModelFromFile(filename); });
     }).detach();
 
     return true;

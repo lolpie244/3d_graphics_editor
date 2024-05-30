@@ -50,7 +50,7 @@ class CommunicationSocket {
     template <typename FuncReturnType>
     std::future<FuncReturnType> on_recieve(
         std::function<FuncReturnType(const BytesType &data, const CommunicationSocket &socket)> callback_function) {
-        BytesType data;
+        BytesType data(settings::PACKAGE_SIZE);
         int recieve_size = ::recv(socket_fd, data.data(), settings::PACKAGE_SIZE, 0);
 
         if (recieve_size <= 0) {

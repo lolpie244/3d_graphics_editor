@@ -170,7 +170,6 @@ std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConf
 }
 
 struct ModelFileData {
-    int id;
     std::vector<ModelVertexData> vertices;
     std::vector<Mesh<ModelVertex>::Face> faces;
     // std::vector<uint8_t> texture;

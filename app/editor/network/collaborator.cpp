@@ -1,5 +1,7 @@
 #include "editor/editor.h"
 #include "network.h"
+#include "network/communication_socket.h"
+#include "render/model.h"
 #include "utils/alpaca_types.h"
 
 Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
@@ -25,9 +27,26 @@ void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
     });
 }
 
+struct NewModelData {
+    int id;
+    tcp_socket::BytesType bytes;
+};
+
+void Collaborator::SendNewModel(render::Model* model) {
+    SendData(ModelAdd, NewModelData{.id = model->Id(), .bytes = model->toBytes()});
+}
+
+void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
+
+    stage->PendingFunctions.push_back([raw_data, this, data]() { stage->AddModelFromMemory(data.id, data.bytes); });
+}
+
 void Collaborator::ReceiveData(const EventData& event) {
     static const std::unordered_map<unsigned int, EventHandler> events{
         {Events::VertexMove, &Collaborator::VertexMovedHandler},
+        {Events::ModelAdd, &Collaborator::NewModelHandler},
     };
 
     if (events.contains(event.event))

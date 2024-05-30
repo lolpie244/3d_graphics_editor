@@ -4,6 +4,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <algorithm>
+#include <functional>
+#include <future>
 #include <memory>
 
 #include "data/texture.h"
@@ -11,6 +13,7 @@
 #include "gui/select_rect.h"
 #include "render/light.h"
 #include "render/mesh.h"
+#include "render/model.h"
 #include "utils/settings.h"
 
 void EditorStage::BindEvents() {
@@ -59,10 +62,7 @@ void EditorStage::BindEvents() {
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
 }
 
-void EditorStage::AddModel(const std::string& filename) {
-    auto model = render::Model::loadFromFile(
-        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-
+void EditorStage::AddModel(std::unique_ptr<render::Model> model) {
     model->texture = data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
     model->BindPress(observer_, [this, model = model.get()](sf::Event event) { return ModelPress(event, model); },
                      {sf::Mouse::Left});
@@ -73,7 +73,23 @@ void EditorStage::AddModel(const std::string& filename) {
                         return MoveSelectedPoints(event, model->PressInfo());
                     },
                     {sf::Mouse::Left});
+
+	SendUpdate([this, model = model.get()](){connection_->SendNewModel(model);});
     models.insert({model->Id(), std::move(model)});
+}
+
+void EditorStage::AddModelFromFile(const std::string& filename) {
+    auto model = render::Model::loadFromFile(
+        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+    AddModel(std::move(model));
+}
+
+void EditorStage::AddModelFromMemory(int id, const tcp_socket::BytesType& bytes) {
+    auto model = render::Model::fromBytes(
+        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
+
+    model->ForceSetId(id);
+    AddModel(std::move(model));
 }
 
 void EditorStage::AddLight(glm::vec4 color) {
@@ -86,6 +102,12 @@ void EditorStage::AddLight(glm::vec4 color) {
     light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
                      {sf::Mouse::Left});
     lights.insert({light->Id(), std::move(light)});
+}
+
+void EditorStage::SendUpdate(std::function<void(void)> func) {
+    if (!connection_)
+        return;
+    requests_.push_back(std::async(std::launch::async, func));
 }
 
 EditorStage::EditorStage() {

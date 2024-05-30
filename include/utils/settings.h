@@ -20,7 +20,7 @@ const glm::vec4 SELECTED_POINT_COLOR = {255, 0, 0, 1};
 constexpr int DYNAMIC_TRIANGULATE_LIMIT = 10;
 constexpr float GIZMO_SCALE = 0.2;
 
-constexpr int PACKAGE_SIZE = 1000;
+constexpr int PACKAGE_SIZE = 100000;
 constexpr char PORT[] = "2341";
 constexpr int INET_FAMILY = AF_INET6;
 

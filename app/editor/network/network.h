@@ -7,6 +7,7 @@
 
 #include "network/communication_socket.h"
 #include "network/connection_socket.h"
+#include "render/model.h"
 #include "render/opengl/picking_texture.h"
 #include "utils/settings.h"
 
@@ -17,6 +18,7 @@ class Collaborator {
     enum Events {
         VertexMove,
         VertexAdd,
+        ModelAdd,
 
         Host_ConnectionAttempt,
 
@@ -35,12 +37,20 @@ class Collaborator {
     void SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to);
     void VertexMovedHandler(const tcp_socket::BytesType& data);
 
+    void SendNewModel(render::Model* model);
+    void NewModelHandler(const tcp_socket::BytesType& data);
+
     template <typename T>
     void SendData(Events event, const T& data) {
         EventData event_data{.event = event};
         tcp_socket::BytesType bytes;
+        alpaca::serialize(data, bytes);
+        SendData(event, bytes);
+    }
 
-        alpaca::serialize(data, event_data.data);
+    void SendData(Events event, const tcp_socket::BytesType& data) {
+        EventData event_data{.event = event, .data = data};
+        tcp_socket::BytesType bytes;
         alpaca::serialize(event_data, bytes);
         SendBytes(bytes);
     }

@@ -59,7 +59,7 @@ void EditorStage::InitGui() {
         auto button = std::make_shared<gui::ButtonFromList>(name);
 
         button->BindPress(observer_, [this, &filename](sf::Event) {
-            AddModel(filename);
+            AddModelFromFile(filename);
             return true;
         });
 

@@ -4,6 +4,7 @@
 #include "editor/network/network.h"
 #include "events/event.h"
 #include "gui/select_rect.h"
+#include "network/communication_socket.h"
 #include "render/gizmo.h"
 #include "render/light.h"
 #include "render/model.h"
@@ -20,7 +21,9 @@ class EditorStage : public stage::Stage {
     void Run() override;
     void InitGui();
     void BindEvents();
-    void AddModel(const std::string& filename);
+    void AddModel(std::unique_ptr<render::Model> model);
+    void AddModelFromFile(const std::string& filename);
+    void AddModelFromMemory(int id, const tcp_socket::BytesType& filename);
     void AddLight(glm::vec4 color);
 
     void Select(render::PickingTexture::Info info);
@@ -30,6 +33,8 @@ class EditorStage : public stage::Stage {
 
     void PerformPendingFunctions();
 	bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
+
+	void SendUpdate(std::function<void(void)>);
 
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
@@ -93,6 +98,7 @@ class EditorStage : public stage::Stage {
     float scale_ = 1;
 
     std::unique_ptr<Collaborator> connection_;
+	std::list<std::future<void>> requests_;
 
 	bool pending_move_ = false;
 };
