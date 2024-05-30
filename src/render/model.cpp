@@ -158,8 +158,15 @@ void Model::Triangulate(const SelectedVertices& changed_vertices) {
 }
 
 std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
-    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data, config);
+    if (filename.ends_with(".obj")) {
+        auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
+        return std::make_unique<render::Model>(data, config);
+    } else {
+        std::ifstream input(filename, std::ios::binary);
+        std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
+        std::cout << buffer.size() << '\n';
+        return fromBytes(buffer, config);
+    }
 }
 
 struct ModelFileData {

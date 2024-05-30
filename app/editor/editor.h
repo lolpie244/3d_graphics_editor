@@ -18,7 +18,15 @@ class EditorStage : public stage::Stage {
 
     struct SceneData {
         std::vector<tcp_socket::BytesType> models;
+        std::vector<tcp_socket::BytesType> ligths;
     };
+
+   public:
+    constexpr static render::MeshConfig DEFAULT_MODEL_CONFIG{.changeable = render::MeshConfig::Dynamic,
+                                                             .triangulate = true};
+
+    constexpr static render::Light::LightData DEFAULT_LIGHT_DATA{
+        .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}};
 
    public:
     EditorStage();
@@ -35,10 +43,8 @@ class EditorStage : public stage::Stage {
     float Scale() const { return std::max(0.05f, scale_); }
 
     void AddModel(std::unique_ptr<render::Model> model);
-    void AddModelFromFile(const std::string& filename);
-    void AddModelFromMemory(int id, const tcp_socket::BytesType& filename);
-    void AddModelFromMemory(const tcp_socket::BytesType& filename);
-    void AddLight(glm::vec4 color);
+    void AddLight(std::unique_ptr<render::Light> light);
+
     void SetFilename(const char* filename);
 
     void LoadScene(const tcp_socket::BytesType& data);
@@ -65,6 +71,8 @@ class EditorStage : public stage::Stage {
 
     bool DuplicateSelected(sf::Event event);
     bool JoinSelected(sf::Event event);
+
+    bool AddLight(sf::Event event);
 
     bool NewScene();
     bool SaveScene();

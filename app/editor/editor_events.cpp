@@ -222,43 +222,39 @@ void EditorStage::PerformPendingFunctions() {
     PendingFunctions.clear();
 }
 
-void EditorStage::AddModelFromFile(const std::string& filename) {
-    auto model = render::Model::loadFromFile(
-        filename, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-    AddModel(std::move(model));
-}
-
-void EditorStage::AddModelFromMemory(int id, const tcp_socket::BytesType& bytes) {
-    auto model = render::Model::fromBytes(
-        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-
-    model->ForceSetId(id);
-    AddModel(std::move(model));
-}
-
-void EditorStage::AddModelFromMemory(const tcp_socket::BytesType& bytes) {
-    auto model = render::Model::fromBytes(
-        bytes, render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
-    AddModel(std::move(model));
-}
-
-void EditorStage::AddLight(glm::vec4 color) {
+void EditorStage::AddLight(std::unique_ptr<render::Light> light) {
     if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
         return;
-
-    auto light = std::make_unique<render::Light>(render::Light::LightData{
-        .color = color, .ambient = {0.5, 0.5, 0.5}, .diffuse = {0.5, 0.5, 0.5}, .specular = {0.5, 0.5, 0.5}});
 
     light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
                      {sf::Mouse::Left});
     lights.insert({light->Id(), std::move(light)});
 }
 
+bool EditorStage::AddLight(sf::Event event) {
+    RunAsync([this]() {
+        unsigned char lRgbColor[3];
+        if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
+            return;
+
+        PendingFunctions.push_back([this, lRgbColor]() {
+            glm::vec4 color = {lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1};
+            auto data = DEFAULT_LIGHT_DATA;
+            data.color = color;
+            auto light = std::make_unique<render::Light>(data);
+
+            this->AddLight(std::move(light));
+        });
+    });
+    return true;
+}
+
 void EditorStage::LoadScene(const tcp_socket::BytesType& data) {
     std::error_code ec;
     auto scenes = alpaca::deserialize<SceneData>(data, ec);
 
-    for (auto& model : scenes.models) { AddModelFromMemory(model); }
+    for (auto& model : scenes.models) { AddModel(render::Model::fromBytes(model, DEFAULT_MODEL_CONFIG)); }
+    for (auto& light : scenes.ligths) { AddLight(render::Light::fromBytes(light)); }
 }
 
 bool EditorStage::NewScene() {
@@ -296,6 +292,7 @@ bool EditorStage::SaveScene() {
         std::ofstream file(current_filename_, std::ios::binary);
         SceneData scenes;
         for (auto& [_, model] : models) { scenes.models.push_back(model->toBytes()); }
+        for (auto& [_, light] : lights) { scenes.ligths.push_back(light->toBytes()); }
 
         tcp_socket::BytesType bytes;
         alpaca::serialize(scenes, bytes);
@@ -329,7 +326,10 @@ bool EditorStage::ImportModel() {
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() { AddModelFromFile(filename); });
+        this->PendingFunctions.push_back([this, filename]() {
+            auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
+            AddModel(std::move(model));
+        });
     });
 
     return true;

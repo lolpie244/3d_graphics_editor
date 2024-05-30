@@ -1,3 +1,5 @@
+#include <memory>
+
 #include "editor/editor.h"
 #include "network.h"
 #include "network/communication_socket.h"
@@ -40,7 +42,11 @@ void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
     std::error_code ec;
     auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
 
-    stage->PendingFunctions.push_back([raw_data, this, data]() { stage->AddModelFromMemory(data.id, data.bytes); });
+    stage->PendingFunctions.push_back([this, data]() {
+        auto model = render::Model::fromBytes(data.bytes, EditorStage::DEFAULT_MODEL_CONFIG);
+        model->ForceSetId(data.id);
+        stage->AddModel(std::move(model));
+    });
 }
 
 void Collaborator::ReceiveData(const EventData& event) {

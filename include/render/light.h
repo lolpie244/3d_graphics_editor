@@ -4,13 +4,15 @@
 #include "events/propterties/clickable.h"
 #include "events/propterties/draggable.h"
 #include "math/transform.h"
+#include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "render/model_for_gizmo.h"
 #include "render/vertex.h"
 #include "utils/uuid.h"
 namespace render {
-struct LightVertex : Vertex<LightVertex> {
-    glm::vec3 position;
+
+struct LightVertex : public Vertex<LightVertex> {
+	glm::vec3 position;
     VertexLayout Layout() const;
 };
 
@@ -30,6 +32,9 @@ class Light : virtual public UUID, virtual public events::Clickable3D, virtual p
     void Apply(int id, data::Shader& shader);
 
 	void Scale(float x = 1, float y = 1, float z = 1) override;
+
+	tcp_socket::BytesType toBytes() const;
+    static std::unique_ptr<Light> fromBytes(const tcp_socket::BytesType& data);
 
    public:
     LightData Data;

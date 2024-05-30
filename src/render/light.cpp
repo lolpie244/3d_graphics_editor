@@ -41,4 +41,26 @@ void Light::Scale(float x, float y, float z) {
     Data.specular += glm::vec3{z};
 }
 
+struct LightFileData {
+    Light::LightData data;
+    math::TransformData localTransform;
+};
+
+tcp_socket::BytesType Light::toBytes() const {
+    LightFileData data{.data = Data, .localTransform = *this};
+    tcp_socket::BytesType bytes;
+
+    alpaca::serialize(data, bytes);
+    return bytes;
+}
+std::unique_ptr<Light> Light::fromBytes(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<LightFileData>(raw_data, ec);
+
+    auto result = std::make_unique<Light>(data.data);
+    result->SetTransformData(data.localTransform);
+
+    return result;
+}
+
 };  // namespace render

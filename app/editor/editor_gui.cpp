@@ -61,7 +61,8 @@ void EditorStage::InitGui() {
         auto button = std::make_shared<gui::ButtonFromList>(name);
 
         button->BindPress(observer_, [this, &filename](sf::Event) {
-            AddModelFromFile(filename);
+            auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
+			AddModel(std::move(model));
             return true;
         });
 
@@ -69,16 +70,8 @@ void EditorStage::InitGui() {
     }
     auto light_button = std::make_shared<gui::ButtonFromList>(L"Джерело світла");
     figures_button_list->AddButton(light_button);
-    light_button->BindPress(observer_, [this](sf::Event) {
-        std::thread([this]() {
-            unsigned char lRgbColor[3];
-            if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
-                return;
-
-            PendingFunctions.push_back([this, lRgbColor]() {
-                this->AddLight({lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1});
-            });
-        }).detach();
+    light_button->BindPress(observer_, [this](sf::Event event) {
+		AddLight(event);
         return true;
     });
 
