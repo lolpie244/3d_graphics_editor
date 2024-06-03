@@ -14,7 +14,14 @@ inline glm::vec3 axis_to_vector(unsigned int axis) {
     return {(axis & Axis::X) != 0, (axis & Axis::Y) != 0, (axis & Axis::Z) != 0};
 }
 
-class Transform {
+struct TransformData {
+    glm::vec3 position_ = glm::vec3(0.0f);
+    glm::vec3 rotation_ = glm::vec3(0.0f);
+    glm::vec3 scale_ = glm::vec3(1.0f);
+    glm::vec3 origin_ = glm::vec3(0.0f);
+};
+
+class Transform: protected TransformData {
    public:
    public:
     virtual ~Transform() = default;
@@ -38,11 +45,8 @@ class Transform {
     glm::vec3 GetOrigin() const;
     glm::vec3 GetRotation() const;
 
-   protected:
-    glm::vec3 position_ = glm::vec3(0.0f);
-    glm::vec3 rotation_ = glm::vec3(0.0f);
-    glm::vec3 scale_ = glm::vec3(1.0f);
-    glm::vec3 origin_ = glm::vec3(0.0f);
+	TransformData GetTransformData() const;
+	void SetTransformData(const TransformData& other);
 
    protected:
     mutable bool changed_ = true;

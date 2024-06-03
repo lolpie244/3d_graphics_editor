@@ -1,15 +1,15 @@
 #pragma once
 
 #include <atomic>
+#include <cstdint>
+#include <cstdlib>
+#include <limits>
 
 class UUID {
    public:
-    int Id() const { return id_; }
+    uint8_t Id() const { return id_; }
+    void ForceSetId(uint8_t id) { id_ = id; }
 
    private:
-    int id_ = max_object_id_++;
-
-    static std::atomic<int> max_object_id_;
+    uint8_t id_ = rand() % std::numeric_limits<uint8_t>::max();
 };
-
-inline std::atomic<int> UUID::max_object_id_{1};

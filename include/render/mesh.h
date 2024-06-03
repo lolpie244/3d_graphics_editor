@@ -209,6 +209,10 @@ class Mesh {
         return {min, max};
     }
 
+	RawMesh GetRawMesh() const {
+		return raw_mesh_;
+	}
+
    protected:
     VertexArray VAO;
     VertexBuffer VBO;

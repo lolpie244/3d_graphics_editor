@@ -24,6 +24,7 @@ add_library(${PROJECT_NAME}-static STATIC
 	render/model.cpp
 	render/gizmo.cpp
 	render/camera.cpp
+	render/light.cpp
 
 	render/opengl/frame_buffer.cpp
 	render/opengl/picking_texture.cpp
@@ -42,6 +43,6 @@ target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
 	OpenGL GLU GLEW::GLEW glm::glm
-	${lunasvg} tinyobjloader::tinyobjloader
+	${lunasvg} tinyobjloader::tinyobjloader alpaca::alpaca
 )
 

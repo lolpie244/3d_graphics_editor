@@ -1,22 +1,27 @@
 #include <GL/glew.h>
+#include <tinyfiledialogs.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <iterator>
+#include <system_error>
 
+#include "alpaca/alpaca.h"
 #include "data/model_loader.h"
 #include "editor.h"
 #include "editor/network/network.h"
 #include "math/points_cast.h"
 #include "math/ray.h"
 #include "math/utils.h"
+#include "network/communication_socket.h"
+#include "render/light.h"
 #include "render/model.h"
 #include "utils/settings.h"
 
 bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
-        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved) * scale;
+        auto move = math::to_ndc(stage::StageManager::Instance().windowSize() / 2.0f + moved) * Scale();
         stage::StageManager::Instance().Camera()->Move(-move.x, -move.y);
         return true;
     }
@@ -30,15 +35,15 @@ bool EditorStage::CameraMove(sf::Event event, glm::vec2 moved) {
 
 bool EditorStage::CameraZoom(sf::Event event) {
     auto old_origin = Camera()->GetOrigin();
-    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * scale);
+    Camera()->Move(0, 0, -event.mouseWheelScroll.delta * Scale());
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
 
-    scale = std::min(0.1, std::abs(scale - 0.001 * event.mouseWheelScroll.delta));
+    scale_ = scale_ - 0.5 * event.mouseWheelScroll.delta;
     return true;
 }
 
 void EditorStage::ClearSelection() {
-    gizmo.SetModel(nullptr);
+    current_gizmo_->Reset();
     for (auto& vertex : selected_vertexes_) {
         models[vertex.ObjectID]->SetVertexColor(vertex.VertexId, vertex.Type, settings::DEFAULT_POINT_COLOR);
     }
@@ -49,7 +54,8 @@ void EditorStage::Select(render::PickingTexture::Info info) {
     auto model = models[info.ObjectID].get();
 
     if (info.Type == render::Model::Surface) {
-        gizmo.SetModel(model);
+        current_gizmo_->SetModel(model);
+        after_gizmo_transform_ = [model](Collaborator* connection) { connection->ModelTransform(model); };
         return;
     }
 
@@ -58,6 +64,7 @@ void EditorStage::Select(render::PickingTexture::Info info) {
 }
 
 bool EditorStage::ContextPress(sf::Event event) {
+    pending_move_ = false;
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
         ClearSelection();
 
@@ -89,6 +96,12 @@ bool EditorStage::ContextRelease(sf::Event event) {
 }
 
 bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
+    if (pending_move_) {
+        ClearSelection();
+        pending_move_ = false;
+        return true;
+    }
+
     last_vertex_position = {-1, -1, -1};
 
     if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift) && !selected_vertexes_.contains(model->PressInfo()))
@@ -98,10 +111,11 @@ bool EditorStage::ModelPress(sf::Event event, render::Model* model) {
     return true;
 }
 
-bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model* model) {
-    auto press_info = model->PressInfo();
+bool EditorStage::MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info) {
     if (press_info.Type != render::Model::Point && press_info.Type != render::Model::Pending)
         return false;
+
+    auto model = models[press_info.ObjectID].get();
 
     math::Ray ray = math::Ray::FromPoint({event.mouseMove.x, event.mouseMove.y});
     render::ModelVertex vertex;
@@ -127,8 +141,9 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
         auto* model = models[vertex_info.ObjectID].get();
         model->SetVertexPosition(vertex_info.VertexId, vertex_info.Type,
                                  model->Vertex(vertex_info.VertexId, vertex_info.Type).position + move);
-        if (connection_)
-            connection_->SendVertexMoved(vertex_info, move);
+
+        SendRequest([vertex_info, position = model->Vertex(vertex_info.VertexId, vertex_info.Type).position](
+                        Collaborator* connection) { connection->VertexMoved(vertex_info, position); });
     }
 
     this->last_vertex_position = intersect_point;
@@ -140,6 +155,24 @@ bool EditorStage::ModelDrag(sf::Event event, glm::vec3 mouse_move, render::Model
 
 bool EditorStage::ModelRelease(sf::Event event, render::Model* model) {
     model->Triangulate(selected_vertexes_);
+    return true;
+}
+
+bool EditorStage::DeleteModel(sf::Event event) {
+    if (!current_gizmo_->GetModel())
+        return false;
+    auto id = current_gizmo_->GetModel()->Id();
+    models.erase(id);
+    lights.erase(id);
+    current_gizmo_->Reset();
+
+    return true;
+}
+
+bool EditorStage::LightPress(sf::Event event, render::Light* light) {
+    ClearSelection();
+    current_gizmo_->SetModel(light);
+    after_gizmo_transform_ = [light](Collaborator* connection) { connection->LightTransform(light); };
     return true;
 }
 
@@ -155,6 +188,7 @@ bool EditorStage::DuplicateSelected(sf::Event event) {
 
     ClearSelection();
     selected_vertexes_ = new_selected;
+    pending_move_ = true;
     return true;
 }
 
@@ -182,14 +216,118 @@ bool EditorStage::JoinSelected(sf::Event event) {
     math::sort_clockwise_polygon(model->Vertices(render::Model::Point), indices);
 
     model->AddFace(indices);
+    ClearSelection();
     return true;
 }
 
-void EditorStage::PerformPendingVertexMovement() {
-    for (auto& [vertex, moved_to] : PendingVertexMovement) {
-        auto* model = models.at(vertex.ObjectID).get();
-        model->SetVertexPosition(vertex.VertexId, vertex.Type,
-                                 model->Vertex(vertex.VertexId, vertex.Type).position + moved_to);
-    }
-    PendingVertexMovement.clear();
+void EditorStage::PerformPendingFunctions() {
+    for (auto& function : PendingFunctions) { function(); }
+    PendingFunctions.clear();
+}
+
+bool EditorStage::AddLight(sf::Event event) {
+    RunAsync([this]() {
+        unsigned char lRgbColor[3];
+        if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
+            return;
+
+        PendingFunctions.push_back([this, lRgbColor]() {
+            glm::vec4 color = {lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1};
+            auto data = DEFAULT_LIGHT_DATA;
+            data.color = color;
+            auto light = std::make_unique<render::Light>(data);
+
+            this->AddLight(std::move(light));
+        });
+    });
+    return true;
+}
+
+void EditorStage::LoadScene(const tcp_socket::BytesType& data) {
+    std::error_code ec;
+    auto scenes = alpaca::deserialize<SceneData>(data, ec);
+
+    for (auto& model : scenes.models) { AddModel(render::Model::fromBytes(model, DEFAULT_MODEL_CONFIG)); }
+    for (auto& light : scenes.ligths) { AddLight(render::Light::fromBytes(light)); }
+}
+
+bool EditorStage::NewScene() {
+    Clear();
+    current_filename_ = nullptr;
+    return true;
+}
+
+bool EditorStage::OpenScene() {
+    RunAsync([this]() {
+        std::array<const char*, 1> formats{settings::FILE_FORMAT};
+        this->Clear();
+
+        const char* filename =
+            tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "Model files", false);
+
+        if (!filename)
+            return;
+
+        this->PendingFunctions.push_back([this, filename]() {
+            std::ifstream input(filename, std::ios::binary);
+            std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
+            LoadScene(buffer);
+        });
+    });
+
+    return true;
+}
+
+bool EditorStage::SaveScene() {
+    if (current_filename_ == nullptr)
+        SaveAsScene();
+
+    RunAsync([this]() {
+        std::ofstream file(current_filename_, std::ios::binary);
+        SceneData scenes;
+        for (auto& [_, model] : models) { scenes.models.push_back(model->toBytes()); }
+        for (auto& [_, light] : lights) { scenes.ligths.push_back(light->toBytes()); }
+
+        tcp_socket::BytesType bytes;
+        alpaca::serialize(scenes, bytes);
+        file.write((char*)bytes.data(), bytes.size());
+    });
+
+    return true;
+}
+
+bool EditorStage::SaveAsScene() {
+    RunAsync([this]() {
+        std::array<const char*, 1> formats{settings::FILE_FORMAT};
+        std::string default_filename = settings::FILE_FORMAT;
+        default_filename = "file" + default_filename.substr(1, default_filename.size() - 1);
+        const char* filename = tinyfd_saveFileDialog("Зберегти файл", default_filename.c_str(), formats.size(),
+                                                     formats.data(), "Model file");
+
+        if (!filename)
+            return;
+
+        SetFilename(filename);
+        SaveScene();
+    });
+
+    return true;
+}
+
+bool EditorStage::ImportModel() {
+    RunAsync([this]() {
+        std::array<const char*, 1> formats{"*.obj"};
+        const char* filename =
+            tinyfd_openFileDialog("Оберіть файл", "", formats.size(), formats.data(), "obj files", false);
+
+        if (!filename)
+            return;
+
+        this->PendingFunctions.push_back([this, filename]() {
+            auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
+            AddModel(std::move(model));
+        });
+    });
+
+    return true;
 }

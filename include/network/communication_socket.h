@@ -12,9 +12,11 @@
 
 #include "communication_socket.h"
 #include "file_descriptor.h"
+#include "utils/alpaca_types.h"
 #include "utils/settings.h"
 
 namespace tcp_socket {
+using BytesType = std::vector<uint8_t>;
 
 class CommunicationSocket {
    private:
@@ -30,40 +32,33 @@ class CommunicationSocket {
 
     void close_connection() const;
 
-    void send(const char *message) const;
-    void send(std::stringstream &message) const;
-    void send(const std::string &message) const;
+    template <typename T>
+    void send(const T &data) const {
+        BytesType bytes;
+        auto bytes_written = alpaca::serialize(data, bytes);
+        send(bytes);
+    }
+
+    void send(const BytesType &data) const {
+        int send_size = ::send(socket_fd, data.data(), data.size(), 0);
+        if (send_size == -1) {
+            std::cout << "Send error: " << strerror(errno);
+            return;
+        }
+    }
 
     template <typename FuncReturnType>
     std::future<FuncReturnType> on_recieve(
-        std::function<FuncReturnType(char *message, const CommunicationSocket &socket)> callback_function) {
-        char buffer[settings::PACKAGE_SIZE];
-        int recieve_size = ::recv(socket_fd, buffer, settings::PACKAGE_SIZE, 0);
+        std::function<FuncReturnType(const BytesType &data, const CommunicationSocket &socket)> callback_function) {
+        BytesType data(settings::PACKAGE_SIZE);
+        int recieve_size = ::recv(socket_fd, data.data(), settings::PACKAGE_SIZE, 0);
 
         if (recieve_size <= 0) {
-			fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
+            fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
             return std::async(std::launch::async, []() { return FuncReturnType(); });
         }
-        return std::async(std::launch::async, callback_function, buffer, *this);
-    }
-
-    template <typename FuncReturnType>
-    std::future<FuncReturnType> on_recieve(
-        std::function<FuncReturnType(std::stringstream &message, const CommunicationSocket &address)>
-            callback_function) {
-        return on_recieve<FuncReturnType>([callback_function](char *buffer, const CommunicationSocket &socket) {
-            std::stringstream message(buffer);
-            return callback_function(message, socket);
-        });
-    }
-
-    template <typename FuncReturnType>
-    std::future<FuncReturnType> on_recieve(
-        std::function<FuncReturnType(std::string &message, const CommunicationSocket &address)> callback_function) {
-        return on_recieve<FuncReturnType>([=](char *buffer, const CommunicationSocket &socket) {
-            std::string message(buffer);
-            return callback_function(message, socket);
-        });
+        return std::async(std::launch::async, callback_function, data, *this);
     }
 };
+
 }  // namespace tcp_socket

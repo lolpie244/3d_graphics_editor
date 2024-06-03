@@ -1,48 +1,110 @@
-#include "network.h"
+#include <memory>
+
 #include "editor/editor.h"
-
-std::istream& operator>>(std::istream& is, render::PickingTexture::Info& vertex) {
-    is >> vertex.ObjectID >> vertex.VertexId >> vertex.Type;
-    return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const render::PickingTexture::Info& vertex) {
-    os << vertex.ObjectID << ' ' << vertex.VertexId << ' ' << vertex.Type;
-    return os;
-}
-
-std::istream& operator>>(std::istream& is, glm::vec3& vertex) {
-    is >> vertex.x >> vertex.y >> vertex.z;
-    return is;
-}
-
-std::ostream& operator<<(std::ostream& os, const glm::vec3& vertex) {
-    os << vertex.x << ' ' << vertex.y << ' ' << vertex.z;
-    return os;
-}
+#include "math/transform.h"
+#include "network.h"
+#include "network/communication_socket.h"
+#include "render/light.h"
+#include "render/model.h"
+#include "utils/alpaca_types.h"
 
 Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
 
-void Collaborator::SendVertexMoved(render::PickingTexture::Info vertex, glm::vec3 moved_to) {
-    std::stringstream data;
-    data << Events::VertexMove << ' ' << vertex << ' ' << moved_to << '\n';
-    SendData(data.str());
+struct VertexMovedData {
+    render::PickingTexture::Info vertex;
+    glm::vec3 new_position;
+};
+
+struct NewModelData {
+    uint8_t id;
+    tcp_socket::BytesType bytes;
+};
+
+struct ModelTransformData {
+    uint8_t id;
+
+    math::TransformData localTransform;
+    math::TransformData globalTransform;
+};
+
+struct LightTransformData {
+    uint8_t id;
+
+    math::TransformData localTransform;
+};
+
+void Collaborator::VertexMoved(render::PickingTexture::Info vertex, glm::vec3 new_position) {
+    SendData(Event_VertexMove, VertexMovedData{.vertex = vertex, .new_position = new_position});
 }
 
-void Collaborator::VertexMovedHandler(std::stringstream& data) {
-	render::PickingTexture::Info vertex;
-	glm::vec3 moved_to;
-	data >> vertex >> moved_to;
-	stage->PendingVertexMovement.push_back({vertex, moved_to});
+void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<VertexMovedData>(raw_data, ec);
+
+    stage->PendingFunctions.push_back([vertex = data.vertex, new_position = data.new_position, this]() {
+        auto* model = stage->models.at(vertex.ObjectID).get();
+        model->SetVertexPosition(vertex.VertexId, vertex.Type, new_position);
+    });
 }
 
-void Collaborator::ReceiveData(std::stringstream& data) {
+void Collaborator::NewModel(render::Model* model) {
+    SendData(Event_ModelAdd, NewModelData{.id = model->Id(), .bytes = model->toBytes()});
+}
+
+void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
+
+    stage->PendingFunctions.push_back([this, data, raw_data]() {
+        auto model = render::Model::fromBytes(data.bytes, EditorStage::DEFAULT_MODEL_CONFIG);
+        model->ForceSetId(data.id);
+        stage->AddModel(std::move(model), false);
+    });
+}
+
+void Collaborator::ModelTransform(render::Model* model) {
+    SendData(Event_ModelTransform, ModelTransformData{.id = model->Id(),
+                                                      .localTransform = model->GetTransformData(),
+                                                      .globalTransform = model->GlobalTransform.GetTransformData()});
+}
+void Collaborator::ModelTransformHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<ModelTransformData>(raw_data, ec);
+    stage->models.at(data.id)->SetTransformData(data.localTransform);
+    stage->models.at(data.id)->GlobalTransform.SetTransformData(data.globalTransform);
+}
+
+void Collaborator::NewLight(render::Light* light) {
+    SendData(Event_LightAdd, NewModelData{.id = light->Id(), .bytes = light->toBytes()});
+}
+
+void Collaborator::NewLightHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
+
+    stage->PendingFunctions.push_back([this, data, raw_data]() {
+        auto light = render::Light::fromBytes(data.bytes);
+        light->ForceSetId(data.id);
+        stage->AddLight(std::move(light), false);
+    });
+}
+
+void Collaborator::LightTransform(render::Light* model) {
+    SendData(Event_LightTransform, LightTransformData{.id = model->Id(), .localTransform = model->GetTransformData()});
+}
+void Collaborator::LightTransformHandler(const tcp_socket::BytesType& raw_data) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<LightTransformData>(raw_data, ec);
+    stage->lights.at(data.id)->SetTransformData(data.localTransform);
+}
+
+void Collaborator::ReceiveData(const EventData& event) {
     static const std::unordered_map<unsigned int, EventHandler> events{
-        {Events::VertexMove, &Collaborator::VertexMovedHandler},
+        {Event_VertexMove, &Collaborator::VertexMovedHandler},        {Event_ModelAdd, &Collaborator::NewModelHandler},
+        {Event_ModelTransform, &Collaborator::ModelTransformHandler}, {Event_LightAdd, &Collaborator::NewLightHandler},
+        {Event_LightTransform, &Collaborator::LightTransformHandler},
     };
 
-    unsigned int event;
-    data >> event;
-	if (events.contains(event))
-		events.at(event)(this, data);
+    if (events.contains(event.event))
+        events.at(event.event)(this, event.data);
 }

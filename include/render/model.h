@@ -5,15 +5,22 @@
 #include "data/shader.h"
 #include "math/transform.h"
 #include "mesh.h"
+#include "network/communication_socket.h"
+#include "render/model_for_gizmo.h"
 #include "utils/uuid.h"
 #include "vertex.h"
 
 namespace render {
-struct ModelVertex : public Vertex<ModelVertex> {
+
+struct ModelVertexData {
     glm::vec3 position;
     glm::vec2 texture_coord;
     glm::vec3 normal;
     glm::vec4 color{255, 255, 255, 255};
+};
+
+struct ModelVertex : public ModelVertexData, public Vertex<ModelVertex> {
+	using Data = ModelVertexData;
 
     size_t Hash() const;
     VertexLayout Layout() const;
@@ -21,7 +28,7 @@ struct ModelVertex : public Vertex<ModelVertex> {
     void Parse(const tinyobj::ObjReader& reader, tinyobj::index_t id);
 };
 
-class Model : virtual public UUID, virtual public math::ModelTransform, virtual public events::Draggable3D {
+class Model : virtual public UUID, virtual public GizmoSupport, virtual public events::Draggable3D {
    public:
     enum DataType {
         Point = 1,
@@ -33,16 +40,19 @@ class Model : virtual public UUID, virtual public math::ModelTransform, virtual 
    public:
     Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config = MeshConfig());
 
-	using math::ModelTransform::GetTransformation;
+    using math::ModelTransform::GetTransformation;
 
     static std::unique_ptr<Model> loadFromFile(const std::string& filename, MeshConfig config = MeshConfig());
+
+    tcp_socket::BytesType toBytes() const;
+    static std::unique_ptr<Model> fromBytes(const tcp_socket::BytesType& data, MeshConfig config);
 
     void Draw(data::Shader& shader) const;
     void DrawPoints(data::Shader& shader) const;
 
     const ModelVertex Vertex(int id, unsigned int type) const;
     const std::vector<ModelVertex>& Vertices(unsigned int type) const;
-	const Mesh<ModelVertex>& ModelMesh() const;
+    const Mesh<ModelVertex>& ModelMesh() const;
 
     void SetVertexPosition(int id, unsigned int type, glm::vec3 new_position);
     void SetVertexColor(int id, unsigned int type, glm::vec4 color);

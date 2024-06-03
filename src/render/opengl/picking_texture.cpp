@@ -33,11 +33,10 @@ PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
     if (x >= width_ || y >= height_)
         return {0, 0, 0};
 
-	return ReadArea(x, y, 1, 1)[0];
+    return ReadArea(x, y, 1, 1)[0];
 }
 
-std::vector<PickingTexture::Info> PickingTexture::ReadArea(unsigned int x, unsigned int y, int width,
-                                                           int height) {
+std::vector<PickingTexture::Info> PickingTexture::ReadArea(unsigned int x, unsigned int y, int width, int height) {
     if (x + width >= width_ || y + height >= height_)
         return {};
 

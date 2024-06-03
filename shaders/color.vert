@@ -13,4 +13,3 @@ void main()
    gl_Position = u_Projection * u_View * u_Model * vec4(pos, 1.0);
    v_VertexId = gl_VertexID;
 }
-

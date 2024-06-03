@@ -1,8 +1,15 @@
 #include "render/model.h"
 
+#include <algorithm>
+#include <cstdint>
+#include <system_error>
+
 #include "data/model_loader.h"
+#include "math/transform.h"
+#include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
+#include "utils/alpaca_types.h"
 #include "utils/settings.h"
 
 namespace render {
@@ -55,11 +62,6 @@ Model::Model(const Mesh<ModelVertex>::RawMesh& mesh, MeshConfig config)
     this->SetOrigin((min.x + max.x) / 2.0f, (min.y + max.y) / 2.0f, (min.z + max.z) / 2.0f);
 }
 
-std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
-    auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
-    return std::make_unique<render::Model>(data, config);
-}
-
 void Model::Draw(data::Shader& shader) const {
     shader.setUniform("u_Data", DataType::Surface);
     shader.setUniform("u_ObjectId", Id());
@@ -77,7 +79,6 @@ void Model::DrawPoints(data::Shader& shader) const {
     shader.setUniform("u_Data", DataType::Point);
     this->mesh_.Draw(GL_POINTS, shader, this);
 
-    glClear(GL_DEPTH_BUFFER_BIT);
     shader.setUniform("u_Data", DataType::Pending);
     this->pending_mesh_.Draw(GL_POINTS, shader, this);
 }
@@ -90,11 +91,7 @@ const std::vector<ModelVertex>& Model::Vertices(unsigned int type) const {
 
 const ModelVertex Model::Vertex(int id, unsigned int type) const { return Vertices(type)[id]; }
 
-
-const Mesh<ModelVertex>& Model::ModelMesh() const {
-	return mesh_;
-}
-
+const Mesh<ModelVertex>& Model::ModelMesh() const { return mesh_; }
 
 void Model::SetVertexPosition(int id, unsigned int type, glm::vec3 new_position) {
     auto old_position = Vertex(id, type).position;
@@ -158,6 +155,59 @@ void Model::Triangulate(const SelectedVertices& changed_vertices) {
         ids.push_back(info.VertexId);
     }
     mesh_.Triangulate(ids);
+}
+
+std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConfig config) {
+    if (filename.ends_with(".obj")) {
+        auto data = data::parser::loadModelFromFile<render::ModelVertex>(filename);
+        return std::make_unique<render::Model>(data, config);
+    } else {
+        std::ifstream input(filename, std::ios::binary);
+        std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
+        return fromBytes(buffer, config);
+    }
+}
+
+struct ModelFileData {
+    std::vector<ModelVertexData> vertices;
+    std::vector<Mesh<ModelVertex>::Face> faces;
+    // std::vector<uint8_t> texture;
+
+    math::TransformData localTransform;
+    math::TransformData globalTransform;
+};
+
+tcp_socket::BytesType Model::toBytes() const {
+    std::vector<ModelVertexData> vertices(this->mesh_.GetRawMesh().vertices.size());
+    for (int i = 0; i < this->mesh_.GetRawMesh().vertices.size(); i++) {
+        vertices[i] = this->mesh_.GetRawMesh().vertices[i];
+    }
+
+    ModelFileData data{.vertices = vertices,
+                       .faces = this->mesh_.GetRawMesh().faces,
+                       .localTransform = *this,
+                       .globalTransform = GlobalTransform};
+    // texture.copyToImage().
+    // texture.copyToImage().saveToMemory(data.texture, "png");
+
+    tcp_socket::BytesType bytes;
+
+    alpaca::serialize(data, bytes);
+    return bytes;
+}
+
+std::unique_ptr<Model> Model::fromBytes(const tcp_socket::BytesType& raw_data, MeshConfig config) {
+    std::error_code ec;
+    auto data = alpaca::deserialize<ModelFileData>(raw_data, ec);
+    std::vector<ModelVertex> vertices(data.vertices.begin(), data.vertices.end());
+
+    Mesh<ModelVertex>::RawMesh raw_mesh{.vertices = vertices, .faces = data.faces};
+
+    auto result = std::make_unique<render::Model>(raw_mesh, config);
+
+    result->SetTransformData(data.localTransform);
+    result->GlobalTransform.SetTransformData(data.globalTransform);
+    return std::move(result);
 }
 
 }  // namespace render

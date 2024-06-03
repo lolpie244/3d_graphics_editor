@@ -24,17 +24,20 @@ class Draggable : virtual public Clickable {
    public:
     virtual ~Draggable() = default;
 
-    virtual void OnPress(sf::Event event) override;
-    virtual void OnRelease(sf::Event event) override;
     virtual void BindDrag(events::Observer& observer, const EVENT_FUNC& function, MouseButtons buttons = all_buttons_);
 
-	glm::vec2 StartPosition() { return start_position_; }
+    glm::vec2 StartPosition() { return start_position_; }
+
+   protected:
+    virtual void OnPress(sf::Event event) override;
+    virtual void OnRelease(sf::Event event) override;
+
    private:
     glm::vec2 last_position_;
     glm::vec2 start_position_;
-	std::unordered_map<int, events::Event> move_events_;
-	bool is_draggable_ = false;
-	sf::Mouse::Button pressed_button_;
+    std::unordered_map<int, events::Event> move_events_;
+    bool is_draggable_ = false;
+    sf::Mouse::Button pressed_button_;
 };
 
 class Draggable3D : virtual public Clickable3D, virtual public Draggable {

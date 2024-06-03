@@ -3,12 +3,18 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <algorithm>
+#include <functional>
+#include <future>
 #include <memory>
 
 #include "data/texture.h"
 #include "editor/network/network.h"
 #include "gui/select_rect.h"
+#include "render/light.h"
 #include "render/mesh.h"
+#include "render/model.h"
+#include "utils/settings.h"
 
 void EditorStage::BindEvents() {
     opengl_context_->SetScaleMethod<events::DefaultScale>();
@@ -17,20 +23,6 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::Escape}, [this](sf::Event event) {
         this->Stop(stage::StageState::Exit);
         return true;
-    }));
-
-    events.push_back(observer_.Bind(sf::Event::KeyPressed, [this](sf::Event event) {
-        auto next = 0;
-        if (event.key.code == sf::Keyboard::Left)
-            next -= 1;
-
-        if (event.key.code == sf::Keyboard::Right)
-            next += 1;
-        if (next)
-            gizmo.SetModel(nullptr);
-
-        current_draw_mode_ = (3 + current_draw_mode_ + next) % 3;
-        return next;
     }));
 
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::D},
@@ -54,56 +46,96 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 
+    events.push_back(observer_.KeyBind({sf::Keyboard::Delete}, [this](sf::Event event) { return DeleteModel(event); }));
+
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
     opengl_context_->BindRelease(observer_, [&](sf::Event event) { return ContextRelease(event); }, {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return ContextDrag(event, moved); },
                               {sf::Mouse::Left});
     opengl_context_->BindDrag(observer_, [&](sf::Event event, glm::vec2 moved) { return CameraMove(event, moved); },
                               {sf::Mouse::Right, sf::Mouse::Middle});
+    opengl_context_->BindMouseMove(observer_, [&](sf::Event event) {
+        if (!pending_move_ || selected_vertexes_.empty())
+            return false;
+        return MoveSelectedPoints(event, *selected_vertexes_.begin());
+    });
     opengl_context_->BindScroll(observer_, [this](sf::Event event) { return CameraZoom(event); });
-
-    for (auto& [_, model] : models) {
-        model->BindPress(observer_, [&](sf::Event event) { return ModelPress(event, model.get()); }, {sf::Mouse::Left});
-        model->BindRelease(observer_, [&](sf::Event event) { return ModelRelease(event, model.get()); },
-                           {sf::Mouse::Left});
-        model->BindDrag(observer_, [&](sf::Event event, glm::vec3 move) { return ModelDrag(event, move, model.get()); },
-                        {sf::Mouse::Left});
-    }
 }
 
-EditorStage::EditorStage() : gizmo(this->observer_, this->scale) {
-    auto theme = data::SvgTexture::loadFromFile("resources/theme.svg");
-    opengl_context_->SetLeftCorner(50, 0);
-    opengl_context_->Resize(glm::vec2(1700, 1080));
+void EditorStage::AddModel(std::unique_ptr<render::Model> model, bool send_request) {
+    model->texture = data::PngTexture::loadFromFile("resources/default/default_texture.png")->getTexture({0, 0});
+    model->BindPress(observer_, [this, model = model.get()](sf::Event event) { return ModelPress(event, model); },
+                     {sf::Mouse::Left});
+    model->BindRelease(observer_, [this, model = model.get()](sf::Event event) { return ModelRelease(event, model); },
+                       {sf::Mouse::Left});
+    model->BindDrag(observer_,
+                    [this, model = model.get()](sf::Event event, glm::vec3 move) {
+                        return MoveSelectedPoints(event, model->PressInfo());
+                    },
+                    {sf::Mouse::Left});
 
-    camera_->Move(0.0f, 0.0f, 3.0f);
+    if (send_request)
+        SendRequest([model = model.get()](Collaborator* connection) { connection->NewModel(model); });
+
+    models.insert({model->Id(), std::move(model)});
+}
+
+void EditorStage::AddLight(std::unique_ptr<render::Light> light, bool send_request) {
+    if (lights.size() >= settings::MAXIMUM_LIGHT_COUNT)
+        return;
+
+    light->BindPress(observer_, [this, light = light.get()](sf::Event event) { return LightPress(event, light); },
+                     {sf::Mouse::Left});
+    if (send_request)
+        SendRequest([light = light.get()](Collaborator* connection) { connection->NewLight(light); });
+
+    lights.insert({light->Id(), std::move(light)});
+}
+
+void EditorStage::SendRequest(std::function<void(Collaborator*)> func) {
+    if (!connection_)
+        return;
+    RunAsync([func, this]() { func(connection_.get()); });
+}
+
+void EditorStage::RunAsync(std::function<void(void)> func) {
+    requests_.push_back(std::async(std::launch::async, [this, func]() { func(); }));
+}
+
+void EditorStage::SetFilename(const char* filename) { current_filename_ = filename; }
+
+void EditorStage::Clear() {
+    ClearSelection();
+    models.clear();
+    lights.clear();
+}
+
+EditorStage::EditorStage() {
+    gizmo_shader_.loadFromFile("shaders/color.vert", "shaders/color.frag");
+    gizmo_picking_.loadFromFile("shaders/color.vert", "shaders/picking.frag");
+
+    camera_->Move(0, 0, 4.0f);
     camera_->SetOrigin(0, 0, 0);
-    ///////////////////////////////////////////
-    auto model = render::Model::loadFromFile(
-        "resources/cube_1.obj", render::MeshConfig{.changeable = render::MeshConfig::Dynamic, .triangulate = true});
 
-    model->Scale(0.5, 0.5, 0.5);
-    model->texture = data::PngTexture::loadFromFile("resources/cube.png")->getTexture({0, 0});
-    models[model->Id()] = std::move(model);
-    ///////////////////////////////////////////
-    selection_rect_ = std::make_shared<gui::SelectRect>();
-    selection_rect_->Disable();
-    ///////////////////////////////////////////
-    elements_.Insert({selection_rect_});
+    InitGui();
     BindEvents();
 }
 
 void EditorStage::Run() {
-	PerformPendingVertexMovement();
+	window_->pushGLStates();
+    window_->draw(elements_);
+    window_->popGLStates();
+
+    PerformPendingFunctions();
 
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         opengl_context_->PickingTexture.Bind();
-        draw_modes_[current_draw_mode_]->DrawPicker(models);
-        gizmo.DrawPicking();
+        current_draw_mode_->DrawPicker(models, lights);
+        current_gizmo_->Draw(gizmo_picking_);
         opengl_context_->PickingTexture.Unbind();
     }
     PollEvents();
-    draw_modes_[current_draw_mode_]->Draw(models);
-    gizmo.Draw();
+    current_draw_mode_->Draw(models, lights);
+    current_gizmo_->Draw(gizmo_shader_);
     FrameEnd();
 }

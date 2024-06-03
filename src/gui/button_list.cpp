@@ -3,15 +3,37 @@
 #include <memory>
 
 #include "events/observer.h"
+#include "gui/base.h"
 #include "gui/buttons_list.h"
 
 namespace gui {
 ButtonFromList::ButtonFromList(const sf::String& text) { this->Text().SetText(text); }
 
-void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* button_list) {
+void ButtonFromList::Enable() {
+    GuiElement::Enable();
+    if (button_list_)
+        button_list_->Disable();
+}
+
+void ButtonFromList::AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list) {
+    this->button_list_ = button_list;
+    this->button_list_->SetParent(this);
     button_list->Disable();
     button_list->BindMouseOut(observer, [button_list, this](sf::Event event) {
-        button_list->Disable();
+        for (auto& button : button_list->buttons_) {
+            if (button->button_list_ && button->button_list_->ContainsMouse(event))
+                return false;
+        }
+        ButtonsList* parent = button_list_.get();
+        while (parent != nullptr) {
+            if (!parent->parent || parent->ContainsMouse(event))
+                break;
+            parent->Disable();
+            auto button = dynamic_cast<ButtonFromList*>(parent->parent);
+            if (!button)
+                break;
+            parent = dynamic_cast<ButtonsList*>(button->parent);
+        }
         return false;
     });
 
@@ -33,15 +55,17 @@ void ButtonFromList::AddButtonList(events::Observer& observer, ButtonsList* butt
     });
 }
 
-ButtonsList::ButtonsList(ListOrientation orientation) : orientation_(orientation) {}
+ButtonsList::ButtonsList(float space, ListOrientation orientation) : space_(space), orientation_(orientation) {}
 
-ButtonsList::ButtonsList(glm::vec3 position, glm::vec2 size, ListOrientation orientation) : orientation_(orientation) {
+ButtonsList::ButtonsList(glm::vec3 position, glm::vec2 size, float space, ListOrientation orientation)
+    : space_(space), orientation_(orientation) {
     this->SetPosition(position);
     this->Resize(size);
 }
 
 glm::vec2 ButtonsList::PositionCoef() const {
-    return orientation_ == ListOrientation::Vertical ? glm::vec2{0, this->Size().y} : glm::vec2{this->Size().x, 0};
+    return orientation_ == ListOrientation::Vertical ? glm::vec2{0, this->Size().y + space_}
+                                                     : glm::vec2{this->Size().x + space_, 0};
 }
 
 sf::Rect<float> ButtonsList::Rect() const {
@@ -52,7 +76,7 @@ sf::Rect<float> ButtonsList::Rect() const {
 }
 
 void ButtonsList::Move(float x, float y, float z) {
-	GuiElement::Move(x, y, z);
+    GuiElement::Move(x, y, z);
 
     auto coef = PositionCoef();
 
@@ -70,7 +94,7 @@ void ButtonsList::AddButton(ButtonType button) {
     button->Move(button_move_to.x, button_move_to.y);
     button->Text().SfText().setFillColor(font_color_);
     button->SetPressedTexture(pressed_texture_);
-    button->SetReleasedTexture(pressed_texture_);
+    button->SetReleasedTexture(released_texture_);
     button->is_active_ = this->is_active_;
 
     buttons_.push_back(button);

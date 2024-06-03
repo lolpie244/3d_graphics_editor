@@ -43,6 +43,17 @@ void Hoverable::BindMouseOut(events::Observer &observer, const events::EVENT_FUN
         BindMouseIn(observer, [](sf::Event) { return false; });
 }
 
+void Hoverable::BindMouseMove(events::Observer &observer, const events::EVENT_FUNC &function) {
+    auto event_function = [this, function](sf::Event event) {
+        ReturnOnDisable(false);
+        if (!this->ContainsMouse(event))
+            return false;
+
+        return function(event);
+    };
+    mouse_move_event_ = observer.Bind(sf::Event::MouseMoved, event_function, this->position_.z);
+}
+
 bool Hoverable3D::Contains(glm::vec2 point) {
     auto &picking_texture = stage::StageManager::Instance().Context()->PickingTexture;
     return picking_texture.ReadPixel(point.x, point.y).ObjectID == this->Id();

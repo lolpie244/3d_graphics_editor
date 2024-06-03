@@ -44,21 +44,21 @@ MenuStage::MenuStage() {
         return true;
     });
 
-	auto button_list = std::make_shared<gui::ButtonsList>(glm::vec3(900, 300, 0), glm::vec2(380, 94));
+    auto button_list = std::make_shared<gui::ButtonsList>(glm::vec3(900, 300, 0), glm::vec2(380, 94));
 
+    auto test = std::make_shared<gui::ButtonFromList>(L"Кнопка 1");
+    auto test1 = std::make_shared<gui::ButtonFromList>(L"Кнопка 2");
+    auto test2 = std::make_shared<gui::ButtonFromList>(L"Список");
 
-	auto test = std::make_shared<gui::ButtonFromList>(L"Кнопка 1");
-	auto test1 = std::make_shared<gui::ButtonFromList>(L"Кнопка 2");
-	auto test2 = std::make_shared<gui::ButtonFromList>(L"Випадне меню");
+    auto test3 = std::make_shared<gui::ButtonFromList>(L"Кнопка 3");
+    auto test4 = std::make_shared<gui::ButtonFromList>(L"Кнопка 4");
+    button_list->AddButtons({test, test1, test2});
 
-	auto test3 = std::make_shared<gui::ButtonFromList>(L"Кнопка 3");
-	auto test4 = std::make_shared<gui::ButtonFromList>(L"Кнопка 4");
-	button_list->AddButtons({test, test1, test2});
+    auto button_list2 =
+        std::make_shared<gui::ButtonsList>(glm::vec3(300, 300, 0), glm::vec2(380, 94), gui::ListOrientation::Vertical);
+    button_list2->AddButtons({test3, test4});
 
-	auto button_list2 = std::make_shared<gui::ButtonsList>(glm::vec3(300, 300, 0), glm::vec2(380, 94), gui::ListOrientation::Vertical);
-	button_list2->AddButtons({test3, test4});
-
-	test2->AddButtonList(observer_, button_list2.get());
+    test2->AddButtonList(observer_, button_list2);
 
     button_list->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
     button_list2->SetReleasedTexture({theme->getElement("g1"), {0, 0.01}, {0.2, 0.3}});
