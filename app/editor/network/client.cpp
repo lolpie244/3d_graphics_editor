@@ -2,22 +2,23 @@
 
 #include "network.h"
 #include "network/communication_socket.h"
+#include "network/connection_socket.h"
 
 Client::Client(EditorStage* stage) : Collaborator(stage) {
     addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
     hints.ai_family = settings::INET_FAMILY;
     hints.ai_flags = AI_PASSIVE;
 
-    tcp_socket::ConnectionSocket host_socket(nullptr, settings::PORT, hints);
+    tcp_socket::ConnectionSocket host_socket = tcp_socket::ConnectionSocket(nullptr, settings::PORT, hints);
     this->socket = host_socket.connect();
 
-    SendData(Event_Host_ConnectionAttempt);
+    SendEvent(Event_Host_ConnectionAttempt);
     listener = std::async(std::launch::async, [this]() {
         bool recieve_successful;
         do {
-            auto future = socket->on_recieve<bool>(
-                [this](const tcp_socket::BytesType bytes, const tcp_socket::CommunicationSocket& socket) {
-                    ReceiveData(ReceiveBytes(bytes));
+            auto future = socket->on_recieve<bool, EventData>(
+                [this](const EventData& bytes) {
+                    ReceiveData(bytes);
                     return true;
                 });
             future.wait();
@@ -26,4 +27,4 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     });
 }
 
-void Client::SendBytes(const tcp_socket::BytesType& data) { this->socket->send(data); }
+void Client::SendEvent(const EventData& event) { socket->send(event); }

@@ -34,7 +34,7 @@ struct LightTransformData {
 };
 
 void Collaborator::VertexMoved(render::PickingTexture::Info vertex, glm::vec3 new_position) {
-    SendData(Event_VertexMove, VertexMovedData{.vertex = vertex, .new_position = new_position});
+    SendEvent(EventData(Event_VertexMove, VertexMovedData{.vertex = vertex, .new_position = new_position}));
 }
 
 void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
@@ -48,7 +48,7 @@ void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
 }
 
 void Collaborator::NewModel(render::Model* model) {
-    SendData(Event_ModelAdd, NewModelData{.id = model->Id(), .bytes = model->toBytes()});
+    SendEvent(EventData(Event_ModelAdd, NewModelData{.id = model->Id(), .bytes = model->toBytes()}));
 }
 
 void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
@@ -63,9 +63,10 @@ void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
 }
 
 void Collaborator::ModelTransform(render::Model* model) {
-    SendData(Event_ModelTransform, ModelTransformData{.id = model->Id(),
-                                                      .localTransform = model->GetTransformData(),
-                                                      .globalTransform = model->GlobalTransform.GetTransformData()});
+    SendEvent(EventData(Event_ModelTransform,
+                        ModelTransformData{.id = model->Id(),
+                                           .localTransform = model->GetTransformData(),
+                                           .globalTransform = model->GlobalTransform.GetTransformData()}));
 }
 void Collaborator::ModelTransformHandler(const tcp_socket::BytesType& raw_data) {
     std::error_code ec;
@@ -75,7 +76,7 @@ void Collaborator::ModelTransformHandler(const tcp_socket::BytesType& raw_data) 
 }
 
 void Collaborator::NewLight(render::Light* light) {
-    SendData(Event_LightAdd, NewModelData{.id = light->Id(), .bytes = light->toBytes()});
+    SendEvent(EventData(Event_LightAdd, NewModelData{.id = light->Id(), .bytes = light->toBytes()}));
 }
 
 void Collaborator::NewLightHandler(const tcp_socket::BytesType& raw_data) {
@@ -90,7 +91,8 @@ void Collaborator::NewLightHandler(const tcp_socket::BytesType& raw_data) {
 }
 
 void Collaborator::LightTransform(render::Light* model) {
-    SendData(Event_LightTransform, LightTransformData{.id = model->Id(), .localTransform = model->GetTransformData()});
+    SendEvent(EventData(Event_LightTransform,
+                        LightTransformData{.id = model->Id(), .localTransform = model->GetTransformData()}));
 }
 void Collaborator::LightTransformHandler(const tcp_socket::BytesType& raw_data) {
     std::error_code ec;
@@ -107,4 +109,7 @@ void Collaborator::ReceiveData(const EventData& event) {
 
     if (events.contains(event.event))
         events.at(event.event)(this, event.data);
+    else {
+        std::cout << "INCORRECT EVENT\n";
+    }
 }

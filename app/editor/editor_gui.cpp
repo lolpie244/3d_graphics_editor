@@ -52,6 +52,8 @@ void EditorStage::InitGui() {
     auto client = std::make_shared<gui::ButtonFromList>(L"Клієнт");
     auto server = std::make_shared<gui::ButtonFromList>(L"Сервер");
     network_button_list->AddButtons({client, server});
+    client->BindPress(observer_, [this](sf::Event event) { return ClientButton(event); });
+    server->BindPress(observer_, [this](sf::Event event) { return ServerButton(event); });
     ////////////////////////////////////
     auto figures_button_list = std::make_shared<gui::ButtonsList>();
     figures_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
@@ -77,16 +79,6 @@ void EditorStage::InitGui() {
 
     ///////////////////////////////////////////
 
-    client->BindPress(observer_, [this](sf::Event) {
-        if (connection_ == nullptr)
-            connection_ = std::make_unique<Client>(this);
-        return true;
-    });
-    server->BindPress(observer_, [this](sf::Event) {
-        if (connection_ == nullptr)
-            connection_ = std::make_unique<Host>(this);
-        return true;
-    });
     //////////////////////////////////////////////////////
     auto mode_group = gui::RadioButton::NewGroup();
 

@@ -54,6 +54,9 @@ class EditorStage : public stage::Stage {
 
     bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
+	bool ClientButton(sf::Event event);
+	bool ServerButton(sf::Event event);
+
    public:  // events
     bool CameraMove(sf::Event event, glm::vec2 moved);
     bool CameraZoom(sf::Event event);

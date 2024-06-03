@@ -17,6 +17,8 @@ class EditorStage;
 class Collaborator {
    public:
     enum Events {
+        Event_InvalidEvent,
+
         Event_VertexMove,
         Event_VertexAdd,
         Event_ModelAdd,
@@ -32,6 +34,15 @@ class Collaborator {
     struct EventData {
         Events event;
         tcp_socket::BytesType data;
+
+        EventData() : event(Event_InvalidEvent) {}
+        EventData(Events event) : event(event) {}
+        template <typename T>
+        EventData(Events event, const T& raw_data) : event(event) {
+            tcp_socket::BytesType bytes;
+            alpaca::serialize(raw_data, bytes);
+            this->data = bytes;
+        }
     };
 
     typedef std::function<void(Collaborator*, const tcp_socket::BytesType& data)> EventHandler;
@@ -50,40 +61,11 @@ class Collaborator {
     void NewLight(render::Light* light);
     void NewLightHandler(const tcp_socket::BytesType& data);
 
-	void LightTransform(render::Light* light);
+    void LightTransform(render::Light* light);
     void LightTransformHandler(const tcp_socket::BytesType& data);
 
-    template <typename T>
-    void SendData(Events event, const T& data) {
-        EventData event_data{.event = event};
-        tcp_socket::BytesType bytes;
-        alpaca::serialize(data, bytes);
-        SendData(event, bytes);
-    }
-
-    void SendData(Events event, const tcp_socket::BytesType& data) {
-        EventData event_data{.event = event, .data = data};
-        tcp_socket::BytesType bytes;
-        alpaca::serialize(event_data, bytes);
-        SendBytes(bytes);
-    }
-    void SendData(Events event) {
-        EventData event_data{.event = event};
-        tcp_socket::BytesType bytes;
-
-        alpaca::serialize(event_data, bytes);
-        SendBytes(bytes);
-    }
-
-    EventData ReceiveBytes(const tcp_socket::BytesType& bytes) {
-        std::error_code ec;
-        return alpaca::deserialize<EventData>(bytes, ec);
-    }
-
-    virtual std::string Name() = 0;
-
    protected:
-    virtual void SendBytes(const tcp_socket::BytesType& data) = 0;
+    virtual void SendEvent(const EventData& event) = 0;
     virtual void ReceiveData(const EventData& data);
 
    protected:
@@ -92,19 +74,17 @@ class Collaborator {
 
 class Host : public Collaborator {
    public:
-    typedef std::function<void(Host*, const tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data)>
+    typedef std::function<void(Host*, tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data)>
         EventHandler;
 
    public:
     Host(EditorStage* stage);
 
-    std::string Name() override { return "HOST"; };
-
    protected:
-    void SendBytes(const tcp_socket::BytesType& data) override;
-    void ReceiveData(const EventData& data, const tcp_socket::CommunicationSocket& socket);
+    virtual void SendEvent(const EventData& event);
+    void ReceiveData(const EventData& data, tcp_socket::CommunicationSocket& socket);
 
-    void NewConnection(const tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data);
+    void NewConnection(tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data);
 
    private:
     std::unique_ptr<tcp_socket::ConnectionSocket> socket;
@@ -116,13 +96,12 @@ class Host : public Collaborator {
 class Client : public Collaborator {
    public:
     Client(EditorStage* stage);
-    std::string Name() override { return "CLIENT"; };
 
    protected:
-    void SendBytes(const tcp_socket::BytesType& data) override;
+    virtual void SendEvent(const EventData& event);
 
    private:
-    std::unique_ptr<tcp_socket::CommunicationSocket> socket;
+    tcp_socket::CommunicationSocket socket;
 
     std::future<void> listener;
 };

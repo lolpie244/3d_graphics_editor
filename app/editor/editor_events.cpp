@@ -331,3 +331,14 @@ bool EditorStage::ImportModel() {
 
     return true;
 }
+
+bool EditorStage::ClientButton(sf::Event event) {
+    if (connection_ == nullptr)
+        connection_ = std::make_unique<Client>(this);
+    return true;
+}
+bool EditorStage::ServerButton(sf::Event event) {
+    if (connection_ == nullptr)
+        connection_ = std::make_unique<Host>(this);
+    return true;
+}

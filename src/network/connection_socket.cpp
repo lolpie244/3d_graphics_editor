@@ -4,6 +4,7 @@
 
 #include <cstring>
 
+#include "network/communication_socket.h"
 #include "utils/settings.h"
 
 namespace tcp_socket {
@@ -29,12 +30,12 @@ void ConnectionSocket::bind() {
         throw std::runtime_error(strerror(errno));
 }
 
-std::unique_ptr<CommunicationSocket> ConnectionSocket::connect() {
+CommunicationSocket ConnectionSocket::connect() {
     int status = ::connect(socket_fd, address->ai_addr, address->ai_addrlen);
     if (status == -1)
         throw std::runtime_error(strerror(errno));
 
-    return std::make_unique<CommunicationSocket>(socket_fd, *(sockaddr_storage *)address->ai_addr, false);
+    return CommunicationSocketType::Create(socket_fd, *(sockaddr_storage *)address->ai_addr, false);
 }
 void ConnectionSocket::listen(std::function<void(CommunicationSocket communication_socket)> after_accept,
                               int queue_size) {
@@ -50,7 +51,9 @@ void ConnectionSocket::listen(std::function<void(CommunicationSocket communicati
             std::cout << "Accept error: " << strerror(errno) << '\n';
             break;
         }
-        threads.emplace_back(after_accept, std::move(CommunicationSocket(new_socket_fd, client_address, true)));
+        threads.emplace_back(
+            std::async(std::launch::async, after_accept,
+                       std::move(CommunicationSocketType::Create(new_socket_fd, client_address, true))));
     }
 }
 
@@ -62,7 +65,7 @@ addrinfo ConnectionSocket::get_default_addrinfo() {
 }
 
 ConnectionSocket::~ConnectionSocket() {
-    // close(socket_fd);
-    freeaddrinfo(address);
+    // ::close(socket_fd);
+    ::freeaddrinfo(address);
 }
 }  // namespace tcp_socket
