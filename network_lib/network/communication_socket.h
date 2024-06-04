@@ -1,5 +1,6 @@
 #pragma once
 
+#include <alpaca/alpaca.h>
 #include <netdb.h>
 
 #include <cstring>
@@ -11,15 +12,13 @@
 
 #include "communication_socket.h"
 #include "file_descriptor.h"
-#include "utils/alpaca_types.h"
-#include "utils/settings.h"
 
 namespace tcp_socket {
 class CommunicationSocketType;
 
 using BytesType = std::vector<uint8_t>;
 using CommunicationSocket = std::shared_ptr<CommunicationSocketType>;
-using CommunicationSocketPtr = CommunicationSocketType*;
+using CommunicationSocketPtr = CommunicationSocketType *;
 
 class CommunicationSocketType {
    private:
@@ -28,8 +27,7 @@ class CommunicationSocketType {
     bool is_server;
 
    public:
-    static CommunicationSocket Create(FileDescriptor socket_fd, sockaddr_storage address,
-                                                           bool is_server) {
+    static CommunicationSocket Create(FileDescriptor socket_fd, sockaddr_storage address, bool is_server) {
         return std::shared_ptr<CommunicationSocketType>(new CommunicationSocketType(socket_fd, address, is_server));
     }
 
@@ -47,16 +45,15 @@ class CommunicationSocketType {
     void send(const BytesType &data) const {
         int send_size = ::send(socket_fd, data.data(), data.size(), 0);
         if (send_size == -1) {
-			fprintf(stderr, "on_recieve error %s\n", strerror(errno));
+            fprintf(stderr, "on_recieve error %s\n", strerror(errno));
             return;
         }
     }
 
     template <typename FuncReturnType, typename DataType>
-    std::future<FuncReturnType> on_recieve(
-        std::function<FuncReturnType(const DataType &data)> callback_function) {
-        BytesType bytes(settings::PACKAGE_SIZE);
-        int recieve_size = ::recv(socket_fd, bytes.data(), settings::PACKAGE_SIZE, 0);
+    std::future<FuncReturnType> on_recieve(std::function<FuncReturnType(const DataType &data)> callback_function, const int PACKAGE_SIZE) {
+        BytesType bytes(PACKAGE_SIZE);
+        int recieve_size = ::recv(socket_fd, bytes.data(), PACKAGE_SIZE, 0);
 
         if (recieve_size <= 0) {
             fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);

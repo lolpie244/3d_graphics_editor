@@ -31,17 +31,16 @@ add_library(${PROJECT_NAME}-static STATIC
 	render/opengl/vertex_array.cpp
 	render/opengl/vertex_buffer.cpp
 
-	network/connection_socket.cpp
-
 	stage/stage.cpp
 	stage/stage_manager.cpp
 )
 target_include_directories(${PROJECT_NAME}-static PUBLIC ../include
-	${CMAKE_BINARY_DIR}/include)
+	${CMAKE_BINARY_DIR}/include ../network_lib)
 
 target_link_libraries(${PROJECT_NAME}-static
 	sfml-graphics sfml-audio
 	OpenGL GLU GLEW::GLEW glm::glm
-	${lunasvg} tinyobjloader::tinyobjloader alpaca::alpaca
+	${lunasvg} tinyobjloader::tinyobjloader
 )
 
+target_compile_definitions(${PROJECT_NAME}-static PUBLIC ALPACA_INCLUDE_SUPPORT_GLM_VECTOR)

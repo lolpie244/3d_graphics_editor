@@ -1,3 +1,5 @@
+#include <alpaca/alpaca.h>
+
 #include <memory>
 
 #include "editor/editor.h"
@@ -6,7 +8,6 @@
 #include "network/communication_socket.h"
 #include "render/light.h"
 #include "render/model.h"
-#include "utils/alpaca_types.h"
 
 Collaborator::Collaborator(EditorStage* stage) : stage(stage) {}
 

@@ -2,9 +2,14 @@
 
 #include "network.h"
 #include "network/communication_socket.h"
+#include "utils/settings.h"
 
 Host::Host(EditorStage* stage) : Collaborator(stage) {
-    socket = std::make_unique<tcp_socket::ConnectionSocket>(settings::PORT);
+    addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
+    hints.ai_family = settings::INET_FAMILY;
+    hints.ai_flags = AI_PASSIVE;
+
+    socket = std::make_unique<tcp_socket::ConnectionSocket>(nullptr, settings::PORT, hints);
 
     listener = std::async(std::launch::async, [this]() {
         socket->listen([this](tcp_socket::CommunicationSocket socket) {
@@ -13,7 +18,7 @@ Host::Host(EditorStage* stage) : Collaborator(stage) {
                 auto future = socket->on_recieve<bool, EventData>([this, &socket](const EventData& bytes) {
                     ReceiveData(bytes, socket);
                     return true;
-                });
+                }, settings::PACKAGE_SIZE);
                 future.wait();
                 recieve_successful = future.get();
             } while (recieve_successful);
@@ -37,7 +42,7 @@ void Host::ReceiveData(const EventData& event, tcp_socket::CommunicationSocket& 
         for (auto& next_socket : clients_sockets) {
             if (next_socket != socket) {
                 next_socket->send(event);
-			}
+            }
         }
     }
 }

@@ -122,7 +122,7 @@ EditorStage::EditorStage() {
 }
 
 void EditorStage::Run() {
-	window_->pushGLStates();
+    window_->pushGLStates();
     window_->draw(elements_);
     window_->popGLStates();
 

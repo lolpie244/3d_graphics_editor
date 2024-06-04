@@ -1,5 +1,7 @@
 #include "render/model.h"
 
+#include <alpaca/alpaca.h>
+
 #include <algorithm>
 #include <cstdint>
 #include <system_error>
@@ -9,7 +11,6 @@
 #include "network/communication_socket.h"
 #include "render/mesh.h"
 #include "stage/stage_manager.h"
-#include "utils/alpaca_types.h"
 #include "utils/settings.h"
 
 namespace render {

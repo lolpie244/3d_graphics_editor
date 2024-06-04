@@ -14,6 +14,15 @@ ExternalProject_Add(lunasvg-git
 		-DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}
 )
 
+ExternalProject_Add(alpaca-git
+	GIT_REPOSITORY https://github.com/lolpie244/alpaca
+	GIT_TAG master
+	UPDATE_COMMAND ""
+	CMAKE_ARGS
+		-DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}
+		-DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}
+)
+
 set(lunasvg ${CMAKE_BINARY_DIR}/lib/liblunasvg.a)
 set(tinyfiledialogs ${CMAKE_BINARY_DIR}/lib/libtinyfiledialogs.so)
 
@@ -22,7 +31,6 @@ find_package(OpenGL REQUIRED)
 find_package(glm REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(tinyobjloader REQUIRED)
-find_package(alpaca REQUIRED)
 
 add_subdirectory(src)
 add_subdirectory(app)

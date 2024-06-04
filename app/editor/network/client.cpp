@@ -16,11 +16,10 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     listener = std::async(std::launch::async, [this]() {
         bool recieve_successful;
         do {
-            auto future = socket->on_recieve<bool, EventData>(
-                [this](const EventData& bytes) {
-                    ReceiveData(bytes);
-                    return true;
-                });
+            auto future = socket->on_recieve<bool, EventData>([this](const EventData& bytes) {
+                ReceiveData(bytes);
+                return true;
+            }, settings::PACKAGE_SIZE);
             future.wait();
             recieve_successful = future.get();
         } while (recieve_successful);
