@@ -2,6 +2,7 @@
 
 #include <alpaca/alpaca.h>
 #include <netdb.h>
+#include <unistd.h>
 
 #include <cstring>
 #include <functional>
@@ -31,7 +32,7 @@ class CommunicationSocketType {
         return std::shared_ptr<CommunicationSocketType>(new CommunicationSocketType(socket_fd, address, is_server));
     }
 
-    ~CommunicationSocketType() = default;
+    ~CommunicationSocketType() { stop(); }
 
     bool operator==(const CommunicationSocketType &other_socket) { return socket_fd == other_socket.socket_fd; }
 
@@ -50,28 +51,53 @@ class CommunicationSocketType {
         }
     }
 
-    template <typename FuncReturnType, typename DataType>
-    std::future<FuncReturnType> on_recieve(std::function<FuncReturnType(const DataType &data)> callback_function, const int PACKAGE_SIZE) {
-        BytesType bytes(PACKAGE_SIZE);
-        int recieve_size = ::recv(socket_fd, bytes.data(), PACKAGE_SIZE, 0);
+    template <typename DataType>
+    std::future<std::optional<DataType>> recieve(const int PACKAGE_SIZE) {
+        return std::async(std::launch::async, [&]() {
+            BytesType bytes(PACKAGE_SIZE);
+            int recieve_size = ::recv(socket_fd, bytes.data(), PACKAGE_SIZE, 0);
 
-        if (recieve_size <= 0) {
-            fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
-            return std::async(std::launch::async, []() { return FuncReturnType(); });
-        }
-        std::error_code ec;
-        auto data = alpaca::deserialize<DataType>(bytes, ec);
-        if (ec) {
-            fprintf(stderr, "on_recieve error %s\n", ec.message());
-            return std::async(std::launch::async, []() { return FuncReturnType(); });
-        }
+            if (recieve_size <= 0) {
+                fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
+                return std::optional<DataType>(std::nullopt);
+            }
+            std::error_code ec;
+            auto data = alpaca::deserialize<DataType>(bytes, ec);
+            if (ec) {
+                fprintf(stderr, "on_recieve error %s\n", ec.message());
+                return std::optional<DataType>(std::nullopt);
+            }
 
-        return std::async(std::launch::async, callback_function, data);
+            return std::optional<DataType>(data);
+        });
     }
+
+    template <typename DataType>
+    void start_recieve_loop(std::function<void(const DataType &data)> callback_function, const int PACKAGE_SIZE) {
+        recieve_loop = std::async(std::launch::async, [this, callback_function, PACKAGE_SIZE]() {
+            while (true) {
+                std::future<std::optional<DataType>> future = this->recieve<DataType>(PACKAGE_SIZE);
+				auto value = future.get();
+                if (!value.has_value()) {
+                    break;
+				}
+                callback_function(value.value());
+            }
+        });
+    }
+
+    void wait() {
+        if (recieve_loop.valid())
+            recieve_loop.wait();
+    }
+
+    void stop() { ::close(socket_fd); }
 
    private:
     CommunicationSocketType(FileDescriptor socket_fd, sockaddr_storage address, bool is_server)
         : socket_fd(socket_fd), address(address), is_server(is_server) {}
+
+    std::future<void> recieve_loop;
 };
 
 }  // namespace tcp_socket

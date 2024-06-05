@@ -84,11 +84,9 @@ class Host : public Collaborator {
     virtual void SendEvent(const EventData& event);
     void ReceiveData(const EventData& data, tcp_socket::CommunicationSocket& socket);
 
-    void NewConnection(tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data);
-
    private:
     std::unique_ptr<tcp_socket::ConnectionSocket> socket;
-    std::vector<tcp_socket::CommunicationSocket> clients_sockets;
+    std::list<tcp_socket::CommunicationSocket> clients_sockets;
 
     std::future<void> listener;
 };

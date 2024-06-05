@@ -3,6 +3,7 @@
 #include "network.h"
 #include "network/communication_socket.h"
 #include "network/connection_socket.h"
+#include "utils/settings.h"
 
 Client::Client(EditorStage* stage) : Collaborator(stage) {
     addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
@@ -12,18 +13,8 @@ Client::Client(EditorStage* stage) : Collaborator(stage) {
     tcp_socket::ConnectionSocket host_socket = tcp_socket::ConnectionSocket(nullptr, settings::PORT, hints);
     this->socket = host_socket.connect();
 
-    SendEvent(Event_Host_ConnectionAttempt);
-    listener = std::async(std::launch::async, [this]() {
-        bool recieve_successful;
-        do {
-            auto future = socket->on_recieve<bool, EventData>([this](const EventData& bytes) {
-                ReceiveData(bytes);
-                return true;
-            }, settings::PACKAGE_SIZE);
-            future.wait();
-            recieve_successful = future.get();
-        } while (recieve_successful);
-    });
+    socket->start_recieve_loop<EventData>([this](const EventData& event) { ReceiveData(event); },
+                                          settings::PACKAGE_SIZE);
 }
 
 void Client::SendEvent(const EventData& event) { socket->send(event); }

@@ -1,3 +1,4 @@
+#include <future>
 #include <string>
 
 #include "network.h"
@@ -11,18 +12,13 @@ Host::Host(EditorStage* stage) : Collaborator(stage) {
 
     socket = std::make_unique<tcp_socket::ConnectionSocket>(nullptr, settings::PORT, hints);
 
-    listener = std::async(std::launch::async, [this]() {
-        socket->listen([this](tcp_socket::CommunicationSocket socket) {
-            bool recieve_successful;
-            do {
-                auto future = socket->on_recieve<bool, EventData>([this, &socket](const EventData& bytes) {
-                    ReceiveData(bytes, socket);
-                    return true;
-                }, settings::PACKAGE_SIZE);
-                future.wait();
-                recieve_successful = future.get();
-            } while (recieve_successful);
-        });
+    listener = socket->listen([this](tcp_socket::CommunicationSocket socket) {
+        clients_sockets.push_back(socket);
+        auto it = std::prev(clients_sockets.end(), 1);
+        socket->start_recieve_loop<EventData>([this, &socket](const EventData& event) { ReceiveData(event, socket); },
+                                              settings::PACKAGE_SIZE);
+        socket->wait();
+        clients_sockets.erase(it);
     });
 }
 
@@ -32,7 +28,7 @@ void Host::SendEvent(const EventData& data) {
 
 void Host::ReceiveData(const EventData& event, tcp_socket::CommunicationSocket& socket) {
     static const std::unordered_map<unsigned int, EventHandler> events{
-        {Event_Host_ConnectionAttempt, &Host::NewConnection},
+        // {Event_Host_ConnectionAttempt, &Host::NewConnection},
     };
 
     if (events.contains(event.event)) {
@@ -45,9 +41,4 @@ void Host::ReceiveData(const EventData& event, tcp_socket::CommunicationSocket& 
             }
         }
     }
-}
-
-void Host::NewConnection(tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data) {
-    clients_sockets.push_back(socket);
-    socket->send(EventData(Event_Client_Connected));
 }

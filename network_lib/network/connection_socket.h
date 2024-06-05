@@ -40,23 +40,26 @@ class ConnectionSocket {
 
         return CommunicationSocketType::Create(socket_fd, *(sockaddr_storage *)address->ai_addr, false);
     }
-    void listen(std::function<void(CommunicationSocket communication_socket)> after_accept, int queue_size = 20) {
-        if (!is_binded)
-            bind();
+    std::future<void> listen(std::function<void(CommunicationSocket communication_socket)> after_accept,
+                             int queue_size = 20) {
+        return std::async(std::launch::async, [&]() {
+            if (!is_binded)
+                bind();
 
-        ::listen(socket_fd, queue_size);
-        sockaddr_storage client_address;
-        socklen_t client_address_size = sizeof(client_address);
-        while (true) {
-            int new_socket_fd = ::accept(socket_fd, NULL, &client_address_size);
-            if (new_socket_fd == -1) {
-                std::cout << "Accept error: " << strerror(errno) << '\n';
-                break;
+            ::listen(socket_fd, queue_size);
+            sockaddr_storage client_address;
+            socklen_t client_address_size = sizeof(client_address);
+            while (true) {
+                int new_socket_fd = ::accept(socket_fd, NULL, &client_address_size);
+                if (new_socket_fd == -1) {
+                    std::cout << "Accept error: " << strerror(errno) << '\n';
+                    break;
+                }
+                threads.emplace_back(
+                    std::async(std::launch::async, after_accept,
+                               std::move(CommunicationSocketType::Create(new_socket_fd, client_address, true))));
             }
-            threads.emplace_back(
-                std::async(std::launch::async, after_accept,
-                           std::move(CommunicationSocketType::Create(new_socket_fd, client_address, true))));
-        }
+        });
     }
 
     static addrinfo get_default_addrinfo() {
