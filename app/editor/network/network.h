@@ -27,8 +27,6 @@ class Collaborator {
         Event_LightTransform,
 
         Event_Host_ConnectionAttempt,
-
-        Event_Client_Connected
     };
 
     struct EventData {

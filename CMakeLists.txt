@@ -2,8 +2,6 @@ cmake_minimum_required(VERSION 3.28)
 
 project(3d_graphics CXX)
 
-add_compile_options("$<$<CONFIG:DEBUG>:-DDEBUG>")
-
 include(ExternalProject)
 ExternalProject_Add(lunasvg-git
 	GIT_REPOSITORY https://github.com/lolpie244/lunasvg
@@ -32,5 +30,6 @@ find_package(glm REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(tinyobjloader REQUIRED)
 
+add_subdirectory(server)
 add_subdirectory(src)
 add_subdirectory(app)
