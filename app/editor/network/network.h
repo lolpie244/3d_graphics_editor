@@ -1,6 +1,7 @@
 #pragma once
 
 #include <alpaca/alpaca.h>
+#include <sys/socket.h>
 
 #include <glm/glm.hpp>
 #include <sstream>
@@ -76,7 +77,7 @@ class Host : public Collaborator {
         EventHandler;
 
    public:
-    Host(EditorStage* stage);
+    Host(EditorStage* stage, sockaddr_storage address);
 
    protected:
     virtual void SendEvent(const EventData& event);
@@ -91,7 +92,7 @@ class Host : public Collaborator {
 
 class Client : public Collaborator {
    public:
-    Client(EditorStage* stage);
+    Client(EditorStage* stage, sockaddr_storage address);
 
    protected:
     virtual void SendEvent(const EventData& event);

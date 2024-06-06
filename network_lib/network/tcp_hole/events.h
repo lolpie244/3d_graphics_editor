@@ -8,15 +8,30 @@
 
 #include "network/network.h"
 
-constexpr char PORT[] = "2349";
-constexpr int PACKAGE_SIZE = 1000;
-constexpr int CODE_LEN = 6;
+namespace tcp_hole {
+
+constexpr int MAX_CODE_LEN = 10;
+constexpr int CLIENT_PACKAGE_SIZE = 100;
+
+inline std::string GenerateCode(int CODE_LEN) {
+	auto randchar = []() -> char {
+		static const char charset[] =
+			"0123456789"
+			"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		const size_t max_index = (sizeof(charset) - 1);
+		return charset[rand() % max_index];
+	};
+	std::string str(CODE_LEN, 0);
+	std::generate_n(str.begin(), CODE_LEN, randchar);
+	return str;
+}
 
 struct ServerEvent {
     std::string data;
 
-	ServerEvent() = default;
-    ServerEvent(const std::string& code) { data = code.substr(0, CODE_LEN); }
+    ServerEvent() = default;
+    ServerEvent(const std::string& code) : data(code) {}
+
 };
 
 enum Status {
@@ -47,3 +62,4 @@ struct ClientEvent {
         return result;
     }
 };
+}  // namespace tcp_hole

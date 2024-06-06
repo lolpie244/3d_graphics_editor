@@ -37,7 +37,7 @@ class ConnectionSocket {
         int result = getnameinfo(sa, sizeof(sockaddr_storage), host, NI_MAXHOST, service, NI_MAXSERV,
                                  NI_NUMERICHOST | NI_NUMERICSERV);
 
-		std::cout << host << ":" << service << '\n';
+        std::cout << host << ":" << service << '\n';
 
         addrinfo hints = get_default_addrinfo();
         hints.ai_family = AF_UNSPEC;
@@ -60,7 +60,7 @@ class ConnectionSocket {
     }
     std::future<void> listen(std::function<void(CommunicationSocket communication_socket)> after_accept,
                              int queue_size = 20) {
-        return std::async(std::launch::async, [&]() {
+        return std::async(std::launch::async, [after_accept, this, queue_size]() {
             if (!is_binded)
                 bind();
 
@@ -94,6 +94,9 @@ class ConnectionSocket {
         addrinfo result;
         memset(&result, 0, sizeof(result));
         result.ai_socktype = SOCK_STREAM;
+        result.ai_family = AF_UNSPEC;
+        result.ai_flags = AI_PASSIVE;
+
         return result;
     }
 

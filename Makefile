@@ -41,10 +41,9 @@ run: build
 run-intel: build
 	build/app/3d_graphics
 
-TYPES := server client
-.PHONY: run-${type}
-$(TYPES:%=run-%): build
-	build/server/3d_graphics-$(@:run-%=%)
+.PHONY: run-server
+run-server: build
+	build/network_lib/3d_graphics-server 2344
 
 
 .PHONY: format

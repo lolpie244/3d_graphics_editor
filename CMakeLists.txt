@@ -30,6 +30,6 @@ find_package(glm REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(tinyobjloader REQUIRED)
 
-add_subdirectory(server)
+add_subdirectory(network_lib)
 add_subdirectory(src)
 add_subdirectory(app)

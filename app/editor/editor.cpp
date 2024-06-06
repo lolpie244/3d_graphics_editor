@@ -31,18 +31,6 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 
-    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::H}, [this](sf::Event event) {
-        if (connection_ == nullptr)
-            connection_ = std::make_unique<Host>(this);
-        return true;
-    }));
-
-    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::C}, [this](sf::Event event) {
-        if (connection_ == nullptr)
-            connection_ = std::make_unique<Client>(this);
-        return true;
-    }));
-
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 

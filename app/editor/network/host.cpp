@@ -5,12 +5,9 @@
 #include "network/communication_socket.h"
 #include "utils/settings.h"
 
-Host::Host(EditorStage* stage) : Collaborator(stage) {
-    addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
-    hints.ai_family = settings::INET_FAMILY;
-    hints.ai_flags = AI_PASSIVE;
-
-    socket = std::make_unique<tcp_socket::ConnectionSocket>(nullptr, settings::PORT, hints);
+Host::Host(EditorStage* stage, sockaddr_storage address) : Collaborator(stage) {
+    socket = std::make_unique<tcp_socket::ConnectionSocket>(address);
+	socket->allow_reuse();
 
     listener = socket->listen([this](tcp_socket::CommunicationSocket socket) {
         clients_sockets.push_back(socket);
