@@ -1,29 +1,33 @@
+#include <future>
+#include <stdexcept>
 #include <string>
 
 #include "network.h"
 #include "network/communication_socket.h"
+#include "network/connection_socket.h"
+#include "utils/settings.h"
 
-Client::Client(EditorStage* stage) : Collaborator(stage) {
-    addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
-    hints.ai_family = settings::INET_FAMILY;
-    hints.ai_flags = AI_PASSIVE;
+Client::Client(EditorStage* stage, sockaddr_storage address) : Collaborator(stage) {
+    tcp_socket::ConnectionSocket host_socket = tcp_socket::ConnectionSocket(address);
 
-    tcp_socket::ConnectionSocket host_socket(nullptr, settings::PORT, hints);
-    this->socket = host_socket.connect();
-
-    SendData(Event_Host_ConnectionAttempt);
-    listener = std::async(std::launch::async, [this]() {
-        bool recieve_successful;
-        do {
-            auto future = socket->on_recieve<bool>(
-                [this](const tcp_socket::BytesType bytes, const tcp_socket::CommunicationSocket& socket) {
-                    ReceiveData(ReceiveBytes(bytes));
-                    return true;
-                });
-            future.wait();
-            recieve_successful = future.get();
-        } while (recieve_successful);
+    bool run = true;
+    auto try_connect = std::async(std::launch::async, [this, &host_socket, &run]() {
+        while (run) {
+            try {
+                this->socket = host_socket.connect();
+                break;
+            } catch (...) {}
+        }
     });
+
+    if (try_connect.wait_for(settings::WAIT_FOR_CONNECTION) != std::future_status::ready) {
+        run = false;
+        throw std::runtime_error("Can't connect");
+    }
+    std::cout << "CONNECTED\n";
+
+    socket->start_recieve_loop<EventData>([this](const EventData& event) { ReceiveData(event); },
+                                          settings::PACKAGE_SIZE);
 }
 
-void Client::SendBytes(const tcp_socket::BytesType& data) { this->socket->send(data); }
+void Client::SendEvent(const EventData& event) { socket->send(event); }

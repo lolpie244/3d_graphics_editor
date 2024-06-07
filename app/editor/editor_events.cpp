@@ -1,10 +1,12 @@
 #include <GL/glew.h>
+#include <sys/socket.h>
 #include <tinyfiledialogs.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <iterator>
+#include <optional>
 #include <system_error>
 
 #include "alpaca/alpaca.h"
@@ -15,6 +17,7 @@
 #include "math/ray.h"
 #include "math/utils.h"
 #include "network/communication_socket.h"
+#include "network/tcp_hole/events.h"
 #include "render/light.h"
 #include "render/model.h"
 #include "utils/settings.h"
@@ -327,6 +330,59 @@ bool EditorStage::ImportModel() {
             auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
             AddModel(std::move(model));
         });
+    });
+
+    return true;
+}
+
+std::optional<sockaddr_storage> GetAddress(const std::string& code = "") {
+    addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
+    static tcp_socket::ConnectionSocket host_socket =
+        tcp_socket::ConnectionSocket(nullptr, settings::SERVER_PORT, hints);
+    host_socket.allow_reuse();
+    auto socket = host_socket.connect();
+
+    socket->send(tcp_hole::ServerEvent{code});
+    auto response = socket->recieve<tcp_hole::ClientEvent>(tcp_hole::CLIENT_PACKAGE_SIZE).get().value();
+
+    if (response.status == tcp_hole::Status::Server) {
+        return socket->own_address();
+    }
+    if (response.status == tcp_hole::Status::Client) {
+        return response.GetAddress();
+    }
+
+    return std::optional<sockaddr_storage>(std::nullopt);
+}
+
+bool EditorStage::ClientButton(sf::Event event) {
+    if (connection_ != nullptr)
+        return true;
+
+    RunAsync([this]() {
+        auto code = tinyfd_inputBox("Код кімнати", "Введіть код кімнати", "");
+        if (!code)
+            return;
+
+        auto address = GetAddress(code);
+        if (address.has_value())
+            connection_ = std::make_unique<Client>(this, address.value());
+    });
+
+    return true;
+}
+bool EditorStage::ServerButton(sf::Event event) {
+    if (connection_ != nullptr)
+        return true;
+
+    RunAsync([this]() {
+        std::string code = tcp_hole::GenerateCode(settings::CODE_LEN);
+        if (!tinyfd_messageBox("Код кімнати", code.c_str(), "ok", "info", 1))
+            return;
+
+        auto address = GetAddress(code);
+        if (address.has_value())
+            connection_ = std::make_unique<Host>(this, address.value());
     });
 
     return true;

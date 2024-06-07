@@ -41,6 +41,10 @@ run: build
 run-intel: build
 	build/app/3d_graphics
 
+.PHONY: run-server
+run-server: build
+	build/network_lib/3d_graphics-server 2344
+
 
 .PHONY: format
 format:
