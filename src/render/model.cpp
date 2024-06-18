@@ -170,8 +170,10 @@ std::unique_ptr<Model> Model::loadFromFile(const std::string& filename, MeshConf
 }
 
 struct ModelFileData {
+    int id;
     std::vector<ModelVertexData> vertices;
     std::vector<Mesh<ModelVertex>::Face> faces;
+
     // std::vector<uint8_t> texture;
 
     math::TransformData localTransform;
@@ -184,7 +186,8 @@ tcp_socket::BytesType Model::toBytes() const {
         vertices[i] = this->mesh_.GetRawMesh().vertices[i];
     }
 
-    ModelFileData data{.vertices = vertices,
+    ModelFileData data{.id = Id(),
+                       .vertices = vertices,
                        .faces = this->mesh_.GetRawMesh().faces,
                        .localTransform = *this,
                        .globalTransform = GlobalTransform};
@@ -208,6 +211,7 @@ std::unique_ptr<Model> Model::fromBytes(const tcp_socket::BytesType& raw_data, M
 
     result->SetTransformData(data.localTransform);
     result->GlobalTransform.SetTransformData(data.globalTransform);
+	result->ForceSetId(data.id);
     return std::move(result);
 }
 

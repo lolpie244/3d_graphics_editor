@@ -2,6 +2,7 @@
 #include <stdexcept>
 #include <string>
 
+#include "editor/editor.h"
 #include "network.h"
 #include "network/communication_socket.h"
 #include "network/connection_socket.h"
@@ -26,8 +27,21 @@ Client::Client(EditorStage* stage, sockaddr_storage address) : Collaborator(stag
     }
     std::cout << "CONNECTED\n";
 
-    socket->start_recieve_loop<EventData>([this](const EventData& event) { ReceiveData(event); },
-                                          settings::PACKAGE_SIZE);
+    socket->start_recieve_loop<EventData>([this](const EventData& event) { ReceiveData(event); });
 }
 
 void Client::SendEvent(const EventData& event) { socket->send(event); }
+
+void Client::ClientConnectedHandler(const tcp_socket::BytesType& data) { stage->LoadScene(data); }
+
+void Client::ReceiveData(const EventData& event) {
+    static const std::unordered_map<unsigned int, EventHandler> events{
+        {Event_ClientConnected, &Client::ClientConnectedHandler},
+    };
+
+    if (events.contains(event.event))
+        events.at(event.event)(this, event.data);
+    else {
+        Collaborator::ReceiveData(event);
+    }
+}

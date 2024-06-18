@@ -36,11 +36,12 @@ class EditorStage : public stage::Stage {
     void InitGui();
     void BindEvents();
 
+    void ScheduleWork(std::function<void(void)>);
     void RunAsync(std::function<void(void)>);
     void SendRequest(std::function<void(Collaborator*)>);
 
     void PerformPendingFunctions();
-    float Scale() const { return std::max(0.05f, scale_); }
+    float Scale() const;
 
     void AddModel(std::unique_ptr<render::Model> model, bool send_request = true);
     void AddLight(std::unique_ptr<render::Light> light, bool send_request = true);
@@ -48,6 +49,7 @@ class EditorStage : public stage::Stage {
     void SetFilename(const char* filename);
 
     void LoadScene(const tcp_socket::BytesType& data);
+    tcp_socket::BytesType SceneToBytes();
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
@@ -84,7 +86,6 @@ class EditorStage : public stage::Stage {
     bool ImportModel();
 
    public:
-    std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
     render::LightList lights;
 
@@ -122,10 +123,10 @@ class EditorStage : public stage::Stage {
     SelectedVertices selected_vertexes_;
 
     glm::vec3 last_vertex_position = {-1, -1, -1};
-    float scale_ = 1;
 
     std::unique_ptr<Collaborator> connection_;
     std::list<std::future<void>> requests_;
+    std::list<std::function<void()>> pending_functions_;
 
     bool pending_move_ = false;
 

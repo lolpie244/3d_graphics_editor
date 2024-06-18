@@ -16,11 +16,6 @@ struct VertexMovedData {
     glm::vec3 new_position;
 };
 
-struct NewModelData {
-    uint8_t id;
-    tcp_socket::BytesType bytes;
-};
-
 struct ModelTransformData {
     uint8_t id;
 
@@ -42,23 +37,19 @@ void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
     std::error_code ec;
     auto data = alpaca::deserialize<VertexMovedData>(raw_data, ec);
 
-    stage->PendingFunctions.push_back([vertex = data.vertex, new_position = data.new_position, this]() {
+    stage->ScheduleWork([vertex = data.vertex, new_position = data.new_position, this]() {
         auto* model = stage->models.at(vertex.ObjectID).get();
         model->SetVertexPosition(vertex.VertexId, vertex.Type, new_position);
     });
 }
 
 void Collaborator::NewModel(render::Model* model) {
-    SendEvent(EventData(Event_ModelAdd, NewModelData{.id = model->Id(), .bytes = model->toBytes()}));
+    SendEvent(EventData(Event_ModelAdd, model->toBytes()));
 }
 
 void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
-    std::error_code ec;
-    auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
-
-    stage->PendingFunctions.push_back([this, data, raw_data]() {
-        auto model = render::Model::fromBytes(data.bytes, EditorStage::DEFAULT_MODEL_CONFIG);
-        model->ForceSetId(data.id);
+    stage->ScheduleWork([this, raw_data]() {
+        auto model = render::Model::fromBytes(raw_data, EditorStage::DEFAULT_MODEL_CONFIG);
         stage->AddModel(std::move(model), false);
     });
 }
@@ -77,16 +68,13 @@ void Collaborator::ModelTransformHandler(const tcp_socket::BytesType& raw_data) 
 }
 
 void Collaborator::NewLight(render::Light* light) {
-    SendEvent(EventData(Event_LightAdd, NewModelData{.id = light->Id(), .bytes = light->toBytes()}));
+    SendEvent(EventData(Event_LightAdd, light->toBytes()));
 }
 
 void Collaborator::NewLightHandler(const tcp_socket::BytesType& raw_data) {
-    std::error_code ec;
-    auto data = alpaca::deserialize<NewModelData>(raw_data, ec);
 
-    stage->PendingFunctions.push_back([this, data, raw_data]() {
-        auto light = render::Light::fromBytes(data.bytes);
-        light->ForceSetId(data.id);
+    stage->ScheduleWork([this, raw_data]() {
+        auto light = render::Light::fromBytes(raw_data);
         stage->AddLight(std::move(light), false);
     });
 }
@@ -111,6 +99,6 @@ void Collaborator::ReceiveData(const EventData& event) {
     if (events.contains(event.event))
         events.at(event.event)(this, event.data);
     else {
-        std::cout << "INCORRECT EVENT\n";
+        std::cout << "INCORRECT EVENT " << event.event << "\n";
     }
 }

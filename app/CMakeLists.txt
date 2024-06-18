@@ -1,7 +1,5 @@
 add_executable(${PROJECT_NAME}
 	main.cpp
-	menu/menu.cpp
-
 	editor/editor.cpp
 	editor/editor_events.cpp
 	editor/editor_gui.cpp

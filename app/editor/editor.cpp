@@ -7,10 +7,12 @@
 #include <functional>
 #include <future>
 #include <memory>
+#include <mutex>
 
 #include "data/texture.h"
 #include "editor/network/network.h"
 #include "gui/select_rect.h"
+#include "math/transform.h"
 #include "render/light.h"
 #include "render/mesh.h"
 #include "render/model.h"
@@ -86,8 +88,23 @@ void EditorStage::SendRequest(std::function<void(Collaborator*)> func) {
     RunAsync([func, this]() { func(connection_.get()); });
 }
 
+void EditorStage::ScheduleWork(std::function<void(void)> func) { pending_functions_.push_back(func); }
+
 void EditorStage::RunAsync(std::function<void(void)> func) {
-    requests_.push_back(std::async(std::launch::async, [this, func]() { func(); }));
+    requests_.emplace_back();
+    auto it = std::prev(requests_.end(), 1);
+
+    *it = std::async(std::launch::async, [this, func, it]() {
+        auto mutex = new std::mutex();
+        std::unique_lock<std::mutex> lock(*mutex);
+        func();
+        this->ScheduleWork([this, it, mutex]() {
+            std::unique_lock<std::mutex> lock(*mutex);
+            requests_.erase(it);
+            lock.release();
+            delete mutex;
+        });
+    });
 }
 
 void EditorStage::SetFilename(const char* filename) { current_filename_ = filename; }
@@ -98,11 +115,18 @@ void EditorStage::Clear() {
     lights.clear();
 }
 
+float EditorStage::Scale() const {
+	auto dist = camera_->GetRealPosition() - camera_->GetOrigin();
+	return dist.length() * 0.3f;
+}
+
 EditorStage::EditorStage() {
     gizmo_shader_.loadFromFile("shaders/color.vert", "shaders/color.frag");
     gizmo_picking_.loadFromFile("shaders/color.vert", "shaders/picking.frag");
 
-    camera_->Move(0, 0, 4.0f);
+    camera_->Move(0, 0, 10.0f);
+    camera_->Rotate(-45, math::Y);
+    camera_->Rotate(-20, math::X);
     camera_->SetOrigin(0, 0, 0);
 
     InitGui();

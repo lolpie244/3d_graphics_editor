@@ -1,22 +1,16 @@
 #include <future>
 #include <string>
 
+#include "editor/editor.h"
 #include "network.h"
 #include "network/communication_socket.h"
 #include "utils/settings.h"
 
 Host::Host(EditorStage* stage, sockaddr_storage address) : Collaborator(stage) {
     socket = std::make_unique<tcp_socket::ConnectionSocket>(address);
-	socket->allow_reuse();
+    socket->allow_reuse();
 
-    listener = socket->listen([this](tcp_socket::CommunicationSocket socket) {
-        clients_sockets.push_back(socket);
-        auto it = std::prev(clients_sockets.end(), 1);
-        socket->start_recieve_loop<EventData>([this, &socket](const EventData& event) { ReceiveData(event, socket); },
-                                              settings::PACKAGE_SIZE);
-        socket->wait();
-        clients_sockets.erase(it);
-    });
+    listener = socket->listen([this](tcp_socket::CommunicationSocket socket) { NewClient(socket); });
 }
 
 void Host::SendEvent(const EventData& data) {
@@ -38,4 +32,14 @@ void Host::ReceiveData(const EventData& event, tcp_socket::CommunicationSocket& 
             }
         }
     }
+}
+
+void Host::NewClient(tcp_socket::CommunicationSocket socket) {
+    clients_sockets.push_back(socket);
+    auto it = std::prev(clients_sockets.end(), 1);
+
+    socket->send(EventData(Event_ClientConnected, stage->SceneToBytes()));
+    socket->start_recieve_loop<EventData>([this, &socket](const EventData& event) { ReceiveData(event, socket); });
+    socket->wait();
+    clients_sockets.erase(it);
 }

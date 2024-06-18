@@ -41,7 +41,6 @@ bool EditorStage::CameraZoom(sf::Event event) {
     Camera()->Move(0, 0, -event.mouseWheelScroll.delta * Scale());
     Camera()->SetOrigin(Camera()->GetOrigin().x, Camera()->GetOrigin().y, old_origin.z);
 
-    scale_ = scale_ - 0.5 * event.mouseWheelScroll.delta;
     return true;
 }
 
@@ -224,8 +223,8 @@ bool EditorStage::JoinSelected(sf::Event event) {
 }
 
 void EditorStage::PerformPendingFunctions() {
-    for (auto& function : PendingFunctions) { function(); }
-    PendingFunctions.clear();
+    for (auto& function : pending_functions_) { function(); }
+    pending_functions_.clear();
 }
 
 bool EditorStage::AddLight(sf::Event event) {
@@ -234,7 +233,7 @@ bool EditorStage::AddLight(sf::Event event) {
         if (!tinyfd_colorChooser("Оберіть колір", "#FFFFFF", lRgbColor, lRgbColor))
             return;
 
-        PendingFunctions.push_back([this, lRgbColor]() {
+        ScheduleWork([this, lRgbColor]() {
             glm::vec4 color = {lRgbColor[0] / 255.0f, lRgbColor[1] / 255.0f, lRgbColor[2] / 255.0f, 1};
             auto data = DEFAULT_LIGHT_DATA;
             data.color = color;
@@ -254,6 +253,16 @@ void EditorStage::LoadScene(const tcp_socket::BytesType& data) {
     for (auto& light : scenes.ligths) { AddLight(render::Light::fromBytes(light)); }
 }
 
+tcp_socket::BytesType EditorStage::SceneToBytes() {
+    SceneData scenes;
+    for (auto& [_, model] : models) { scenes.models.push_back(model->toBytes()); }
+    for (auto& [_, light] : lights) { scenes.ligths.push_back(light->toBytes()); }
+
+    tcp_socket::BytesType bytes;
+    alpaca::serialize(scenes, bytes);
+    return bytes;
+}
+
 bool EditorStage::NewScene() {
     Clear();
     current_filename_ = nullptr;
@@ -271,7 +280,7 @@ bool EditorStage::OpenScene() {
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() {
+        ScheduleWork([this, filename]() {
             std::ifstream input(filename, std::ios::binary);
             std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(input), {});
             LoadScene(buffer);
@@ -287,12 +296,7 @@ bool EditorStage::SaveScene() {
 
     RunAsync([this]() {
         std::ofstream file(current_filename_, std::ios::binary);
-        SceneData scenes;
-        for (auto& [_, model] : models) { scenes.models.push_back(model->toBytes()); }
-        for (auto& [_, light] : lights) { scenes.ligths.push_back(light->toBytes()); }
-
-        tcp_socket::BytesType bytes;
-        alpaca::serialize(scenes, bytes);
+        auto bytes = SceneToBytes();
         file.write((char*)bytes.data(), bytes.size());
     });
 
@@ -326,7 +330,7 @@ bool EditorStage::ImportModel() {
         if (!filename)
             return;
 
-        this->PendingFunctions.push_back([this, filename]() {
+        ScheduleWork([this, filename]() {
             auto model = render::Model::loadFromFile(filename, DEFAULT_MODEL_CONFIG);
             AddModel(std::move(model));
         });
@@ -343,7 +347,7 @@ std::optional<sockaddr_storage> GetAddress(const std::string& code = "") {
     auto socket = host_socket.connect();
 
     socket->send(tcp_hole::ServerEvent{code});
-    auto response = socket->recieve<tcp_hole::ClientEvent>(tcp_hole::CLIENT_PACKAGE_SIZE).get().value();
+    auto response = socket->recieve<tcp_hole::ClientEvent>().get().value();
 
     if (response.status == tcp_hole::Status::Server) {
         return socket->own_address();

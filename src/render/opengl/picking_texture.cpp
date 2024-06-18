@@ -30,10 +30,11 @@ void PickingTexture::Resize(int width, int height) {
 }
 
 PickingTexture::Info PickingTexture::ReadPixel(unsigned int x, unsigned int y) {
-    if (x >= width_ || y >= height_)
+    auto area = ReadArea(x, y, 1, 1);
+    if (area.empty())
         return {0, 0, 0};
 
-    return ReadArea(x, y, 1, 1)[0];
+    return area[0];
 }
 
 std::vector<PickingTexture::Info> PickingTexture::ReadArea(unsigned int x, unsigned int y, int width, int height) {

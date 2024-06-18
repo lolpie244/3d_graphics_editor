@@ -6,6 +6,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+#include <cstdint>
 #include <cstring>
 #include <functional>
 #include <future>
@@ -24,6 +25,8 @@ using CommunicationSocket = std::shared_ptr<CommunicationSocketType>;
 using CommunicationSocketPtr = CommunicationSocketType *;
 
 class CommunicationSocketType {
+    static constexpr int BATCH_SIZE = 10000;
+
    private:
     FileDescriptor socket_fd;
     sockaddr_storage client_address_;
@@ -47,32 +50,52 @@ class CommunicationSocketType {
     }
 
     void send(const BytesType &data) const {
-        int send_size = ::send(socket_fd, data.data(), data.size(), 0);
+		int size = data.size();
+        BytesType send_bytes;
+		send_bytes.insert(send_bytes.end(), reinterpret_cast<uint8_t*>(&size), reinterpret_cast<uint8_t*>(&size) + sizeof(size));
+        send_bytes.insert(send_bytes.end(), data.begin(), data.end());
+
+        int send_size = ::send(socket_fd, send_bytes.data(), send_bytes.size(), 0);
         if (send_size == -1) {
-            fprintf(stderr, "on_recieve error %s\n", strerror(errno));
+            fprintf(stderr, "send: %s\n", strerror(errno));
             return;
         }
     }
 
     template <typename DataType>
-    std::future<std::optional<DataType>> recieve(const int PACKAGE_SIZE) {
+    std::future<std::optional<DataType>> recieve() {
         return std::async(std::launch::async, [&]() {
-            BytesType bytes(PACKAGE_SIZE);
-            int recieve_size = ::recv(socket_fd, bytes.data(), PACKAGE_SIZE, 0);
+            int package_size;
+            int recieve_size = ::recv(socket_fd, &package_size, sizeof(package_size), 0);
 
             if (recieve_size <= 0) {
                 fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
                 return std::optional<DataType>(std::nullopt);
             }
+
+            BytesType bytes(package_size);
+            auto current_byte = bytes.data();
+
+            while (package_size) {
+                int recieve_size = ::recv(socket_fd, current_byte, std::min(package_size, BATCH_SIZE), 0);
+
+                if (recieve_size <= 0) {
+                    fprintf(stderr, "recv: %s (%d)\n", strerror(errno), errno);
+                    return std::optional<DataType>(std::nullopt);
+                }
+                current_byte += recieve_size;
+                package_size -= recieve_size;
+            }
+
             return serialize(bytes, (DataType *)nullptr);
         });
     }
 
     template <typename DataType>
-    void start_recieve_loop(std::function<void(const DataType &data)> callback_function, const int PACKAGE_SIZE) {
-        recieve_loop = std::async(std::launch::async, [this, callback_function, PACKAGE_SIZE]() {
+    void start_recieve_loop(std::function<void(const DataType &data)> callback_function) {
+        recieve_loop = std::async(std::launch::async, [this, callback_function]() {
             while (true) {
-                std::future<std::optional<DataType>> future = this->recieve<DataType>(PACKAGE_SIZE);
+                std::future<std::optional<DataType>> future = this->recieve<DataType>();
                 auto value = future.get();
                 if (!value.has_value()) {
                     break;
