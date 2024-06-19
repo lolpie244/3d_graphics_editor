@@ -6,7 +6,6 @@
 
 #include "events/observer.h"
 #include "math/transform.h"
-
 #include "utils/active.h"
 #include "utils/uuid.h"
 
@@ -18,6 +17,10 @@ class Hoverable : virtual public math::Transform, virtual public Activatable {
     void BindMouseIn(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseOut(events::Observer &observer, const events::EVENT_FUNC &function);
     void BindMouseMove(events::Observer &observer, const events::EVENT_FUNC &function);
+
+    void UbindMouseIn() { mouse_in_event_.reset(); }
+    void UbindMouseOut() { mouse_out_event_.reset(); }
+    void UbindMouseMove() { mouse_move_event_.reset(); }
 
     virtual bool Contains(glm::vec2 point) = 0;
     bool ContainsMouse(sf::Event event);

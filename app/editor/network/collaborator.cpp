@@ -17,14 +17,14 @@ struct VertexMovedData {
 };
 
 struct ModelTransformData {
-    uint8_t id;
+    int id;
 
     math::TransformData localTransform;
     math::TransformData globalTransform;
 };
 
 struct LightTransformData {
-    uint8_t id;
+    int id;
 
     math::TransformData localTransform;
 };
@@ -43,9 +43,7 @@ void Collaborator::VertexMovedHandler(const tcp_socket::BytesType& raw_data) {
     });
 }
 
-void Collaborator::NewModel(render::Model* model) {
-    SendEvent(EventData(Event_ModelAdd, model->toBytes()));
-}
+void Collaborator::NewModel(render::Model* model) { SendEvent(EventData(Event_ModelAdd, model->toBytes())); }
 
 void Collaborator::NewModelHandler(const tcp_socket::BytesType& raw_data) {
     stage->ScheduleWork([this, raw_data]() {
@@ -67,12 +65,9 @@ void Collaborator::ModelTransformHandler(const tcp_socket::BytesType& raw_data) 
     stage->models.at(data.id)->GlobalTransform.SetTransformData(data.globalTransform);
 }
 
-void Collaborator::NewLight(render::Light* light) {
-    SendEvent(EventData(Event_LightAdd, light->toBytes()));
-}
+void Collaborator::NewLight(render::Light* light) { SendEvent(EventData(Event_LightAdd, light->toBytes())); }
 
 void Collaborator::NewLightHandler(const tcp_socket::BytesType& raw_data) {
-
     stage->ScheduleWork([this, raw_data]() {
         auto light = render::Light::fromBytes(raw_data);
         stage->AddLight(std::move(light), false);

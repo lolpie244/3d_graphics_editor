@@ -191,8 +191,6 @@ tcp_socket::BytesType Model::toBytes() const {
                        .faces = this->mesh_.GetRawMesh().faces,
                        .localTransform = *this,
                        .globalTransform = GlobalTransform};
-    // texture.copyToImage().
-    // texture.copyToImage().saveToMemory(data.texture, "png");
 
     tcp_socket::BytesType bytes;
 

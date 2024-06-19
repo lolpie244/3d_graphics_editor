@@ -33,9 +33,6 @@ void EditorStage::BindEvents() {
     events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
                                        [this](sf::Event event) { return JoinSelected(event); }));
 
-    events.push_back(observer_.KeyBind({sf::Keyboard::LControl, sf::Keyboard::J},
-                                       [this](sf::Event event) { return JoinSelected(event); }));
-
     events.push_back(observer_.KeyBind({sf::Keyboard::Delete}, [this](sf::Event event) { return DeleteModel(event); }));
 
     opengl_context_->BindPress(observer_, [&](sf::Event event) { return ContextPress(event); }, {sf::Mouse::Left});
@@ -116,8 +113,8 @@ void EditorStage::Clear() {
 }
 
 float EditorStage::Scale() const {
-	auto dist = camera_->GetRealPosition() - camera_->GetOrigin();
-	return dist.length() * 0.3f;
+    auto dist = camera_->GetRealPosition() - camera_->GetOrigin();
+    return dist.length() * 0.3f;
 }
 
 EditorStage::EditorStage() {

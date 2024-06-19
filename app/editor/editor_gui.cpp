@@ -28,8 +28,8 @@ void EditorStage::InitGui() {
 
     auto file_button = std::make_shared<gui::ButtonFromList>(L"Файл");
     auto figures_button = std::make_shared<gui::ButtonFromList>(L"Фігури");
-    auto network_button = std::make_shared<gui::ButtonFromList>(L"Кімната");
-    menu_bar->AddButtons({file_button, figures_button, network_button});
+    network_button_ = std::make_shared<gui::ButtonFromList>(L"Кімната");
+    menu_bar->AddButtons({file_button, figures_button, network_button_});
 
     file_button->AddButtonList(observer_, file_button_list);
     auto new_file = std::make_shared<gui::ButtonFromList>(L"Новий файл");
@@ -47,7 +47,7 @@ void EditorStage::InitGui() {
     /////////////////////////////////////
     auto network_button_list = std::make_shared<gui::ButtonsList>();
     network_button_list->SetPressedTexture({theme->getElement("g4"), {0, 0.01}, {0.2, 0.3}});
-    network_button->AddButtonList(observer_, network_button_list);
+    network_button_->AddButtonList(observer_, network_button_list);
 
     auto client = std::make_shared<gui::ButtonFromList>(L"Приєднатись");
     auto server = std::make_shared<gui::ButtonFromList>(L"Створити");
@@ -77,8 +77,6 @@ void EditorStage::InitGui() {
         return true;
     });
 
-    ///////////////////////////////////////////
-
     //////////////////////////////////////////////////////
     auto mode_group = gui::RadioButton::NewGroup();
 
@@ -86,7 +84,7 @@ void EditorStage::InitGui() {
 
     for (auto &[name, mode] : draw_modes_) {
         auto button =
-            std::make_shared<gui::RadioButton>(glm::vec3(1650 + 90 * i, 70, 0), glm::vec2(82, 82), mode_group);
+            std::make_shared<gui::RadioButton>(glm::vec3(1650 + 90 * (i++), 70, 0), glm::vec2(82, 82), mode_group);
 
         button->Text().SetText(name);
         button->Text().SfText().setFillColor(sf::Color::Black);
@@ -101,7 +99,6 @@ void EditorStage::InitGui() {
         button->SetPressedTexture({theme->getElement("g583"), {0, 0.1}, {0.2, 0.3}});
 
         elements_.Insert({button});
-        i++;
     }
 
     auto gizmo_button_list = std::make_shared<gui::ButtonsList>(glm::vec3(60, 200, 0), glm::vec2(82, 82), 10);

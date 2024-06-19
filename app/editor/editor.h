@@ -3,6 +3,7 @@
 #include "editor/mode.h"
 #include "editor/network/network.h"
 #include "events/event.h"
+#include "gui/buttons_list.h"
 #include "gui/select_rect.h"
 #include "network/communication_socket.h"
 #include "render/gizmo.h"
@@ -56,6 +57,7 @@ class EditorStage : public stage::Stage {
 
     bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
+	bool RoomButton(sf::Event event);
 	bool ClientButton(sf::Event event);
 	bool ServerButton(sf::Event event);
 
@@ -119,16 +121,18 @@ class EditorStage : public stage::Stage {
 	std::function<void(Collaborator*)> after_gizmo_transform_;
 
     std::shared_ptr<gui::SelectRect> selection_rect_;
+	std::shared_ptr<gui::ButtonFromList> network_button_;
 
     SelectedVertices selected_vertexes_;
-
     glm::vec3 last_vertex_position = {-1, -1, -1};
+	bool pending_move_ = false;
 
-    std::unique_ptr<Collaborator> connection_;
     std::list<std::future<void>> requests_;
     std::list<std::function<void()>> pending_functions_;
 
-    bool pending_move_ = false;
 
     const char* current_filename_;
+
+    std::unique_ptr<Collaborator> connection_;
+	std::string room_code_;
 };

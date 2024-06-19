@@ -339,6 +339,11 @@ bool EditorStage::ImportModel() {
     return true;
 }
 
+bool EditorStage::RoomButton(sf::Event event) {
+    RunAsync([this]() { tinyfd_messageBox("Код кімнати", this->room_code_.c_str(), "ok", "info", 1); });
+    return true;
+}
+
 std::optional<sockaddr_storage> GetAddress(const std::string& code = "") {
     addrinfo hints = tcp_socket::ConnectionSocket::get_default_addrinfo();
     static tcp_socket::ConnectionSocket host_socket =
@@ -369,8 +374,13 @@ bool EditorStage::ClientButton(sf::Event event) {
             return;
 
         auto address = GetAddress(code);
-        if (address.has_value())
+        if (address.has_value()) {
+            room_code_ = code;
+            network_button_->RemoveButtonList();
+            network_button_->BindPress(observer_, [this](sf::Event event) { return RoomButton(event); });
+
             connection_ = std::make_unique<Client>(this, address.value());
+        }
     });
 
     return true;
@@ -385,8 +395,13 @@ bool EditorStage::ServerButton(sf::Event event) {
             return;
 
         auto address = GetAddress(code);
-        if (address.has_value())
+        if (address.has_value()) {
+            room_code_ = code;
+            network_button_->RemoveButtonList();
+            network_button_->BindPress(observer_, [this](sf::Event event) { return RoomButton(event); });
+
             connection_ = std::make_unique<Host>(this, address.value());
+        }
     });
 
     return true;

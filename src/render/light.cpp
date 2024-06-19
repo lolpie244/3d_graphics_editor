@@ -59,7 +59,7 @@ std::unique_ptr<Light> Light::fromBytes(const tcp_socket::BytesType& raw_data) {
     auto data = alpaca::deserialize<LightFileData>(raw_data, ec);
 
     auto result = std::make_unique<Light>(data.data);
-	result->ForceSetId(data.id);
+    result->ForceSetId(data.id);
     result->SetTransformData(data.localTransform);
 
     return result;
