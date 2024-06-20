@@ -42,12 +42,13 @@ void Light::Scale(float x, float y, float z) {
 }
 
 struct LightFileData {
+    int id;
     Light::LightData data;
     math::TransformData localTransform;
 };
 
 tcp_socket::BytesType Light::toBytes() const {
-    LightFileData data{.data = Data, .localTransform = *this};
+    LightFileData data{.id = Id(), .data = Data, .localTransform = *this};
     tcp_socket::BytesType bytes;
 
     alpaca::serialize(data, bytes);
@@ -58,6 +59,7 @@ std::unique_ptr<Light> Light::fromBytes(const tcp_socket::BytesType& raw_data) {
     auto data = alpaca::deserialize<LightFileData>(raw_data, ec);
 
     auto result = std::make_unique<Light>(data.data);
+    result->ForceSetId(data.id);
     result->SetTransformData(data.localTransform);
 
     return result;

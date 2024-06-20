@@ -3,6 +3,7 @@
 #include "editor/mode.h"
 #include "editor/network/network.h"
 #include "events/event.h"
+#include "gui/buttons_list.h"
 #include "gui/select_rect.h"
 #include "network/communication_socket.h"
 #include "render/gizmo.h"
@@ -36,24 +37,27 @@ class EditorStage : public stage::Stage {
     void InitGui();
     void BindEvents();
 
+    void ScheduleWork(std::function<void(void)>);
     void RunAsync(std::function<void(void)>);
     void SendRequest(std::function<void(Collaborator*)>);
 
     void PerformPendingFunctions();
-    float Scale() const { return std::max(0.05f, scale_); }
+    float Scale() const;
 
     void AddModel(std::unique_ptr<render::Model> model, bool send_request = true);
     void AddLight(std::unique_ptr<render::Light> light, bool send_request = true);
 
     void SetFilename(const char* filename);
 
-    void LoadScene(const tcp_socket::BytesType& data);
+    void LoadScene(const tcp_socket::BytesType& data, bool send_request = true);
+    tcp_socket::BytesType SceneToBytes();
 
     void Select(render::PickingTexture::Info info);
     void ClearSelection();
 
     bool MoveSelectedPoints(sf::Event event, render::PickingTexture::Info press_info);
 
+	bool RoomButton(sf::Event event);
 	bool ClientButton(sf::Event event);
 	bool ServerButton(sf::Event event);
 
@@ -84,7 +88,6 @@ class EditorStage : public stage::Stage {
     bool ImportModel();
 
    public:
-    std::list<std::function<void()>> PendingFunctions;
     render::ModelsList models;
     render::LightList lights;
 
@@ -118,16 +121,18 @@ class EditorStage : public stage::Stage {
 	std::function<void(Collaborator*)> after_gizmo_transform_;
 
     std::shared_ptr<gui::SelectRect> selection_rect_;
+	std::shared_ptr<gui::ButtonFromList> network_button_;
 
     SelectedVertices selected_vertexes_;
-
     glm::vec3 last_vertex_position = {-1, -1, -1};
-    float scale_ = 1;
+	bool pending_move_ = false;
 
-    std::unique_ptr<Collaborator> connection_;
     std::list<std::future<void>> requests_;
+    std::list<std::function<void()>> pending_functions_;
 
-    bool pending_move_ = false;
 
     const char* current_filename_;
+
+    std::unique_ptr<Collaborator> connection_;
+	std::string room_code_;
 };

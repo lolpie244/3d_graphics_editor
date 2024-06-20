@@ -30,6 +30,7 @@ class ButtonFromList : virtual public Button {
     void Enable() override;
 
     void AddButtonList(events::Observer& observer, std::shared_ptr<ButtonsList> button_list);
+    void RemoveButtonList();
 
    private:
     virtual void Resize(glm::vec2 size) override { Button::Resize(size); };

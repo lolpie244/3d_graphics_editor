@@ -27,7 +27,7 @@ class Collaborator {
         Event_LightAdd,
         Event_LightTransform,
 
-        Event_Host_ConnectionAttempt,
+        Event_ClientConnected,
     };
 
     struct EventData {
@@ -36,6 +36,7 @@ class Collaborator {
 
         EventData() : event(Event_InvalidEvent) {}
         EventData(Events event) : event(event) {}
+        EventData(Events event, const tcp_socket::BytesType& raw_data) : event(event), data(raw_data) {}
         template <typename T>
         EventData(Events event, const T& raw_data) : event(event) {
             tcp_socket::BytesType bytes;
@@ -72,7 +73,6 @@ class Collaborator {
 };
 
 class Host : public Collaborator {
-   public:
     typedef std::function<void(Host*, tcp_socket::CommunicationSocket& socket, const tcp_socket::BytesType& data)>
         EventHandler;
 
@@ -80,7 +80,9 @@ class Host : public Collaborator {
     Host(EditorStage* stage, sockaddr_storage address);
 
    protected:
-    virtual void SendEvent(const EventData& event);
+    void NewClient(tcp_socket::CommunicationSocket);
+
+    void SendEvent(const EventData& event) override;
     void ReceiveData(const EventData& data, tcp_socket::CommunicationSocket& socket);
 
    private:
@@ -91,11 +93,16 @@ class Host : public Collaborator {
 };
 
 class Client : public Collaborator {
+    typedef std::function<void(Client*, const tcp_socket::BytesType& data)> EventHandler;
+
    public:
     Client(EditorStage* stage, sockaddr_storage address);
 
    protected:
-    virtual void SendEvent(const EventData& event);
+    void ClientConnectedHandler(const tcp_socket::BytesType& data);
+    void ReceiveData(const EventData& data) override;
+
+    void SendEvent(const EventData& event) override;
 
    private:
     tcp_socket::CommunicationSocket socket;

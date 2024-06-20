@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
     tcp_socket::CommunicationSocket server;
     auto listener = socket->listen([&](tcp_socket::CommunicationSocket socket) {
-        auto data = socket->recieve<tcp_hole::ServerEvent>(tcp_hole::MAX_CODE_LEN).get();
+        auto data = socket->recieve<tcp_hole::ServerEvent>().get();
         if (!data.has_value()) {
             socket->send(tcp_hole::ClientEvent(tcp_hole::Status::Failed));
             return;

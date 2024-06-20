@@ -7,7 +7,6 @@
 #include <memory>
 
 #include "editor/editor.h"
-#include "menu/menu.h"
 #include "render/camera.h"
 #include "render/opengl/error_callback.h"
 #include "stage/stage_manager.h"
@@ -22,7 +21,7 @@ int main() {
 
     stage::StageManager& stage_manager = stage::StageManager::Instance();
     stage_manager.InitWindow(sf::VideoMode(1920, 1080), "test", sf::Style::Fullscreen, settings);
-    stage_manager.Window()->setMouseCursorGrabbed(true);
+    // stage_manager.Window()->setMouseCursorGrabbed(true);
 
     srand(time(nullptr));
 
@@ -42,7 +41,7 @@ int main() {
     glDebugMessageCallback(GLDebugMessageCallback, 0);
 #endif
 
-    auto test_stage = std::make_unique<MenuStage>();
+    auto test_stage = std::make_unique<EditorStage>();
     stage_manager.NextStage(std::move(test_stage));
 
     stage_manager.Start();

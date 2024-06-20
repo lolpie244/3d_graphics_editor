@@ -1,0 +1,3569 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   version="1.1"
+   id="svg506"
+   sodipodi:docname="theme.svg"
+   width="1451.05"
+   height="729"
+   inkscape:version="1.3.2 (091e20ef0f, 2023-11-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview506"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="5.1636159"
+     inkscape:cx="1396.3084"
+     inkscape:cy="663.19805"
+     inkscape:window-width="1920"
+     inkscape:window-height="1080"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg506"
+     showguides="false" />
+  <defs
+     id="defs40">
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1165,42.5)"
+       id="gradient0">
+      <stop
+         offset="0"
+         stop-color="#FFFFFF"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#EEEEEE"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1165,102.5)"
+       id="gradient1">
+      <stop
+         offset="0"
+         stop-color="#FFD948"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#FFCC00"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1165,162.5)"
+       id="gradient2">
+      <stop
+         offset="0"
+         stop-color="#88E060"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#73CD4B"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1165,222.5)"
+       id="gradient3">
+      <stop
+         offset="0"
+         stop-color="#FA8132"
+         id="stop7" />
+      <stop
+         offset="1"
+         stop-color="#E86A17"
+         id="stop8" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1165,282.5)"
+       id="gradient4">
+      <stop
+         offset="0"
+         stop-color="#35BAF3"
+         id="stop9" />
+      <stop
+         offset="1"
+         stop-color="#1EA7E1"
+         id="stop10" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1375,46.5)"
+       id="gradient5">
+      <stop
+         offset="0"
+         stop-color="#FFFFFF"
+         id="stop11" />
+      <stop
+         offset="1"
+         stop-color="#EEEEEE"
+         id="stop12" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1375,106.5)"
+       id="gradient6">
+      <stop
+         offset="0"
+         stop-color="#FFD948"
+         id="stop13" />
+      <stop
+         offset="1"
+         stop-color="#FFCC00"
+         id="stop14" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1375,166.5)"
+       id="gradient7">
+      <stop
+         offset="0"
+         stop-color="#88E060"
+         id="stop15" />
+      <stop
+         offset="1"
+         stop-color="#73CD4B"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1375,226.5)"
+       id="gradient8">
+      <stop
+         offset="0"
+         stop-color="#FA8132"
+         id="stop17" />
+      <stop
+         offset="1"
+         stop-color="#E86A17"
+         id="stop18" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,1375,286.5)"
+       id="gradient9">
+      <stop
+         offset="0"
+         stop-color="#35BAF3"
+         id="stop19" />
+      <stop
+         offset="1"
+         stop-color="#1EA7E1"
+         id="stop20" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,664.5,482.5)"
+       id="gradient10">
+      <stop
+         offset="0"
+         stop-color="#FFFFFF"
+         id="stop21" />
+      <stop
+         offset="1"
+         stop-color="#EEEEEE"
+         id="stop22" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,664.5,542.5)"
+       id="gradient11">
+      <stop
+         offset="0"
+         stop-color="#FFD948"
+         id="stop23" />
+      <stop
+         offset="1"
+         stop-color="#FFCC00"
+         id="stop24" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,664.5,602.5)"
+       id="gradient12">
+      <stop
+         offset="0"
+         stop-color="#88E060"
+         id="stop25" />
+      <stop
+         offset="1"
+         stop-color="#73CD4B"
+         id="stop26" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,664.5,662.5)"
+       id="gradient13">
+      <stop
+         offset="0"
+         stop-color="#FA8132"
+         id="stop27" />
+      <stop
+         offset="1"
+         stop-color="#E86A17"
+         id="stop28" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(-7.6293945e-5,0.0249939,-0.02256775,-6.1035156e-5,664.5,722.5)"
+       id="gradient14">
+      <stop
+         offset="0"
+         stop-color="#35BAF3"
+         id="stop29" />
+      <stop
+         offset="1"
+         stop-color="#1EA7E1"
+         id="stop30" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(-7.6293945e-5,0.0249939,-0.02256775,-6.1035156e-5,724.5,726.5)"
+       id="gradient15">
+      <stop
+         offset="0"
+         stop-color="#35BAF3"
+         id="stop31" />
+      <stop
+         offset="1"
+         stop-color="#1EA7E1"
+         id="stop32" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,724.5,666.5)"
+       id="gradient16">
+      <stop
+         offset="0"
+         stop-color="#FA8132"
+         id="stop33" />
+      <stop
+         offset="1"
+         stop-color="#E86A17"
+         id="stop34" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,724.5,606.5)"
+       id="gradient17">
+      <stop
+         offset="0"
+         stop-color="#88E060"
+         id="stop35" />
+      <stop
+         offset="1"
+         stop-color="#73CD4B"
+         id="stop36" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,724.5,546.5)"
+       id="gradient18">
+      <stop
+         offset="0"
+         stop-color="#FFD948"
+         id="stop37" />
+      <stop
+         offset="1"
+         stop-color="#FFCC00"
+         id="stop38" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       x1="-819.20001"
+       x2="819.20001"
+       spreadMethod="pad"
+       gradientTransform="matrix(0,0.02502441,-0.02258301,0,724.5,486.5)"
+       id="gradient19">
+      <stop
+         offset="0"
+         stop-color="#FFFFFF"
+         id="stop39" />
+      <stop
+         offset="1"
+         stop-color="#EEEEEE"
+         id="stop40" />
+    </linearGradient>
+    <linearGradient
+       id="a"
+       gradientUnits="userSpaceOnUse"
+       x1="0"
+       x2="0"
+       y1="0"
+       y2="150"
+       gradientTransform="rotate(-120)">
+      <stop
+         offset="0"
+         stop-color="#ffffff"
+         id="stop1-3" />
+      <stop
+         offset="1"
+         stop-color="#4FE"
+         id="stop2-6" />
+    </linearGradient>
+    <pattern
+       patternUnits="userSpaceOnUse"
+       id="b"
+       width="540"
+       height="450"
+       x="0"
+       y="0"
+       viewBox="0 0 1080 900">
+      <g
+         fill-opacity="0.1"
+         id="g70">
+        <polygon
+           fill="#444"
+           points="90 150 0 300 180 300"
+           id="polygon2" />
+        <polygon
+           points="90 150 180 0 0 0"
+           id="polygon3" />
+        <polygon
+           fill="#AAA"
+           points="270 150 360 0 180 0"
+           id="polygon4" />
+        <polygon
+           fill="#DDD"
+           points="450 150 360 300 540 300"
+           id="polygon5" />
+        <polygon
+           fill="#999"
+           points="450 150 540 0 360 0"
+           id="polygon6" />
+        <polygon
+           points="630 150 540 300 720 300"
+           id="polygon7" />
+        <polygon
+           fill="#DDD"
+           points="630 150 720 0 540 0"
+           id="polygon8" />
+        <polygon
+           fill="#444"
+           points="810 150 720 300 900 300"
+           id="polygon9" />
+        <polygon
+           fill="#FFF"
+           points="810 150 900 0 720 0"
+           id="polygon10" />
+        <polygon
+           fill="#DDD"
+           points="990 150 900 300 1080 300"
+           id="polygon11" />
+        <polygon
+           fill="#444"
+           points="990 150 1080 0 900 0"
+           id="polygon12" />
+        <polygon
+           fill="#DDD"
+           points="90 450 0 600 180 600"
+           id="polygon13" />
+        <polygon
+           points="90 450 180 300 0 300"
+           id="polygon14" />
+        <polygon
+           fill="#666"
+           points="270 450 180 600 360 600"
+           id="polygon15" />
+        <polygon
+           fill="#AAA"
+           points="270 450 360 300 180 300"
+           id="polygon16" />
+        <polygon
+           fill="#DDD"
+           points="450 450 360 600 540 600"
+           id="polygon17" />
+        <polygon
+           fill="#999"
+           points="450 450 540 300 360 300"
+           id="polygon18" />
+        <polygon
+           fill="#999"
+           points="630 450 540 600 720 600"
+           id="polygon19" />
+        <polygon
+           fill="#FFF"
+           points="630 450 720 300 540 300"
+           id="polygon20" />
+        <polygon
+           points="810 450 720 600 900 600"
+           id="polygon21" />
+        <polygon
+           fill="#DDD"
+           points="810 450 900 300 720 300"
+           id="polygon22" />
+        <polygon
+           fill="#AAA"
+           points="990 450 900 600 1080 600"
+           id="polygon23" />
+        <polygon
+           fill="#444"
+           points="990 450 1080 300 900 300"
+           id="polygon24" />
+        <polygon
+           fill="#222"
+           points="90 750 0 900 180 900"
+           id="polygon25" />
+        <polygon
+           points="270 750 180 900 360 900"
+           id="polygon26" />
+        <polygon
+           fill="#DDD"
+           points="270 750 360 600 180 600"
+           id="polygon27" />
+        <polygon
+           points="450 750 540 600 360 600"
+           id="polygon28" />
+        <polygon
+           points="630 750 540 900 720 900"
+           id="polygon29" />
+        <polygon
+           fill="#444"
+           points="630 750 720 600 540 600"
+           id="polygon30" />
+        <polygon
+           fill="#AAA"
+           points="810 750 720 900 900 900"
+           id="polygon31" />
+        <polygon
+           fill="#666"
+           points="810 750 900 600 720 600"
+           id="polygon32" />
+        <polygon
+           fill="#999"
+           points="990 750 900 900 1080 900"
+           id="polygon33" />
+        <polygon
+           fill="#999"
+           points="180 0 90 150 270 150"
+           id="polygon34" />
+        <polygon
+           fill="#444"
+           points="360 0 270 150 450 150"
+           id="polygon35" />
+        <polygon
+           fill="#FFF"
+           points="540 0 450 150 630 150"
+           id="polygon36" />
+        <polygon
+           points="900 0 810 150 990 150"
+           id="polygon37" />
+        <polygon
+           fill="#222"
+           points="0 300 -90 450 90 450"
+           id="polygon38" />
+        <polygon
+           fill="#FFF"
+           points="0 300 90 150 -90 150"
+           id="polygon39" />
+        <polygon
+           fill="#FFF"
+           points="180 300 90 450 270 450"
+           id="polygon40" />
+        <polygon
+           fill="#666"
+           points="180 300 270 150 90 150"
+           id="polygon41" />
+        <polygon
+           fill="#222"
+           points="360 300 270 450 450 450"
+           id="polygon42" />
+        <polygon
+           fill="#FFF"
+           points="360 300 450 150 270 150"
+           id="polygon43" />
+        <polygon
+           fill="#444"
+           points="540 300 450 450 630 450"
+           id="polygon44" />
+        <polygon
+           fill="#222"
+           points="540 300 630 150 450 150"
+           id="polygon45" />
+        <polygon
+           fill="#AAA"
+           points="720 300 630 450 810 450"
+           id="polygon46" />
+        <polygon
+           fill="#666"
+           points="720 300 810 150 630 150"
+           id="polygon47" />
+        <polygon
+           fill="#FFF"
+           points="900 300 810 450 990 450"
+           id="polygon48" />
+        <polygon
+           fill="#999"
+           points="900 300 990 150 810 150"
+           id="polygon49" />
+        <polygon
+           points="0 600 -90 750 90 750"
+           id="polygon50" />
+        <polygon
+           fill="#666"
+           points="0 600 90 450 -90 450"
+           id="polygon51" />
+        <polygon
+           fill="#AAA"
+           points="180 600 90 750 270 750"
+           id="polygon52" />
+        <polygon
+           fill="#444"
+           points="180 600 270 450 90 450"
+           id="polygon53" />
+        <polygon
+           fill="#444"
+           points="360 600 270 750 450 750"
+           id="polygon54" />
+        <polygon
+           fill="#999"
+           points="360 600 450 450 270 450"
+           id="polygon55" />
+        <polygon
+           fill="#666"
+           points="540 600 630 450 450 450"
+           id="polygon56" />
+        <polygon
+           fill="#222"
+           points="720 600 630 750 810 750"
+           id="polygon57" />
+        <polygon
+           fill="#FFF"
+           points="900 600 810 750 990 750"
+           id="polygon58" />
+        <polygon
+           fill="#222"
+           points="900 600 990 450 810 450"
+           id="polygon59" />
+        <polygon
+           fill="#DDD"
+           points="0 900 90 750 -90 750"
+           id="polygon60" />
+        <polygon
+           fill="#444"
+           points="180 900 270 750 90 750"
+           id="polygon61" />
+        <polygon
+           fill="#FFF"
+           points="360 900 450 750 270 750"
+           id="polygon62" />
+        <polygon
+           fill="#AAA"
+           points="540 900 630 750 450 750"
+           id="polygon63" />
+        <polygon
+           fill="#FFF"
+           points="720 900 810 750 630 750"
+           id="polygon64" />
+        <polygon
+           fill="#222"
+           points="900 900 990 750 810 750"
+           id="polygon65" />
+        <polygon
+           fill="#222"
+           points="1080 300 990 450 1170 450"
+           id="polygon66" />
+        <polygon
+           fill="#FFF"
+           points="1080 300 1170 150 990 150"
+           id="polygon67" />
+        <polygon
+           points="1080 600 990 750 1170 750"
+           id="polygon68" />
+        <polygon
+           fill="#666"
+           points="1080 600 1170 450 990 450"
+           id="polygon69" />
+        <polygon
+           fill="#DDD"
+           points="1080 900 1170 750 990 750"
+           id="polygon70" />
+      </g>
+    </pattern>
+  </defs>
+  <g
+     id="g506"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 207.95,25.05 Q 207.5,22 204,22 H 26 q -3.5,0 -3.9,3.05 L 22,26 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 26 l -0.05,-0.95 M 20,59.25 V 26 q 0,-6 6,-6 h 178 q 6,0 6,6 V 59.25 Q 209.85,65 204,65 H 26 q -5.85,0 -6,-5.75"
+       id="path40" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 207.95,25.05 208,26 v 33 q 0,4 -4,4 H 26 q -4,0 -4,-4 V 26 l 0.1,-0.95 Q 22.5,22 26,22 h 178 q 3.5,0 3.95,3.05 M 205,25.55 204.95,25.5 Q 204.75,25 204,25 H 26 q -0.75,0 -0.95,0.5 v 0.05 L 25,26 v 33 q 0,1 1,1 h 178 q 1,0 1,-1 V 26 25.55"
+       id="path41" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 205,25.55 V 26 59 q 0,1 -1,1 H 26 q -1,0 -1,-1 V 26 l 0.05,-0.45 V 25.5 Q 25.25,25 26,25 h 178 q 0.75,0 0.95,0.5 l 0.05,0.05"
+       id="path42" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 210,59.25 V 63 q 0,6 -6,6 H 26 q -6,0 -6,-6 V 59.25 Q 20.15,65 26,65 h 178 q 5.85,0 6,-5.75"
+       id="path43" />
+  </g>
+  <g
+     id="g510"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 25.05,265.5 v 0.05 L 25,266 v 33 q 0,1 1,1 h 178 q 1,0 1,-1 v -33 -0.45 l -0.05,-0.05 Q 204.75,265 204,265 H 26 q -0.75,0 -0.95,0.5 M 22,266 22.1,265.05 Q 22.5,262 26,262 h 178 q 3.5,0 3.95,3.05 L 208,266 v 33 q 0,4 -4,4 H 26 q -4,0 -4,-4 v -33"
+       id="path44" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 22,266 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 207.5,262 204,262 H 26 q -3.5,0 -3.9,3.05 L 22,266 m -2,33.25 V 266 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 209.85,305 204,305 H 26 q -5.85,0 -6,-5.75"
+       id="path45" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 25.05,265.5 Q 25.25,265 26,265 h 178 q 0.75,0 0.95,0.5 l 0.05,0.05 v 0.45 33 q 0,1 -1,1 H 26 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05"
+       id="path46" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 210,299.25 V 303 q 0,6 -6,6 H 26 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path47" />
+  </g>
+  <g
+     id="g509"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 25.05,205.5 v 0.05 L 25,206 v 33 q 0,1 1,1 h 178 q 1,0 1,-1 v -33 -0.45 l -0.05,-0.05 Q 204.75,205 204,205 H 26 q -0.75,0 -0.95,0.5 M 22.1,205.05 Q 22.5,202 26,202 h 178 q 3.5,0 3.95,3.05 L 208,206 v 33 q 0,4 -4,4 H 26 q -4,0 -4,-4 v -33 l 0.1,-0.95"
+       id="path48" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 25.05,205.5 Q 25.25,205 26,205 h 178 q 0.75,0 0.95,0.5 l 0.05,0.05 v 0.45 33 q 0,1 -1,1 H 26 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05"
+       id="path49" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 22.1,205.05 22,206 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 207.5,202 204,202 H 26 q -3.5,0 -3.9,3.05 M 20,239.25 V 206 q 0,-5.8 5.65,-6 H 204.4 q 5.6,0.2 5.6,6 v 33.25 Q 209.85,245 204,245 H 26 q -5.85,0 -6,-5.75"
+       id="path50" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="m 20,239.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 243 q 0,6 -6,6 H 26 q -6,0 -6,-6 v -3.75"
+       id="path51" />
+  </g>
+  <g
+     id="g508"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 207.95,145.05 Q 207.5,142 204,142 H 26 q -3.5,0 -3.9,3.05 L 22,146 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 M 20,179.25 V 146 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 209.85,185 204,185 H 26 q -5.85,0 -6,-5.75"
+       id="path52" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="M 207.95,145.05 208,146 v 33 q 0,4 -4,4 H 26 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 22.5,142 26,142 h 178 q 3.5,0 3.95,3.05 m -2.95,0.5 -0.05,-0.05 Q 204.75,145 204,145 H 26 q -0.75,0 -0.95,0.5 v 0.05 L 25,146 v 33 q 0,1 1,1 h 178 q 1,0 1,-1 v -33 -0.45"
+       id="path53" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 205,145.55 v 0.45 33 q 0,1 -1,1 H 26 q -1,0 -1,-1 v -33 l 0.05,-0.45 V 145.5 Q 25.25,145 26,145 h 178 q 0.75,0 0.95,0.5 l 0.05,0.05"
+       id="path54" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 210,179.25 V 183 q 0,6 -6,6 H 26 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path55" />
+  </g>
+  <g
+     id="g507"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 204,82 H 26 q -3.5,0 -3.9,3.05 L 22,86 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 86 l -0.05,-0.95 Q 207.5,82 204,82 M 20,119.25 V 86 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 209.85,125 204,125 H 26 q -5.85,0 -6,-5.75"
+       id="path56" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 204,82 q 3.5,0 3.95,3.05 L 208,86 v 33 q 0,4 -4,4 H 26 q -4,0 -4,-4 V 86 l 0.1,-0.95 Q 22.5,82 26,82 h 178 m 1,4 V 85.55 L 204.95,85.5 Q 204.75,85 204,85 H 26 q -0.75,0 -0.95,0.5 v 0.05 L 25,86 v 33 q 0,1 1,1 h 178 q 1,0 1,-1 V 86"
+       id="path57" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 205,86 v 33 q 0,1 -1,1 H 26 q -1,0 -1,-1 V 86 l 0.05,-0.45 V 85.5 Q 25.25,85 26,85 h 178 q 0.75,0 0.95,0.5 L 205,85.55 V 86"
+       id="path58" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 210,119.25 V 123 q 0,6 -6,6 H 26 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path59" />
+  </g>
+  <g
+     id="g514"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 414,22 H 236 q -3.5,0 -3.9,3.05 L 232,26 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 26 l -0.05,-0.95 Q 417.5,22 414,22 M 230,59.25 V 26 q 0,-6 6,-6 h 178 q 6,0 6,6 V 59.25 Q 419.85,65 414,65 H 236 q -5.85,0 -6,-5.75"
+       id="path60" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 414,22 q 3.5,0 3.95,3.05 L 418,26 v 33 q 0,4 -4,4 H 236 q -4,0 -4,-4 V 26 l 0.1,-0.95 Q 232.5,22 236,22 h 178 m 0,38 q 1,0 1,-1 V 42.5 H 235 V 59 q 0,1 1,1 h 178"
+       id="path61" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 414,60 H 236 q -1,0 -1,-1 V 42.5 H 415 V 59 q 0,1 -1,1"
+       id="path62" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 420,59.25 V 63 q 0,6 -6,6 H 236 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path63" />
+  </g>
+  <g
+     id="g539"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 417.95,265.05 Q 417.5,262 414,262 H 236 q -3.5,0 -3.9,3.05 L 232,266 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 M 230,299.25 V 266 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 419.85,305 414,305 H 236 q -5.85,0 -6,-5.75"
+       id="path64" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="M 417.95,265.05 418,266 v 33 q 0,4 -4,4 H 236 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 232.5,262 236,262 h 178 q 3.5,0 3.95,3.05 M 414,300 q 1,0 1,-1 V 282.5 H 235 V 299 q 0,1 1,1 h 178"
+       id="path65" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="M 414,300 H 236 q -1,0 -1,-1 V 282.5 H 415 V 299 q 0,1 -1,1"
+       id="path66" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="M 420,299.25 V 303 q 0,6 -6,6 H 236 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path67" />
+  </g>
+  <g
+     id="g538"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 230,239.25 V 206 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2 v 33.25 Q 419.85,245 414,245 H 236 q -5.85,0 -6,-5.75 M 417.95,205.05 417.7,204 q -0.85,-2 -3.7,-2 H 236 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95"
+       id="path68" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="M 417.95,205.05 418,206 v 33 q 0,4 -4,4 H 236 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 q 2.85,0 3.7,2 l 0.25,1.05 M 414,240 q 1,0 1,-1 V 222.5 H 235 V 239 q 0,1 1,1 h 178"
+       id="path69" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="M 420,239.25 V 243 q 0,5.45 -4.95,5.95 L 414,249 H 236 l -1.05,-0.05 Q 230,248.45 230,243 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path70" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="M 414,240 H 236 q -1,0 -1,-1 V 222.5 H 415 V 239 q 0,1 -1,1"
+       id="path71" />
+  </g>
+  <g
+     id="g527"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="M 417.95,145.05 418,146 v 33 q 0,4 -4,4 H 236 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 232.5,142 236,142 h 178 q 3.5,0 3.95,3.05 M 414,180 q 1,0 1,-1 V 162.5 H 235 V 179 q 0,1 1,1 h 178"
+       id="path72" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 230,179.25 V 146 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 419.85,185 414,185 H 236 q -5.85,0 -6,-5.75 m 187.95,-34.2 Q 417.5,142 414,142 H 236 q -3.5,0 -3.9,3.05 L 232,146 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95"
+       id="path73" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="M 414,180 H 236 q -1,0 -1,-1 V 162.5 H 415 V 179 q 0,1 -1,1"
+       id="path74" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="M 420,179.25 V 183 q 0,6 -6,6 H 236 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path75" />
+  </g>
+  <g
+     id="g521"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 417.95,85.05 Q 417.5,82 414,82 H 236 q -3.5,0 -3.9,3.05 L 232,86 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 86 l -0.05,-0.95 M 230,119.25 V 86 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 419.85,125 414,125 H 236 q -5.85,0 -6,-5.75"
+       id="path76" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="M 417.95,85.05 418,86 v 33 q 0,4 -4,4 H 236 q -4,0 -4,-4 V 86 l 0.1,-0.95 Q 232.5,82 236,82 h 178 q 3.5,0 3.95,3.05 M 414,120 q 1,0 1,-1 V 102.5 H 235 V 119 q 0,1 1,1 h 178"
+       id="path77" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="M 420,119.25 V 123 q 0,6 -6,6 H 236 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path78" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 414,120 H 236 q -1,0 -1,-1 V 102.5 H 415 V 119 q 0,1 -1,1"
+       id="path79" />
+  </g>
+  <g
+     id="g515"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 627.95,29.05 Q 627.5,26 624,26 H 446 q -3.5,0 -3.9,3.05 L 442,30 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 L 628,63 V 30 l -0.05,-0.95 M 630,30 v 33 0.25 Q 629.85,69 624,69 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 440,63.25 V 30 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path80" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 627.95,29.05 628,30 v 33 l -0.05,1 Q 627.5,67 624,67 H 446 q -3.5,0 -3.9,-3 L 442,63 V 30 l 0.1,-0.95 Q 442.5,26 446,26 h 178 q 3.5,0 3.95,3.05 M 624,64 q 1,0 1,-1 V 46.5 H 445 V 63 q 0,1 1,1 h 178"
+       id="path81" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 624,64 H 446 q -1,0 -1,-1 V 46.5 H 625 V 63 q 0,1 -1,1"
+       id="path82" />
+  </g>
+  <g
+     id="g540"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 442,270 0.1,-0.95 Q 442.5,266 446,266 h 178 q 3.5,0 3.95,3.05 L 628,270 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 446 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 m 3,33 q 0,1 1,1 h 178 q 1,0 1,-1 V 286.5 H 445 V 303"
+       id="path83" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 442,270 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 627.5,266 624,266 H 446 q -3.5,0 -3.9,3.05 L 442,270 m 4,-6 h 178 q 6,0 6,6 v 33 0.25 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 440,303.25 V 303 270 q 0,-6 6,-6"
+       id="path84" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="M 445,303 V 286.5 H 625 V 303 q 0,1 -1,1 H 446 q -1,0 -1,-1"
+       id="path85" />
+  </g>
+  <g
+     id="g537"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 442.1,244 -0.1,-1 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 446 q -3.5,0 -3.9,-3 M 445,226.5 V 243 q 0,1 1,1 h 178 q 1,0 1,-1 V 226.5 H 445"
+       id="path86" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="M 445,226.5 H 625 V 243 q 0,1 -1,1 H 446 q -1,0 -1,-1 v -16.5"
+       id="path87" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 440,243.25 V 210 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.1,5.2 -4.95,5.7 L 624,249 H 446 l -1.05,-0.05 q -4.55,-0.45 -4.9,-5.1 l -0.05,-0.6 m 2.1,0.75 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 H 446 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 l 0.1,1"
+       id="path88" />
+  </g>
+  <g
+     id="g528"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="M 627.95,149.05 628,150 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 446 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 442.5,146 446,146 h 178 q 3.5,0 3.95,3.05 M 624,184 q 1,0 1,-1 V 166.5 H 445 V 183 q 0,1 1,1 h 178"
+       id="path89" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 627.95,149.05 Q 627.5,146 624,146 H 446 q -3.5,0 -3.9,3.05 L 442,150 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 m 2.05,34.2 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 440,183.25 V 150 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33 0.25"
+       id="path90" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="M 624,184 H 446 q -1,0 -1,-1 V 166.5 H 625 V 183 q 0,1 -1,1"
+       id="path91" />
+  </g>
+  <path
+     stroke="none"
+     fill="#cda400"
+     d="m 605.05,66 h -178 q -3.5,0 -3.9,3.05 l -0.1,0.95 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 V 70 L 609,69.05 Q 608.55,66 605.05,66 m 6,4 v 33 0.25 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 l -0.05,-0.6 V 103 70 q 0,-6 6,-6 h 178 q 6,0 6,6"
+     id="path92" />
+  <g
+     id="g522"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 624,86 q 3.5,0 3.95,3.05 L 628,90 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 446 q -3.5,0 -3.9,-3 L 442,123 V 90 l 0.1,-0.95 Q 442.5,86 446,86 h 178 m 0,38 q 1,0 1,-1 V 106.5 H 445 V 123 q 0,1 1,1 h 178"
+       id="path93" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 624,124 H 446 q -1,0 -1,-1 V 106.5 H 625 V 123 q 0,1 -1,1"
+       id="path94" />
+  </g>
+  <g
+     id="g511"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 27.05,330 h 85.85 q 3.55,0 5.25,1.85 1.85,1.7 1.85,5.2 v 85.9 q 0,3.5 -1.85,5.2 -1.7,1.85 -5.25,1.85 H 27.05 Q 20,430 20,422.95 v -85.9 Q 20,330 27.05,330 m 0,2 Q 22,332 22,337.05 v 85.9 q 0,5.05 5.05,5.05 h 85.85 q 5.1,0 5.1,-5.05 v -85.9 Q 118,332 112.9,332 H 27.05"
+       id="path95" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 27.05,332 h 85.85 q 5.1,0 5.1,5.05 v 85.9 q 0,5.05 -5.1,5.05 H 27.05 Q 22,428 22,422.95 v -85.9 Q 22,332 27.05,332 M 24,337.05 v 85.9 q 0,3.05 3.05,3.05 h 85.85 q 3.1,0 3.1,-3.05 v -85.9 Q 116,334 112.9,334 H 27.05 Q 24,334 24,337.05"
+       id="path96" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 24,337.05 Q 24,334 27.05,334 h 85.85 q 3.1,0 3.1,3.05 v 85.9 q 0,3.05 -3.1,3.05 H 27.05 Q 24,426 24,422.95 v -85.9"
+       id="path97" />
+  </g>
+  <g
+     id="g545"
+     transform="translate(-18.950001,-20)">
+    <g
+       id="g512">
+      <path
+         stroke="none"
+         fill="#ffcc00"
+         d="m 145,337.05 q 0,-3.05 3.05,-3.05 h 85.85 q 3.1,0 3.1,3.05 v 85.9 q 0,3.05 -3.1,3.05 H 148.05 Q 145,426 145,422.95 v -85.9"
+         id="path98" />
+      <path
+         stroke="none"
+         fill="#ffd948"
+         d="m 145,337.05 v 85.9 q 0,3.05 3.05,3.05 h 85.85 q 3.1,0 3.1,-3.05 v -85.9 Q 237,334 233.9,334 h -85.85 q -3.05,0 -3.05,3.05 m 3.05,-5.05 h 85.85 q 5.1,0 5.1,5.05 v 85.9 q 0,5.05 -5.1,5.05 H 148.05 Q 143,428 143,422.95 v -85.9 q 0,-5.05 5.05,-5.05"
+         id="path99" />
+      <path
+         stroke="none"
+         fill="#cda400"
+         d="m 148.05,332 q -5.05,0 -5.05,5.05 v 85.9 q 0,5.05 5.05,5.05 h 85.85 q 5.1,0 5.1,-5.05 v -85.9 Q 239,332 233.9,332 h -85.85 m 0,-2 h 85.85 q 3.55,0 5.25,1.85 1.85,1.7 1.85,5.2 v 85.9 q 0,3.5 -1.85,5.2 -1.7,1.85 -5.25,1.85 H 148.05 Q 141,430 141,422.95 v -85.9 q 0,-7.05 7.05,-7.05"
+         id="path100" />
+    </g>
+  </g>
+  <g
+     id="g546"
+     transform="translate(-18.950001,-20)">
+    <g
+       id="g513">
+      <path
+         stroke="none"
+         fill="#5fb13a"
+         d="M 360,337.05 Q 360,332 354.9,332 h -85.85 q -5.05,0 -5.05,5.05 v 85.9 q 0,5.05 5.05,5.05 h 85.85 q 5.1,0 5.1,-5.05 v -85.9 m 2,0 v 85.9 q 0,3.5 -1.85,5.2 -1.7,1.85 -5.25,1.85 H 269.05 Q 262,430 262,422.95 v -85.9 q 0,-7.05 7.05,-7.05 h 85.85 q 3.55,0 5.25,1.85 1.85,1.7 1.85,5.2"
+         id="path101" />
+      <path
+         stroke="none"
+         fill="#73cd4b"
+         d="m 354.9,334 q 3.1,0 3.1,3.05 v 85.9 q 0,3.05 -3.1,3.05 H 269.05 Q 266,426 266,422.95 v -85.9 q 0,-3.05 3.05,-3.05 h 85.85"
+         id="path102" />
+      <path
+         stroke="none"
+         fill="#88e060"
+         d="m 354.9,334 h -85.85 q -3.05,0 -3.05,3.05 v 85.9 q 0,3.05 3.05,3.05 h 85.85 q 3.1,0 3.1,-3.05 v -85.9 Q 358,334 354.9,334 m 5.1,3.05 v 85.9 q 0,5.05 -5.1,5.05 H 269.05 Q 264,428 264,422.95 v -85.9 q 0,-5.05 5.05,-5.05 h 85.85 q 5.1,0 5.1,5.05"
+         id="path103" />
+    </g>
+  </g>
+  <g
+     id="g547"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 387,337.05 q 0,-3.05 3.05,-3.05 h 85.85 q 3.1,0 3.1,3.05 v 85.9 q 0,3.05 -3.1,3.05 H 390.05 Q 387,426 387,422.95 v -85.9"
+       id="path104" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 387,337.05 v 85.9 q 0,3.05 3.05,3.05 h 85.85 q 3.1,0 3.1,-3.05 v -85.9 Q 479,334 475.9,334 h -85.85 q -3.05,0 -3.05,3.05 m 3.05,-5.05 h 85.85 q 5.1,0 5.1,5.05 v 85.9 q 0,5.05 -5.1,5.05 H 390.05 Q 385,428 385,422.95 v -85.9 q 0,-5.05 5.05,-5.05"
+       id="path105" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 390.05,332 q -5.05,0 -5.05,5.05 v 85.9 q 0,5.05 5.05,5.05 h 85.85 q 5.1,0 5.1,-5.05 v -85.9 Q 481,332 475.9,332 h -85.85 m 0,-2 h 85.85 q 3.55,0 5.25,1.85 1.85,1.7 1.85,5.2 v 85.9 q 0,3.5 -1.85,5.2 -1.7,1.85 -5.25,1.85 H 390.05 Q 383,430 383,422.95 v -85.9 q 0,-7.05 7.05,-7.05"
+       id="path106" />
+  </g>
+  <g
+     id="g548"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 508,337.05 q 0,-3.05 3.05,-3.05 h 85.85 q 3.1,0 3.1,3.05 v 85.9 q 0,3.05 -3.1,3.05 H 511.05 Q 508,426 508,422.95 v -85.9"
+       id="path107" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 508,337.05 v 85.9 q 0,3.05 3.05,3.05 h 85.85 q 3.1,0 3.1,-3.05 v -85.9 Q 600,334 596.9,334 h -85.85 q -3.05,0 -3.05,3.05 m 3.05,-5.05 h 85.85 q 5.1,0 5.1,5.05 v 85.9 q 0,5.05 -5.1,5.05 H 511.05 Q 506,428 506,422.95 v -85.9 q 0,-5.05 5.05,-5.05"
+       id="path108" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 511.05,332 q -5.05,0 -5.05,5.05 v 85.9 q 0,5.05 5.05,5.05 h 85.85 q 5.1,0 5.1,-5.05 v -85.9 Q 602,332 596.9,332 h -85.85 m 0,-2 h 85.85 q 3.55,0 5.25,1.85 1.85,1.7 1.85,5.2 v 85.9 q 0,3.5 -1.85,5.2 -1.7,1.85 -5.25,1.85 H 511.05 Q 504,430 504,422.95 v -85.9 q 0,-7.05 7.05,-7.05"
+       id="path109" />
+  </g>
+  <g
+     id="g556"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 37.75,464 q -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 m 0,-2 q 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6"
+       id="path110" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 37.75,464 q 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4"
+       id="path111" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 37.75,462 q -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 Q 44.3,462 37.75,462 M 25.2,465.15 Q 30.4,460 37.75,460 q 7.35,0 12.55,5.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 H 25.15 Q 20,485.1 20,477.75 20,470.4 25.15,465.2 l 0.05,-0.05"
+       id="path112" />
+  </g>
+  <g
+     id="g558"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 20.95,573.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 m -2,0 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1"
+       id="path113" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 22.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path114" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 22.95,590.95 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85 m -2,-17.85 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1"
+       id="path115" />
+  </g>
+  <g
+     id="g563"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 70.95,573.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 m -2,0 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1"
+       id="path116" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 72.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path117" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 72.95,590.95 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85 m -2,-17.85 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1"
+       id="path118" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 77,580.35 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25"
+       id="path119" />
+  </g>
+  <g
+     id="g574"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 218.95,573.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1 m 2,0 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1"
+       id="path126" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 220.95,573.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path127" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 222.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path128" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 235.4,580.5 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3"
+       id="path129" />
+  </g>
+  <g
+     id="g571"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 170.95,573.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 m -2,0 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1"
+       id="path123" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 170.95,573.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path124" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 172.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path125" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 177,580.35 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25"
+       id="path130" />
+  </g>
+  <g
+     id="g568"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 118.95,573.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1 m 2,0 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1"
+       id="path120" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 120.95,573.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path121" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 122.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path122" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 132.9,577.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05"
+       id="path131" />
+  </g>
+  <g
+     id="g565"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 104.95,673.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 673.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 m -2,0 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 673.1"
+       id="path132" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 102.95,673.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 673.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 m -2,0 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 673.1"
+       id="path133" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 100.95,673.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05 V 673.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1"
+       id="path134" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 92,673.15 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05"
+       id="path144" />
+  </g>
+  <g
+     id="g575"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 254.95,690.95 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 673.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 m -2,0 V 673.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05"
+       id="path141" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 252.95,690.95 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 673.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 m -2,-17.85 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 673.1"
+       id="path142" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 250.95,673.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05 V 673.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1"
+       id="path143" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 245.8,676.2 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05"
+       id="path145" />
+  </g>
+  <g
+     id="g572"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 170.95,673.1 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 673.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1 m -2,0 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 673.1"
+       id="path138" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 170.95,673.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 673.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 673.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path139" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 172.95,690.95 V 673.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path140" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 181.2,673.15 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05"
+       id="path146" />
+  </g>
+  <g
+     id="g569"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 118.95,673.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 673.1 m 2,0 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 673.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1"
+       id="path135" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 120.95,673.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 673.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 673.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path136" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 122.95,690.95 V 673.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path137" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 131.95,673.15 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0"
+       id="path147" />
+  </g>
+  <g
+     id="g566"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 78.15,726.95 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05"
+       id="path148" />
+  </g>
+  <path
+     stroke="none"
+     fill="#1ea7e1"
+     d="m 218,708.2 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05"
+     id="path149" />
+  <path
+     stroke="none"
+     fill="#e86a17"
+     d="m 162.25,703.15 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05"
+     id="path150" />
+  <path
+     stroke="none"
+     fill="#73cd4b"
+     d="m 113,703.15 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0"
+     id="path151" />
+  <g
+     id="g564"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 98,625.85 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2"
+       id="path152" />
+  </g>
+  <path
+     stroke="none"
+     fill="#1ea7e1"
+     d="m 229,606.1 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25"
+     id="path153" />
+  <path
+     stroke="none"
+     fill="#e86a17"
+     d="m 158.05,610.35 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25"
+     id="path154" />
+  <path
+     stroke="none"
+     fill="#73cd4b"
+     d="m 114.15,607.2 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15"
+     id="path155" />
+  <g
+     id="g578"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 268.95,673.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 673.1 m 2,0 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 673.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1"
+       id="path159" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 270.95,673.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 673.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 673.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path160" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 272.95,690.95 V 673.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path161" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 278.15,676.2 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75"
+       id="path162" />
+  </g>
+  <path
+     stroke="none"
+     fill="#999999"
+     d="m 276.85,706.2 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05"
+     id="path163" />
+  <path
+     stroke="none"
+     fill="#999999"
+     d="m 279,606.1 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25"
+     id="path164" />
+  <g
+     id="g577"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 268.95,573.1 q 0,-9.1 9.1,-9.1 h 17.8 q 9.1,0 9.1,9.1 v 17.85 q 0,4.5 -2.35,6.7 -2.25,2.35 -6.75,2.35 h -17.8 q -4.5,0 -6.75,-2.35 -2.35,-2.2 -2.35,-6.7 V 573.1 m 2,0 v 17.85 q 0,7.05 7.1,7.05 h 17.8 q 7.1,0 7.1,-7.05 V 573.1 q 0,-7.1 -7.1,-7.1 h -17.8 q -7.1,0 -7.1,7.1"
+       id="path156" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 270.95,573.1 q 0,-7.1 7.1,-7.1 h 17.8 q 7.1,0 7.1,7.1 v 17.85 q 0,7.05 -7.1,7.05 h -17.8 q -7.1,0 -7.1,-7.05 V 573.1 m 2,17.85 q 0,5.05 5.1,5.05 h 17.8 q 5.1,0 5.1,-5.05 V 573.1 q 0,-5.1 -5.1,-5.1 h -17.8 q -5.1,0 -5.1,5.1 v 17.85"
+       id="path157" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 272.95,590.95 V 573.1 q 0,-5.1 5.1,-5.1 h 17.8 q 5.1,0 5.1,5.1 v 17.85 q 0,5.05 -5.1,5.05 h -17.8 q -5.1,0 -5.1,-5.05"
+       id="path158" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 277.15,580.15 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2"
+       id="path165" />
+  </g>
+  <g
+     id="g1">
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 815.05,2 h -178 q -3.5,0 -3.9,3.05 L 633.05,6 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 6 L 819,5.05 Q 818.55,2 815.05,2 m -184,37.25 V 6 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path167" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 817.05,6 817,5.3 817.05,5.35 Q 816.7,4 815.05,4 h -178 q -1.65,0 -1.9,1.3 L 635.1,5.5 635.05,6 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 6 m -2,-4 q 3.5,0 3.95,3.05 L 819.05,6 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 V 6 l 0.1,-0.95 Q 633.55,2 637.05,2 h 178"
+       id="path166" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 817.05,6 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 V 6 l 0.05,-0.5 0.05,-0.2 Q 635.4,4 637.05,4 h 178 q 1.65,0 2,1.35 L 817,5.3 817.05,6"
+       id="path168" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 821.05,39.25 V 43 q 0,6 -6,6 h -178 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path169" />
+  </g>
+  <g
+     id="g523"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 834,82 H 656 q -3.5,0 -3.9,3.05 L 652,86 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 86 l -0.05,-0.95 Q 837.5,82 834,82 M 650,119.25 V 86 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 839.85,125 834,125 H 656 q -5.85,0 -6,-5.75"
+       id="path170" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="M 835.95,85.3 836,85.35 Q 835.65,84 834,84 H 656 q -1.65,0 -1.9,1.3 L 654.05,85.5 654,86 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 86 l -0.05,-0.7 M 834,82 q 3.5,0 3.95,3.05 L 838,86 v 33 q 0,4 -4,4 H 656 q -4,0 -4,-4 V 86 l 0.1,-0.95 Q 652.5,82 656,82 h 178"
+       id="path171" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 835.95,85.3 836,86 v 33 q 0,2 -2,2 H 656 q -2,0 -2,-2 V 86 l 0.05,-0.5 0.05,-0.2 Q 654.35,84 656,84 h 178 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path172" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="M 840,119.25 V 123 q 0,6 -6,6 H 656 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path173" />
+  </g>
+  <g
+     id="g529"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 836,146 -0.05,-0.7 0.05,0.05 Q 835.65,144 834,144 H 656 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 m -2,-4 q 3.5,0 3.95,3.05 L 838,146 v 33 q 0,4 -4,4 H 656 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 652.5,142 656,142 h 178"
+       id="path174" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 834,142 H 656 q -3.5,0 -3.9,3.05 L 652,146 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 837.5,142 834,142 M 650,179.25 V 146 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 839.85,185 834,185 H 656 q -5.85,0 -6,-5.75"
+       id="path175" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 836,146 v 33 q 0,2 -2,2 H 656 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path176" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="M 840,179.25 V 183 q 0,6 -6,6 H 656 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path177" />
+  </g>
+  <g
+     id="g536"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 652,206 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 H 656 q -4,0 -4,-4 v -33 m 2.1,-0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6 Q 835.35,204 834,204 H 656 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6"
+       id="path178" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 652,206 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 H 656 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 m -2,33.25 V 206 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2 v 33.25 Q 839.85,245 834,245 H 656 q -5.85,0 -6,-5.75"
+       id="path179" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 654.1,205.4 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7 h 178 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 q 0,2 -2,2 H 656 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1"
+       id="path180" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="M 840,239.25 V 243 q 0,5.45 -4.95,5.95 L 834,249 H 656 l -1.05,-0.05 Q 650,248.45 650,243 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path181" />
+  </g>
+  <g
+     id="g541"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 654.1,265.3 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 835.65,264 834,264 H 656 q -1.65,0 -1.9,1.3 m -2,-0.25 Q 652.5,262 656,262 h 178 q 3.5,0 3.95,3.05 L 838,266 v 33 q 0,4 -4,4 H 656 q -4,0 -4,-4 v -33 l 0.1,-0.95"
+       id="path182" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 652.1,265.05 652,266 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 837.5,262 834,262 H 656 q -3.5,0 -3.9,3.05 m -2.1,34.2 V 266 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 Q 839.85,305 834,305 H 656 q -5.85,0 -6,-5.75"
+       id="path183" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 654.1,265.3 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 H 656 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path184" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="M 840,299.25 V 303 q 0,6 -6,6 H 656 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75"
+       id="path185" />
+  </g>
+  <g
+     id="g542"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="M 1046,269.35 Q 1045.65,268 1044,268 H 866 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 178 q 1.6,0 1.95,-1.2 L 1046,303 v -33 l -0.05,-0.7 0.05,0.05 m 1.95,-0.3 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 866 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 862.5,266 866,266 h 178 q 3.5,0 3.95,3.05"
+       id="path186" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 1047.95,269.05 Q 1047.5,266 1044,266 H 866 q -3.5,0 -3.9,3.05 L 862,270 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 M 1050,270 v 33 0.25 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 860,303.25 V 303 270 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path187" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 1046,269.35 -0.05,-0.05 0.05,0.7 v 33 l -0.05,0.8 Q 1045.6,305 1044,305 H 866 q -1.65,0 -1.9,-1.25 L 864.05,303.6 864,303 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35"
+       id="path188" />
+  </g>
+  <g
+     id="g535"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 1044,206 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 866 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 m 1.85,2.8 Q 1045.35,208 1044,208 H 866 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 178 q 1.6,0 1.95,-1.2 L 1046,243 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6"
+       id="path189" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 1044,206 H 866 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 m 6,4 v 33.25 q -0.1,5.2 -4.95,5.7 L 1044,249 H 866 l -1.05,-0.05 q -4.55,-0.45 -4.9,-5.1 L 860,243.25 V 210 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2"
+       id="path190" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 1045.85,208.8 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 l -0.05,0.8 Q 1045.6,245 1044,245 H 866 q -1.65,0 -1.9,-1.25 L 864.05,243.6 864,243 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7 h 178 q 1.35,0 1.85,0.8"
+       id="path191" />
+  </g>
+  <g
+     id="g530"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 1045.95,149.3 0.05,0.05 Q 1045.65,148 1044,148 H 866 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 178 q 1.6,0 1.95,-1.2 L 1046,183 v -33 l -0.05,-0.7 m 2,-0.25 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 866 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 862.5,146 866,146 h 178 q 3.5,0 3.95,3.05"
+       id="path192" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 1045.95,149.3 0.05,0.7 v 33 l -0.05,0.8 Q 1045.6,185 1044,185 H 866 q -1.65,0 -1.9,-1.25 L 864.05,183.6 864,183 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path193" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 1047.95,149.05 Q 1047.5,146 1044,146 H 866 q -3.5,0 -3.9,3.05 L 862,150 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 M 1044,189 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 860,183.25 V 150 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33 0.25 q -0.15,5.75 -6,5.75"
+       id="path194" />
+  </g>
+  <g
+     id="g524"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 1047.95,89.05 Q 1047.5,86 1044,86 H 866 q -3.5,0 -3.9,3.05 L 862,90 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 l 0.05,-1 V 90 l -0.05,-0.95 M 1050,90 v 33 0.25 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 860,123.25 V 123 90 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path195" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 1046,90 -0.05,-0.7 0.05,0.05 Q 1045.65,88 1044,88 H 866 q -1.65,0 -1.9,1.3 L 864.05,89.5 864,90 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 178 q 1.6,0 1.95,-1.2 L 1046,123 V 90 m 1.95,-0.95 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 866 q -3.5,0 -3.9,-3 L 862,123 V 90 l 0.1,-0.95 Q 862.5,86 866,86 h 178 q 3.5,0 3.95,3.05"
+       id="path196" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 1046,90 v 33 l -0.05,0.8 Q 1045.6,125 1044,125 H 866 q -1.65,0 -1.9,-1.25 L 864.05,123.6 864,123 V 90 l 0.05,-0.5 0.05,-0.2 Q 864.35,88 866,88 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path197" />
+  </g>
+  <g
+     id="g517"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 1046,29.35 Q 1045.65,28 1044,28 H 866 q -1.65,0 -1.9,1.3 L 864.05,29.5 864,30 v 33 l 0.05,0.6 0.05,0.15 Q 864.35,65 866,65 h 178 q 1.6,0 1.95,-1.2 L 1046,63 V 30 l -0.05,-0.7 0.05,0.05 m 1.95,-0.3 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 H 866 q -3.5,0 -3.9,-3 L 862,63 V 30 l 0.1,-0.95 Q 862.5,26 866,26 h 178 q 3.5,0 3.95,3.05"
+       id="path198" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 1047.95,29.05 Q 1047.5,26 1044,26 H 866 q -3.5,0 -3.9,3.05 L 862,30 v 33 l 0.1,1 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 L 1048,63 V 30 l -0.05,-0.95 M 1050,30 v 33 0.25 q -0.15,5.75 -6,5.75 h -178 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 860,63.25 V 30 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path199" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 1046,29.35 -0.05,-0.05 0.05,0.7 v 33 l -0.05,0.8 Q 1045.6,65 1044,65 H 866 q -1.65,0 -1.9,-1.25 L 864.05,63.6 864,63 V 30 l 0.05,-0.5 0.05,-0.2 Q 864.35,28 866,28 h 178 q 1.65,0 2,1.35"
+       id="path200" />
+  </g>
+  <g
+     id="g579"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 345.05,465.5 v 0.05 L 345,466 v 33 q 0,1 1,1 h 37 q 1,0 1,-1 v -33 -0.45 l -0.05,-0.05 Q 383.75,465 383,465 h -37 q -0.75,0 -0.95,0.5 m -2.95,-0.45 Q 342.5,462 346,462 h 37 q 3.5,0 3.95,3.05 L 387,466 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95"
+       id="path201" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 342.1,465.05 342,466 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 386.5,462 383,462 h -37 q -3.5,0 -3.9,3.05 m -2.1,34.2 V 466 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path202" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 345.05,465.5 q 0.2,-0.5 0.95,-0.5 h 37 q 0.75,0 0.95,0.5 l 0.05,0.05 v 0.45 33 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05"
+       id="path203" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 389,499.25 V 503 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path204" />
+  </g>
+  <g
+     id="g627"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="M 386.95,705.05 387,706 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 342.5,702 346,702 h 37 q 3.5,0 3.95,3.05 m -2.95,0.5 -0.05,-0.05 Q 383.75,705 383,705 h -37 q -0.75,0 -0.95,0.5 v 0.05 L 345,706 v 33 q 0,1 1,1 h 37 q 1,0 1,-1 v -33 -0.45"
+       id="path205" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 386.95,705.05 Q 386.5,702 383,702 h -37 q -3.5,0 -3.9,3.05 L 342,706 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 340,739.25 V 706 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path206" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 384,705.55 v 0.45 33 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05 q 0.2,-0.5 0.95,-0.5 h 37 q 0.75,0 0.95,0.5 l 0.05,0.05"
+       id="path207" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 389,739.25 V 743 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path208" />
+  </g>
+  <g
+     id="g615"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 345.05,645.5 v 0.05 L 345,646 v 33 q 0,1 1,1 h 37 q 1,0 1,-1 v -33 -0.45 l -0.05,-0.05 Q 383.75,645 383,645 h -37 q -0.75,0 -0.95,0.5 m -3.05,0.5 0.1,-0.95 Q 342.5,642 346,642 h 37 q 3.5,0 3.95,3.05 L 387,646 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33"
+       id="path209" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 345.05,645.5 q 0.2,-0.5 0.95,-0.5 h 37 q 0.75,0 0.95,0.5 l 0.05,0.05 v 0.45 33 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05"
+       id="path210" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 342,646 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 386.5,642 383,642 h -37 q -3.5,0 -3.9,3.05 L 342,646 m -2,33.25 V 646 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path211" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="m 340,679.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 683 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path212" />
+  </g>
+  <g
+     id="g603"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 346,585 q -0.75,0 -0.95,0.5 v 0.05 L 345,586 v 33 q 0,1 1,1 h 37 q 1,0 1,-1 v -33 -0.45 l -0.05,-0.05 Q 383.75,585 383,585 h -37 m -4,1 0.1,-0.95 Q 342.5,582 346,582 h 37 q 3.5,0 3.95,3.05 L 387,586 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33"
+       id="path213" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 342,586 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 386.5,582 383,582 h -37 q -3.5,0 -3.9,3.05 L 342,586 m -2,33.25 V 586 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path214" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 346,585 h 37 q 0.75,0 0.95,0.5 l 0.05,0.05 v 0.45 33 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05 q 0.2,-0.5 0.95,-0.5"
+       id="path215" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 389,619.25 V 623 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path216" />
+  </g>
+  <g
+     id="g591"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 384,525.55 -0.05,-0.05 Q 383.75,525 383,525 h -37 q -0.75,0 -0.95,0.5 v 0.05 L 345,526 v 33 q 0,1 1,1 h 37 q 1,0 1,-1 v -33 -0.45 m 2.95,-0.5 0.05,0.95 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 342.5,522 346,522 h 37 q 3.5,0 3.95,3.05"
+       id="path217" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 386.95,525.05 Q 386.5,522 383,522 h -37 q -3.5,0 -3.9,3.05 L 342,526 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 340,559.25 V 526 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path218" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 384,525.55 v 0.45 33 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -33 l 0.05,-0.45 v -0.05 q 0.2,-0.5 0.95,-0.5 h 37 q 0.75,0 0.95,0.5 l 0.05,0.05"
+       id="path219" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 389,559.25 V 563 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path220" />
+  </g>
+  <g
+     id="g580"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 406,462 h 37 q 3.5,0 3.95,3.05 L 447,466 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 402.5,462 406,462 m 38,20.5 H 405 V 499 q 0,1 1,1 h 37 q 1,0 1,-1 v -16.5"
+       id="path221" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="M 444,482.5 V 499 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -16.5 h 39"
+       id="path222" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 400,499.25 V 466 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 M 406,462 q -3.5,0 -3.9,3.05 L 402,466 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 446.5,462 443,462 h -37"
+       id="path223" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 449,499.25 V 503 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path224" />
+  </g>
+  <g
+     id="g592"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 402,525.95 0.1,-0.9 Q 402.5,522 406,522 h 37 q 3.5,0 3.95,3.05 l 0.05,0.9 V 559 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33.05 m 42,16.55 H 405 V 559 q 0,1 1,1 h 37 q 1,0 1,-1 v -16.5"
+       id="path225" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 402,525.95 V 559 q 0,4 4,4 h 37 q 4,0 4,-4 v -33.05 l -0.05,-0.9 Q 446.5,522 443,522 h -37 q -3.5,0 -3.9,3.05 l -0.1,0.9 m -2,33.3 v -33.3 q 0.05,-5.95 6,-5.95 h 37 q 6,0 6,5.95 v 33.3 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path226" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="m 400,559.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 563 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path227" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 444,542.5 V 559 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -16.5 h 39"
+       id="path228" />
+  </g>
+  <g
+     id="g604"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 402,586 0.1,-0.95 Q 402.5,582 406,582 h 37 q 3.5,0 3.95,3.05 L 447,586 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 m 3,33 q 0,1 1,1 h 37 q 1,0 1,-1 V 602.5 H 405 V 619"
+       id="path229" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 402,586 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 446.5,582 443,582 h -37 q -3.5,0 -3.9,3.05 L 402,586 m -2,33.25 V 586 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path230" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="m 400,619.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 623 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path231" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 405,619 v -16.5 h 39 V 619 q 0,1 -1,1 h -37 q -1,0 -1,-1"
+       id="path232" />
+  </g>
+  <g
+     id="g616"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 406,642 h 37 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 m -1,37 q 0,1 1,1 h 37 q 1,0 1,-1 V 662.5 H 405 V 679"
+       id="path233" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 400,679.25 V 646 l 0.2,-2 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 M 406,642 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 h -37"
+       id="path234" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 405,679 v -16.5 h 39 V 679 q 0,1 -1,1 h -37 q -1,0 -1,-1"
+       id="path235" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="M 449,679.25 V 683 q 0,5.45 -4.95,5.95 L 443,689 h -37 l -1.05,-0.05 Q 400,688.45 400,683 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path236" />
+  </g>
+  <g
+     id="g628"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 402,739 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 446.5,702 443,702 h -37 q -3.5,0 -3.9,3.05 L 402,706 v 33 m -2,0.25 V 706 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path237" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 402,739 v -33 l 0.1,-0.95 Q 402.5,702 406,702 h 37 q 3.5,0 3.95,3.05 L 447,706 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 m 3,-16.5 V 739 q 0,1 1,1 h 37 q 1,0 1,-1 v -16.5 h -39"
+       id="path238" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="M 449,739.25 V 743 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path239" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 405,722.5 h 39 V 739 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -16.5"
+       id="path240" />
+  </g>
+  <g
+     id="g629"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 462.1,709.05 462,710 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 506.5,706 503,706 h -37 q -3.5,0 -3.9,3.05 M 466,704 h 37 q 6,0 6,6 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 460,743.25 V 743 710 q 0,-6 6,-6"
+       id="path241" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="M 462.1,709.05 Q 462.5,706 466,706 h 37 q 3.5,0 3.95,3.05 L 507,710 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 M 465,743 q 0,1 1,1 h 37 q 1,0 1,-1 V 726.5 H 465 V 743"
+       id="path242" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 465,743 v -16.5 h 39 V 743 q 0,1 -1,1 h -37 q -1,0 -1,-1"
+       id="path243" />
+  </g>
+  <g
+     id="g617"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 462,650 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 37 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 m 3,33 q 0,1 1,1 h 37 q 1,0 1,-1 V 666.5 H 465 V 683"
+       id="path244" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 462,650 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 h -37 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 m -1.8,-2 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.1,5.2 -4.95,5.7 L 503,689 h -37 l -1.05,-0.05 q -4.55,-0.45 -4.9,-5.1 L 460,683.25 V 650 l 0.2,-2"
+       id="path245" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 465,683 v -16.5 h 39 V 683 q 0,1 -1,1 h -37 q -1,0 -1,-1"
+       id="path246" />
+  </g>
+  <g
+     id="g605"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 503,586 q 3.5,0 3.95,3.05 L 507,590 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 462.5,586 466,586 h 37 m -38,37 q 0,1 1,1 h 37 q 1,0 1,-1 V 606.5 H 465 V 623"
+       id="path247" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 509,590 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 460,623.25 V 590 q 0,-6 6,-6 h 37 q 6,0 6,6 m -6,-4 h -37 q -3.5,0 -3.9,3.05 L 462,590 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 506.5,586 503,586"
+       id="path248" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 465,623 v -16.5 h 39 V 623 q 0,1 -1,1 h -37 q -1,0 -1,-1"
+       id="path249" />
+  </g>
+  <g
+     id="g593"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 503,526 h -37 q -3.5,0 -3.9,3.05 L 462,530 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 506.5,526 503,526 m 6,4 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 460,563.25 V 563 530 q 0,-6 6,-6 h 37 q 6,0 6,6"
+       id="path250" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 503,526 q 3.5,0 3.95,3.05 L 507,530 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 462.5,526 466,526 h 37 m 1,37 V 546.5 H 465 V 563 q 0,1 1,1 h 37 q 1,0 1,-1"
+       id="path251" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 504,563 q 0,1 -1,1 h -37 q -1,0 -1,-1 v -16.5 h 39 V 563"
+       id="path252" />
+  </g>
+  <g
+     id="g581"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 506.95,469.05 507,470 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 462.5,466 466,466 h 37 q 3.5,0 3.95,3.05 M 503,504 q 1,0 1,-1 V 486.5 H 465 V 503 q 0,1 1,1 h 37"
+       id="path253" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 509,470 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 460,503.25 V 470 q 0,-6 6,-6 h 37 q 6,0 6,6 m -2.05,-0.95 Q 506.5,466 503,466 h -37 q -3.5,0 -3.9,3.05 L 462,470 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95"
+       id="path254" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 503,504 h -37 q -1,0 -1,-1 v -16.5 h 39 V 503 q 0,1 -1,1"
+       id="path255" />
+  </g>
+  <g
+     id="g582"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 522.1,465.05 Q 522.5,462 526,462 h 37 q 3.5,0 3.95,3.05 L 567,466 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 m 2,0.25 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 564.65,464 563,464 h -37 q -1.65,0 -1.9,1.3"
+       id="path256" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 524.1,465.3 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path257" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 520,499.25 V 466 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 m 2.1,-34.2 -0.1,0.95 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 566.5,462 563,462 h -37 q -3.5,0 -3.9,3.05"
+       id="path258" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="M 569,499.25 V 503 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path259" />
+  </g>
+  <g
+     id="g594"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 563,522 q 3.5,0 3.95,3.05 L 567,526 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 522.5,522 526,522 h 37 m 1.95,3.3 0.05,0.05 Q 564.65,524 563,524 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path260" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 564.95,525.3 565,526 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path261" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 563,522 h -37 q -3.5,0 -3.9,3.05 L 522,526 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 566.5,522 563,522 m -43,37.25 V 526 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path262" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="m 520,559.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 563 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path263" />
+  </g>
+  <g
+     id="g606"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 524.1,585.3 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 564.65,584 563,584 h -37 q -1.65,0 -1.9,1.3 m -2.1,0.7 0.1,-0.95 Q 522.5,582 526,582 h 37 q 3.5,0 3.95,3.05 L 567,586 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33"
+       id="path264" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 522,586 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 566.5,582 563,582 h -37 q -3.5,0 -3.9,3.05 L 522,586 m -2,33.25 V 586 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path265" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 524.1,585.3 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path266" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="M 569,619.25 V 623 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path267" />
+  </g>
+  <g
+     id="g618"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 567,646 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 37 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 m -41,-2 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6 Q 564.35,644 563,644 h -37"
+       id="path268" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 520,679.25 V 646 l 0.2,-2 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 M 567,646 566.95,645.05 566.7,644 q -0.85,-2 -3.7,-2 h -37 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33"
+       id="path269" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="M 569,679.25 V 683 q 0,5.45 -4.95,5.95 L 563,689 h -37 l -1.05,-0.05 Q 520,688.45 520,683 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path270" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 526,644 h 37 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7"
+       id="path271" />
+  </g>
+  <g
+     id="g630"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 565,706 -0.05,-0.7 0.05,0.05 Q 564.65,704 563,704 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 m -2,-4 q 3.5,0 3.95,3.05 L 567,706 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 522.5,702 526,702 h 37"
+       id="path272" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 563,702 h -37 q -3.5,0 -3.9,3.05 L 522,706 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 566.5,702 563,702 m -43,37.25 V 706 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path273" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 565,706 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path274" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="M 569,739.25 V 743 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path275" />
+  </g>
+  <g
+     id="g631"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 623,706 h -37 q -3.5,0 -3.9,3.05 L 582,710 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 626.5,706 623,706 m 6,4 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 580,743.25 V 743 710 q 0,-6 6,-6 h 37 q 6,0 6,6"
+       id="path276" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 625,710 -0.05,-0.7 0.05,0.05 Q 624.65,708 623,708 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 37 q 1.6,0 1.95,-1.2 L 625,743 v -33 m -2,-4 q 3.5,0 3.95,3.05 L 627,710 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 582.5,706 586,706 h 37"
+       id="path277" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 625,710 v 33 l -0.05,0.8 Q 624.6,745 623,745 h -37 q -1.65,0 -1.9,-1.25 L 584.05,743.6 584,743 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path278" />
+  </g>
+  <g
+     id="g619"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 584.3,648.7 -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 37 q 1.6,0 1.95,-1.2 L 625,683 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6 Q 624.35,648 623,648 h -37 q -1.3,0 -1.7,0.7 m -1.9,-0.7 q 0.75,-2 3.6,-2 h 37 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 0.3,-1.05"
+       id="path279" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 584.3,648.7 q 0.4,-0.7 1.7,-0.7 h 37 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 l -0.05,0.8 Q 624.6,685 623,685 h -37 q -1.65,0 -1.9,-1.25 L 584.05,683.6 584,683 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1"
+       id="path280" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 582.4,648 -0.3,1.05 -0.1,0.95 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 h -37 q -2.85,0 -3.6,2 m -2.2,0 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.1,5.2 -4.95,5.7 L 623,689 h -37 l -1.05,-0.05 q -4.55,-0.45 -4.9,-5.1 L 580,683.25 V 650 l 0.2,-2"
+       id="path281" />
+  </g>
+  <g
+     id="g607"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 582,590 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 626.5,586 623,586 h -37 q -3.5,0 -3.9,3.05 L 582,590 m 4,-6 h 37 q 6,0 6,6 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 580,623.25 V 590 q 0,-6 6,-6"
+       id="path282" />
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 582,590 0.1,-0.95 Q 582.5,586 586,586 h 37 q 3.5,0 3.95,3.05 L 627,590 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 m 2.05,-0.5 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 37 q 1.6,0 1.95,-1.2 L 625,623 v -33 l -0.05,-0.7 0.05,0.05 Q 624.65,588 623,588 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2"
+       id="path283" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 584.05,589.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 l -0.05,0.8 Q 624.6,625 623,625 h -37 q -1.65,0 -1.9,-1.25 L 584.05,623.6 584,623 v -33 l 0.05,-0.5"
+       id="path284" />
+  </g>
+  <g
+     id="g595"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 623,526 h -37 q -3.5,0 -3.9,3.05 L 582,530 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 626.5,526 623,526 m 6,4 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 580,563.25 V 563 530 q 0,-6 6,-6 h 37 q 6,0 6,6"
+       id="path285" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 624.95,529.3 0.05,0.05 Q 624.65,528 623,528 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 37 q 1.6,0 1.95,-1.2 L 625,563 v -33 l -0.05,-0.7 M 623,526 q 3.5,0 3.95,3.05 L 627,530 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95 Q 582.5,526 586,526 h 37"
+       id="path286" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 624.95,529.3 625,530 v 33 l -0.05,0.8 Q 624.6,565 623,565 h -37 q -1.65,0 -1.9,-1.25 L 584.05,563.6 584,563 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path287" />
+  </g>
+  <g
+     id="g583"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 584.1,469.3 -0.05,0.2 -0.05,0.5 v 33 l 0.05,0.6 0.05,0.15 q 0.25,1.25 1.9,1.25 h 37 q 1.6,0 1.95,-1.2 L 625,503 v -33 l -0.05,-0.7 0.05,0.05 Q 624.65,468 623,468 h -37 q -1.65,0 -1.9,1.3 m -2,-0.25 Q 582.5,466 586,466 h 37 q 3.5,0 3.95,3.05 L 627,470 v 33 l -0.05,1 q -0.45,3 -3.95,3 h -37 q -3.5,0 -3.9,-3 l -0.1,-1 v -33 l 0.1,-0.95"
+       id="path288" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 582.1,469.05 582,470 v 33 l 0.1,1 q 0.4,3 3.9,3 h 37 q 3.5,0 3.95,-3 l 0.05,-1 v -33 l -0.05,-0.95 Q 626.5,466 623,466 h -37 q -3.5,0 -3.9,3.05 M 586,464 h 37 q 6,0 6,6 v 33 0.25 q -0.15,5.75 -6,5.75 h -37 -0.25 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 580,503.25 V 470 q 0,-6 6,-6"
+       id="path289" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 584.1,469.3 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 l -0.05,0.8 Q 624.6,505 623,505 h -37 q -1.65,0 -1.9,-1.25 L 584.05,503.6 584,503 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path290" />
+  </g>
+  <g
+     id="g570"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 200.3,465.2 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 170,485.1 170,477.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 m -1.4,1.4 q -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15"
+       id="path297" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 198.9,466.6 q 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 m -1.45,1.4 q -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75"
+       id="path298" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 197.45,468 q 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4"
+       id="path299" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 187.75,469.5 q 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4"
+       id="path300" />
+  </g>
+  <g
+     id="g576"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 276.6,466.6 q 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 m 1.4,1.4 q -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 -5.7,0 -9.75,4"
+       id="path304" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 278,468 q 4.05,-4 9.75,-4 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75"
+       id="path305" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 276.6,466.6 q -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 m -1.45,-1.4 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 270,485.1 270,477.75 q 0,-7.35 5.15,-12.55"
+       id="path306" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 279.5,477.75 q 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8"
+       id="path307" />
+  </g>
+  <g
+     id="g573"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 248.9,488.85 -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 m 2.6,-11.1 q 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7"
+       id="path301" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 251.5,477.75 q 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4 4.05,4.05 4.05,9.75"
+       id="path302" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 250.3,490.3 q -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 220,485.1 220,477.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 m -1.4,-1.45 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05"
+       id="path303" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 246,477.75 q 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85"
+       id="path308" />
+  </g>
+  <g
+     id="g567"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 150.3,465.2 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 120,485.1 120,477.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 M 137.75,462 q -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6"
+       id="path294" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 137.75,462 q 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 m 0,2 q -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4"
+       id="path295" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 137.75,464 q 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4"
+       id="path296" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 137.75,486 q -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45"
+       id="path309" />
+  </g>
+  <g
+     id="g561"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 100.3,465.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 H 75.15 Q 70,485.1 70,477.75 70,470.4 75.15,465.2 l 0.05,-0.05 Q 80.4,460 87.75,460 q 7.35,0 12.55,5.15 m -1.4,1.45 Q 94.3,462 87.75,462 q -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15"
+       id="path291" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 98.9,466.6 q 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 m -1.45,1.4 q -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75"
+       id="path292" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 97.45,468 q 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4"
+       id="path293" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 81.9,483.55 q -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45"
+       id="path310" />
+  </g>
+  <path
+     stroke="none"
+     fill="#e86a17"
+     d="m 174.6,501.9 q 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4"
+     id="path311" />
+  <path
+     stroke="none"
+     fill="#999999"
+     d="m 274.6,501.9 q 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4"
+     id="path312" />
+  <path
+     stroke="none"
+     fill="#1ea7e1"
+     d="m 212.95,513.55 q -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45"
+     id="path313" />
+  <path
+     stroke="none"
+     fill="#73cd4b"
+     d="m 112.95,513.55 q -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45"
+     id="path314" />
+  <g
+     id="g562"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 87.75,519.5 q 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4"
+       id="path315" />
+  </g>
+  <g
+     id="g557"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 46,527.75 q 0,3.4 -2.45,5.8 -2.4,2.45 -5.8,2.45 -3.45,0 -5.85,-2.45 -2.4,-2.4 -2.4,-5.8 0,-3.4 2.4,-5.85 2.4,-2.4 5.85,-2.4 3.4,0 5.8,2.4 2.45,2.45 2.45,5.85"
+       id="path316" />
+  </g>
+  <g
+     id="g559"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 42.4,622.05 5.45,3.6 0.15,0.2 -0.05,0.25 -12.35,15.75 -0.15,0.15 -0.2,-0.05 -0.2,-0.1 -8,-11.25 -0.05,-0.25 0.15,-0.2 5.45,-3.05 0.3,-0.05 0.2,0.15 2.3,3.3 6.55,-8.4 0.25,-0.1 0.2,0.05"
+       id="path317" />
+  </g>
+  <g
+     id="g560"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 45.8,726.2 q 0.4,0.4 0,0.75 l -5,5.05 5,5 q 0.4,0.35 0,0.75 l -3,3 -0.8,0.05 -5,-5.05 -5.05,5 q -0.4,0.4 -0.8,0 l -3,-3 q -0.4,-0.4 0,-0.75 l 5.05,-5 -5.05,-5.05 q -0.35,-0.35 0,-0.75 l 3.05,-3.05 q 0.35,-0.35 0.75,0 l 5,5.05 5.05,-5.05 q 0.4,-0.35 0.75,0 l 3.05,3.05"
+       id="path318" />
+  </g>
+  <g
+     id="g551"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 656,337 h 178 q 8,0 8,8 v 33 0.25 0.05 q -0.2,7.4 -7.4,7.7 h -178.75 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 -0.15 q -6.4,-0.55 -6.9,-7 L 648,378.25 V 378 345 q 0,-8 8,-8"
+       id="path319" />
+    <path
+       stroke="none"
+       fill="#c6c6c6"
+       d="M 838,346.7 V 345 l -0.05,-0.95 Q 837.5,341 834,341 H 656 q -3.5,0 -3.9,3.05 L 652,345 v 1.8 31.35 l 0.1,0.85 q 0.4,3 3.9,3 h 178 q 3.5,0 3.95,-3 L 838,378.25 V 346.7 M 656,339 h 178 q 6,0 6,6 v 33 0.25 q -0.15,5.5 -5.5,5.75 h -178.65 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 L 650,378.25 V 378 345 q 0,-6 6,-6"
+       id="path320" />
+    <path
+       stroke="none"
+       fill="#ececec"
+       d="M 652,346.8 V 345 l 0.1,-0.95 Q 652.5,341 656,341 h 178 q 3.5,0 3.95,3.05 L 838,345 v 1.7 l -0.05,-0.65 Q 837.5,343 834,343 H 656 q -3.5,0 -3.9,3.05 l -0.1,0.75"
+       id="path321" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 652,346.8 0.1,-0.75 Q 652.5,343 656,343 h 178 q 3.5,0 3.95,3.05 l 0.05,0.65 v 31.55 l -0.05,0.75 q -0.45,3 -3.95,3 H 656 q -3.5,0 -3.9,-3 L 652,378.15 V 346.8"
+       id="path322" />
+  </g>
+  <g
+     id="g519"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 1257.95,25.05 1258,26 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 V 26 l 0.1,-0.95 Q 1072.5,22 1076,22 h 178 q 3.5,0 3.95,3.05 M 1256,26 l -0.05,-0.7 0.05,0.05 Q 1255.65,24 1254,24 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 26"
+       id="path323" />
+    <g
+       id="g518">
+      <path
+         stroke="none"
+         fill="url(#gradient0)"
+         d="m 1256,26 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 V 26 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+         id="path324"
+         style="fill:url(#gradient0)" />
+    </g>
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 1257.95,25.05 Q 1257.5,22 1254,22 h -178 q -3.5,0 -3.9,3.05 L 1072,26 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 26 l -0.05,-0.95 M 1070,59.25 V 26 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path325" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="m 1070,59.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 63 q 0,6 -6,6 h -178 q -6,0 -6,-6 v -3.75"
+       id="path326" />
+  </g>
+  <g
+     id="g525"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="M 1257.95,85.05 1258,86 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 V 86 l 0.1,-0.95 Q 1072.5,82 1076,82 h 178 q 3.5,0 3.95,3.05 M 1256,86 l -0.05,-0.7 0.05,0.05 Q 1255.65,84 1254,84 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 86"
+       id="path327" />
+    <path
+       stroke="none"
+       fill="url(#gradient1)"
+       d="m 1256,86 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 V 86 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path328"
+       style="fill:url(#gradient1)" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 1257.95,85.05 Q 1257.5,82 1254,82 h -178 q -3.5,0 -3.9,3.05 L 1072,86 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 86 l -0.05,-0.95 M 1070,119.25 V 86 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path329" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="m 1070,119.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 123 q 0,6 -6,6 h -178 q -6,0 -6,-6 v -3.75"
+       id="path330" />
+  </g>
+  <g
+     id="g531"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="M 1257.95,145.05 1258,146 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33 l 0.1,-0.95 q 0.4,-3.05 3.9,-3.05 h 178 q 3.5,0 3.95,3.05 m -1.95,0.95 -0.05,-0.7 0.05,0.05 q -0.35,-1.35 -2,-1.35 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33"
+       id="path331" />
+    <path
+       stroke="none"
+       fill="url(#gradient2)"
+       d="m 1256,146 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path332"
+       style="fill:url(#gradient2)" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 1257.95,145.05 Q 1257.5,142 1254,142 h -178 q -3.5,0 -3.9,3.05 L 1072,146 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 M 1070,179.25 V 146 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path333" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="m 1070,179.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 183 q 0,6 -6,6 h -178 q -6,0 -6,-6 v -3.75"
+       id="path334" />
+  </g>
+  <g
+     id="g534"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 1074.3,204.7 -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6 q -0.5,-0.8 -1.85,-0.8 h -178 q -1.3,0 -1.7,0.7 m -2.3,1.3 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 q 2.85,0 3.7,2 l 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33"
+       id="path335" />
+    <path
+       stroke="none"
+       fill="url(#gradient3)"
+       d="m 1074.3,204.7 q 0.4,-0.7 1.7,-0.7 h 178 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1"
+       id="path336"
+       style="fill:url(#gradient3)" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 1072,206 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 -0.25,-1.05 q -0.85,-2 -3.7,-2 h -178 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 m -2,33.25 V 206 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path337" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="m 1070,239.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 243 q 0,5.45 -4.95,5.95 L 1254,249 h -178 l -1.05,-0.05 Q 1070,248.45 1070,243 v -3.75"
+       id="path338" />
+  </g>
+  <g
+     id="g543"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 1072.1,265.05 q 0.4,-3.05 3.9,-3.05 h 178 q 3.5,0 3.95,3.05 L 1258,266 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33 l 0.1,-0.95 m 2,0.25 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 q -0.35,-1.35 -2,-1.35 h -178 q -1.65,0 -1.9,1.3"
+       id="path339" />
+    <path
+       stroke="none"
+       fill="url(#gradient4)"
+       d="m 1074.1,265.3 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path340"
+       style="fill:url(#gradient4)" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 1072.1,265.05 1072,266 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 1257.5,262 1254,262 h -178 q -3.5,0 -3.9,3.05 m -2.1,34.2 V 266 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75"
+       id="path341" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="m 1070,299.25 q 0.15,5.75 6,5.75 h 178 q 5.85,0 6,-5.75 V 303 q 0,6 -6,6 h -178 q -6,0 -6,-6 v -3.75"
+       id="path342" />
+  </g>
+  <g
+     id="g520"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1466,30 -0.05,-0.7 0.05,0.05 Q 1465.65,28 1464,28 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 30 m -2,-4 q 3.5,0 3.95,3.05 L 1468,30 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 V 30 l 0.1,-0.95 Q 1282.5,26 1286,26 h 178"
+       id="path343" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="m 1464,26 h -178 q -3.5,0 -3.9,3.05 L 1282,30 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 30 l -0.05,-0.95 Q 1467.5,26 1464,26 m 6,4 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75 V 30 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path344" />
+    <path
+       stroke="none"
+       fill="url(#gradient5)"
+       d="m 1466,30 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 V 30 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path345"
+       style="fill:url(#gradient5)" />
+  </g>
+  <g
+     id="g526"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 1466,90 -0.05,-0.7 0.05,0.05 Q 1465.65,88 1464,88 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 V 90 m 1.95,-0.95 0.05,0.95 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 V 90 l 0.1,-0.95 Q 1282.5,86 1286,86 h 178 q 3.5,0 3.95,3.05"
+       id="path346" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 1467.95,89.05 Q 1467.5,86 1464,86 h -178 q -3.5,0 -3.9,3.05 L 1282,90 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 V 90 l -0.05,-0.95 M 1470,90 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75 V 90 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path347" />
+    <path
+       stroke="none"
+       fill="url(#gradient6)"
+       d="m 1466,90 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 V 90 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path348"
+       style="fill:url(#gradient6)" />
+  </g>
+  <g
+     id="g532"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 1466,150 -0.05,-0.7 0.05,0.05 q -0.35,-1.35 -2,-1.35 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 m 1.95,-0.95 0.05,0.95 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33 l 0.1,-0.95 q 0.4,-3.05 3.9,-3.05 h 178 q 3.5,0 3.95,3.05"
+       id="path349" />
+    <path
+       stroke="none"
+       fill="url(#gradient7)"
+       d="m 1466,150 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path350"
+       style="fill:url(#gradient7)" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 1467.95,149.05 Q 1467.5,146 1464,146 h -178 q -3.5,0 -3.9,3.05 L 1282,150 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 M 1464,189 h -178 q -5.85,0 -6,-5.75 V 150 q 0,-6 6,-6 h 178 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75"
+       id="path351" />
+  </g>
+  <g
+     id="g533"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 1470,210 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75 V 210 l 0.2,-2 q 0.9,-4 5.8,-4 h 178 q 4.9,0 5.8,4 l 0.2,2 m -2.3,-2 q -0.85,-2 -3.7,-2 h -178 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 -0.25,-1.05"
+       id="path352" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 1467.7,208 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 178 q 2.85,0 3.7,2 m -1.75,1.3 0.05,0.1 -0.15,-0.6 q -0.5,-0.8 -1.85,-0.8 h -178 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path353" />
+    <path
+       stroke="none"
+       fill="url(#gradient8)"
+       d="m 1465.95,209.3 0.05,0.7 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7 h 178 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1"
+       id="path354"
+       style="fill:url(#gradient8)" />
+  </g>
+  <g
+     id="g544"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 1466,270 -0.05,-0.7 0.05,0.05 q -0.35,-1.35 -2,-1.35 h -178 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 178 q 2,0 2,-2 v -33 m -2,-4 q 3.5,0 3.95,3.05 L 1468,270 v 33 q 0,4 -4,4 h -178 q -4,0 -4,-4 v -33 l 0.1,-0.95 q 0.4,-3.05 3.9,-3.05 h 178"
+       id="path355" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 1464,266 h -178 q -3.5,0 -3.9,3.05 L 1282,270 v 33 q 0,4 4,4 h 178 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 1467.5,266 1464,266 m 6,4 v 33.25 q -0.15,5.75 -6,5.75 h -178 q -5.85,0 -6,-5.75 V 270 q 0,-6 6,-6 h 178 q 6,0 6,6"
+       id="path356" />
+    <path
+       stroke="none"
+       fill="url(#gradient9)"
+       d="m 1466,270 v 33 q 0,2 -2,2 h -178 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 178 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path357"
+       style="fill:url(#gradient9)" />
+  </g>
+  <g
+     id="g584"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="M 686.95,465.05 687,466 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 642.5,462 646,462 h 37 q 3.5,0 3.95,3.05 m -2,0.25 0.05,0.05 Q 684.65,464 683,464 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path358" />
+    <path
+       stroke="none"
+       fill="url(#gradient10)"
+       d="M 684.95,465.3 685,466 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path359"
+       style="fill:url(#gradient10)" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 686.95,465.05 Q 686.5,462 683,462 h -37 q -3.5,0 -3.9,3.05 L 642,466 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 640,499.25 V 466 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path360" />
+    <path
+       stroke="none"
+       fill="#aaaaaa"
+       d="m 640,499.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 503 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path361" />
+  </g>
+  <g
+     id="g596"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="M 686.95,525.05 687,526 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 642.5,522 646,522 h 37 q 3.5,0 3.95,3.05 m -2,0.25 0.05,0.05 Q 684.65,524 683,524 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path362" />
+    <path
+       stroke="none"
+       fill="url(#gradient11)"
+       d="M 684.95,525.3 685,526 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path363"
+       style="fill:url(#gradient11)" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 686.95,525.05 Q 686.5,522 683,522 h -37 q -3.5,0 -3.9,3.05 L 642,526 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 640,559.25 V 526 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path364" />
+    <path
+       stroke="none"
+       fill="#a88600"
+       d="m 640,559.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 563 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path365" />
+  </g>
+  <g
+     id="g608"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="M 686.95,585.05 687,586 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 642.5,582 646,582 h 37 q 3.5,0 3.95,3.05 m -2,0.25 0.05,0.05 Q 684.65,584 683,584 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path366" />
+    <path
+       stroke="none"
+       fill="url(#gradient12)"
+       d="M 684.95,585.3 685,586 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path367"
+       style="fill:url(#gradient12)" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 686.95,585.05 Q 686.5,582 683,582 h -37 q -3.5,0 -3.9,3.05 L 642,586 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 640,619.25 V 586 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path368" />
+    <path
+       stroke="none"
+       fill="#47832c"
+       d="m 640,619.25 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75 V 623 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75"
+       id="path369" />
+  </g>
+  <g
+     id="g620"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 686.7,644 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 37 q 2.85,0 3.7,2 m -1.85,0.8 Q 684.35,644 683,644 h -37 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.1 -0.15,-0.6"
+       id="path370" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 686.7,644 q -0.85,-2 -3.7,-2 h -37 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 V 646 L 686.95,645.05 686.7,644 M 640,679.25 V 646 l 0.2,-2 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4 l 0.2,2 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75"
+       id="path371" />
+    <path
+       stroke="none"
+       fill="url(#gradient13)"
+       d="m 684.85,644.8 0.15,0.6 -0.05,-0.1 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7 h 37 q 1.35,0 1.85,0.8"
+       id="path372"
+       style="fill:url(#gradient13)" />
+    <path
+       stroke="none"
+       fill="#aa4e11"
+       d="M 689,679.25 V 683 q 0,5.45 -4.95,5.95 L 683,689 h -37 l -1.05,-0.05 Q 640,688.45 640,683 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path373" />
+  </g>
+  <g
+     id="g632"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 640,739.25 V 706 q 0,-6 6,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 M 687,706 686.95,705.05 Q 686.5,702 683,702 h -37 q -3.5,0 -3.9,3.05 L 642,706 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33"
+       id="path374" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 687,706 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 642.5,702 646,702 h 37 q 3.5,0 3.95,3.05 L 687,706 m -2,0 -0.05,-0.7 0.05,0.05 Q 684.65,704 683,704 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33"
+       id="path375" />
+    <path
+       stroke="none"
+       fill="url(#gradient14)"
+       d="m 685,706 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7"
+       id="path376"
+       style="fill:url(#gradient14)" />
+    <path
+       stroke="none"
+       fill="#166e93"
+       d="M 689,739.25 V 743 q 0,6 -6,6 h -37 q -6,0 -6,-6 v -3.75 q 0.15,5.75 6,5.75 h 37 q 5.85,0 6,-5.75"
+       id="path377" />
+  </g>
+  <g
+     id="g633"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 702,710 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 746.5,706 743,706 h -37 q -3.5,0 -3.9,3.05 L 702,710 m 4,-6 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 V 710 q 0,-6 6,-6"
+       id="path378" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="M 704.05,709.5 704,710 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 744.65,708 743,708 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 m -2.05,0.5 0.1,-0.95 Q 702.5,706 706,706 h 37 q 3.5,0 3.95,3.05 L 747,710 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33"
+       id="path379" />
+    <path
+       stroke="none"
+       fill="url(#gradient15)"
+       d="m 704.05,709.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5"
+       id="path380"
+       style="fill:url(#gradient15)" />
+  </g>
+  <g
+     id="g621"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 746.7,648 0.25,1.05 0.05,0.95 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 0.3,-1.05 q 0.75,-2 3.6,-2 h 37 q 2.85,0 3.7,2 m -1.75,1.3 0.05,0.1 -0.15,-0.6 Q 744.35,648 743,648 h -37 q -1.3,0 -1.7,0.7 l -0.05,0.1 -0.15,0.6 -0.05,0.1 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7"
+       id="path381" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 746.7,648 q -0.85,-2 -3.7,-2 h -37 q -2.85,0 -3.6,2 l -0.3,1.05 -0.1,0.95 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 -0.25,-1.05 m 2.1,0 0.2,2 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 V 650 l 0.2,-2 q 0.9,-4 5.8,-4 h 37 q 4.9,0 5.8,4"
+       id="path382" />
+    <path
+       stroke="none"
+       fill="url(#gradient16)"
+       d="M 744.95,649.3 745,650 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.1 0.15,-0.6 0.05,-0.1 q 0.4,-0.7 1.7,-0.7 h 37 q 1.35,0 1.85,0.8 l 0.15,0.6 -0.05,-0.1"
+       id="path383"
+       style="fill:url(#gradient16)" />
+  </g>
+  <g
+     id="g609"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 704.1,589.3 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 744.65,588 743,588 h -37 q -1.65,0 -1.9,1.3 m -2,-0.25 Q 702.5,586 706,586 h 37 q 3.5,0 3.95,3.05 L 747,590 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95"
+       id="path384" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="M 702.1,589.05 702,590 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 746.5,586 743,586 h -37 q -3.5,0 -3.9,3.05 M 706,584 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 V 590 q 0,-6 6,-6"
+       id="path385" />
+    <path
+       stroke="none"
+       fill="url(#gradient17)"
+       d="m 704.1,589.3 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path386"
+       style="fill:url(#gradient17)" />
+  </g>
+  <g
+     id="g597"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 704.1,529.3 -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 0.05,0.05 Q 744.65,528 743,528 h -37 q -1.65,0 -1.9,1.3 m -2,-0.25 Q 702.5,526 706,526 h 37 q 3.5,0 3.95,3.05 L 747,530 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95"
+       id="path387" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 702.1,529.05 702,530 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 Q 746.5,526 743,526 h -37 q -3.5,0 -3.9,3.05 M 706,524 h 37 q 6,0 6,6 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 V 530 q 0,-6 6,-6"
+       id="path388" />
+    <path
+       stroke="none"
+       fill="url(#gradient18)"
+       d="m 704.1,529.3 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05 0.05,0.7 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2"
+       id="path389"
+       style="fill:url(#gradient18)" />
+  </g>
+  <g
+     id="g585"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 744.95,469.3 0.05,0.05 Q 744.65,468 743,468 h -37 q -1.65,0 -1.9,1.3 l -0.05,0.2 -0.05,0.5 v 33 q 0,2 2,2 h 37 q 2,0 2,-2 v -33 l -0.05,-0.7 m 2,-0.25 0.05,0.95 v 33 q 0,4 -4,4 h -37 q -4,0 -4,-4 v -33 l 0.1,-0.95 Q 702.5,466 706,466 h 37 q 3.5,0 3.95,3.05"
+       id="path390" />
+    <path
+       stroke="none"
+       fill="#d5d5d5"
+       d="M 746.95,469.05 Q 746.5,466 743,466 h -37 q -3.5,0 -3.9,3.05 L 702,470 v 33 q 0,4 4,4 h 37 q 4,0 4,-4 v -33 l -0.05,-0.95 M 749,470 v 33.25 q -0.15,5.75 -6,5.75 h -37 q -5.85,0 -6,-5.75 V 470 q 0,-6 6,-6 h 37 q 6,0 6,6"
+       id="path391" />
+    <path
+       stroke="none"
+       fill="url(#gradient19)"
+       d="M 744.95,469.3 745,470 v 33 q 0,2 -2,2 h -37 q -2,0 -2,-2 v -33 l 0.05,-0.5 0.05,-0.2 q 0.25,-1.3 1.9,-1.3 h 37 q 1.65,0 2,1.35 l -0.05,-0.05"
+       id="path392"
+       style="fill:url(#gradient19)" />
+  </g>
+  <path
+     stroke="none"
+     fill="#ffffff"
+     d="m 832.6,580.8 -5.8,6.65 -0.8,0.5 h -0.95 l -0.75,-0.5 -5.85,-6.65 q -0.45,-0.55 -0.4,-1.2 0,-0.7 0.5,-1.15 0.5,-0.45 1.15,-0.45 h 11.65 q 0.7,0 1.2,0.45 0.45,0.45 0.5,1.15 l -0.45,1.2"
+     id="path393" />
+  <path
+     stroke="none"
+     fill="#ffffff"
+     d="m 826,638.05 0.8,0.5 5.8,6.65 q 0.45,0.55 0.45,1.2 -0.05,0.7 -0.5,1.15 -0.5,0.45 -1.2,0.45 H 819.7 q -0.65,0 -1.15,-0.45 -0.5,-0.45 -0.5,-1.15 -0.05,-0.65 0.4,-1.2 l 5.85,-6.65 0.75,-0.5 q 0.5,-0.15 0.95,0"
+     id="path394" />
+  <path
+     stroke="none"
+     fill="#999999"
+     d="m 826,467.95 h -0.95 l -0.75,-0.5 -5.85,-6.65 q -0.45,-0.55 -0.4,-1.2 0,-0.7 0.5,-1.15 0.5,-0.45 1.15,-0.45 h 11.65 q 0.7,0 1.2,0.45 0.45,0.45 0.5,1.15 l -0.45,1.2 -5.8,6.65 -0.8,0.5"
+     id="path395" />
+  <path
+     stroke="none"
+     fill="#999999"
+     d="m 825.05,518.05 q 0.5,-0.15 0.95,0 l 0.8,0.5 5.8,6.65 q 0.45,0.55 0.45,1.2 -0.05,0.7 -0.5,1.15 -0.5,0.45 -1.2,0.45 H 819.7 q -0.65,0 -1.15,-0.45 -0.5,-0.45 -0.5,-1.15 -0.05,-0.65 0.4,-1.2 l 5.85,-6.65 0.75,-0.5"
+     id="path396" />
+  <g
+     id="g598"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 783.6,531.6 q -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 m -1.4,-1.45 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 777,550.1 777,542.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05"
+       id="path397" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 783.6,531.6 q 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 m 1.4,1.4 q -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 -5.7,0 -9.75,4"
+       id="path398" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 785,533 q 4.05,-4 9.75,-4 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75"
+       id="path399" />
+  </g>
+  <g
+     id="g610"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 794.75,587 q 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 m 0,2 q -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4"
+       id="path400" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 794.75,589 q 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4"
+       id="path401" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 807.3,590.2 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 777,610.1 777,602.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 v 0.05 M 794.75,587 q -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6"
+       id="path402" />
+  </g>
+  <g
+     id="g622"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 805.9,651.6 q -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 m 1.4,-1.45 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 777,670.1 777,662.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15"
+       id="path403" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 805.9,651.6 q 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 m 2.6,11.15 q 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7"
+       id="path404" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 808.5,662.75 q 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4 4.05,4.05 4.05,9.75"
+       id="path405" />
+  </g>
+  <g
+     id="g634"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 804.45,713 q -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 m 1.45,-1.4 q 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6"
+       id="path406" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 804.45,713 q 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4"
+       id="path407" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 805.9,711.6 q -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 m 1.4,-1.45 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 Q 777,730.1 777,722.75 q 0,-7.35 5.15,-12.55 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15"
+       id="path408" />
+  </g>
+  <g
+     id="g586"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 807.3,470.15 v 0.05 q 5.2,5.2 5.2,12.55 0,7.35 -5.2,12.55 -5.2,5.2 -12.55,5.2 -7.35,0 -12.55,-5.2 h -0.05 q -2,-2 -3.2,-4.3 -1.95,-3.75 -1.95,-8.25 0,-4.5 1.95,-8.2 1.2,-2.35 3.2,-4.35 l 0.05,-0.05 q 5.2,-5.15 12.55,-5.15 7.35,0 12.55,5.15 m -28.3,12.6 q 0,6.55 4.6,11.15 4.6,4.6 11.15,4.6 6.5,0 11.1,-4.6 l 0.05,-0.05 q 4.6,-4.6 4.6,-11.1 0,-6.55 -4.6,-11.15 -4.6,-4.6 -11.15,-4.6 -6.5,0 -11.15,4.6 -4.6,4.65 -4.6,11.15"
+       id="path409" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 779,482.75 q 0,-6.5 4.6,-11.15 4.65,-4.6 11.15,-4.6 6.55,0 11.15,4.6 4.6,4.6 4.6,11.15 0,6.5 -4.6,11.1 l -0.05,0.05 q -4.6,4.6 -11.1,4.6 -6.55,0 -11.15,-4.6 -4.6,-4.6 -4.6,-11.15 m 2,0 q 0,5.7 4,9.7 4.05,4.05 9.75,4.05 5.7,0 9.7,-4.05 4.05,-4 4.05,-9.7 0,-5.7 -4.05,-9.75 -4,-4 -9.7,-4 -5.7,0 -9.75,4 -4,4.05 -4,9.75"
+       id="path410" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 781,482.75 q 0,-5.7 4,-9.75 4.05,-4 9.75,-4 5.7,0 9.7,4 4.05,4.05 4.05,9.75 0,5.7 -4.05,9.7 -4,4.05 -9.7,4.05 -5.7,0 -9.75,-4.05 -4,-4 -4,-9.7"
+       id="path411" />
+  </g>
+  <g
+     id="g635"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 916.85,717.3 -0.4,-0.6 -10,-10.1 q -0.6,-0.6 -1.45,-0.6 -0.85,0 -1.4,0.6 l -10,10.1 -0.4,0.55 -0.2,0.85 V 739 q 0,0.85 0.6,1.45 0.55,0.55 1.4,0.55 h 20 q 0.85,0 1.45,-0.55 0.55,-0.6 0.55,-1.45 v -20.9 l -0.15,-0.8 M 891,739.1 v -21 q 0,-1.65 1.15,-2.8 l 10,-10.1 q 0.45,-0.45 1,-0.75 Q 904,704 905,704 q 1,0 1.85,0.45 l 1,0.75 10,10.1 q 1.15,1.15 1.15,2.8 v 21 q -0.05,1.6 -1.15,2.75 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 q -1.1,-1.15 -1.15,-2.75"
+       id="path412" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 916.85,717.3 0.15,0.8 V 739 q 0,0.85 -0.55,1.45 -0.6,0.55 -1.45,0.55 h -20 q -0.85,0 -1.4,-0.55 -0.6,-0.6 -0.6,-1.45 v -20.9 l 0.2,-0.85 0.4,-0.55 10,-10.1 q 0.55,-0.6 1.4,-0.6 0.85,0 1.45,0.6 l 10,10.1 0.4,0.6 M 895,718.1 V 739 h 20 V 718.1 L 905,708 895,718.1"
+       id="path413" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 895,718.1 10,-10.1 10,10.1 V 739 h -20 v -20.9"
+       id="path414" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 919,739.1 v 2.9 q 0,1.65 -1.15,2.85 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891,743.65 891,742 v -2.9 q 0.05,1.6 1.15,2.75 h 0.05 q 1.15,1.15 2.8,1.15 h 20 q 1.65,0 2.85,-1.15 1.1,-1.15 1.15,-2.75"
+       id="path415" />
+  </g>
+  <g
+     id="g623"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 917,658.1 -0.15,-0.8 -0.4,-0.6 -10,-10.1 q -0.6,-0.6 -1.45,-0.6 -0.85,0 -1.4,0.6 l -10,10.1 -0.4,0.55 -0.2,0.85 V 679 q 0,0.85 0.6,1.45 0.55,0.55 1.4,0.55 h 20 q 0.85,0 1.45,-0.55 0.55,-0.6 0.55,-1.45 v -20.9 m -26,21 v -21 q 0,-1.65 1.15,-2.8 l 10,-10.1 q 1.2,-1.2 2.85,-1.2 1.65,0 2.85,1.2 l 10,10.1 q 1.15,1.15 1.15,2.8 v 21 q -0.05,1.6 -1.15,2.75 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 q -1.1,-1.15 -1.15,-2.75"
+       id="path416" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="M 917,658.1 V 679 q 0,0.85 -0.55,1.45 -0.6,0.55 -1.45,0.55 h -20 q -0.85,0 -1.4,-0.55 -0.6,-0.6 -0.6,-1.45 v -20.9 l 0.2,-0.85 0.4,-0.55 10,-10.1 q 0.55,-0.6 1.4,-0.6 0.85,0 1.45,0.6 l 10,10.1 0.4,0.6 0.15,0.8 M 905,648 895,658.1 V 679 h 20 V 658.1 L 905,648"
+       id="path417" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 905,648 10,10.1 V 679 H 895 V 658.1 L 905,648"
+       id="path418" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 919,679.1 v 2.9 q 0,1.65 -1.15,2.85 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891,683.65 891,682 v -2.9 q 0.05,1.6 1.15,2.75 h 0.05 q 1.15,1.15 2.8,1.15 h 20 q 1.65,0 2.85,-1.15 1.1,-1.15 1.15,-2.75"
+       id="path419" />
+  </g>
+  <g
+     id="g611"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 891,619.1 v -21 q 0,-1.65 1.15,-2.8 l 10,-10.1 q 1.2,-1.2 2.85,-1.2 1.65,0 2.85,1.2 l 10,10.1 q 1.15,1.15 1.15,2.8 v 21 q -0.05,1.6 -1.15,2.75 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 q -1.1,-1.15 -1.15,-2.75 m 15.45,-32.5 q -0.6,-0.6 -1.45,-0.6 -0.85,0 -1.4,0.6 l -10,10.1 -0.4,0.55 -0.2,0.85 V 619 q 0,0.85 0.6,1.45 0.55,0.55 1.4,0.55 h 20 q 0.85,0 1.45,-0.55 0.55,-0.6 0.55,-1.45 v -20.9 l -0.15,-0.8 -0.4,-0.6 -10,-10.1"
+       id="path420" />
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 906.45,586.6 10,10.1 0.4,0.6 0.15,0.8 V 619 q 0,0.85 -0.55,1.45 -0.6,0.55 -1.45,0.55 h -20 q -0.85,0 -1.4,-0.55 -0.6,-0.6 -0.6,-1.45 v -20.9 l 0.2,-0.85 0.4,-0.55 10,-10.1 q 0.55,-0.6 1.4,-0.6 0.85,0 1.45,0.6 M 915,619 V 598.1 L 905,588 895,598.1 V 619 h 20"
+       id="path421" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 919,619.1 v 2.9 q 0,1.65 -1.15,2.85 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891,623.65 891,622 v -2.9 q 0.05,1.6 1.15,2.75 h 0.05 q 1.15,1.15 2.8,1.15 h 20 q 1.65,0 2.85,-1.15 1.1,-1.15 1.15,-2.75"
+       id="path422" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 915,619 h -20 v -20.9 l 10,-10.1 10,10.1 V 619"
+       id="path423" />
+  </g>
+  <g
+     id="g599"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 891,559.1 v -21 q 0,-1.65 1.15,-2.8 l 10,-10.1 q 1.2,-1.2 2.85,-1.2 1.65,0 2.85,1.2 l 10,10.1 q 1.15,1.15 1.15,2.8 v 21 q -0.05,1.6 -1.15,2.75 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 q -1.1,-1.15 -1.15,-2.75 m 15.45,-32.5 q -0.6,-0.6 -1.45,-0.6 -0.85,0 -1.4,0.6 l -10,10.1 -0.4,0.55 -0.2,0.85 V 559 q 0,0.85 0.6,1.45 0.55,0.55 1.4,0.55 h 20 q 0.85,0 1.45,-0.55 0.55,-0.6 0.55,-1.45 v -20.9 l -0.15,-0.8 -0.4,-0.6 -10,-10.1"
+       id="path424" />
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 906.45,526.6 10,10.1 0.4,0.6 0.15,0.8 V 559 q 0,0.85 -0.55,1.45 -0.6,0.55 -1.45,0.55 h -20 q -0.85,0 -1.4,-0.55 -0.6,-0.6 -0.6,-1.45 v -20.9 l 0.2,-0.85 0.4,-0.55 10,-10.1 q 0.55,-0.6 1.4,-0.6 0.85,0 1.45,0.6 M 905,528 895,538.1 V 559 h 20 V 538.1 L 905,528"
+       id="path425" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 905,528 10,10.1 V 559 H 895 V 538.1 L 905,528"
+       id="path426" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 919,559.1 v 2.9 q 0,1.65 -1.15,2.85 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891,563.65 891,562 v -2.9 q 0.05,1.6 1.15,2.75 h 0.05 q 1.15,1.15 2.8,1.15 h 20 q 1.65,0 2.85,-1.15 1.1,-1.15 1.15,-2.75"
+       id="path427" />
+  </g>
+  <g
+     id="g587"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 891,499.1 v -21 q 0,-1.65 1.15,-2.8 l 10,-10.1 q 1.2,-1.2 2.85,-1.2 1.65,0 2.85,1.2 l 10,10.1 q 1.15,1.15 1.15,2.8 v 21 q -0.05,1.6 -1.15,2.75 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891.05,500.7 891,499.1 M 905,466 q -0.85,0 -1.4,0.6 l -10,10.1 -0.4,0.55 -0.2,0.85 V 499 q 0,0.85 0.6,1.45 0.55,0.55 1.4,0.55 h 20 q 0.85,0 1.45,-0.55 0.55,-0.6 0.55,-1.45 v -20.9 l -0.15,-0.8 -0.4,-0.6 -10,-10.1 Q 905.85,466 905,466"
+       id="path428" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 905,466 q 0.85,0 1.45,0.6 l 10,10.1 0.4,0.6 0.15,0.8 V 499 q 0,0.85 -0.55,1.45 -0.6,0.55 -1.45,0.55 h -20 q -0.85,0 -1.4,-0.55 -0.6,-0.6 -0.6,-1.45 v -20.9 l 0.2,-0.85 0.4,-0.55 10,-10.1 q 0.55,-0.6 1.4,-0.6 m -10,12.1 V 499 h 20 V 478.1 L 905,468 895,478.1"
+       id="path429" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 895,478.1 10,-10.1 10,10.1 V 499 h -20 v -20.9"
+       id="path430" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 919,499.1 v 2.9 q 0,1.65 -1.15,2.85 -1.2,1.15 -2.85,1.15 h -20 q -1.65,0 -2.8,-1.15 h -0.05 Q 891,503.65 891,502 v -2.9 q 0.05,1.6 1.15,2.75 h 0.05 q 1.15,1.15 2.8,1.15 h 20 q 1.65,0 2.85,-1.15 1.1,-1.15 1.15,-2.75"
+       id="path431" />
+  </g>
+  <g
+     id="g588"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 963.05,467.5 q 0.15,-0.55 0.55,-0.95 0.55,-0.55 1.4,-0.55 h 20 q 0.85,0 1.45,0.55 l 0.5,0.95 0.05,0.5 v 20.9 l -0.15,0.8 -0.4,0.6 -10,10.1 q -0.6,0.6 -1.45,0.6 -0.85,0 -1.4,-0.6 l -10,-10.1 -0.4,-0.55 -0.2,-0.85 V 468 l 0.05,-0.5 M 965,468 v 20.9 l 10,10.1 10,-10.1 V 468 h -20"
+       id="path432" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="M 963.05,467.5 963,468 v 20.9 l 0.2,0.85 0.4,0.55 10,10.1 q 0.55,0.6 1.4,0.6 0.85,0 1.45,-0.6 l 10,-10.1 0.4,-0.6 0.15,-0.8 V 468 l -0.05,-0.5 -0.5,-0.95 Q 985.85,466 985,466 h -20 q -0.85,0 -1.4,0.55 -0.4,0.4 -0.55,0.95 M 961,489 v -21.1 q 0.05,-1.6 1.15,-2.75 h 0.05 Q 963.35,464 965,464 h 20 q 1.65,0 2.85,1.15 1.1,1.15 1.15,2.75 V 489 q -0.05,1.6 -1.15,2.7 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 q -1.1,-1.1 -1.15,-2.7"
+       id="path433" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 961,489 q 0.05,1.6 1.15,2.7 l 10,10.1 q 1.2,1.2 2.85,1.2 1.65,0 2.85,-1.2 l 10,-10.1 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 Q 961,493.55 961,491.9 V 489"
+       id="path434" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 965,468 h 20 v 20.9 L 975,499 965,488.9 V 468"
+       id="path435" />
+  </g>
+  <g
+     id="g600"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 963.05,527.5 q 0.15,-0.55 0.55,-0.95 0.55,-0.55 1.4,-0.55 h 20 q 0.85,0 1.45,0.55 l 0.5,0.95 0.05,0.5 v 20.9 l -0.15,0.8 -0.4,0.6 -10,10.1 q -0.6,0.6 -1.45,0.6 -0.85,0 -1.4,-0.6 l -10,-10.1 -0.4,-0.55 -0.2,-0.85 V 528 l 0.05,-0.5 m 1.95,21.4 10,10.1 10,-10.1 V 528 h -20 v 20.9"
+       id="path436" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="m 961,549 v -21.1 q 0.05,-1.6 1.15,-2.75 h 0.05 Q 963.35,524 965,524 h 20 q 1.65,0 2.85,1.15 1.1,1.15 1.15,2.75 V 549 q -0.05,1.6 -1.15,2.7 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 q -1.1,-1.1 -1.15,-2.7 m 2.05,-21.5 -0.05,0.5 v 20.9 l 0.2,0.85 0.4,0.55 10,10.1 q 0.55,0.6 1.4,0.6 0.85,0 1.45,-0.6 l 10,-10.1 0.4,-0.6 0.15,-0.8 V 528 l -0.05,-0.5 -0.5,-0.95 Q 985.85,526 985,526 h -20 q -0.85,0 -1.4,0.55 -0.4,0.4 -0.55,0.95"
+       id="path437" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 961,549 q 0.05,1.6 1.15,2.7 l 10,10.1 q 1.2,1.2 2.85,1.2 1.65,0 2.85,-1.2 l 10,-10.1 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 Q 961,553.55 961,551.9 V 549"
+       id="path438" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="M 965,548.9 V 528 h 20 v 20.9 L 975,559 965,548.9"
+       id="path439" />
+  </g>
+  <g
+     id="g612"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 963.05,587.5 q 0.15,-0.55 0.55,-0.95 0.55,-0.55 1.4,-0.55 h 20 q 0.85,0 1.45,0.55 l 0.5,0.95 0.05,0.5 v 20.9 l -0.15,0.8 -0.4,0.6 -10,10.1 q -0.6,0.6 -1.45,0.6 -0.85,0 -1.4,-0.6 l -10,-10.1 -0.4,-0.55 -0.2,-0.85 V 588 l 0.05,-0.5 m 1.95,21.4 10,10.1 10,-10.1 V 588 h -20 v 20.9"
+       id="path440" />
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 961,609 v -21.1 q 0.05,-1.6 1.15,-2.75 h 0.05 Q 963.35,584 965,584 h 20 q 1.65,0 2.85,1.15 1.1,1.15 1.15,2.75 V 609 q -0.05,1.6 -1.15,2.7 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 q -1.1,-1.1 -1.15,-2.7 m 2.05,-21.5 -0.05,0.5 v 20.9 l 0.2,0.85 0.4,0.55 10,10.1 q 0.55,0.6 1.4,0.6 0.85,0 1.45,-0.6 l 10,-10.1 0.4,-0.6 0.15,-0.8 V 588 l -0.05,-0.5 -0.5,-0.95 Q 985.85,586 985,586 h -20 q -0.85,0 -1.4,0.55 -0.4,0.4 -0.55,0.95"
+       id="path441" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 961,609 q 0.05,1.6 1.15,2.7 l 10,10.1 q 1.2,1.2 2.85,1.2 1.65,0 2.85,-1.2 l 10,-10.1 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 Q 961,613.55 961,611.9 V 609"
+       id="path442" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="M 965,608.9 V 588 h 20 v 20.9 L 975,619 965,608.9"
+       id="path443" />
+  </g>
+  <g
+     id="g624"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="M 963.6,646.55 Q 964.15,646 965,646 h 20 q 0.85,0 1.45,0.55 l 0.5,0.95 0.05,0.5 v 20.9 l -0.15,0.8 -0.4,0.6 -10,10.1 q -0.6,0.6 -1.45,0.6 -0.85,0 -1.4,-0.6 l -10,-10.1 -0.4,-0.55 -0.2,-0.85 V 648 l 0.05,-0.5 q 0.15,-0.55 0.55,-0.95 m 1.4,22.35 10,10.1 10,-10.1 V 648 h -20 v 20.9"
+       id="path444" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="m 963.6,646.55 q -0.4,0.4 -0.55,0.95 L 963,648 v 20.9 l 0.2,0.85 0.4,0.55 10,10.1 q 0.55,0.6 1.4,0.6 0.85,0 1.45,-0.6 l 10,-10.1 0.4,-0.6 0.15,-0.8 V 648 l -0.05,-0.5 -0.5,-0.95 Q 985.85,646 985,646 h -20 q -0.85,0 -1.4,0.55 M 961,669 v -21.1 q 0.05,-1.6 1.15,-2.75 h 0.05 Q 963.35,644 965,644 h 20 q 1.65,0 2.85,1.15 1.1,1.15 1.15,2.75 V 669 q -0.05,1.6 -1.15,2.7 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 q -1.1,-1.1 -1.15,-2.7"
+       id="path445" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 961,669 q 0.05,1.6 1.15,2.7 l 10,10.1 q 1.2,1.2 2.85,1.2 1.65,0 2.85,-1.2 l 10,-10.1 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 l -10,10.1 q -1.2,1.2 -2.85,1.2 -1.65,0 -2.85,-1.2 l -10,-10.1 Q 961,673.55 961,671.9 V 669"
+       id="path446" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="M 965,668.9 V 648 h 20 v 20.9 L 975,679 965,668.9"
+       id="path447" />
+  </g>
+  <g
+     id="g636"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="M 963.6,706.55 Q 964.15,706 965,706 h 20 q 0.85,0 1.45,0.55 l 0.5,0.95 0.05,0.5 v 20.9 l -0.15,0.8 -0.4,0.6 -10,10.1 q -0.6,0.6 -1.45,0.6 -0.85,0 -1.4,-0.6 l -10,-10.1 -0.4,-0.55 -0.2,-0.85 V 708 l 0.05,-0.5 q 0.15,-0.55 0.55,-0.95 m 1.4,22.35 10,10.1 10,-10.1 V 708 h -20 v 20.9"
+       id="path448" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="m 963.6,706.55 q -0.4,0.4 -0.55,0.95 L 963,708 v 20.9 l 0.2,0.85 0.4,0.55 10,10.1 q 0.55,0.6 1.4,0.6 0.85,0 1.45,-0.6 l 10,-10.1 0.4,-0.6 0.15,-0.8 V 708 l -0.05,-0.5 -0.5,-0.95 Q 985.85,706 985,706 h -20 q -0.85,0 -1.4,0.55 M 961,729 v -21.1 q 0.05,-1.6 1.15,-2.75 h 0.05 Q 963.35,704 965,704 h 20 q 1.65,0 2.85,1.15 1.1,1.15 1.15,2.75 V 729 q -0.05,1.6 -1.15,2.7 l -10,10.1 -1,0.75 -1.85,0.45 -1.85,-0.45 -1,-0.75 -10,-10.1 q -1.1,-1.1 -1.15,-2.7"
+       id="path449" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 961,729 q 0.05,1.6 1.15,2.7 l 10,10.1 1,0.75 1.85,0.45 1.85,-0.45 1,-0.75 10,-10.1 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 l -10,10.1 -1,0.75 -1.85,0.45 -1.85,-0.45 -1,-0.75 -10,-10.1 Q 961,733.55 961,731.9 V 729"
+       id="path450" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="M 965,728.9 V 708 h 20 v 20.9 L 975,739 965,728.9"
+       id="path451" />
+  </g>
+  <g
+     id="g637"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 1026.05,724.5 1026,724 q 0,-1 0.45,-1.85 l 0.75,-1 10.1,-10 q 1.15,-1.15 2.8,-1.15 h 21 q 1.6,0.05 2.75,1.15 1.15,1.2 1.15,2.85 v 20.1 q -0.05,1.6 -1.15,2.7 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 -0.75,-1 q -0.35,-0.65 -0.4,-1.35 m 13.25,-12.35 -0.6,0.4 -10.1,10 q -0.6,0.6 -0.6,1.45 0,0.85 0.6,1.4 l 10.1,10 0.55,0.4 0.85,0.2 h 20.9 q 0.85,0 1.45,-0.6 0.55,-0.55 0.55,-1.4 v -20 q 0,-0.85 -0.55,-1.45 -0.6,-0.55 -1.45,-0.55 h -20.9 l -0.8,0.15"
+       id="path452" />
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 1039.3,712.15 0.8,-0.15 h 20.9 q 0.85,0 1.45,0.55 0.55,0.6 0.55,1.45 v 20 q 0,0.85 -0.55,1.4 -0.6,0.6 -1.45,0.6 h -20.9 l -0.85,-0.2 -0.55,-0.4 -10.1,-10 q -0.6,-0.55 -0.6,-1.4 0,-0.85 0.6,-1.45 l 10.1,-10 0.6,-0.4 m -9.3,11.85 10.1,10 h 20.9 v -20 h -20.9 l -10.1,10"
+       id="path453" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1065,734.1 v 2.9 q 0,1.65 -1.15,2.8 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 -0.75,-1 Q 1026,728 1026,727 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 -0.05,-0.5 0.05,-0.5 q 0.05,0.7 0.4,1.35 l 0.75,1 10.1,10 q 1.15,1.15 2.8,1.15 h 21 q 1.6,-0.05 2.75,-1.15 v -0.05 q 1.1,-1.1 1.15,-2.7"
+       id="path454" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 1030,724 10.1,-10 h 20.9 v 20 h -20.9 L 1030,724"
+       id="path455" />
+  </g>
+  <g
+     id="g625"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 1062.45,652.55 Q 1061.85,652 1061,652 h -20.9 l -0.8,0.15 -0.6,0.4 -10.1,10 q -0.6,0.6 -0.6,1.45 0,0.85 0.6,1.4 l 10.1,10 0.55,0.4 0.85,0.2 h 20.9 q 0.85,0 1.45,-0.6 0.55,-0.55 0.55,-1.4 v -20 q 0,-0.85 -0.55,-1.45 m -36.4,11.95 -0.05,-0.5 q 0,-1.65 1.2,-2.85 l 10.1,-10 q 1.15,-1.15 2.8,-1.15 h 21 q 1.6,0.05 2.75,1.15 1.15,1.2 1.15,2.85 v 20.1 q -0.05,1.6 -1.15,2.7 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1,-1 -1.15,-2.35"
+       id="path456" />
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 1062.45,652.55 q 0.55,0.6 0.55,1.45 v 20 q 0,0.85 -0.55,1.4 -0.6,0.6 -1.45,0.6 h -20.9 l -0.85,-0.2 -0.55,-0.4 -10.1,-10 q -0.6,-0.55 -0.6,-1.4 0,-0.85 0.6,-1.45 l 10.1,-10 0.6,-0.4 0.8,-0.15 h 20.9 q 0.85,0 1.45,0.55 M 1061,674 v -20 h -20.9 l -10.1,10 10.1,10 h 20.9"
+       id="path457" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1065,674.1 v 2.9 q 0,1.65 -1.15,2.8 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1.2,-1.2 -1.2,-2.85 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 -0.05,-0.5 0.05,-0.5 q 0.15,1.35 1.15,2.35 l 10.1,10 q 1.15,1.15 2.8,1.15 h 21 q 1.6,-0.05 2.75,-1.15 v -0.05 q 1.1,-1.1 1.15,-2.7"
+       id="path458" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 1061,674 h -20.9 l -10.1,-10 10.1,-10 h 20.9 v 20"
+       id="path459" />
+  </g>
+  <g
+     id="g613"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 1040.1,592 -0.8,0.15 -0.6,0.4 -10.1,10 q -0.6,0.6 -0.6,1.45 0,0.85 0.6,1.4 l 10.1,10 0.55,0.4 0.85,0.2 h 20.9 q 0.85,0 1.45,-0.6 0.55,-0.55 0.55,-1.4 v -20 q 0,-0.85 -0.55,-1.45 -0.6,-0.55 -1.45,-0.55 h -20.9 m -14.05,12.5 -0.05,-0.5 q 0,-1.65 1.2,-2.85 l 10.1,-10 q 1.15,-1.15 2.8,-1.15 h 21 q 1.6,0.05 2.75,1.15 1.15,1.2 1.15,2.85 v 20.1 q -0.05,1.6 -1.15,2.7 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1,-1 -1.15,-2.35"
+       id="path460" />
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 1040.1,592 h 20.9 q 0.85,0 1.45,0.55 0.55,0.6 0.55,1.45 v 20 q 0,0.85 -0.55,1.4 -0.6,0.6 -1.45,0.6 h -20.9 l -0.85,-0.2 -0.55,-0.4 -10.1,-10 q -0.6,-0.55 -0.6,-1.4 0,-0.85 0.6,-1.45 l 10.1,-10 0.6,-0.4 0.8,-0.15 m 20.9,22 v -20 h -20.9 l -10.1,10 10.1,10 h 20.9"
+       id="path461" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1065,614.1 v 2.9 q 0,1.65 -1.15,2.8 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1.2,-1.2 -1.2,-2.85 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 -0.05,-0.5 0.05,-0.5 q 0.15,1.35 1.15,2.35 l 10.1,10 q 1.15,1.15 2.8,1.15 h 21 q 1.6,-0.05 2.75,-1.15 v -0.05 q 1.1,-1.1 1.15,-2.7"
+       id="path462" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 1061,614 h -20.9 l -10.1,-10 10.1,-10 h 20.9 v 20"
+       id="path463" />
+  </g>
+  <g
+     id="g601"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 1039.3,532.15 0.8,-0.15 h 20.9 q 0.85,0 1.45,0.55 0.55,0.6 0.55,1.45 v 20 q 0,0.85 -0.55,1.4 -0.6,0.6 -1.45,0.6 h -20.9 l -0.85,-0.2 -0.55,-0.4 -10.1,-10 q -0.6,-0.55 -0.6,-1.4 0,-0.85 0.6,-1.45 l 10.1,-10 0.6,-0.4 m 0.8,1.85 -10.1,10 10.1,10 h 20.9 v -20 h -20.9"
+       id="path464" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 1040.1,534 h 20.9 v 20 h -20.9 l -10.1,-10 10.1,-10"
+       id="path465" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 1026.05,544.5 1026,544 q 0,-1.65 1.2,-2.85 l 10.1,-10 q 1.15,-1.15 2.8,-1.15 h 21 q 1.6,0.05 2.75,1.15 1.15,1.2 1.15,2.85 v 20.1 q -0.05,1.6 -1.15,2.7 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1,-1 -1.15,-2.35 m 13.25,-12.35 -0.6,0.4 -10.1,10 q -0.6,0.6 -0.6,1.45 0,0.85 0.6,1.4 l 10.1,10 0.55,0.4 0.85,0.2 h 20.9 q 0.85,0 1.45,-0.6 0.55,-0.55 0.55,-1.4 v -20 q 0,-0.85 -0.55,-1.45 -0.6,-0.55 -1.45,-0.55 h -20.9 l -0.8,0.15"
+       id="path466" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1065,554.1 v 2.9 q 0,1.65 -1.15,2.8 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1.2,-1.2 -1.2,-2.85 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 -0.05,-0.5 0.05,-0.5 q 0.15,1.35 1.15,2.35 l 10.1,10 q 1.15,1.15 2.8,1.15 h 21 q 1.6,-0.05 2.75,-1.15 v -0.05 q 1.1,-1.1 1.15,-2.7"
+       id="path467" />
+  </g>
+  <g
+     id="g589"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 1061,474 v 20 h -20.9 l -10.1,-10 10.1,-10 h 20.9"
+       id="path468" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1061,474 h -20.9 l -10.1,10 10.1,10 h 20.9 v -20 m 2,20 q 0,0.85 -0.55,1.4 -0.6,0.6 -1.45,0.6 h -20.9 l -0.85,-0.2 -0.55,-0.4 -10.1,-10 q -0.6,-0.55 -0.6,-1.4 0,-0.85 0.6,-1.45 l 10.1,-10 0.6,-0.4 0.8,-0.15 h 20.9 q 0.85,0 1.45,0.55 0.55,0.6 0.55,1.45 v 20"
+       id="path469" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 1063,494 v -20 q 0,-0.85 -0.55,-1.45 -0.6,-0.55 -1.45,-0.55 h -20.9 l -0.8,0.15 -0.6,0.4 -10.1,10 q -0.6,0.6 -0.6,1.45 0,0.85 0.6,1.4 l 10.1,10 0.55,0.4 0.85,0.2 h 20.9 q 0.85,0 1.45,-0.6 0.55,-0.55 0.55,-1.4 m -36.95,-9.5 -0.05,-0.5 q 0,-1.65 1.2,-2.85 l 10.1,-10 q 1.15,-1.15 2.8,-1.15 h 21 q 1.6,0.05 2.75,1.15 1.15,1.2 1.15,2.85 v 20.1 q -0.05,1.6 -1.15,2.7 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1,-1 -1.15,-2.35"
+       id="path470" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1026.05,484.5 q 0.15,1.35 1.15,2.35 l 10.1,10 q 1.15,1.15 2.8,1.15 h 21 q 1.6,-0.05 2.75,-1.15 v -0.05 q 1.1,-1.1 1.15,-2.7 v 2.9 q 0,1.65 -1.15,2.8 v 0.05 q -1.15,1.1 -2.75,1.15 h -21 q -1.65,0 -2.8,-1.15 l -10.1,-10 q -1.2,-1.2 -1.2,-2.85 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 -0.05,-0.5 0.05,-0.5"
+       id="path471" />
+  </g>
+  <g
+     id="g638"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#35baf3"
+       d="m 1124.7,712.15 q 0.35,0.15 0.6,0.4 l 10.1,10 q 0.6,0.6 0.6,1.45 0,0.85 -0.6,1.4 l -10.1,10 -0.55,0.4 -0.85,0.2 H 1103 q -0.85,0 -1.45,-0.6 -0.55,-0.55 -0.55,-1.4 v -20 q 0,-0.85 0.55,-1.45 0.6,-0.55 1.45,-0.55 h 20.9 l 0.8,0.15 M 1103,714 v 20 h 20.9 l 10.1,-10 -10.1,-10 H 1103"
+       id="path472" />
+    <path
+       stroke="none"
+       fill="#1989b8"
+       d="M 1124.7,712.15 1123.9,712 H 1103 q -0.85,0 -1.45,0.55 -0.55,0.6 -0.55,1.45 v 20 q 0,0.85 0.55,1.4 0.6,0.6 1.45,0.6 h 20.9 l 0.85,-0.2 0.55,-0.4 10.1,-10 q 0.6,-0.55 0.6,-1.4 0,-0.85 -0.6,-1.45 l -10.1,-10 q -0.25,-0.25 -0.6,-0.4 M 1099,734.1 V 714 q 0,-1.65 1.15,-2.85 1.15,-1.1 2.75,-1.15 h 21 q 1.65,0 2.8,1.15 l 10.1,10 0.75,1 Q 1138,723 1138,724 l -0.05,0.5 -0.4,1.35 -0.75,1 -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 v -0.05 q -1.1,-1.1 -1.15,-2.7"
+       id="path473" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1099,734.1 q 0.05,1.6 1.15,2.7 v 0.05 q 1.15,1.1 2.75,1.15 h 21 q 1.65,0 2.8,-1.15 l 10.1,-10 0.75,-1 0.4,-1.35 0.05,0.5 -0.05,0.5 0.05,0.5 -0.05,0.5 0.05,0.5 q 0,1 -0.45,1.85 l -0.75,1 -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 V 739.8 Q 1099,738.65 1099,737 v -2.9"
+       id="path474" />
+    <path
+       stroke="none"
+       fill="#1ea7e1"
+       d="m 1103,714 h 20.9 l 10.1,10 -10.1,10 H 1103 v -20"
+       id="path475" />
+  </g>
+  <g
+     id="g626"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#fa8132"
+       d="m 1124.7,652.15 q 0.35,0.15 0.6,0.4 l 10.1,10 q 0.6,0.6 0.6,1.45 0,0.85 -0.6,1.4 l -10.1,10 -0.55,0.4 -0.85,0.2 H 1103 q -0.85,0 -1.45,-0.6 -0.55,-0.55 -0.55,-1.4 v -20 q 0,-0.85 0.55,-1.45 0.6,-0.55 1.45,-0.55 h 20.9 l 0.8,0.15 M 1103,674 h 20.9 l 10.1,-10 -10.1,-10 H 1103 v 20"
+       id="path476" />
+    <path
+       stroke="none"
+       fill="#cd5d12"
+       d="M 1124.7,652.15 1123.9,652 H 1103 q -0.85,0 -1.45,0.55 -0.55,0.6 -0.55,1.45 v 20 q 0,0.85 0.55,1.4 0.6,0.6 1.45,0.6 h 20.9 l 0.85,-0.2 0.55,-0.4 10.1,-10 q 0.6,-0.55 0.6,-1.4 0,-0.85 -0.6,-1.45 l -10.1,-10 q -0.25,-0.25 -0.6,-0.4 M 1099,674.1 V 654 q 0,-1.65 1.15,-2.85 1.15,-1.1 2.75,-1.15 h 21 q 1.65,0 2.8,1.15 l 10.1,10 q 1.2,1.2 1.2,2.85 l -0.05,0.5 q -0.15,1.35 -1.15,2.35 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 v -0.05 q -1.1,-1.1 -1.15,-2.7"
+       id="path477" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1099,674.1 q 0.05,1.6 1.15,2.7 v 0.05 q 1.15,1.1 2.75,1.15 h 21 q 1.65,0 2.8,-1.15 l 10.1,-10 q 1,-1 1.15,-2.35 l 0.05,0.5 -0.05,0.5 0.05,0.5 -0.05,0.5 0.05,0.5 q 0,1.65 -1.2,2.85 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 V 679.8 Q 1099,678.65 1099,677 v -2.9"
+       id="path478" />
+    <path
+       stroke="none"
+       fill="#e86a17"
+       d="m 1103,674 v -20 h 20.9 l 10.1,10 -10.1,10 H 1103"
+       id="path479" />
+  </g>
+  <g
+     id="g614"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#5fb13a"
+       d="m 1101.55,592.55 q -0.55,0.6 -0.55,1.45 v 20 q 0,0.85 0.55,1.4 0.6,0.6 1.45,0.6 h 20.9 l 0.85,-0.2 0.55,-0.4 10.1,-10 q 0.6,-0.55 0.6,-1.4 0,-0.85 -0.6,-1.45 l -10.1,-10 q -0.25,-0.25 -0.6,-0.4 L 1123.9,592 H 1103 q -0.85,0 -1.45,0.55 M 1099,614.1 V 594 q 0,-1.65 1.15,-2.85 1.15,-1.1 2.75,-1.15 h 21 q 1.65,0 2.8,1.15 l 10.1,10 q 1.2,1.2 1.2,2.85 l -0.05,0.5 q -0.15,1.35 -1.15,2.35 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 v -0.05 q -1.1,-1.1 -1.15,-2.7"
+       id="path480" />
+    <path
+       stroke="none"
+       fill="#88e060"
+       d="m 1101.55,592.55 q 0.6,-0.55 1.45,-0.55 h 20.9 l 0.8,0.15 q 0.35,0.15 0.6,0.4 l 10.1,10 q 0.6,0.6 0.6,1.45 0,0.85 -0.6,1.4 l -10.1,10 -0.55,0.4 -0.85,0.2 H 1103 q -0.85,0 -1.45,-0.6 -0.55,-0.55 -0.55,-1.4 v -20 q 0,-0.85 0.55,-1.45 M 1103,614 h 20.9 l 10.1,-10 -10.1,-10 H 1103 v 20"
+       id="path481" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1099,614.1 q 0.05,1.6 1.15,2.7 v 0.05 q 1.15,1.1 2.75,1.15 h 21 q 1.65,0 2.8,-1.15 l 10.1,-10 q 1,-1 1.15,-2.35 l 0.05,0.5 -0.05,0.5 0.05,0.5 -0.05,0.5 0.05,0.5 q 0,1.65 -1.2,2.85 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 V 619.8 Q 1099,618.65 1099,617 v -2.9"
+       id="path482" />
+    <path
+       stroke="none"
+       fill="#73cd4b"
+       d="m 1103,614 v -20 h 20.9 l 10.1,10 -10.1,10 H 1103"
+       id="path483" />
+  </g>
+  <g
+     id="g602"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffd948"
+       d="m 1135.4,542.55 q 0.6,0.6 0.6,1.45 0,0.85 -0.6,1.4 l -10.1,10 -0.55,0.4 -0.85,0.2 H 1103 q -0.85,0 -1.45,-0.6 -0.55,-0.55 -0.55,-1.4 v -20 q 0,-0.85 0.55,-1.45 0.6,-0.55 1.45,-0.55 h 20.9 l 0.8,0.15 q 0.35,0.15 0.6,0.4 l 10.1,10 M 1103,534 v 20 h 20.9 l 10.1,-10 -10.1,-10 H 1103"
+       id="path484" />
+    <path
+       stroke="none"
+       fill="#cda400"
+       d="M 1099,554.1 V 534 q 0,-1.65 1.15,-2.85 1.15,-1.1 2.75,-1.15 h 21 q 1.65,0 2.8,1.15 l 10.1,10 q 1.2,1.2 1.2,2.85 l -0.05,0.5 q -0.15,1.35 -1.15,2.35 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 v -0.05 q -1.1,-1.1 -1.15,-2.7 m 36.4,-11.55 -10.1,-10 q -0.25,-0.25 -0.6,-0.4 L 1123.9,532 H 1103 q -0.85,0 -1.45,0.55 -0.55,0.6 -0.55,1.45 v 20 q 0,0.85 0.55,1.4 0.6,0.6 1.45,0.6 h 20.9 l 0.85,-0.2 0.55,-0.4 10.1,-10 q 0.6,-0.55 0.6,-1.4 0,-0.85 -0.6,-1.45"
+       id="path485" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1099,554.1 q 0.05,1.6 1.15,2.7 v 0.05 q 1.15,1.1 2.75,1.15 h 21 q 1.65,0 2.8,-1.15 l 10.1,-10 q 1,-1 1.15,-2.35 l 0.05,0.5 -0.05,0.5 0.05,0.5 -0.05,0.5 0.05,0.5 q 0,1.65 -1.2,2.85 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 V 559.8 Q 1099,558.65 1099,557 v -2.9"
+       id="path486" />
+    <path
+       stroke="none"
+       fill="#ffcc00"
+       d="m 1103,534 h 20.9 l 10.1,10 -10.1,10 H 1103 v -20"
+       id="path487" />
+  </g>
+  <g
+     id="g590"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 1137.95,484.5 q -0.15,1.35 -1.15,2.35 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 v -0.05 q -1.1,-1.1 -1.15,-2.7 V 474 q 0,-1.65 1.15,-2.85 1.15,-1.1 2.75,-1.15 h 21 q 1.65,0 2.8,1.15 l 10.1,10 q 1.2,1.2 1.2,2.85 l -0.05,0.5 M 1136,484 q 0,-0.85 -0.6,-1.45 l -10.1,-10 q -0.25,-0.25 -0.6,-0.4 L 1123.9,472 H 1103 q -0.85,0 -1.45,0.55 -0.55,0.6 -0.55,1.45 v 20 q 0,0.85 0.55,1.4 0.6,0.6 1.45,0.6 h 20.9 l 0.85,-0.2 0.55,-0.4 10.1,-10 q 0.6,-0.55 0.6,-1.4"
+       id="path488" />
+    <path
+       stroke="none"
+       fill="#000000"
+       fill-opacity="0.101961"
+       d="m 1099,494.1 q 0.05,1.6 1.15,2.7 v 0.05 q 1.15,1.1 2.75,1.15 h 21 q 1.65,0 2.8,-1.15 l 10.1,-10 q 1,-1 1.15,-2.35 l 0.05,0.5 -0.05,0.5 0.05,0.5 -0.05,0.5 0.05,0.5 q 0,1.65 -1.2,2.85 l -10.1,10 q -1.15,1.15 -2.8,1.15 h -21 q -1.6,-0.05 -2.75,-1.15 V 499.8 Q 1099,498.65 1099,497 v -2.9"
+       id="path489" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1136,484 q 0,0.85 -0.6,1.4 l -10.1,10 -0.55,0.4 -0.85,0.2 H 1103 q -0.85,0 -1.45,-0.6 -0.55,-0.55 -0.55,-1.4 v -20 q 0,-0.85 0.55,-1.45 0.6,-0.55 1.45,-0.55 h 20.9 l 0.8,0.15 q 0.35,0.15 0.6,0.4 l 10.1,10 q 0.6,0.6 0.6,1.45 m -33,-10 v 20 h 20.9 l 10.1,-10 -10.1,-10 H 1103"
+       id="path490" />
+    <path
+       stroke="none"
+       fill="#eeeeee"
+       d="m 1103,474 h 20.9 l 10.1,10 -10.1,10 H 1103 v -20"
+       id="path491" />
+  </g>
+  <g
+     id="g553"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 860,339 v -2 h 190 v 2 H 860"
+       id="path492" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 860,339 h 190 v 2 H 860 v -2"
+       id="path493" />
+  </g>
+  <g
+     id="g552"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 868,356.5 v 0.5 0.5 0.5 q 0,1.65 -1.2,2.85 -1.15,1.15 -2.8,1.15 -1.65,0 -2.85,-1.15 Q 860,359.65 860,358 l 0.05,-0.5 -0.05,-0.5 0.05,-0.5 q 0.15,1.35 1.1,2.35 1.2,1.15 2.85,1.15 1.65,0 2.8,-1.15 1,-1 1.2,-2.35"
+       id="path494" />
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 868,356.5 q -0.2,1.35 -1.2,2.35 -1.15,1.15 -2.8,1.15 -1.65,0 -2.85,-1.15 -0.95,-1 -1.1,-2.35 L 860,356 q 0,-1.65 1.15,-2.8 1.2,-1.2 2.85,-1.2 1.65,0 2.8,1.2 1.2,1.15 1.2,2.8 v 0.5"
+       id="path495" />
+  </g>
+  <g
+     id="g554"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#999999"
+       d="m 1072,337.05 h 2 v 100 h -2 v -100"
+       id="path496" />
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1072,337.05 v 100 h -2 v -100 h 2"
+       id="path497" />
+  </g>
+  <g
+     id="g555"
+     transform="translate(-18.950001,-20)">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1468,331 q 0,-6 -6,-6 h -174 q -6,0 -6,6 v 33 0.25 l 0.05,0.6 q 0.35,4.75 5.05,5.15 h 0.1 0.1 0.1 0.2 0.15 0.1 174.65 q 5.35,-0.25 5.5,-5.75 V 364 331 m -184,1.65 0.1,-0.6 q 0.4,-3.05 3.9,-3.05 h 174 q 3.5,0 3.95,3.05 l 0.05,0.55 v 31.65 l -0.05,0.75 q -0.45,3 -3.95,3 h -174 q -3.5,0 -3.9,-3 l -0.1,-0.85 v -31.5 M 1470,331 v 33 0.25 0.05 q -0.2,7.4 -7.4,7.7 h -174.75 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 -0.15 q -6.4,-0.55 -6.9,-7 L 1280,364.25 V 364 331 q 0,-8 8,-8 h 174 q 8,0 8,8"
+       id="path498" />
+    <path
+       stroke="none"
+       fill="#ececec"
+       d="m 1466,332.6 -0.05,-0.55 Q 1465.5,329 1462,329 h -174 q -3.5,0 -3.9,3.05 l -0.1,0.6 V 331 l 0.1,-0.95 q 0.4,-3.05 3.9,-3.05 h 174 q 3.5,0 3.95,3.05 L 1466,331 v 1.6"
+       id="path499" />
+    <path
+       stroke="none"
+       fill="#c6c6c6"
+       d="M 1466,332.6 V 331 l -0.05,-0.95 Q 1465.5,327 1462,327 h -174 q -3.5,0 -3.9,3.05 L 1284,331 v 1.65 31.5 l 0.1,0.85 q 0.4,3 3.9,3 h 174 q 3.5,0 3.95,-3 l 0.05,-0.75 V 332.6 m 2,-1.6 v 33 0.25 q -0.15,5.5 -5.5,5.75 h -174.65 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 l -0.05,-0.6 V 364 331 q 0,-6 6,-6 h 174 q 6,0 6,6"
+       id="path500" />
+  </g>
+  <path
+     stroke="none"
+     fill="#ececec"
+     d="M 1265.05,382.6 V 381 l 0.1,-0.95 q 0.4,-3.05 3.9,-3.05 h 174 q 3.5,0 3.95,3.05 l 0.05,0.95 v 1.55 l -0.05,-0.5 q -0.45,-3.05 -3.95,-3.05 h -174 q -3.5,0 -3.9,3.05 l -0.1,0.55"
+     id="path501" />
+  <path
+     stroke="none"
+     fill="#c6c6c6"
+     d="m 1265.05,382.6 v 19.35 h -2 V 381 q 0,-6 6,-6 h 174 q 6,0 6,6 v 20.95 h -2 V 382.55 381 l -0.05,-0.95 q -0.45,-3.05 -3.95,-3.05 h -174 q -3.5,0 -3.9,3.05 l -0.1,0.95 v 1.6 m -2,19.4 h 2 v 142.15 l 0.1,0.85 q 0.4,3 3.9,3 h 174 q 3.5,0 3.95,-3 l 0.05,-0.75 V 402 h 2 v 142 0.25 q -0.15,5.5 -5.5,5.75 h -174.65 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 q -4.7,-0.4 -5.05,-5.15 l -0.05,-0.6 V 544 402"
+     id="path502" />
+  <g
+     id="g3">
+    <path
+       stroke="none"
+       fill="#ffffff"
+       d="m 1263.05,402 v 142 0.25 l 0.05,0.6 q 0.35,4.75 5.05,5.15 h 0.1 0.1 0.1 0.2 0.15 0.1 174.65 q 5.35,-0.25 5.5,-5.75 V 544 402 h 2 v 142 0.25 0.05 q -0.2,7.4 -7.4,7.7 h -174.75 -0.1 -0.15 -0.2 -0.1 -0.1 -0.1 -0.15 q -6.4,-0.55 -6.9,-7 l -0.05,-0.75 V 544 402 h 2 m 2,-19.4 0.1,-0.55 q 0.4,-3.05 3.9,-3.05 h 174 q 3.5,0 3.95,3.05 l 0.05,0.5 v 19.4 h -182 V 382.6 m 184,19.35 V 381 q 0,-6 -6,-6 h -174 q -6,0 -6,6 v 20.95 h -2 V 381 q 0,-8 8,-8 h 174 q 8,0 8,8 v 20.95 h -2 m -184,0.05 h 182 V 544.25 L 1447,545 q -0.45,3 -3.95,3 h -174 q -3.5,0 -3.9,-3 l -0.1,-0.85 V 402"
+       id="path503" />
+  </g>
+  <g
+     id="g4"
+     transform="translate(185.9448,297.7507)">
+    <path
+       stroke="none"
+       fill="#cccccc"
+       d="m 1249.8671,425.92492 h -160 v -2 h 160 v 2"
+       id="path504-3" />
+    <rect
+       style="fill:#ffffff;stroke-width:1.13679"
+       id="rect1"
+       width="160.01045"
+       height="40.712498"
+       x="1089.8518"
+       y="383.24792" />
+  </g>
+  <g
+     id="g71"
+     transform="matrix(0.17359199,0,0,0.17359199,1159.2405,554.4637)">
+    <rect
+       x="0"
+       y="0"
+       fill="url(#a)"
+       width="100%"
+       height="100%"
+       id="rect70"
+       style="fill:url(#a)" />
+    <rect
+       x="0"
+       y="0"
+       fill="url(#b)"
+       width="100%"
+       height="100%"
+       id="rect71" />
+  </g>
+</svg>

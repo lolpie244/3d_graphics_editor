@@ -55,6 +55,12 @@ void ButtonFromList::AddButtonList(events::Observer& observer, std::shared_ptr<B
     });
 }
 
+void ButtonFromList::RemoveButtonList() {
+    this->UbindMouseIn();
+    this->UbindMouseOut();
+    button_list_.reset();
+}
+
 ButtonsList::ButtonsList(float space, ListOrientation orientation) : space_(space), orientation_(orientation) {}
 
 ButtonsList::ButtonsList(glm::vec3 position, glm::vec2 size, float space, ListOrientation orientation)

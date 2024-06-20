@@ -43,7 +43,7 @@ run-intel: build
 
 .PHONY: run-server
 run-server: build
-	build/network_lib/3d_graphics-server 2344
+	build/network_lib/3d_graphics-server 2345
 
 
 .PHONY: format
