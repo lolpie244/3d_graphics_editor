@@ -46,6 +46,18 @@ build/network_lib/3d_graphics-server <PORT>
 
 ---
 ## Demo
+* Mixed model view mode: shows points and faces
+![mixed](https://github.com/lolpie244/3d_graphics_editor/assets/86479624/b04e1684-995e-463d-bf00-19ce90bc5a82)
+* Points only view mode: shows only points
+![points](https://github.com/lolpie244/3d_graphics_editor/assets/86479624/377333c8-f89a-4ae0-a7bf-be01d078b598)
+* Save/load model
+![load](https://github.com/lolpie244/3d_graphics_editor/assets/86479624/4bef7505-9296-45a2-a194-35bf4c4474ed)
+* Duplicate/Join points
+![duplicate](https://github.com/lolpie244/3d_graphics_editor/assets/86479624/ee0bb0f6-ec28-4aef-8808-593d9f94700b)
+![join](https://github.com/lolpie244/3d_graphics_editor/assets/86479624/f51a0628-9d3c-4a25-b663-171c7c91586d)
+* Collaboration
+  
+https://github.com/lolpie244/3d_graphics_editor/assets/86479624/f77a300c-755b-46f5-a0df-8b98e4dfd5f4
 
 
 
