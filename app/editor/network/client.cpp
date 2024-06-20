@@ -32,7 +32,9 @@ Client::Client(EditorStage* stage, sockaddr_storage address) : Collaborator(stag
 
 void Client::SendEvent(const EventData& event) { socket->send(event); }
 
-void Client::ClientConnectedHandler(const tcp_socket::BytesType& data) { stage->LoadScene(data); }
+void Client::ClientConnectedHandler(const tcp_socket::BytesType& data) {
+    stage->ScheduleWork([data, this]() { stage->LoadScene(data, false); });
+}
 
 void Client::ReceiveData(const EventData& event) {
     static const std::unordered_map<unsigned int, EventHandler> events{

@@ -245,12 +245,12 @@ bool EditorStage::AddLight(sf::Event event) {
     return true;
 }
 
-void EditorStage::LoadScene(const tcp_socket::BytesType& data) {
+void EditorStage::LoadScene(const tcp_socket::BytesType& data, bool send_request) {
     std::error_code ec;
     auto scenes = alpaca::deserialize<SceneData>(data, ec);
 
-    for (auto& model : scenes.models) { AddModel(render::Model::fromBytes(model, DEFAULT_MODEL_CONFIG)); }
-    for (auto& light : scenes.ligths) { AddLight(render::Light::fromBytes(light)); }
+    for (auto& model : scenes.models) { AddModel(render::Model::fromBytes(model, DEFAULT_MODEL_CONFIG), send_request); }
+    for (auto& light : scenes.ligths) { AddLight(render::Light::fromBytes(light), send_request); }
 }
 
 tcp_socket::BytesType EditorStage::SceneToBytes() {

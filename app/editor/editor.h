@@ -49,7 +49,7 @@ class EditorStage : public stage::Stage {
 
     void SetFilename(const char* filename);
 
-    void LoadScene(const tcp_socket::BytesType& data);
+    void LoadScene(const tcp_socket::BytesType& data, bool send_request = true);
     tcp_socket::BytesType SceneToBytes();
 
     void Select(render::PickingTexture::Info info);
